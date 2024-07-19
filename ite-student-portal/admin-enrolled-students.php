@@ -174,7 +174,7 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Admin' && $_SESSION['depa
                                 $school_year_condition = "AND sy.school_year = '" . $_GET['school_year'] . "'";
                             }
 
-                            $query = "SELECT sy.school_year, sem.semester, COUNT(DISTINCT e.account_number) AS num_students
+                            $query = "SELECT sy.school_year, sem.semester, COUNT(DISTINCT u.account_number, u.department) AS num_students
                                 FROM school_year sy
                                 CROSS JOIN semester sem
                                 LEFT JOIN enrolled e ON e.school_year = sy.school_year AND e.semester = sem.semester
