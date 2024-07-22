@@ -242,7 +242,7 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Officer'  && $_SESSION['d
                                                 <input type="hidden" name="account_number" value="<?php echo $row['account_number']; ?>">
                                                 <input type="hidden" name="previous_url"
                                                     value="<?php echo htmlspecialchars($current_url, ENT_QUOTES, 'UTF-8'); ?>">
-                                                <button class="btn btn-success" type="submit" name="enroll_student">Add</button>
+                                                <button class="btn btn-success" type="submit" name="add_student">Add</button>
                                             </form>
                                         </td>
                                     </tr>
