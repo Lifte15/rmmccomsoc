@@ -199,14 +199,14 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Officer' && $_SESSION['de
                   $school_year_condition = "AND sy.school_year = '" . $_GET['school_year'] . "'";
                 }
 
-                $query = "SELECT sy.school_year, sem.semester, COUNT(e.account_number) AS num_students
-                      FROM school_year sy
-                      CROSS JOIN semester sem
-                      LEFT JOIN enrolled e ON e.school_year = sy.school_year AND e.semester = sem.semester
-                      WHERE 1=1 $school_year_condition $semester_condition
-                      GROUP BY sy.school_year, sem.semester
-                      ORDER BY sy.school_year, sem.semester
-                      ";
+                $query = "SELECT sy.school_year, sem.semester, COUNT(DISTINCT u.account_number, u.department) AS num_students
+                FROM school_year sy
+                CROSS JOIN semester sem
+                LEFT JOIN enrolled e ON e.school_year = sy.school_year AND e.semester = sem.semester
+                LEFT JOIN user u ON e.account_number = u.account_number AND u.department = 'ITE'
+                WHERE 1=1 $school_year_condition $semester_condition 
+                GROUP BY sy.school_year, sem.semester
+                ORDER BY sy.school_year, sem.semester";
 
                 $result = $conn->query($query);
                 if ($result->num_rows > 0) {

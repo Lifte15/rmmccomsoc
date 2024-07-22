@@ -51,7 +51,7 @@ function validate($data)
     return mysqli_real_escape_string($conn, $data);
 }
 
-if (isset($_SESSION['role']) && $_SESSION['role'] === 'Officer' && $_SESSION['department'] === 'ITE') {
+if (isset($_SESSION['role']) && $_SESSION['role'] === 'Officer'  && $_SESSION['department'] === 'ITE') {
     if (isset($_GET['event_id'])) {
         $event_id = intval($_GET['event_id']);
 
@@ -71,14 +71,14 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Officer' && $_SESSION['de
                     <?php include 'layout/officer-fixed-topnav.php'; ?>
                     <?php include 'layout/officer-sidebar.php'; ?>
                     <?php
-                $eventid = $_GET['event_id'];
-                $stmt = $conn->prepare("SELECT event_name FROM events WHERE event_id = ?");
-                $stmt->bind_param("i", $eventid);
-                $stmt->execute();
-                $stmt->bind_result($event_name);
-                $stmt->fetch();
-                $stmt->close();
-                ?>
+                    $eventid = $_GET['event_id'];
+                    $stmt = $conn->prepare("SELECT event_name FROM events WHERE event_id = ?");
+                    $stmt->bind_param("i", $eventid);
+                    $stmt->execute();
+                    $stmt->bind_result($event_name);
+                    $stmt->fetch();
+                    $stmt->close();
+                    ?>
                     <div class="content-wrapper">
                         <div class="content-header">
                             <div class="container-fluid">
@@ -89,7 +89,8 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Officer' && $_SESSION['de
                                     <div class="col-sm-6 text-right">
                                         <a id="addNewSubjectBtn" class="btn btn-secondary"
                                             href="officer-event-view.php?event_id=<?php echo $event_id; ?>"><i
-                                                class="nav-icon fas fa-solid fa-chevron-left"></i> Back to <?php echo htmlspecialchars($event_name); ?></a>
+                                                class="nav-icon fas fa-solid fa-chevron-left"></i> Back to
+                                            <?php echo htmlspecialchars($event_name); ?></a>
                                     </div>
                                 </div>
                             </div>
@@ -101,92 +102,83 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Officer' && $_SESSION['de
                                 <!-- Search Form -->
                                 <form method="GET">
                                     <input type="hidden" name="event_id" value="<?php echo $event_id; ?>">
-                                    <div class="form-group row mb-3">
-                                        <div class="col-sm-3">
-                                            <select class="form-control" id="program" name="program">
-                                                <option value="all" <?php if (!isset($_GET['program']) || $_GET['program'] == 'all')
-                                                    echo 'selected'; ?>>
-                                                    All Programs
-                                                </option>
-                                                <option value="BSIT" <?php if (isset($_GET['program']) && $_GET['program'] == 'BSIT')
-                                                    echo 'selected'; ?>>
-                                                    BSIT
-                                                </option>
-                                                <option value="BSCS" <?php if (isset($_GET['program']) && $_GET['program'] == 'BSCS')
-                                                    echo 'selected'; ?>>
-                                                    BSCS
-                                                </option>
-                                                <option value="BLIS" <?php if (isset($_GET['program']) && $_GET['program'] == 'BLIS')
-                                                    echo 'selected'; ?>>
-                                                    BLIS
-                                                </option>
-                                                <option value="ACT" <?php if (isset($_GET['program']) && $_GET['program'] == 'ACT')
-                                                    echo 'selected'; ?>>
-                                                    ACT
-                                                </option>
+                                    <div class="input-group mb-3">
+                                        <input type="text" name="search_input" class="form-control col-5" placeholder="Search...">
+                                        <div class="input-group-prepend col-2">
+                                            <select name="column" class="form-control">
+                                                <option value="u.account_number">Student Number</option>
+                                                <option value="u.last_name">Last Name</option>
+                                                <option value="u.first_name">First Name</option>
+                                                <option value="u.middle_name">Middle Name</option>
                                             </select>
                                         </div>
-
-                                        <div class="col-sm-3">
-                                            <select class="form-control" id="year_level" name="year_level">
-                                                <option value="all" <?php if (!isset($_GET['year_level']) || $_GET['year_level'] == 'all')
-                                                    echo 'selected'; ?>>
-                                                    All Year Levels
-                                                </option>
-                                                <option value="1" <?php if (isset($_GET['year_level']) && $_GET['year_level'] == '1')
-                                                    echo 'selected'; ?>>
-                                                    1
-                                                </option>
-                                                <option value="2" <?php if (isset($_GET['year_level']) && $_GET['year_level'] == '2')
-                                                    echo 'selected'; ?>>
-                                                    2
-                                                </option>
-                                                <option value="3" <?php if (isset($_GET['year_level']) && $_GET['year_level'] == '3')
-                                                    echo 'selected'; ?>>
-                                                    3
-                                                </option>
-                                                <option value="4" <?php if (isset($_GET['year_level']) && $_GET['year_level'] == '4')
-                                                    echo 'selected'; ?>>
-                                                    4
-                                                </option>
+                                        <div class="input-group-prepend col-2">
+                                            <select name="year_level" class="form-control">
+                                                <option value="">Year Level</option>
+                                                <option value="">All</option>
+                                                <option value="1">1</option>
+                                                <option value="2">2</option>
+                                                <option value="3">3</option>
+                                                <option value="4">4</option>
                                             </select>
                                         </div>
-
-                                        <div class="col-sm-2">
-                                            <button class="btn btn-outline-secondary" type="submit" name="search">Submit
-                                            </button>
+                                        <div class="input-group-prepend col-2">
+                                            <select name="program" class="form-control">
+                                                <option value="">Program</option>
+                                                <option value="">All</option>
+                                                <option value="BSIT">BSIT</option>
+                                                <option value="BSCS">BSCS</option>
+                                                <option value="BLIS">BLIS</option>
+                                                <option value="ACT">ACT</option>
+                                            </select>
+                                        </div>
+                                        <div class="input-group-append col-1">
+                                            <button class="btn btn-outline-secondary" type="submit" name="search">Search</button>
+                                        </div>
                                 </form>
+
+                                <div class="col-sm text-right">
+                                    <form method="POST" action="indexes/officer-event-delete-all-students-be.php">
+                                        <input type="hidden" name="event_id" value="<?php echo $event_id; ?>">
+                                        <input type="hidden" name="column"
+                                            value="<?php echo isset($_GET['column']) ? $_GET['column'] : ''; ?>">
+                                        <input type="hidden" name="search_input"
+                                            value="<?php echo isset($_GET['search_input']) ? $_GET['search_input'] : ''; ?>">
+                                        <input type="hidden" name="program"
+                                            value="<?php echo isset($_GET['program']) ? $_GET['program'] : ''; ?>">
+                                        <input type="hidden" name="year_level"
+                                            value="<?php echo isset($_GET['year_level']) ? $_GET['year_level'] : ''; ?>">
+                                        <button class="btn btn-outline-danger" type="submit" name="delete_all">Delete All</button>
+                                    </form>
+                                </div>
                             </div>
-
-                            <div class="col-sm text-right">
-                                <form method="POST" action="indexes/officer-event-delete-all-students-be.php">
-                                    <input type="hidden" name="event_id" value="<?php echo $event_id; ?>">
-                                    <input type="hidden" name="program"
-                                        value="<?php echo isset($_GET['program']) ? $_GET['program'] : 'all'; ?>">
-                                    <input type="hidden" name="year_level"
-                                        value="<?php echo isset($_GET['year_level']) ? $_GET['year_level'] : 'all'; ?>">
-                                    <button class="btn btn-outline-danger" type="submit" name="add_all">Delete All</button>
-                                </form>
-                            </div>
-
-
                     </div>
+
+
 
                     <!-- Students table -->
                     <?php
-                    $conditions = [];
-                    if (isset($_GET['program']) && $_GET['program'] !== 'all') {
-                        $program = validate($_GET['program']);
-                        $conditions[] = "u.program = '$program'";
-                    }
-                    if (isset($_GET['year_level']) && $_GET['year_level'] !== 'all') {
-                        $year_level = validate($_GET['year_level']);
-                        $conditions[] = "u.year_level = '$year_level'";
-                    }
-                    $whereClause = count($conditions) > 0 ? 'AND ' . implode(' AND ', $conditions) : '';
+                    if (isset($_GET['search'])) {
+                        $program = $_GET['program'];
+                        $year_level = $_GET['year_level'];
+                        $search_input = $_GET['search_input'];
+                        $column = $_GET['column'];
 
-                    $studentsql = "
-                    SELECT 
+                        $conditions = array();
+
+                        if (!empty($program)) {
+                            $conditions[] = "u.program = '$program'";
+                        }
+                        if (!empty($year_level)) {
+                            $conditions[] = "u.year_level = '$year_level'";
+                        }
+                        if (!empty($search_input) && !empty($column)) {
+                            $conditions[] = "$column LIKE '%$search_input%'";
+                        }
+                        $condition_string = implode(" AND ", $conditions);
+
+                        if (!empty($condition_string)) {
+                            $studentsql = "SELECT 
                         u.account_number, 
                         u.last_name, 
                         u.first_name, 
@@ -207,9 +199,62 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Officer' && $_SESSION['de
                         e.school_year = '$school_year'
                         AND e.semester = '$semester'
                         AND u.role = 'Student'
-                        $whereClause
+                        AND u.department = 'ITE'
+                        AND $condition_string 
                     ORDER BY 
                         u.program ASC, u.year_level ASC, u.last_name ASC";
+                        } else {
+                            $studentsql = "SELECT 
+                        u.account_number, 
+                        u.last_name, 
+                        u.first_name, 
+                        u.middle_name, 
+                        u.program, 
+                        u.year_level
+                    FROM 
+                        attendance a
+                    JOIN 
+                        enrolled e 
+                    ON 
+                        a.account_number = e.account_number
+                    LEFT JOIN 
+                        user u
+                    ON 
+                        u.account_number = a.account_number AND a.event_id = $event_id
+                    WHERE 
+                        e.school_year = '$school_year'
+                        AND e.semester = '$semester'
+                        AND u.role = 'Student'
+                        AND u.department = 'ITE'
+                    ORDER BY 
+                        u.program ASC, u.year_level ASC, u.last_name ASC";
+                        }
+                    } else {
+                        $studentsql = "SELECT 
+                    u.account_number, 
+                    u.last_name, 
+                    u.first_name, 
+                    u.middle_name, 
+                    u.program, 
+                    u.year_level
+                FROM 
+                    attendance a
+                JOIN 
+                    enrolled e 
+                ON 
+                    a.account_number = e.account_number
+                LEFT JOIN 
+                    user u
+                ON 
+                    u.account_number = a.account_number AND a.event_id = $event_id
+                WHERE 
+                    e.school_year = '$school_year'
+                    AND e.semester = '$semester'
+                    AND u.role = 'Student'
+                    AND u.department = 'ITE'
+                ORDER BY 
+                    u.program ASC, u.year_level ASC, u.last_name ASC";
+                    }
                     $result = $conn->query($studentsql);
                     ?>
                     <table class="table">
