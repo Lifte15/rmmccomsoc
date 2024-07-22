@@ -512,7 +512,7 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Admin' && $_SESSION['depa
                      FROM user u
                      INNER JOIN enrolled e ON u.account_number = e.account_number 
                      WHERE u.role = 'Student' 
-                     AND u.program = 'BPA_Dance' 
+                     AND u.program = 'BPA-Dance' 
                      AND e.school_year = '$schoolYear' 
                      AND e.semester = '$semester'";
     $BPA_DanceProgramresult = mysqli_query($conn, $BPA_DanceProgramquery);
@@ -546,7 +546,7 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Admin' && $_SESSION['depa
                      FROM user u
                      INNER JOIN enrolled e ON u.account_number = e.account_number 
                      WHERE u.role = 'Student' 
-                     AND u.program = 'BSESS_FSM' 
+                     AND u.program = 'BSESS-FSM' 
                      AND e.school_year = '$schoolYear' 
                      AND e.semester = '$semester'";
     $BSESS_FSMProgramresult = mysqli_query($conn, $BSESS_FSMProgramquery);
