@@ -35,7 +35,7 @@ if (isset($_POST['addStudent'])) {
     $gender = validate($_POST['gender']);
     $yearlevel = validate($_POST['yearlevel']);
     $program = validate($_POST['program']);
-    $department = "ITE";
+    $department = "CE";
 
     // Convert the names to proper case
     $lastname = ucwords(strtolower($lastnameNotProper));

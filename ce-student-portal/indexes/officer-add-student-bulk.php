@@ -69,7 +69,7 @@ if (isset($_POST['save_excel_data'])) {
                 $gender = validate($row[6]);
                 $phonenumberdefault = validate($row[7]);
                 $phonenumber = "0". $phonenumberdefault;
-                $department = "ITE";
+                $department = "CE";
 
                 // Convert the names to proper case
                 $lastname = ucwords(strtolower($lastnameNotProper));
