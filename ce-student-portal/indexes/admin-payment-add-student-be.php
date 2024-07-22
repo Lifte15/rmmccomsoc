@@ -13,9 +13,15 @@ session_start();
 include "db_conn.php";
 
     if ($_SERVER["REQUEST_METHOD"] === "POST") {
+        function validate($data) {
+            $data = trim($data); // Remove whitespace from the beginning and end of string
+            $data = stripslashes($data); // Remove backslashes
+            $data = htmlspecialchars($data); // Convert special characters to HTML entities
+            return $data;
+        }
         if (isset($_POST['add_student'])) {
-            $payment_for_id = intval($_POST['payment_for_id']);
-            $account_number = intval($_POST['account_number']);
+            $payment_for_id = validate($_POST['payment_for_id']);
+            $account_number = validate($_POST['account_number']);
             $previous_url = $_POST['previous_url'];
 
             // Prepare and bind
