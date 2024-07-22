@@ -55,7 +55,7 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Admin'  && $_SESSION['dep
     if (isset($_GET['payment_for_id'])) {
         $payment_for_id = intval($_GET['payment_for_id']);
 
-        $sql = "SELECT school_year, semester FROM payment_for WHERE payment_for_id = $payment_for_id ";
+        $sql = "SELECT school_year, semester FROM payment_for WHERE payment_for_id = $payment_for_id";
         $result = $conn->query($sql);
 
         if ($result->num_rows > 0) {
@@ -131,7 +131,10 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Admin'  && $_SESSION['dep
                                             <select name="program" class="form-control">
                                                 <option value="">Program</option>
                                                 <option value="">All</option>
-                                                <option value="BSCE">BSCE</option>
+                                                <option value="BSIT">BSIT</option>
+                                                <option value="BSCS">BSCS</option>
+                                                <option value="BLIS">BLIS</option>
+                                                <option value="ACT">ACT</option>
                                             </select>
                                         </div>
                                         <div class="input-group-append col-1">
@@ -177,40 +180,40 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Admin'  && $_SESSION['dep
                         $condition_string = implode(" AND ", $conditions);
 
                         if (!empty($condition_string)) {
-                    $studentsql = "SELECT u.account_number, u.last_name, u.first_name, u.middle_name, u.program, u.year_level
+                    $studentsql = "SELECT u.account_number, u.last_name, u.first_name, u.middle_name, u.program, u.year_level, u.department
                                FROM user u
                                INNER JOIN enrolled e ON u.account_number = e.account_number
                                LEFT JOIN payment p ON u.account_number = p.account_number AND p.payment_for_id = $payment_for_id
                                WHERE e.school_year = '$school_year'
                                  AND e.semester = '$semester'
                                  AND u.role = 'Student'
+                                 AND u.department = 'ITE'
                                  AND p.account_number IS NULL
                                  AND $condition_string
-                                 AND u.department='ITE'
                                ORDER BY u.program ASC, u.year_level ASC, u.last_name ASC";
 
 } else {
-    $studentsql = "SELECT u.account_number, u.last_name, u.first_name, u.middle_name, u.program, u.year_level
+    $studentsql = "SELECT u.account_number, u.last_name, u.first_name, u.middle_name, u.program, u.year_level, u.department
                                FROM user u
                                INNER JOIN enrolled e ON u.account_number = e.account_number
                                LEFT JOIN payment p ON u.account_number = p.account_number AND p.payment_for_id = $payment_for_id
                                WHERE e.school_year = '$school_year'
                                  AND e.semester = '$semester'
                                  AND u.role = 'Student'
+                                 AND u.department = 'ITE'
                                  AND p.account_number IS NULL
-                                 AND u.department='ITE'
                                ORDER BY u.program ASC, u.year_level ASC, u.last_name ASC";
 }
                     } else {
-                        $studentsql = "SELECT u.account_number, u.last_name, u.first_name, u.middle_name, u.program, u.year_level
+                        $studentsql = "SELECT u.account_number, u.last_name, u.first_name, u.middle_name, u.program, u.year_level, u.department
                                FROM user u
                                INNER JOIN enrolled e ON u.account_number = e.account_number
                                LEFT JOIN payment p ON u.account_number = p.account_number AND p.payment_for_id = $payment_for_id
                                WHERE e.school_year = '$school_year'
                                  AND e.semester = '$semester'
                                  AND u.role = 'Student'
+                                 AND u.department = 'ITE'
                                  AND p.account_number IS NULL
-                                 AND u.department='ITE'
                                ORDER BY u.program ASC, u.year_level ASC, u.last_name ASC";
                     }
                     $result = $conn->query($studentsql);
