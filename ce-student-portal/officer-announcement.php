@@ -165,24 +165,24 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Officer' && $_SESSION['de
           </div>
 
           <?php
-          $schoolYearFilter = isset($_GET['school_year']) && $_GET['school_year'] !== 'All' ? $_GET['school_year'] : '';
-          $semesterFilter = isset($_GET['semester']) && $_GET['semester'] !== 'All' ? $_GET['semester'] : '';
-
+          $school_year_filter = isset($_GET['school_year']) && $_GET['school_year'] != 'All' ? $_GET['school_year'] : '';
+          $semester_filter = isset($_GET['semester']) && $_GET['semester'] != 'All' ? $_GET['semester'] : '';
+          $department_filter = 'CE';  // Add this line to set the department filter
+        
           $sql = "SELECT * FROM announcement";
-          $conditions = [];
-
-          if ($schoolYearFilter) {
-            $conditions[] = "school_year = '" . mysqli_real_escape_string($conn, $schoolYearFilter) . "'";
+          if ($school_year_filter || $semester_filter || $department_filter) {
+            $sql .= " WHERE department = '$department_filter'";  // Add department filter in the WHERE clause
+            if ($school_year_filter) {
+              $sql .= " AND school_year = '$school_year_filter'";
+              if ($semester_filter) {
+                $sql .= " AND semester = '$semester_filter'";
+              }
+            } elseif ($semester_filter) {
+              $sql .= " AND semester = '$semester_filter'";
+            }
           }
-          if ($semesterFilter) {
-            $conditions[] = "semester = '" . mysqli_real_escape_string($conn, $semesterFilter) . "'";
-          }
-
-          if (!empty($conditions)) {
-            $sql .= " WHERE " . implode(" AND ", $conditions);
-          }
-
           $sql .= " ORDER BY announcement_id DESC";
+
           $result = mysqli_query($conn, $sql);
 
           if (!$result) {

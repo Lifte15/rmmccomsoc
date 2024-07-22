@@ -166,7 +166,7 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Student' && $_SESSION['de
                             $searchSchoolYear = isset($_GET['school_year']) ? $_GET['school_year'] : 'All';
                             $searchSemester = isset($_GET['semester']) ? $_GET['semester'] : 'All';
 
-                            $sql = "SELECT * FROM announcement WHERE 1=1";
+                            $sql = "SELECT * FROM announcement WHERE 1=1 AND department='ITE'";
                             if ($searchSchoolYear != 'All') {
                                 $sql .= " AND school_year = '$searchSchoolYear'";
                             } else {

@@ -167,17 +167,18 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Admin' && $_SESSION['depa
           <?php
           $school_year_filter = isset($_GET['school_year']) && $_GET['school_year'] != 'All' ? $_GET['school_year'] : '';
           $semester_filter = isset($_GET['semester']) && $_GET['semester'] != 'All' ? $_GET['semester'] : '';
-
+          $department_filter = 'ITE';  // Add this line to set the department filter
+        
           $sql = "SELECT * FROM announcement";
-          if ($school_year_filter || $semester_filter) {
-            $sql .= " WHERE";
+          if ($school_year_filter || $semester_filter || $department_filter) {
+            $sql .= " WHERE department = '$department_filter'";  // Add department filter in the WHERE clause
             if ($school_year_filter) {
-              $sql .= " school_year = '$school_year_filter'";
+              $sql .= " AND school_year = '$school_year_filter'";
               if ($semester_filter) {
                 $sql .= " AND semester = '$semester_filter'";
               }
             } elseif ($semester_filter) {
-              $sql .= " semester = '$semester_filter'";
+              $sql .= " AND semester = '$semester_filter'";
             }
           }
           $sql .= " ORDER BY announcement_id DESC";
