@@ -44,7 +44,7 @@ if (isset($_POST['upload'])) {
         // Update the profile picture in the database
         $sql = "UPDATE user SET profile_picture=? WHERE account_number=?";
         $stmt = mysqli_prepare($conn, $sql);
-        mysqli_stmt_bind_param($stmt, "si", $final_file, $account_number);
+        mysqli_stmt_bind_param($stmt, "ss", $final_file, $account_number);
         mysqli_stmt_execute($stmt);
 
         // Update the profile picture session
