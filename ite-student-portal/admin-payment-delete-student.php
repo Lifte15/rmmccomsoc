@@ -196,6 +196,7 @@ Brief overview of the file's contents. -->
                         e.school_year = '$school_year'
                         AND e.semester = '$semester'
                         AND u.role = 'Student'
+                        AND u.department = 'ITE'
                         AND $condition_string 
                     ORDER BY 
                         u.program ASC, u.year_level ASC, u.last_name ASC";
@@ -221,6 +222,7 @@ Brief overview of the file's contents. -->
                         e.school_year = '$school_year'
                         AND e.semester = '$semester'
                         AND u.role = 'Student'
+                        AND u.department = 'ITE'
                     ORDER BY 
                         u.program ASC, u.year_level ASC, u.last_name ASC";
                         }
@@ -246,6 +248,7 @@ Brief overview of the file's contents. -->
                         e.school_year = '$school_year'
                         AND e.semester = '$semester'
                         AND u.role = 'Student'
+                        AND u.department = 'ITE'
                     ORDER BY 
                         u.program ASC, u.year_level ASC, u.last_name ASC";
                         }
