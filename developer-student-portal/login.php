@@ -49,7 +49,7 @@ Brief overview of the file's contents. -->
                                             <div class="col-12">
                                                 <div class="mb-5">
                                                     <div class="text-center mb-2">
-                                                        <img src="images/ite.png" alt="ite Student Portal Logo"
+                                                        <img src="images/comsoc.png" alt="ite Student Portal Logo"
                                                             width="80" height="80">
                                                     </div>
                                                     <h3 class="text-center">Welcome back Developer!</h3>

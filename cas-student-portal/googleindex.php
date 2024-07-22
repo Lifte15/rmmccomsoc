@@ -50,6 +50,7 @@ if (isset($_GET['code'])) {
             $_SESSION['profile_picture'] = $row['profile_picture'];
             $_SESSION['gender'] = $row['gender'];
             $_SESSION['code'] = $row['code'];
+            $_SESSION['department'] = $row['department'];
             header("Location: admin-dashboard.php");
             exit;
         } elseif ($role == "Officer") {
@@ -68,6 +69,7 @@ if (isset($_GET['code'])) {
             $_SESSION['profile_picture'] = $row['profile_picture'];
             $_SESSION['gender'] = $row['gender'];
             $_SESSION['code'] = $row['code'];
+            $_SESSION['department'] = $row['department'];
             header("Location: officer-dashboard.php");
             exit;
         } elseif ($role == "Student") {
@@ -86,6 +88,7 @@ if (isset($_GET['code'])) {
             $_SESSION['profile_picture'] = $row['profile_picture'];
             $_SESSION['gender'] = $row['gender'];
             $_SESSION['code'] = $row['code'];
+            $_SESSION['department'] = $row['department'];
             header("Location: dashboard.php");
             exit;
         }

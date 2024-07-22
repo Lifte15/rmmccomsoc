@@ -70,6 +70,18 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Developer' && $_SESSION['
       .bg-ccj {
         background-color: #3D2F62 !important;
       }
+
+      .bg-cas {
+        background-color: #278A2D !important;
+      }
+
+      .bg-cte {
+        background-color: #02055A !important;
+      }
+
+      .bg-cbe {
+        background-color: #E9BE00 !important;
+      }
     </style>
   </head>
 
@@ -281,6 +293,100 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Developer' && $_SESSION['
                   </div>
                   <div class="icon" style="position: absolute; top: 10px; right: 10px;">
                     <img src="images/CCJ.png" alt="CE Icon" style="width: 100px; height: auto;">
+                  </div>
+                </div>
+              </div>
+
+              <!-- for number of students of CAS -->
+              <?php
+
+              $CASStudentquery = "SELECT COUNT(*) AS count FROM user 
+                 INNER JOIN enrolled ON user.account_number = enrolled.account_number 
+                 WHERE user.role = 'Student' 
+                 AND enrolled.school_year = '$schoolYear' 
+                 AND enrolled.semester = '$semester'
+                 AND user.department='CAS'";
+              $CASStudentresult = mysqli_query($conn, $CASStudentquery);
+
+              if ($CASStudentresult) {
+                $CASStudentrow = mysqli_fetch_assoc($CASStudentresult);
+                $CASStudentcount = $CASStudentrow['count'];
+              } else {
+                $CASStudentcount = 0;
+              }
+              ?>
+
+              <div class="col-lg-3 col-6">
+                <div class="small-box bg-cas">
+                  <div class="inner text-white">
+                    <h1 style="font-size: 50px;"><strong><?php echo $CASStudentcount; ?></strong></h1>
+                    <p>CAS Student/s</p>
+                  </div>
+                  <div class="icon" style="position: absolute; top: 10px; right: 10px;">
+                    <img src="images/CAS.png" alt="CE Icon" style="width: 100px; height: auto;">
+                  </div>
+                </div>
+              </div>
+
+              <!-- for number of students of CTE -->
+              <?php
+
+              $CTEStudentquery = "SELECT COUNT(*) AS count FROM user 
+                 INNER JOIN enrolled ON user.account_number = enrolled.account_number 
+                 WHERE user.role = 'Student' 
+                 AND enrolled.school_year = '$schoolYear' 
+                 AND enrolled.semester = '$semester'
+                 AND user.department='CTE'";
+              $CTEStudentresult = mysqli_query($conn, $CTEStudentquery);
+
+              if ($CTEStudentresult) {
+                $CTEStudentrow = mysqli_fetch_assoc($CTEStudentresult);
+                $CTEStudentcount = $CTEStudentrow['count'];
+              } else {
+                $CTEStudentcount = 0;
+              }
+              ?>
+
+              <div class="col-lg-3 col-6">
+                <div class="small-box bg-cte">
+                  <div class="inner text-white">
+                    <h1 style="font-size: 50px;"><strong><?php echo $CTEStudentcount; ?></strong></h1>
+                    <p>CTE Student/s</p>
+                  </div>
+                  <div class="icon" style="position: absolute; top: 10px; right: 10px;">
+                    <img src="images/CTE.png" alt="CE Icon" style="width: 100px; height: auto;">
+                  </div>
+                </div>
+              </div>
+
+
+              <!-- for number of students of CBE -->
+              <?php
+
+              $CBEStudentquery = "SELECT COUNT(*) AS count FROM user 
+                 INNER JOIN enrolled ON user.account_number = enrolled.account_number 
+                 WHERE user.role = 'Student' 
+                 AND enrolled.school_year = '$schoolYear' 
+                 AND enrolled.semester = '$semester'
+                 AND user.department='CBE'";
+              $CBEStudentresult = mysqli_query($conn, $CBEStudentquery);
+
+              if ($CBEStudentresult) {
+                $CBEStudentrow = mysqli_fetch_assoc($CBEStudentresult);
+                $CBEStudentcount = $CBEStudentrow['count'];
+              } else {
+                $CBEStudentcount = 0;
+              }
+              ?>
+
+              <div class="col-lg-3 col-6">
+                <div class="small-box bg-cbe">
+                  <div class="inner text-white">
+                    <h1 style="font-size: 50px;"><strong><?php echo $CBEStudentcount; ?></strong></h1>
+                    <p>CBE Student/s</p>
+                  </div>
+                  <div class="icon" style="position: absolute; top: 10px; right: 10px;">
+                    <img src="images/CBE.png" alt="CE Icon" style="width: 100px; height: auto;">
                   </div>
                 </div>
               </div>

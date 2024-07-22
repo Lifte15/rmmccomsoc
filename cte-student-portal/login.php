@@ -38,7 +38,7 @@ require_once 'googleconfig.php';
         <div class="container d-flex justify-content-center align-items-center" style="min-height: 100vh;">
             <div class="row justify-content-center">
                 <div class="col-12 col-xxl-11">
-                    <div class  ="card border-danger shadow-sm">
+                    <div class  ="card border-primary shadow-sm">
                         <div class="row g-0">
                             <div class="col-12 col-md-6">
                                 <img class="login-image img-fluid rounded-start w-100 h-100 object-fit-cover"

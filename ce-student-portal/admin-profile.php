@@ -174,7 +174,7 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Admin' && $_SESSION['depa
     </html>
     <?php
 } else {
-    header("Location: login-v2.php");
+    header("Location: login.php");
     exit();
 }
 ?>
