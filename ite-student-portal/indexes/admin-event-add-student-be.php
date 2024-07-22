@@ -13,15 +13,21 @@ session_start();
 include "db_conn.php";
 
     if ($_SERVER["REQUEST_METHOD"] === "POST") {
-        if (isset($_POST['event_id']) && isset($_POST['account_number'], $_POST['previous_url'])) {
-            $event_id = intval($_POST['event_id']);
-            $account_number = intval($_POST['account_number']);
+        if (isset($_POST['add_student'])) {
+            function validate($data) {
+                $data = trim($data); // Remove whitespace from the beginning and end of string
+                $data = stripslashes($data); // Remove backslashes
+                $data = htmlspecialchars($data); // Convert special characters to HTML entities
+                return $data;
+            }
+            $event_id = validate($_POST['event_id']);
+            $account_number = validate($_POST['account_number']);
             $previous_url = $_POST['previous_url'];
 
             // Prepare and bind
             $stmt = $conn->prepare("INSERT INTO attendance (event_id, account_number, remarks) VALUES (?, ?, ?)");
             $remarks = "Absent";
-            $stmt->bind_param("iis", $event_id, $account_number, $remarks);
+            $stmt->bind_param("iss", $event_id, $account_number, $remarks);
 
             // Execute the statement
             if ($stmt->execute()) {

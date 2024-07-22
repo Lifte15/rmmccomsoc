@@ -230,7 +230,7 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Admin' && $_SESSION['depa
 
                         $query = "SELECT user.account_number, user.username, user.first_name, user.last_name, user.middle_name, user.program, user.year_level, attendance.remarks, attendance.remarked_by
                         FROM attendance 
-                        JOIN user ON attendance.account_number = user.account_number 
+                        JOIN user ON attendance.account_number = user.account_number AND user.department = 'ITE'
                         WHERE attendance.event_id = '$event_id'";
 
                         $filters = [];
