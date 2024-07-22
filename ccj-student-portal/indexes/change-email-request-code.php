@@ -33,11 +33,11 @@ function sendMail($newEmail, $verificationCode, $username)
         $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
         $mail->Port = 587;
 
-        $mail->setFrom('itestudentportal@gmail.com', 'Change Email Address Request Code | ITE Student Portal');
+        $mail->setFrom('itestudentportal@gmail.com', 'Change Email Address Request Code | CCJ Student Portal');
         $mail->addAddress($newEmail);
 
         $mail->isHTML(true);
-        $mail->Subject = 'Change Email Address Request Code | ITE Student Portal';
+        $mail->Subject = 'Change Email Address Request Code | CCJ Student Portal';
         $mail->Body =  "
         <html>
         <head>

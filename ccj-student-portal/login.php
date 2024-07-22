@@ -1,4 +1,4 @@
- <!-- login.php and to login in ITE Student Portal.
+ <!-- login.php and to login in CCJ Student Portal.
 Authors:
   - Lowie Jay Orillo (lowie.jaymier@gmail.com)
   - Caryl Mae Subaldo (subaldomae29@gmail.com)

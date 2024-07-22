@@ -11,7 +11,7 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Officer' && $_SESSION['de
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Admin Query Page | ITE Student Portal</title>
+    <title>Officer Query Page | ITE Student Portal</title>
     <link rel="icon" type="image/png" href="favicon.ico" />
 
     <!-- Google Font: Source Sans Pro -->

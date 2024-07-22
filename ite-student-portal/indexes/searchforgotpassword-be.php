@@ -32,11 +32,11 @@ function sendMail($email, $last_name, $first_name, $v_code)
         $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
         $mail->Port = 587;
 
-        $mail->setFrom('itestudentportal@gmail.com', 'Reset Password Code | CE Student Portal');
+        $mail->setFrom('itestudentportal@gmail.com', 'Reset Password Code | ITEStudent Portal');
         $mail->addAddress($email);
 
         $mail->isHTML(true);
-        $mail->Subject = 'Hello CE Student | CE Student Portal';
+        $mail->Subject = 'Hello ITEStudent | ITEStudent Portal';
         $mail->Body = "
         <html>
 

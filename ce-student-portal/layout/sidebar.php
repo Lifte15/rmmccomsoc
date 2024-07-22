@@ -13,7 +13,7 @@ Brief overview of the file's contents. -->
   <a href="dashboard.php" class="brand-link">
     <img src="images/iteportal-sidebar-logo.png" alt="AdminLTE Logo" class="brand-image elevation-3"
       style="opacity: .8">
-    <span class="brand-text font-weight-light">ITE Student Portal</span>
+    <span class="brand-text font-weight-light">CE Student Portal</span>
   </a>
 
   <?php

@@ -32,11 +32,11 @@ function sendMail($email, $v_code, $last_name, $first_name, $middle_name, $progr
         $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
         $mail->Port = 587;
 
-        $mail->setFrom('itestudentportal@gmail.com', 'Account Verification Code | CE Student Portal');
+        $mail->setFrom('itestudentportal@gmail.com', 'Account Verification Code | ITEStudent Portal');
         $mail->addAddress($email);
 
         $mail->isHTML(true);
-        $mail->Subject = 'Hello CE Student | CE Student Portal';
+        $mail->Subject = 'Hello ITEStudent | ITEStudent Portal';
         $mail->Body = "
         <html>
 
@@ -91,7 +91,7 @@ function sendMail($email, $v_code, $last_name, $first_name, $middle_name, $progr
                     <h3>Program: $program</h3>
                     <h3>Year Level: $year_level</h3>
                     <hr>
-                    <h3>To finalize your CE Student Portal account, please verify your account using the following verification code:</h3>
+                    <h3>To finalize your ITEStudent Portal account, please verify your account using the following verification code:</h3>
                     <h2>Verification Code: $v_code</h2>
                     <hr>
                     <p>Thank you</p>

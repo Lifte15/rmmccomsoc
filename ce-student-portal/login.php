@@ -1,4 +1,4 @@
- <!-- login.php and to login in ITE Student Portal.
+ <!-- login.php and to login in CE Student Portal.
 Authors:
   - Lowie Jay Orillo (lowie.jaymier@gmail.com)
   - Caryl Mae Subaldo (subaldomae29@gmail.com)
@@ -51,7 +51,7 @@ require_once 'googleconfig.php';
                                             <div class="col-12">
                                                 <div class="mb-5">
                                                     <div class="text-center mb-2">
-                                                        <img src="images/ite.png" alt="ite Student Portal Logo"
+                                                        <img src="images/ite.png" alt="Ce Student Portal Logo"
                                                             width="80" height="80">
                                                     </div>
                                                     <h3 class="text-center">Welcome back CE Students!</h3>

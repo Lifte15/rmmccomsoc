@@ -80,8 +80,8 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Officer' && $_SESSION['de
                   <div class="card-header">
                     <h3 class="card-title text-center" style="font-size: 1.25rem; font-weight: bold;">
                       New Bulk Student</h3><br><br>
-                    <p class="text-muted">Please download this <a download="ite-student-portal-guide"
-                        href="excel/ite-student-portal-guide.xlsx">ite-portal-excel</a> for the guide:</strong></p>
+                    <p class="text-muted">Please download this <a download="ce-student-portal-guide"
+                        href="excel/ce-student-portal-guide.xlsx">ce-portal-excel</a> for the guide:</strong></p>
                     <hr>
 
                     <?php if (isset($_GET['newStudentError'])) { ?>

@@ -54,7 +54,7 @@ require_once 'googleconfig.php';
                                                         <img src="images/ite.png" alt="ite Student Portal Logo"
                                                             width="80" height="80">
                                                     </div>
-                                                    <h3 class="text-center">Welcome back CE Students!</h3>
+                                                    <h3 class="text-center">Welcome back ITE Students!</h3>
                                                 </div>
                                             </div>
                                         </div>

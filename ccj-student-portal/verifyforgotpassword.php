@@ -1,4 +1,4 @@
-<!-- verifyforgotpassword.php and to verify forgot password in ITE Student Portal.
+<!-- verifyforgotpassword.php and to verify forgot password in CCJ Student Portal.
 Authors:
   - Lowie Jay Orillo (lowie.jaymier@gmail.com)
   - Caryl Mae Subaldo (subaldomae29@gmail.com)
