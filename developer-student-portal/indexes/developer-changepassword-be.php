@@ -1,12 +1,12 @@
 <?php
 /*
-admin-changepassword-be.php handles the process of changing the password for admin accounts after validation.
+developer-changepassword-be.php handles the process of changing the password for developer accounts after validation.
 Authors:
   - Lowie Jay Orillo (lowie.jaymier@gmail.com)
   - Caryl Mae Subaldo (subaldomae29@gmail.com)
   - Brian Angelo Bognot (c09651052069@gmail.com)
 Last Modified: June 1, 2024
-Overview: This file handles the change of password for admin accounts, 
+Overview: This file handles the change of password for developer accounts, 
     validating input and updating the password in the database.
 */
 
@@ -38,7 +38,7 @@ if (
 
     // Validate if the new password is equal to retyped new password
     if ($newPassword !== $retypeNewPassword) {
-        header("Location: ../admin-profile-setting.php?passerror=Your new password and Retype password do not match.");
+        header("Location: ../developer-profile-setting.php?passerror=Your new password and Retype password do not match.");
         exit();
     }
 
@@ -56,11 +56,11 @@ if (
 
         // Validate if input password and stored password is equal
         if (!password_verify($currentPassword, $storedPassword)) {
-            header("Location: ../admin-profile-setting.php?passerror=Incorrect current password.");
+            header("Location: ../developer-profile-setting.php?passerror=Incorrect current password.");
             exit();
         }
     } else {
-        header("Location: ../admin-profile-setting.php?passerror=User not found.");
+        header("Location: ../developer-profile-setting.php?passerror=User not found.");
         exit();
     }
 
@@ -76,13 +76,13 @@ if (
     // Redirect based on the result of the SQL query
     if ($update_result) {
         $_SESSION['password'] = $hashed_new_password; 
-        header("Location: ../admin-profile-setting.php?passsuccess=Password updated successfully.");
+        header("Location: ../developer-profile-setting.php?passsuccess=Password updated successfully.");
         exit();
     } else {
-        header("Location: ../admin-profile-setting.php?error=Failed to update password.");
+        header("Location: ../developer-profile-setting.php?error=Failed to update password.");
         exit();
     }
 } else {
-    header("Location: ../admin-profile-setting.php");
+    header("Location: ../developer-profile-setting.php");
     exit();
 }

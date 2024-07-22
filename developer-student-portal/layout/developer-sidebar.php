@@ -1,4 +1,4 @@
-<!-- developer-sidebar.php and sidebar of admin form.
+<!-- developer-sidebar.php and sidebar of developer form.
 Author:
   Lowie Jay Orillo lowie.jaymier@gmail.com, 
   Caryl Mae Subaldo subaldomae29@gmail.com, 
@@ -13,7 +13,7 @@ Brief overview of the file's contents. -->
   <a href="developer-dashboard.php" class="brand-link">
     <img src="images/developer-logo.png" alt="AdminLTE Logo" class="brand-image elevation-3"
       style="opacity: .8">
-    <span class="brand-text font-weight-light">Student Portal</span>
+    <span class="brand-text font-weight-light">Developer Portal</span>
   </a>
 
 
@@ -93,17 +93,18 @@ Brief overview of the file's contents. -->
               Announcements
             </p>
           </a>
-        </li>
+        </li> -->
 
         <li class="nav-item ">
-          <a href="developer-officer.php" class="nav-link">
+          <a href="developer-admin.php" class="nav-link">
             <i class="nav-icon fas fa-solid fa-user-tie"></i>
             <p>
-              Officers
+              Admin
             </p>
           </a>
         </li>
 
+        <!--
         <li class="nav-item ">
           <a href="developer-students.php" class="nav-link">
             <i class="nav-icon fas fa-solid fa-users"></i>
