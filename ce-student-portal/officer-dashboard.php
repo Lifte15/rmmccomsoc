@@ -1,4 +1,4 @@
- <!-- officer-dashboard.php and to see the data and the population of the student in officer form.
+<!-- officer-dashboard.php and to see the data and the population of the student and officer in admin form.
 Authors:
   - Lowie Jay Orillo (lowie.jaymier@gmail.com)
   - Caryl Mae Subaldo (subaldomae29@gmail.com)
@@ -8,12 +8,8 @@ Brief overview of the file's contents. -->
 
 <?php
 session_start();
-if (isset($_SESSION['role']) && $_SESSION['role'] === 'Officer' && $_SESSION['department'] === 'CE') { 
-  // Check if the user's position is not 'Staff'
-  if ($_SESSION['position'] === 'Staff') {
-    header("Location: officer-announcement.php?school_year=$defaultYear&semester=$defaultSemester");
-    exit();
-  }
+include "indexes/db_conn.php";
+if (isset($_SESSION['role']) && $_SESSION['role'] === 'Officer' && $_SESSION['department'] === 'CE') { // Check if the role is set and it's 'Admin'
   ?>
 
   <!DOCTYPE html>
@@ -22,7 +18,7 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Officer' && $_SESSION['de
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Officer Dashboard | CE Student Portal</title>
+    <title>Admin Dashboard | CE Student Portal </title>
     <link rel="icon" type="image/png" href="favicon.ico" />
 
     <!-- Google Font: Source Sans Pro -->
@@ -65,15 +61,13 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Officer' && $_SESSION['de
               <div class="col-sm-6">
                 <h1 class="m-0">Dashboard</h1>
               </div>
-
             </div>
           </div>
         </div>
 
 
-      
-        <section class="content">
 
+        <section class="content">
           <div class="container-fluid">
 
             <!-- Search Form -->
@@ -160,7 +154,32 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Officer' && $_SESSION['de
             </form>
 
 
+            <!-- For number of officers -->
             <div class="row">
+              <?php
+              $officerquery = "SELECT COUNT(*) AS count FROM user WHERE role = 'Officer' AND department='CE'";
+              $officerresult = mysqli_query($conn, $officerquery);
+
+              $rofficerow = mysqli_fetch_assoc($officerresult);
+              $officercount = $rofficerow['count'];
+              ?>
+
+              <div class="col-lg-3 col-6">
+                <div class="small-box bg-info">
+                  <div class="inner">
+                    <h1 style="font-size: 50px;"><strong><?php echo $officercount; ?></strong></h1>
+                    <p>Officer/s</p>
+                  </div>
+                  <div class="icon">
+                    <i class="nav-icon fas fa-solid fa-user-tie"></i>
+                  </div>
+                  <a href="officer-officer.php" class="small-box-footer">More info <i
+                      class="fas fa-arrow-circle-right"></i></a>
+                </div>
+              </div>
+
+
+
 
               <!-- for number of students -->
               <?php
@@ -243,7 +262,7 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Officer' && $_SESSION['de
               $paymentforquery = "SELECT COUNT(*) AS count FROM payment_for
                  WHERE payment_for.school_year = '$schoolYear' 
                  AND payment_for.semester = '$semester'
-                 AND payment_for.department='CE'";
+                 AND payment_for.department = 'CE'";
               $paymentforresult = mysqli_query($conn, $paymentforquery);
 
               if ($paymentforresult) {
@@ -276,7 +295,7 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Officer' && $_SESSION['de
               <div class="col-lg-6 col-6">
                 <div class="card card-danger">
                   <div class="card-header">
-                    <h3 class="card-title">Program Polulation</h3>
+                    <h3 class="card-title">Program Population</h3>
 
                     <div class="card-tools">
                       <button type="button" class="btn btn-tool" data-card-widget="collapse">
@@ -289,7 +308,7 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Officer' && $_SESSION['de
                   </div>
                   <div class="card-body">
                     <canvas id="donutChart"
-                      style="min-height: 250px; height: 500; max-height: 250px; max-width: 100%;"></canvas>
+                      style="min-height: 250px; height: 500px; max-height: 250px; max-width: 100%;"></canvas>
                   </div>
                   <!-- /.card-body -->
                 </div>
@@ -314,7 +333,6 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Officer' && $_SESSION['de
                     <canvas id="yearLevelChart"
                       style="min-height: 250px; height: 500; max-height: 250px; max-width: 100%;"></canvas>
                   </div>
-                  <!-- /.card-body -->
                 </div>
               </div>
 
@@ -363,9 +381,6 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Officer' && $_SESSION['de
     <script src="AdminLTE-3.2.0/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
     <!-- AdminLTE App -->
     <script src="AdminLTE-3.2.0/dist/js/adminlte.js"></script>
-
-
-
 
     <!-- for program population -->
     <?php
@@ -542,124 +557,9 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Officer' && $_SESSION['de
         })
       })
     </script>
-
-    <!-- For Year Level Population -->
-    <?php
-
-    $schoolYear = isset($_GET['school_year']) ? mysqli_real_escape_string($conn, $_GET['school_year']) : '';
-    $semester = isset($_GET['semester']) ? mysqli_real_escape_string($conn, $_GET['semester']) : '';
-
-    // 1st year
-    $FirstYearquery = "SELECT COUNT(DISTINCT u.account_number) AS count 
-                     FROM user u
-                     INNER JOIN enrolled e ON u.account_number = e.account_number 
-                     WHERE u.role = 'Student' 
-                     AND u.year_level = '1' 
-                     AND e.school_year = '$schoolYear' 
-                     AND e.semester = '$semester'";
-    $FirstYearresult = mysqli_query($conn, $FirstYearquery);
-
-    if ($FirstYearresult) {
-      $FirstYearrow = mysqli_fetch_assoc($FirstYearresult);
-      $FirstYearCount = $FirstYearrow['count'];
-    } else {
-      $FirstYearCount = 0;
-    }
-
-    // 2nd year
-    $SecondYearquery = "SELECT COUNT(DISTINCT u.account_number) AS count 
-                     FROM user u
-                     INNER JOIN enrolled e ON u.account_number = e.account_number 
-                     WHERE u.role = 'Student' 
-                     AND u.year_level = '2' 
-                     AND e.school_year = '$schoolYear' 
-                     AND e.semester = '$semester'";
-    $SecondYearresult = mysqli_query($conn, $SecondYearquery);
-
-    if ($SecondYearresult) {
-      $SecondYearrow = mysqli_fetch_assoc($SecondYearresult);
-      $SecondYearCount = $SecondYearrow['count'];
-    } else {
-      $SecondYearCount = 0;
-    }
-
-    // 3rd year
-    $ThirdYearquery = "SELECT COUNT(DISTINCT u.account_number) AS count 
-                     FROM user u
-                     INNER JOIN enrolled e ON u.account_number = e.account_number 
-                     WHERE u.role = 'Student' 
-                     AND u.year_level = '3' 
-                     AND e.school_year = '$schoolYear' 
-                     AND e.semester = '$semester'";
-    $ThirdYearresult = mysqli_query($conn, $ThirdYearquery);
-
-    if ($ThirdYearresult) {
-      $ThirdYearrow = mysqli_fetch_assoc($ThirdYearresult);
-      $ThirdYearCount = $ThirdYearrow['count'];
-    } else {
-      $ThirdYearCount = 0;
-    }
-
-    // 4th year
-    $FourthYearquery = "SELECT COUNT(DISTINCT u.account_number) AS count 
-                     FROM user u
-                     INNER JOIN enrolled e ON u.account_number = e.account_number 
-                     WHERE u.role = 'Student' 
-                     AND u.year_level = '4' 
-                     AND e.school_year = '$schoolYear' 
-                     AND e.semester = '$semester'";
-    $FourthYearresult = mysqli_query($conn, $FourthYearquery);
-
-    if ($FourthYearresult) {
-      $FourthYearrow = mysqli_fetch_assoc($FourthYearresult);
-      $FourthYearCount = $FourthYearrow['count'];
-    } else {
-      $FourthYearCount = 0;
-    }
-    ?>
-
-    <!-- for year level population -->
-    <script>
-      $(function () {
-
-        //-------------
-        //- DONUT CHART -
-        //-------------
-        // Get context with jQuery - using jQuery's .get() method.
-        var yearLevelChartCanvas = $('#yearLevelChart').get(0).getContext('2d')
-        var FirstYearCount = <?php echo $FirstYearCount; ?>;
-        var SecondYearCount = <?php echo $SecondYearCount; ?>;
-        var ThirdYearCount = <?php echo $ThirdYearCount; ?>;
-        var FourthYearCount = <?php echo $FourthYearCount; ?>;
-        var donutData = {
-          labels: [
-            '1st Year',
-            '2nd Year',
-            '3rd Year',
-            '4th Year',
-          ],
-          datasets: [
-            {
-              data: [FirstYearCount, SecondYearCount, ThirdYearCount, FourthYearCount],
-              backgroundColor: ['#f56954', '#00a65a', '#f39c12', '#00c0ef'],
-            }
-          ]
-        }
-        var donutOptions = {
-          maintainAspectRatio: false,
-          responsive: true,
-        }
-        new Chart(yearLevelChartCanvas, {
-          type: 'doughnut',
-          data: donutData,
-          options: donutOptions
-        })
-      })
-    </script>
   </body>
 
   </html>
-  
   <?php
 } else {
   header("Location: login.php");
