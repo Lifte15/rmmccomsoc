@@ -76,6 +76,7 @@ if (isset($_POST['delete_all'])) {
                          AND e.school_year = ?
                          AND e.semester = ?
                          AND u.role = 'Student'
+                         AND u.department = 'ITE'
                          $whereClause";
         $stmt = mysqli_prepare($conn, $studentsql);
         if (!$stmt) {

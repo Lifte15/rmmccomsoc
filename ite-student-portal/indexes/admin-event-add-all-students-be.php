@@ -73,6 +73,7 @@ if (isset($_POST['add_all'])) {
                        WHERE e.school_year = ?
                          AND e.semester = ?
                          AND u.role = 'Student'
+                         AND u.department = 'ITE'
                          AND a.account_number IS NULL
                          $whereClause";
         $stmt = mysqli_prepare($conn, $studentsql);
