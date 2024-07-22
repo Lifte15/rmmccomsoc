@@ -13,7 +13,7 @@ session_start();
 require('db_conn.php');
 
 // Check if the form is submitted
-if (isset($_POST['add_all'])) {
+if (isset($_POST['delete_all'])) {
 
     // Function to validate and sanitize user input
     function validate($data) {
@@ -76,6 +76,7 @@ if (isset($_POST['add_all'])) {
                          AND e.school_year = ?
                          AND e.semester = ?
                          AND u.role = 'Student'
+                         AND u.department = 'ITE'
                          $whereClause";
         $stmt = mysqli_prepare($conn, $studentsql);
         if (!$stmt) {
