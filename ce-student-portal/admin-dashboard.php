@@ -93,8 +93,6 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Admin' && $_SESSION['depa
                       }
                       ?>
                       <select class="form-control" id="school_year" name="school_year">
-                        <option value="All" <?php if (isset($_GET['school_year']) && $_GET['school_year'] == 'All')
-                          echo 'selected'; ?>>All</option>
                         <?php foreach ($schoolYears as $year) { ?>
                           <option value="<?php echo $year['school_year']; ?>" <?php
                              if (isset($_GET['school_year']) && $_GET['school_year'] == $year['school_year']) {
@@ -130,8 +128,6 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Admin' && $_SESSION['depa
                       }
                       ?>
                       <select class="form-control" id="semester" name="semester">
-                        <option value="" <?php if (!isset($_GET['semester']))
-                          echo 'selected'; ?>>All</option>
                         <?php foreach ($semesters as $semester) { ?>
                           <option value="<?php echo $semester['semester']; ?>" <?php
                              if (isset($_GET['semester']) && $_GET['semester'] == $semester['semester']) {

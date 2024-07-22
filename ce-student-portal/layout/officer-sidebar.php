@@ -10,7 +10,7 @@ Brief overview of the file's contents. -->
 <aside class="main-sidebar sidebar-dark-primary elevation-2"
   style="background-image: url('images/sidebar-background.png'); background-size: cover; background-position: center;">
   <!-- Brand Logo -->
-  <a href="admin-dashboard.php" class="brand-link">
+  <a href="officer-dashboard.php" class="brand-link">
     <img src="images/iteportal-sidebar-logo.png" alt="AdminLTE Logo" class="brand-image elevation-3"
       style="opacity: .8">
     <span class="brand-text font-weight-light">ITE Student Portal</span>
@@ -135,7 +135,7 @@ Brief overview of the file's contents. -->
 
 
         <li class="nav-item">
-          <a href="officer-events.php?search_input=&date=&school_year=<?php echo $defaultYear; ?>&semester=<?php echo str_replace(' ', '+', 'Third Semester'); ?>&search="
+          <a href="officer-events.php?search_input=&date=&school_year=<?php echo $defaultYear; ?>&semester=<?php echo $defaultSemester; ?>&search="
             class="nav-link">
             <i class="nav-icon fas fa-solid fa-calendar-week"></i>
             <p>Events</p>
@@ -146,7 +146,7 @@ Brief overview of the file's contents. -->
         if ($position != 'Staff') {
           ?>
           <li class="nav-item">
-            <a href="officer-payment.php?search_input=&date=&school_year=<?php echo $defaultYear; ?>&semester=<?php echo str_replace(' ', '+', 'Third Semester'); ?>&search=" class="nav-link">
+            <a href="officer-payment.php?search_input=&date=&school_year=<?php echo $defaultYear; ?>&semester=<?php echo $defaultSemester; ?>&search=" class="nav-link">
               <i class="nav-icon fas fa-money-bill-wave"></i>
               <p>
                 Payments

@@ -6,7 +6,7 @@ Authors:
   - Caryl Mae Subaldo (subaldomae29@gmail.com)
   - Brian Angelo Bognot (c09651052069@gmail.com)
 Last Modified: June 18, 2024
-Overview: This file allows officer to add all eligible students to an event based on program and year level.
+Overview: This file allows officer to add all eligible students to an event based on program, year level, and search criteria.
 */
 
 session_start();
@@ -15,8 +15,7 @@ require('db_conn.php');
 if (isset($_POST['add_all'])) {
 
     // Function to validate and sanitize user input
-    function validate($data)
-    {
+    function validate($data) {
         $data = trim($data); // Remove whitespace from the beginning and end of string
         $data = stripslashes($data); // Remove backslashes
         $data = htmlspecialchars($data); // Convert special characters to HTML entities
@@ -25,8 +24,10 @@ if (isset($_POST['add_all'])) {
 
     // Sanitize and validate inputs
     $event_id = validate($_POST['event_id']);
-    $program = validate($_POST['program']);
-    $year_level = validate($_POST['year_level']);
+    $column = isset($_POST['column']) ? validate($_POST['column']) : 'u.account_number';
+    $search_input = isset($_POST['search_input']) ? validate($_POST['search_input']) : '';
+    $program = isset($_POST['program']) ? validate($_POST['program']) : '';
+    $year_level = isset($_POST['year_level']) ? validate($_POST['year_level']) : '';
 
     // Validate event ID if empty
     if (empty($event_id)) {
@@ -46,15 +47,25 @@ if (isset($_POST['add_all'])) {
         $school_year = $row['school_year'];
         $semester = $row['semester'];
 
+        // Determine if additional conditions should be applied
         $conditions = [];
-        if ($program !== 'all') {
+        if (!empty($program)) {
             $conditions[] = "u.program = '$program'";
         }
-        if ($year_level !== 'all') {
+        if (!empty($year_level)) {
             $conditions[] = "u.year_level = '$year_level'";
         }
-        $whereClause = count($conditions) > 0 ? 'AND ' . implode(' AND ', $conditions) : '';
+        if (!empty($column) && !empty($search_input)) {
+            $conditions[] = "$column LIKE '%$search_input%'";
+        }
 
+        // Construct WHERE clause based on conditions
+        $whereClause = '';
+        if (!empty($conditions)) {
+            $whereClause = 'AND ' . implode(' AND ', $conditions);
+        }
+
+        // Query to fetch eligible students
         $studentsql = "SELECT u.account_number
                        FROM user u
                        INNER JOIN enrolled e ON u.account_number = e.account_number
@@ -62,6 +73,7 @@ if (isset($_POST['add_all'])) {
                        WHERE e.school_year = ?
                          AND e.semester = ?
                          AND u.role = 'Student'
+                         AND u.department = 'CE'
                          AND a.account_number IS NULL
                          $whereClause";
         $stmt = mysqli_prepare($conn, $studentsql);
@@ -87,7 +99,7 @@ if (isset($_POST['add_all'])) {
                 header("Location: ../officer-event-view.php?event_id=$event_id&addAllError=Failed to add all eligible students.");
             }
         } else {
-            header("Location: ../officer-event-view.php?event_id=$event_id&addAllError=No students found to add to the event.");
+            header("Location: ../officer-event-view.php?event_id=$event_id&addAllError=No eligible students found to add to the event.");
         }
     } else {
         header("Location: ../officer-event-view.php?addAllError=Event not found.");

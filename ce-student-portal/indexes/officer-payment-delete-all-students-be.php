@@ -10,9 +10,9 @@ Overview: This file processes the deletion of all eligible students from a payme
 */
 
 session_start();
-require ('db_conn.php');
+require('db_conn.php');
 
-if (isset($_POST['add_all'])) {
+if (isset($_POST['delete_all'])) {
 
     // Function to validate and sanitize user input
     function validate($data)
@@ -25,12 +25,14 @@ if (isset($_POST['add_all'])) {
 
     // Sanitize and validate inputs
     $payment_for_id = validate($_POST['payment_for_id']);
-    $program = validate($_POST['program']);
-    $year_level = validate($_POST['year_level']);
+    $column = isset($_POST['column']) ? validate($_POST['column']) : 'u.account_number';
+    $search_input = isset($_POST['search_input']) ? validate($_POST['search_input']) : '';
+    $program = isset($_POST['program']) ? validate($_POST['program']) : '';
+    $year_level = isset($_POST['year_level']) ? validate($_POST['year_level']) : '';
 
     // Validate payment ID if empty
     if (empty($payment_for_id)) {
-        header("Location: ../officer-Payment-view.php?addAllError=Payment ID is required");
+        header("Location: ../officer-payment-view.php?addAllError=Payment ID is required");
         exit();
     }
 
@@ -45,16 +47,22 @@ if (isset($_POST['add_all'])) {
         $row = $result->fetch_assoc();
         $school_year = $row['school_year'];
         $semester = $row['semester'];
-
         $conditions = [];
-        if ($program !== 'all') {
+        if (!empty($program)) {
             $conditions[] = "u.program = '$program'";
         }
-        if ($year_level !== 'all') {
+        if (!empty($year_level)) {
             $conditions[] = "u.year_level = '$year_level'";
         }
-        $whereClause = count($conditions) > 0 ? 'AND ' . implode(' AND ', $conditions) : '';
+        if (!empty($column) && !empty($search_input)) {
+            $conditions[] = "$column LIKE '%$search_input%'";
+        }
 
+        // Construct WHERE clause based on conditions
+        $whereClause = '';
+        if (!empty($conditions)) {
+            $whereClause = 'AND ' . implode(' AND ', $conditions);
+        }
         $studentsql = "SELECT a.account_number
                        FROM payment a
                        INNER JOIN payment_for e ON a.payment_for_id = e.payment_for_id
@@ -62,6 +70,7 @@ if (isset($_POST['add_all'])) {
                        WHERE e.school_year = ?
                          AND e.semester = ?
                          AND u.role = 'Student'
+                         AND u.department = 'CE'
                          $whereClause";
         $stmt = mysqli_prepare($conn, $studentsql);
         mysqli_stmt_bind_param($stmt, "iss", $payment_for_id, $school_year, $semester);
