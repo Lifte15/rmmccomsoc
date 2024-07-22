@@ -12,7 +12,7 @@ Brief overview of the file's contents. -->
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Admin Add Student | CE Student Portal </title>
+    <title>Admin Add Student | ITE Student Portal </title>
     <link rel="icon" type="image/png" href="favicon.ico" />
 
     <!-- Google Font: Source Sans Pro -->
@@ -186,7 +186,7 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Officer'  && $_SESSION['d
                                  AND u.role = 'Student'
                                  AND p.account_number IS NULL
                                  AND $condition_string
-                                 AND u.department='CE'
+                                 AND u.department='ITE'
                                ORDER BY u.program ASC, u.year_level ASC, u.last_name ASC";
 
 } else {
