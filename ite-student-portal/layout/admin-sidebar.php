@@ -124,7 +124,7 @@ Brief overview of the file's contents. -->
         </li>
 
         <li class="nav-item ">
-          <a href="admin-events.php?search_input=&date=&school_year=<?php echo $defaultYear; ?>&semester=<?php echo str_replace(' ', '+', 'Third Semester'); ?>&search=" class="nav-link">
+          <a href="admin-events.php?search_input=&date=&school_year=<?php echo $defaultYear; ?>&semester=<?php echo $defaultSemester; ?>&search=" class="nav-link">
             <i class="nav-icon fas fa-solid fa-calendar-week"></i>
             <p>
               Events
@@ -133,7 +133,7 @@ Brief overview of the file's contents. -->
         </li>
 
         <li class="nav-item ">
-          <a href="admin-payment.php?search_input=&date=&school_year=<?php echo $defaultYear; ?>&semester=<?php echo str_replace(' ', '+', 'Third Semester'); ?>&search=" class="nav-link">
+          <a href="admin-payment.php?search_input=&date=&school_year=<?php echo $defaultYear; ?>&semester=<?php echo $defaultSemester; ?>&search=" class="nav-link">
             <i class="nav-icon fas fa-money-bill-wave"></i>
             <p>
               Payments
