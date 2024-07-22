@@ -1,0 +1,203 @@
+.background-card {
+  background-image: url('images/AttendanceCardBackground.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.custom-height {
+  width: calc(100vw); /* Adjust the width as per the viewport */
+  height: calc(100vw / 1.586); /* Maintain the ATM card aspect ratio */
+  max-width: 554px;
+  max-height: calc(554px / 1.586);
+}
+
+@media (max-width: 1200px) {
+  .custom-height {
+      width: calc(95vw);
+      height: calc(95vw / 1.586);
+  }
+}
+
+@media (max-width: 1150px) {
+  .custom-height {
+      width: calc(90vw);
+      height: calc(90vw / 1.586);
+  }
+}
+
+@media (max-width: 1100px) {
+  .custom-height {
+      width: calc(85vw);
+      height: calc(85vw / 1.586);
+  }
+}
+
+@media (max-width: 1050px) {
+  .custom-height {
+      width: calc(80vw);
+      height: calc(80vw / 1.586);
+  }
+}
+
+@media (max-width: 1000px) {
+  .custom-height {
+      width: calc(75vw);
+      height: calc(75vw / 1.586);
+  }
+}
+
+@media (max-width: 950px) {
+  .custom-height {
+      width: calc(70vw);
+      height: calc(70vw / 1.586);
+  }
+}
+
+@media (max-width: 900px) {
+  .custom-height {
+      width: calc(65vw);
+      height: calc(65vw / 1.586);
+  }
+}
+
+@media (max-width: 850px) {
+  .custom-height {
+      width: calc(60vw);
+      height: calc(60vw / 1.586);
+  }
+}
+
+.card-body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  height: 100%;
+}
+
+.qr-code {
+  position: absolute;
+  top: 50%;
+  left: 3%;
+  height: 70%;
+  width: auto;
+  transform: translateY(-50%);
+}
+
+.info-table {
+  width: 45%;
+  max-width: 300px;
+  margin-left: 40%;
+}
+
+.info-table table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.info-table th,
+.info-table td {
+  padding: 8px 12px; /* Increased padding for better spacing */
+  text-align: left;
+  font-family: Helvetica, Arial, sans-serif;
+  line-height: 0.8; /* Increased line height for better readability */
+}
+
+.info-table th {
+  font-weight: bold;
+  color: #800016;
+  font-size: calc(1.7vw); /* Adjusted default font size */
+}
+
+.info-table td {
+  font-style: italic;
+  font-size: calc(1.2vw); /* Adjusted default font size for td elements */
+}
+
+/* Responsive font sizes */
+@media (max-width: 1200px) {
+  .info-table th {
+      font-size: calc(1.6vw);
+  }
+  .info-table td {
+      font-size: calc(1.1vw);
+  }
+}
+
+@media (max-width: 1150px) {
+  .info-table th {
+      font-size: calc(1.55vw);
+  }
+  .info-table td {
+      font-size: calc(1.05vw);
+  }
+}
+
+@media (max-width: 1100px) {
+  .info-table th {
+      font-size: calc(1.55vw);
+  }
+  .info-table td {
+      font-size: calc(1vw);
+  }
+}
+
+@media (max-width: 1050px) {
+  .info-table th {
+      font-size: calc(1.5vw);
+  }
+  .info-table td {
+      font-size: calc(0.95vw);
+  }
+}
+
+@media (max-width: 1000px) {
+  .info-table th {
+      font-size: calc(1.45vw);
+  }
+  .info-table td {
+      font-size: calc(0.9vw);
+  }
+}
+
+@media (max-width: 950px) {
+  .info-table th {
+      font-size: calc(1.40vw);
+  }
+  .info-table td {
+      font-size: calc(0.85vw);
+  }
+}
+
+@media (max-width: 900px) {
+  .info-table th {
+      font-size: calc(1.35vw);
+  }
+  .info-table td {
+      font-size: calc(0.8vw);
+  }
+}
+
+@media (max-width: 850px) {
+  .info-table {
+      display: none;
+  }
+
+  .qr-code {
+      position: relative;
+      left: 0;
+      top: 0;
+      transform: none;
+      height: auto;
+      width: calc(50%);
+      display: block;
+      margin: 0 auto;
+  }
+
+  .card-body {
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+  }
+}
