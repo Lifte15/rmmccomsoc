@@ -1,36 +1,30 @@
-<!-- admin-enrolled-students.php and to see the School year and Semester of the school in admin form.
+<!-- admin-payment-add-student.php and to add student in that payment in admin form.
 Authors:
   - Lowie Jay Orillo (lowie.jaymier@gmail.com)
   - Caryl Mae Subaldo (subaldomae29@gmail.com)
   - Brian Angelo Bognot (c09651052069@gmail.com)
-Last Modified: June 17, 2024
+Last Modified: June 18, 2024
 Brief overview of the file's contents. -->
 
-<?php
-session_start();
-include "indexes/db_conn.php";
+<!DOCTYPE html>
+<html lang="en">
 
-if (isset($_SESSION['role']) && $_SESSION['role'] === 'Admin' && $_SESSION['department'] === 'ITE') { // Check if the role is set and it's 'Admin'
-?>
-
-  <!DOCTYPE html>
-  <html lang="en">
-
-  <head>
+<head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Admin Query Page | ITE Student Portal</title>
+    <title>Admin Add Student | ITE Student Portal </title>
     <link rel="icon" type="image/png" href="favicon.ico" />
 
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet"
-      href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+        href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="AdminLTE-3.2.0/plugins/fontawesome-free/css/all.min.css">
     <!-- Ionicons -->
     <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
     <!-- Tempusdominus Bootstrap 4 -->
-    <link rel="stylesheet" href="AdminLTE-3.2.0/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">
+    <link rel="stylesheet"
+        href="AdminLTE-3.2.0/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">
     <!-- iCheck -->
     <link rel="stylesheet" href="AdminLTE-3.2.0/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
     <!-- JQVMap -->
@@ -43,245 +37,258 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Admin' && $_SESSION['depa
     <link rel="stylesheet" href="AdminLTE-3.2.0/plugins/daterangepicker/daterangepicker.css">
     <!-- summernote -->
     <link rel="stylesheet" href="AdminLTE-3.2.0/plugins/summernote/summernote-bs4.min.css">
-  </head>
+</head>
+<?php
+session_start();
+include "indexes/db_conn.php";
 
-  <body class="hold-transition sidebar-mini layout-fixed">
-    <div class="wrapper">
+function validate($data)
+{
+    global $conn;
+    $data = trim($data);
+    $data = stripslashes($data);
+    $data = htmlspecialchars($data);
+    return mysqli_real_escape_string($conn, $data);
+}
 
-      <!-- Navbar -->
-      <?php include 'layout/admin-fixed-topnav.php'; ?>
+if (isset($_SESSION['role']) && $_SESSION['role'] === 'Admin'  && $_SESSION['department'] === 'ITE') {
+    if (isset($_GET['payment_for_id'])) {
+        $payment_for_id = intval($_GET['payment_for_id']);
 
-      <?php include 'layout/admin-sidebar.php'; ?>
+        $sql = "SELECT school_year, semester FROM payment_for WHERE payment_for_id = $payment_for_id ";
+        $result = $conn->query($sql);
 
-      <div class="content-wrapper">
-        <div class="content-header">
-          <div class="container-fluid">
-            <div class="row mb-2 align-items-center">
-              <div class="col-sm-6">
-                <h1>Enrolled Students</h1>
-              </div>
-              
-            </div>
-          </div>
-        </div>
+        if ($result->num_rows > 0) {
+            $row = $result->fetch_assoc();
+            $school_year = $row['school_year'];
+            $semester = $row['semester'];
 
-        <!-- Main content -->
-        <section class="content">
-          <div class="container-fluid">
+            ?>
 
-            <!-- Search Form -->
-            <form method="GET" action="">
-              <div class="row">
-                <div class="col-md-4">
-                  <div class="form-group row">
-                    <label for="school_year" class="col-sm-4 col-form-label">School Year</label>
-                    <div class="col-sm-8">
-                      <?php
-                      $schoolYearQuery = "SELECT * FROM school_year";
-                      $result = mysqli_query($conn, $schoolYearQuery);
-                      $schoolYears = [];
-                      $defaultYear = '';
+            <body class="hold-transition sidebar-mini layout-fixed">
+                <div class="wrapper">
 
-                      if ($result && mysqli_num_rows($result) > 0) {
-                        while ($row = mysqli_fetch_assoc($result)) {
-                          $schoolYears[] = $row;
-                          if ($row['dfault'] == 1) {
-                            $defaultYear = $row['school_year'];
-                          }
-                        }
-                      }
-                      ?>
-                      <select class="form-control" id="school_year" name="school_year">
-                        <option value="All" <?php if (isset($_GET['school_year']) && $_GET['school_year'] == 'All')
-                          echo 'selected'; ?>>All</option>
-                        <?php foreach ($schoolYears as $year) { ?>
-                          <option value="<?php echo $year['school_year']; ?>" <?php
-                             if (isset($_GET['school_year']) && $_GET['school_year'] == $year['school_year']) {
-                               echo 'selected';
-                             } elseif (!isset($_GET['school_year']) && $year['dfault'] == 1) {
-                               echo 'selected';
-                             }
-                             ?>>
-                            <?php echo $year['school_year']; ?>
-                          </option>
-                        <?php } ?>
-                      </select>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-md-4">
-                  <div class="form-group row">
-                    <label for="semester" class="col-sm-4 col-form-label">Semester</label>
-                    <div class="col-sm-8">
-                      <?php
-                      $query = "SELECT * FROM semester";
-                      $result = mysqli_query($conn, $query);
-                      $semesters = [];
-                      $defaultSemester = '';
-
-                      if ($result && mysqli_num_rows($result) > 0) {
-                        while ($row = mysqli_fetch_assoc($result)) {
-                          $semesters[] = $row;
-                          if ($row['dfault'] == 1) {
-                            $defaultSemester = $row['semester'];
-                          }
-                        }
-                      }
-                      ?>
-                      <select class="form-control" id="semester" name="semester">
-                        <option value="" <?php if (!isset($_GET['semester']))
-                          echo 'selected'; ?>>All</option>
-                        <?php foreach ($semesters as $semester) { ?>
-                          <option value="<?php echo $semester['semester']; ?>" <?php
-                             if (isset($_GET['semester']) && $_GET['semester'] == $semester['semester']) {
-                               echo 'selected';
-                             } elseif (!isset($_GET['semester']) && $semester['dfault'] == 1) {
-                               echo 'selected';
-                             }
-                             ?>>
-                            <?php echo $semester['semester']; ?>
-                          </option>
-                        <?php } ?>
-                      </select>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-md-2">
-                  <div class="form-group row">
-                    <div class="col-sm-12">
-                      <button type="submit" class="btn btn-outline-secondary">Search</button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </form>
-
-
-
-            <?php if (isset($_GET['newEventSuccess'])) { ?>
-              <div class="alert alert-success">
-                <?php echo $_GET['newEventSuccess']; ?>
-              </div>
-            <?php } ?>
-
-            <?php if (isset($_GET['deleteEventSuccess'])) { ?>
-              <div class="alert alert-success">
-                <?php echo $_GET['deleteEventSuccess']; ?>
-              </div>
-            <?php } ?>
-
-            <?php if (isset($_GET['deleteEventError'])) { ?>
-              <div class="alert alert-danger">
-                <?php echo $_GET['deleteEventError']; ?>
-              </div>
-            <?php } ?>
-
-            <!-- Events table -->
-            <table class="table">
-              <thead>
-                <tr>
-                  <th class="col-4">School Year</th>
-                  <th class="col-2 text-center">Semester</th>
-                  <th class="col-2 text-center">No. of Students</th>
-                  <th class="col-2 text-center">Action</th>
-                </tr>
-              </thead>
-              <tbody>
-                <?php
-
-                $semester_condition = "";
-                if (isset($_GET['semester']) && $_GET['semester'] != "") {
-                  $semester_condition = "AND sem.semester = '" . $_GET['semester'] . "'";
-                }
-
-                $school_year_condition = "";
-                if (isset($_GET['school_year']) && $_GET['school_year'] != "All") {
-                  $school_year_condition = "AND sy.school_year = '" . $_GET['school_year'] . "'";
-                }
-
-                $query = "
-                      SELECT sy.school_year, sem.semester, COUNT(e.account_number) AS num_students
-                      FROM school_year sy
-                      CROSS JOIN semester sem
-                      LEFT JOIN enrolled e ON e.school_year = sy.school_year AND e.semester = sem.semester
-                      WHERE 1=1 $school_year_condition $semester_condition
-                      GROUP BY sy.school_year, sem.semester
-                      ORDER BY sy.school_year, sem.semester
-                      ";
-
-                $result = $conn->query($query);
-                if ($result->num_rows > 0) {
-                  while ($row = $result->fetch_assoc()) {
-                    ?>
-                    <tr>
-                      <td class="align-middle">
-                        <?php echo $row['school_year']; ?>
-                      </td>
-                      <td class="align-middle text-center">
-                        <?php echo $row['semester']; ?>
-                      </td>
-                      <td class="align-middle text-center">
-                        <?php echo $row['num_students']; ?>
-                      </td>
-                      <td class="align-middle text-center">
-                        <a href='admin-enrolled-student-view.php?school_year=<?php echo $row['school_year']; ?>&semester=<?php echo $row['semester']; ?>'
-                          class='btn btn-success btn-sm'>
-                          <i class="nav-icon fas fa-solid fa-hand-pointer"></i> Select</a>
-                      </td>
-                    </tr>
+                    <?php include 'layout/admin-fixed-topnav.php'; ?>
+                    <?php include 'layout/admin-sidebar.php'; ?>
                     <?php
-                  }
-                } else {
-                  echo "<tr><td colspan='4'>No data found.</td></tr>";
-                }
-                ?>
-              </tbody>
-            </table>
-          </div>
-        </section>
-      </div>
-      <?php include 'layout/fixed-footer.php'; ?>
+                    $payment_for_id = $_GET['payment_for_id'];
+                    $stmt = $conn->prepare("SELECT payment_description FROM payment_for WHERE payment_for_id = ?");
+                    $stmt->bind_param("i", $payment_for_id);
+                    $stmt->execute();
+                    $stmt->bind_result($payment_name);
+                    $stmt->fetch();
+                    $stmt->close();
+                    ?>
+                    <div class="content-wrapper">
+                        <div class="content-header">
+                            <div class="container-fluid">
+                                <div class="row mb-2 align-items-center">
+                                    <div class="col-sm-6">
+                                        <h1>Adding Students to Payment: <?php echo htmlspecialchars($payment_name); ?></h1>
+                                    </div>
+                                    <div class="col-sm-6 text-right">
+                                        <a id="addNewSubjectBtn" class="btn btn-secondary"
+                                            href="admin-payment-view.php?payment_for_id=<?php echo $payment_for_id; ?>"><i
+                                                class="nav-icon fas fa-solid fa-chevron-left"></i> Back to
+                                            <?php echo htmlspecialchars($payment_name); ?></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
 
-      <aside class="control-sidebar control-sidebar-dark">
-      </aside>
-    </div>
+                        <section class="content">
+                            <div class="container-fluid">
 
-    <!-- jQuery -->
-    <script src="AdminLTE-3.2.0/plugins/jquery/jquery.min.js"></script>
-    <!-- jQuery UI 1.11.4 -->
-    <script src="AdminLTE-3.2.0/plugins/jquery-ui/jquery-ui.min.js"></script>
-    <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
-    <script>
-      $.widget.bridge('uibutton', $.ui.button)
-    </script>
-    <!-- Bootstrap 4 -->
-    <script src="AdminLTE-3.2.0/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <!-- ChartJS -->
-    <script src="AdminLTE-3.2.0/plugins/chart.js/Chart.min.js"></script>
-    <!-- Sparkline -->
-    <script src="AdminLTE-3.2.0/plugins/sparklines/sparkline.js"></script>
-    <!-- JQVMap -->
-    <script src="AdminLTE-3.2.0/plugins/jqvmap/jquery.vmap.min.js"></script>
-    <script src="AdminLTE-3.2.0/plugins/jqvmap/maps/jquery.vmap.usa.js"></script>
-    <!-- jQuery Knob Chart -->
-    <script src="AdminLTE-3.2.0/plugins/jquery-knob/jquery.knob.min.js"></script>
-    <!-- daterangepicker -->
-    <script src="AdminLTE-3.2.0/plugins/moment/moment.min.js"></script>
-    <script src="AdminLTE-3.2.0/plugins/daterangepicker/daterangepicker.js"></script>
-    <!-- Tempusdominus Bootstrap 4 -->
-    <script src="AdminLTE-3.2.0/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
-    <!-- Summernote -->
-    <script src="AdminLTE-3.2.0/plugins/summernote/summernote-bs4.min.js"></script>
-    <!-- overlayScrollbars -->
-    <script src="AdminLTE-3.2.0/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
-    <!-- AdminLTE App -->
-    <script src="AdminLTE-3.2.0/dist/js/adminlte.js"></script>
-  </body>
+                                <?php if (isset($_GET['failedToAddStudent'])) { ?>
+                                    <div class="alert alert-danger">
+                                        <?php echo $_GET['failedToAddStudent']; ?>
+                                    </div>
+                                <?php } ?>
+                                <!-- Search Form -->
+                                <form method="GET">
+                                    <input type="hidden" name="payment_for_id" value="<?php echo $payment_for_id; ?>">
+                                    <div class="input-group mb-3">
+                                        <input type="text" name="search_input" class="form-control col-3" placeholder="Search...">
+                                        <div class="input-group-prepend col-2">
+                                            <select name="column" class="form-control">
+                                                <option value="u.account_number">Student Number</option>
+                                                <option value="u.last_name">Last Name</option>
+                                                <option value="u.first_name">First Name</option>
+                                                <option value="u.middle_name">Middle Name</option>
+                                            </select>
+                                        </div>
+                                        <div class="input-group-prepend col-2">
+                                            <select name="year_level" class="form-control">
+                                                <option value="">Year Level</option>
+                                                <option value="">All</option>
+                                                <option value="1">1</option>
+                                                <option value="2">2</option>
+                                                <option value="3">3</option>
+                                                <option value="4">4</option>
+                                            </select>
+                                        </div>
+                                        <div class="input-group-prepend col-2">
+                                            <select name="program" class="form-control">
+                                                <option value="">Program</option>
+                                                <option value="">All</option>
+                                                <option value="BSCE">BSCE</option>
+                                            </select>
+                                        </div>
+                                        <div class="input-group-append col-1">
+                                            <button class="btn btn-outline-secondary" type="submit" name="search">Search</button>
+                                        </div>
+                                </form>
+                                <div class="col-sm text-right">
+                                    <form method="POST" action="indexes/admin-payment-add-all-students-be.php">
+                                        <input type="hidden" name="payment_for_id" value="<?php echo $payment_for_id; ?>">
+                                        <input type="hidden" name="column"
+                                            value="<?php echo isset($_GET['column']) ? $_GET['column'] : ''; ?>">
+                                        <input type="hidden" name="search_input"
+                                            value="<?php echo isset($_GET['search_input']) ? $_GET['search_input'] : ''; ?>">
+                                        <input type="hidden" name="program"
+                                            value="<?php echo isset($_GET['program']) ? $_GET['program'] : ''; ?>">
+                                        <input type="hidden" name="year_level"
+                                            value="<?php echo isset($_GET['year_level']) ? $_GET['year_level'] : ''; ?>">
+                                        <button class="btn btn-outline-success" type="submit" name="add_all">Add All</button>
+                                    </form>
+                                </div>
+                            </div>
+                    </div>
 
-  </html>
-  <?php
+                    <!-- Students table -->
+                    <?php
+                    if (isset($_GET['search'])) {
+                        $program = $_GET['program'];
+                        $year_level = $_GET['year_level'];
+                        $search_input = $_GET['search_input'];
+                        $column = $_GET['column'];
+
+                        $conditions = array();
+
+                        if (!empty($program)) {
+                            $conditions[] = "u.program = '$program'";
+                        }
+                        if (!empty($year_level)) {
+                            $conditions[] = "u.year_level = '$year_level'";
+                        }
+                        if (!empty($search_input) && !empty($column)) {
+                            $conditions[] = "$column LIKE '%$search_input%'";
+                        }
+                        $condition_string = implode(" AND ", $conditions);
+
+                        if (!empty($condition_string)) {
+                    $studentsql = "SELECT u.account_number, u.last_name, u.first_name, u.middle_name, u.program, u.year_level
+                               FROM user u
+                               INNER JOIN enrolled e ON u.account_number = e.account_number
+                               LEFT JOIN payment p ON u.account_number = p.account_number AND p.payment_for_id = $payment_for_id
+                               WHERE e.school_year = '$school_year'
+                                 AND e.semester = '$semester'
+                                 AND u.role = 'Student'
+                                 AND p.account_number IS NULL
+                                 AND $condition_string
+                                 AND u.department='ITE'
+                               ORDER BY u.program ASC, u.year_level ASC, u.last_name ASC";
+
 } else {
-  header("Location: login.php");
-  exit();
+    $studentsql = "SELECT u.account_number, u.last_name, u.first_name, u.middle_name, u.program, u.year_level
+                               FROM user u
+                               INNER JOIN enrolled e ON u.account_number = e.account_number
+                               LEFT JOIN payment p ON u.account_number = p.account_number AND p.payment_for_id = $payment_for_id
+                               WHERE e.school_year = '$school_year'
+                                 AND e.semester = '$semester'
+                                 AND u.role = 'Student'
+                                 AND p.account_number IS NULL
+                                 AND u.department='ITE'
+                               ORDER BY u.program ASC, u.year_level ASC, u.last_name ASC";
+}
+                    } else {
+                        $studentsql = "SELECT u.account_number, u.last_name, u.first_name, u.middle_name, u.program, u.year_level
+                               FROM user u
+                               INNER JOIN enrolled e ON u.account_number = e.account_number
+                               LEFT JOIN payment p ON u.account_number = p.account_number AND p.payment_for_id = $payment_for_id
+                               WHERE e.school_year = '$school_year'
+                                 AND e.semester = '$semester'
+                                 AND u.role = 'Student'
+                                 AND p.account_number IS NULL
+                                 AND u.department='ITE'
+                               ORDER BY u.program ASC, u.year_level ASC, u.last_name ASC";
+                    }
+                    $result = $conn->query($studentsql);
+                    ?>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th class="col-2">Student Number</th>
+                                <th class="col-2">Last Name</th>
+                                <th class="col-2">First Name</th>
+                                <th class="col-2">Middle Name</th>
+                                <th class="col-1">Program</th>
+                                <th class="col-1">Year Level</th>
+                                <th class="col-1 text-center">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php
+                            if (isset($result) && $result->num_rows > 0) {
+                                while ($row = $result->fetch_assoc()) { ?>
+                                    <tr>
+                                        <td class="align-middle"><?php echo $row['account_number']; ?></td>
+                                        <td class="align-middle"><?php echo $row['last_name']; ?></td>
+                                        <td class="align-middle"><?php echo $row['first_name']; ?></td>
+                                        <td class="align-middle"><?php echo $row['middle_name']; ?></td>
+                                        <td class="align-middle"><?php echo $row['program']; ?></td>
+                                        <td class="align-middle"><?php echo $row['year_level']; ?></td>
+                                        <td class="align-middle text-center">
+                                            <?php
+                                            $current_url = $_SERVER['PHP_SELF'] . '?' . $_SERVER['QUERY_STRING'];
+                                            ?>
+                                            <form method="POST" action="indexes/admin-payment-add-student-be.php">
+                                                <input type="hidden" name="payment_for_id" value="<?php echo $payment_for_id; ?>">
+                                                <input type="hidden" name="account_number" value="<?php echo $row['account_number']; ?>">
+                                                <input type="hidden" name="previous_url"
+                                                    value="<?php echo htmlspecialchars($current_url, ENT_QUOTES, 'UTF-8'); ?>">
+                                                <button class="btn btn-success" type="submit" name="add_student">Add
+                                                </button>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                <?php }
+                            } else { ?>
+                                <tr>
+                                    <td colspan="7" class="text-center">No students found.
+                                    </td>
+                                </tr>
+                            <?php } ?>
+                        </tbody>
+                    </table>
+                </div>
+                </section>
+                </div>
+
+                <?php include 'layout/fixed-footer.php'; ?>
+                </div>
+
+                <!-- jQuery -->
+                <script src="AdminLTE-3.2.0/plugins/jquery/jquery.min.js"></script>
+                <!-- jQuery UI 1.11.4 -->
+                <script src="AdminLTE-3.2.0/plugins/jquery-ui/jquery-ui.min.js"></script>
+                <!-- Bootstrap 4 -->
+                <script src="AdminLTE-3.2.0/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+                <!-- AdminLTE App -->
+                <script src="AdminLTE-3.2.0/dist/js/adminlte.js"></script>
+            </body>
+
+            </html>
+
+            <?php
+        } else {
+            echo "payment not found.";
+        }
+    } else {
+        echo "Payment for ID is not specified.";
+    }
+} else {
+    header("Location: login.php");
+    exit();
 }
 ?>
