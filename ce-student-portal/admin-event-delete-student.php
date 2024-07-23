@@ -126,10 +126,7 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Admin'  && $_SESSION['dep
                                             <select name="program" class="form-control">
                                                 <option value="">Program</option>
                                                 <option value="">All</option>
-                                                <option value="BSIT">BSIT</option>
-                                                <option value="BSCS">BSCS</option>
-                                                <option value="BLIS">BLIS</option>
-                                                <option value="ACT">ACT</option>
+                                                <option value="BSCE">BSCE</option>
                                             </select>
                                         </div>
                                         <div class="input-group-append col-1">

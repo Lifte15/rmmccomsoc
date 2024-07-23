@@ -71,10 +71,7 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Admin' && $_SESSION['depa
                     <div class="col-sm-3">
                         <select class="form-control" id="program" name="program">
                             <option value="all" <?php if (!isset($_GET['program']) || $_GET['program'] == 'all') echo 'selected'; ?>>All Programs</option>
-                            <option value="BSIT" <?php if (isset($_GET['program']) && $_GET['program'] == 'BSIT') echo 'selected'; ?>>BSIT</option>
-                            <option value="BSCS" <?php if (isset($_GET['program']) && $_GET['program'] == 'BSCS') echo 'selected'; ?>>BSCS</option>
-                            <option value="BLIS" <?php if (isset($_GET['program']) && $_GET['program'] == 'BLIS') echo 'selected'; ?>>BLIS</option>
-                            <option value="ACT" <?php if (isset($_GET['program']) && $_GET['program'] == 'ACT') echo 'selected'; ?>>ACT</option>
+                            <option value="BSCE" <?php if (isset($_GET['program']) && $_GET['program'] == 'BSCE') echo 'selected'; ?>>BSCE</option>
                         </select>
                     </div>
 

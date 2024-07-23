@@ -131,7 +131,16 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Officer'  && $_SESSION['d
                                             <select name="program" class="form-control">
                                                 <option value="">Program</option>
                                                 <option value="">All</option>
-                                                <option value="BSCE">BSCE</option>
+                                                <option value="BEEd">BEEd</option>
+                    <option value="BECEd">BECEd</option>
+                    <option value="BCAEd">BCAEd</option>
+                    <option value="BPEd">BPEd</option>
+                    <option value="BTLEd">BTLEd</option>
+                    <option value="BSEd-English">BSEd-English</option>
+                    <option value="BSEd-Filipino">BSEd-Filipino</option>
+                    <option value="BSEd-Math">BSEd-Math</option>
+                    <option value="BSEd-Science">BSEd-Science</option>
+                    <option value="BSEd-Social Studies">BSEd-Social Studies</option>
                                             </select>
                                         </div>
                                         <div class="input-group-append col-1">
