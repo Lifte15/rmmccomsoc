@@ -102,7 +102,7 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Developer' && $_SESSION['
             <div class="row">
 
               <?php
-              $sql = "SELECT * FROM user WHERE role = 'Admin'";
+              $sql = "SELECT * FROM user WHERE role = 'Admin' ORDER BY department ASC";
               $result = mysqli_query($conn, $sql);
 
               if (!$result) {
@@ -125,11 +125,43 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Developer' && $_SESSION['
                   <div class="col-md-3">
                     <div class="card">
                       <br>
-                      <div class="text-center"> 
+                      <div class="text-center">
+                        <?php
+                        $base_url = "";
+
+                        switch ($department) {
+                          case 'ITE':
+                            $base_url = "../ite-student-portal/profile-pictures/";
+                            break;
+                          case 'CE':
+                            $base_url = "../ce-student-portal/profile-pictures/";
+                            break;
+                          case 'CAS':
+                            $base_url = "../cas-student-portal/profile-pictures/";
+                            break;
+                          case 'CCJ':
+                            $base_url = "../ccj-student-portal/profile-pictures/";
+                            break;
+                          case 'CTE':
+                            $base_url = "../cte-student-portal/profile-pictures/";
+                            break;
+                          case 'CBE':
+                            $base_url = "../cbe-student-portal/profile-pictures/";
+                            break;
+                          default:
+                            $base_url = "profile-pictures/"; // default path if department doesn't match any case
+                            break;
+                        }
+                        ?>
+
                         <img class="profile-picture img-fluid"
                           style="width: 200px; height: 200px; border-radius: 50%; object-fit: cover;"
+                          src="<?php echo $base_url . $profile_picture . '?' . time(); ?>" alt="User profile picture">
+
+                        <!-- <img class="profile-picture img-fluid"
+                          style="width: 200px; height: 200px; border-radius: 50%; object-fit: cover;"
                           src="profile-pictures/<?php echo $profile_picture; ?>?<?php echo time(); ?>"
-                          alt="User profile picture">
+                          alt="User profile picture"> -->
                       </div>
                       <div class="card-body">
                         <h1 class="text-center" style="font-size: 24px;"><strong><?php echo $username; ?></strong></h1>
@@ -138,6 +170,7 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Developer' && $_SESSION['
                         Department: <?php echo $department; ?><br>
                         Last Name: <?php echo $last_name; ?><br>
                         First Name: <?php echo $first_name; ?><br>
+                        Department: <?php echo $department; ?><br>
                         Phone Number: <?php echo $phonenumber; ?><br>
                         <br>
                         <div class="card-footer d-flex justify-content-center">

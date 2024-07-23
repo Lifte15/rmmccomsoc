@@ -27,7 +27,6 @@ if (isset($_POST['editOfficer'])) {
     // Sanitize and validate 
     $account_number = validate($_POST['account_number']);
     $code = validate($_POST['code']);
-    $position = validate($_POST['position']);
     $lastnameNotProper = validate($_POST['last_name']);
     $firstnameNotProper = validate($_POST['first_name']);
     $middlenameNotProper = validate($_POST['middle_name']);
@@ -50,20 +49,12 @@ if (isset($_POST['editOfficer'])) {
 
 
     // Validate position if empty
-    if (empty($position)) {
-        header("Location: ../developer-admin-edit.php?account_number=$account_number&editOfficerError=Position is required");
-        exit();
-    } // Validate last name if empty
-    elseif (empty($lastname)) {
+    if (empty($lastname)) {
         header("Location: ../developer-admin-edit.php?account_number=$account_number&editOfficerError=Last Name is required");
         exit();
     } // Validate first name if empty
     elseif (empty($firstname)) {
         header("Location: ../developer-admin-edit.php?account_number=$account_number&editOfficerError=First Name is required");
-        exit();
-    } // Validate gender if empty
-    elseif (empty($gender)) {
-        header("Location: ../developer-admin-edit.php?account_number=$account_number&editOfficerError=Gender is required");
         exit();
     } else {
             // Update officer

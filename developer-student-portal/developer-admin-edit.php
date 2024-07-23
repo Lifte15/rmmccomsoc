@@ -77,7 +77,7 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Developer' && $_SESSION['
 
                                             <?php
                                             $account_number = $_GET['account_number'];
-                                            $sql = "SELECT * FROM user WHERE account_number = '$account_number' AND department='ITE'";
+                                            $sql = "SELECT * FROM user WHERE account_number = '$account_number' ";
                                             $result = mysqli_query($conn, $sql);
 
                                             if (mysqli_num_rows($result) > 0) {
