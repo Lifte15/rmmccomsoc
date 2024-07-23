@@ -45,6 +45,7 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Developer' && $_SESSION['
     <style>
       .small-box {
         position: relative;
+        overflow: hidden;
       }
 
       .small-box .icon img {
@@ -227,8 +228,8 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Developer' && $_SESSION['
                     <h1 style="font-size: 50px;"><strong><?php echo $ITEStudentcount; ?></strong></h1>
                     <p>ITE Student/s</p>
                   </div>
-                  <div class="icon" style="position: absolute; top: 10px; right: 10px;">
-                    <img src="images/ite.png" alt="CE Icon" style="width: 100px; height: auto;">
+                  <div class="icon" style="position: absolute; top: 5px; right: 5px;">
+                    <img src="images/ite.png" alt="CE Icon" style="width: 200px; height: auto;">
                   </div>
                 </div>
               </div>
@@ -260,7 +261,7 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Developer' && $_SESSION['
                     <p>CE Student/s</p>
                   </div>
                   <div class="icon" style="position: absolute; top: 10px; right: 10px;">
-                    <img src="images/CE.png" alt="CE Icon" style="width: 100px; height: auto;">
+                    <img src="images/CE.png" alt="CE Icon" style="width: 200px; height: auto;">
                   </div>
                 </div>
               </div>
@@ -292,7 +293,7 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Developer' && $_SESSION['
                     <p>CCJ Student/s</p>
                   </div>
                   <div class="icon" style="position: absolute; top: 10px; right: 10px;">
-                    <img src="images/CCJ.png" alt="CE Icon" style="width: 100px; height: auto;">
+                    <img src="images/CCJ.png" alt="CE Icon" style="width: 200px; height: auto;">
                   </div>
                 </div>
               </div>
@@ -323,7 +324,7 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Developer' && $_SESSION['
                     <p>CAS Student/s</p>
                   </div>
                   <div class="icon" style="position: absolute; top: 10px; right: 10px;">
-                    <img src="images/CAS.png" alt="CE Icon" style="width: 100px; height: auto;">
+                    <img src="images/CAS.png" alt="CE Icon" style="width: 200px; height: auto;">
                   </div>
                 </div>
               </div>
@@ -354,7 +355,7 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Developer' && $_SESSION['
                     <p>CTE Student/s</p>
                   </div>
                   <div class="icon" style="position: absolute; top: 10px; right: 10px;">
-                    <img src="images/CTE.png" alt="CE Icon" style="width: 100px; height: auto;">
+                    <img src="images/CTE.png" alt="CE Icon" style="width: 200px; height: auto;">
                   </div>
                 </div>
               </div>
@@ -386,7 +387,7 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Developer' && $_SESSION['
                     <p>CBE Student/s</p>
                   </div>
                   <div class="icon" style="position: absolute; top: 10px; right: 10px;">
-                    <img src="images/CBE.png" alt="CE Icon" style="width: 100px; height: auto;">
+                    <img src="images/CBE.png" alt="CE Icon" style="width: 200px; height: auto;">
                   </div>
                 </div>
               </div>

@@ -20,28 +20,46 @@
             }
         }
 
-        .bg-ce {
-            background-color: #F74D00;
+        .cas-custom-background {
+            background-image: url('cas-student-portal/images/student-portal-background.png');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
         }
 
-        .bg-ite {
-            background-color: #9A1824;
+        .cbe-custom-background {
+            background-image: url('cbe-student-portal/images/student-portal-background.png');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
         }
 
-        .bg-ccj {
-            background-color: #3D2F62;
+        .ccj-custom-background {
+            background-image: url('ccj-student-portal/images/student-portal-background.png');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
         }
 
-        .bg-cas {
-            background-color: #278A2D;
+        .ce-custom-background {
+            background-image: url('ce-student-portal/images/student-portal-background.png');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
         }
 
-        .bg-cte {
-            background-color: #02055A;
+        .cte-custom-background {
+            background-image: url('cte-student-portal/images/student-portal-background.png');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
         }
 
-        .bg-cbe {
-            background-color: #E9BE00;
+        .ite-custom-background {
+            background-image: url('ite-student-portal/images/student-portal-background.png');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
         }
 
         .square-card {
@@ -51,16 +69,29 @@
             justify-content: center;
             align-items: center;
             overflow: hidden;
+            border: none;
+            /* Ensure no border is adding extra space */
+            margin: 0;
+            /* Remove margin if any */
+            padding: 0;
+            /* Remove padding if any */
         }
 
         .square-card img {
             max-width: 100%;
             max-height: 100%;
-            transition: transform 0.3s ease;
+            transition: transform 0.5s ease;
         }
 
         .square-card:hover img {
             transform: scale(1.1);
+        }
+
+        .card {
+            margin: 0;
+            /* Ensure no margin on card */
+            padding: 0;
+            /* Ensure no padding on card */
         }
 
         .small-box {
@@ -77,48 +108,46 @@
 
 <body>
     <section>
-        <div class="card-body text-center">
-            <img src="images/heading-image.png" class="heading-image" alt="RMMC Student Portal">
-        </div>
-        <div class="container d-flex justify-content-center align-items-center" style="min-height: 100vh;">
+        <img src="images/heading-image.png" class="heading-image text-center" alt="RMMC Student Portal">
+        <div class="container d-flex justify-content-center align-items-center" style="min-height: 50vh;">
             <div class="row w-100">
                 <a class="col-6 col-md-4 mb-4" href="cas-student-portal/login.php">
-                    <div class="card small-box bg-cas square-card">
+                    <div class="card small-box bg-cas square-card cas-custom-background">
                         <div class="card-body">
                             <img src="images/cas.png" class="card-img-top" alt="CAS">
                         </div>
                     </div>
                 </a>
                 <a class="col-6 col-md-4 mb-4" href="cbe-student-portal/login.php">
-                    <div class="card small-box bg-cbe square-card">
+                    <div class="card small-box bg-cbe square-card cbe-custom-background">
                         <div class="card-body">
                             <img src="images/cbe.png" class="card-img-top" alt="CBE">
                         </div>
                     </div>
                 </a>
                 <a class="col-6 col-md-4 mb-4" href="ccj-student-portal/login.php">
-                    <div class="card small-box bg-ccj square-card">
+                    <div class="card small-box bg-ccj square-card ccj-custom-background">
                         <div class="card-body">
                             <img src="images/ccj.png" class="card-img-top" alt="CCJ">
                         </div>
                     </div>
                 </a>
                 <a class="col-6 col-md-4 mb-4" href="ce-student-portal/login.php">
-                    <div class="card small-box bg-ce square-card">
+                    <div class="card small-box bg-ce square-card ce-custom-background">
                         <div class="card-body">
                             <img src="images/ce.png" class="card-img-top" alt="CE">
                         </div>
                     </div>
                 </a>
                 <a class="col-6 col-md-4 mb-4" href="cte-student-portal/login.php">
-                    <div class="card small-box bg-cte square-card">
+                    <div class="card small-box bg-cte square-card cte-custom-background">
                         <div class="card-body">
                             <img src="images/cte.png" class="card-img-top" alt="CTE">
                         </div>
                     </div>
                 </a>
                 <a class="col-6 col-md-4 mb-4" href="ite-student-portal/login.php">
-                    <div class="card small-box bg-ite square-card">
+                    <div class="card small-box bg-ite square-card ite-custom-background">
                         <div class="card-body">
                             <img src="images/ite.png" class="card-img-top" alt="ITE">
                         </div>
