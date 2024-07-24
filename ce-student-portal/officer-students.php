@@ -1,19 +1,7 @@
-<!-- officer-student.php and to show the list of students registered in webpage in officer form.
-Authors:
-  - Lowie Jay Orillo (lowie.jaymier@gmail.com)
-  - Caryl Mae Subaldo (subaldomae29@gmail.com)
-  - Brian Angelo Bognot (c09651052069@gmail.com)
-Last Modified: May 28, 2024
-Brief overview of the file's contents. -->
-
 <?php
 session_start();
+include "indexes/db_conn.php";
 if (isset($_SESSION['role']) && $_SESSION['role'] === 'Officer' && $_SESSION['department'] === 'CE') {
-  // Check if the user's position is not 'Staff'
-  if ($_SESSION['position'] === 'Staff') {
-    header("Location: officer-announcement.php?school_year=$defaultYear&semester=$defaultSemester");
-    exit();
-  }
   ?>
 
   <!DOCTYPE html>
@@ -22,7 +10,7 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Officer' && $_SESSION['de
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Officer Students | CE Student Portal</title>
+    <title>Admin Student Page | CE Student Portal</title>
     <link rel="icon" type="image/png" href="favicon.ico" />
 
     <!-- Google Font: Source Sans Pro -->
@@ -68,7 +56,7 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Officer' && $_SESSION['de
             </div>
           </div>
         </div>
-        
+
         <section class="content">
           <div class="container-fluid">
 
@@ -92,22 +80,20 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Officer' && $_SESSION['de
 
             <!-- Search Form -->
             <form method="GET">
-              <div class="input-group mb-3">
-                <input type="text" name="search_input" class="form-control col-5" placeholder="Search...">
-
-                <div class="input-group-prepend col-2">
+              <div class="form-row">
+                <div class="col-md-5 mb-3">
+                  <input type="text" name="search_input" class="form-control" placeholder="Search...">
+                </div>
+                <div class="col-md-2 mb-3">
                   <select name="column" class="form-control">
                     <option value="account_number">Student Number</option>
                     <option value="username">User Name</option>
                     <option value="last_name">Last Name</option>
                     <option value="first_name">First Name</option>
                     <option value="middle_name">Middle Name</option>
-                    <option value="year_level">Year Level</option>
-                    <option value="program">Program</option>
                   </select>
                 </div>
-
-                <div class="input-group-prepend col-2">
+                <div class="col-md-2 mb-3">
                   <select name="year_level" class="form-control">
                     <option value="">Year Level</option>
                     <option value="">All</option>
@@ -117,14 +103,14 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Officer' && $_SESSION['de
                     <option value="4">4</option>
                   </select>
                 </div>
-                <div class="input-group-prepend col-2">
+                <div class="col-md-2 mb-3">
                   <select name="program" class="form-control">
                     <option value="">Program</option>
                     <option value="">All</option>
                     <option value="BSCE">BSCE</option>
                   </select>
                 </div>
-                <div class="input-group-append col-1">
+                <div class="col-md-1 mb-3">
                   <button class="btn btn-outline-secondary" type="submit" name="search">Search</button>
                 </div>
               </div>
@@ -161,92 +147,96 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Officer' && $_SESSION['de
             }
             ?>
 
-            <table class="table">
-              <thead>
-                <tr>
-                  <th class="col-2">Student Number</th>
-                  <th class="col-1">User Name</th>
-                  <th class="col-2 text-center">Last Name</th>
-                  <th class="col-2 text-center">First Name</th>
-                  <th class="col-1 text-center">Middle Name</th>
-                  <th class="col-1 text-center">Program</th>
-                  <th class="col-1 text-center">Year Level</th>
-                  <th class="col-2 text-center">Action</th>
-                </tr>
-              </thead>
-              <tbody>
-                <?php
-                if (isset($_GET['search'])) {
-                  $search_input = $_GET['search_input'];
-                  $column = $_GET['column'];
-                  $year_level = $_GET['year_level'];
-                  $program = $_GET['program'];
+            <!-- List of student table -->
+            <div class="table-responsive">
+              <table class="table table-striped">
+                <thead>
+                  <tr>
+                    <th>Student Number</th>
+                    <th>User Name</th>
+                    <th class="text-center">Last Name</th>
+                    <th class="text-center">First Name</th>
+                    <th class="text-center">Middle Name</th>
+                    <th class="text-center">Program</th>
+                    <th class="text-center">Year Level</th>
+                    <th class="text-center">Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <?php
+                  if (isset($_GET['search'])) {
+                    $search_input = $_GET['search_input'];
+                    $column = $_GET['column'];
+                    $year_level = $_GET['year_level'];
+                    $program = $_GET['program'];
 
-                  $conditions = array();
+                    $conditions = array();
 
-                  if (!empty($year_level)) {
-                    $conditions[] = "year_level = '$year_level'";
-                  }
+                    if (!empty($year_level)) {
+                      $conditions[] = "year_level = '$year_level'";
+                    }
 
-                  if (!empty($program)) {
-                    $conditions[] = "program = '$program'";
-                  }
+                    if (!empty($program)) {
+                      $conditions[] = "program = '$program'";
+                    }
 
-                  $condition_string = implode(" AND ", $conditions);
+                    $condition_string = implode(" AND ", $conditions);
 
-                  if (!empty($condition_string)) {
-                    $studentssql = "SELECT * FROM user WHERE $condition_string AND $column LIKE '%$search_input%' AND role = 'Student' AND department = 'CE' ORDER BY program ASC, year_level ASC, last_name ASC";
+                    if (!empty($condition_string)) {
+                      $studentssql = "SELECT * FROM user WHERE $condition_string AND $column LIKE '%$search_input%' AND role = 'Student' AND department = 'CE' ORDER BY program ASC, year_level ASC, last_name ASC";
+                    } else {
+                      $studentssql = "SELECT * FROM user WHERE $column LIKE '%$search_input%' AND role = 'Student' AND department = 'CE' ORDER BY program ASC, year_level ASC, last_name ASC";
+                    }
                   } else {
-                    $studentssql = "SELECT * FROM user WHERE $column LIKE '%$search_input%' AND role = 'Student' AND department = 'CE' ORDER BY program ASC, year_level ASC, last_name ASC";
+                    $studentssql = "SELECT * FROM user WHERE role = 'Student' AND department = 'CE' ORDER BY program ASC, year_level ASC, last_name ASC";
                   }
-                } else {
-                  $studentssql = "SELECT * FROM user WHERE role = 'Student' AND department = 'CE' ORDER BY program ASC, year_level ASC, last_name ASC";
-                }
-                $result = $conn->query($studentssql);
-                if ($result->num_rows > 0) {
-                  while ($row = $result->fetch_assoc()) {
-                    ?>
-                    <tr>
-                      <td class="align-middle">
-                        <?php echo $row['account_number']; ?>
-                      </td>
-                      <td class="align-middle">
-                        <?php echo $row['username']; ?>
-                      </td>
-                      <td class="align-middle text-center">
-                        <?php echo $row['last_name']; ?>
-                      </td>
-                      <td class="align-middle text-center">
-                        <?php echo $row['first_name']; ?>
-                      </td>
-                      <td class="align-middle text-center">
-                        <?php echo $row['middle_name']; ?>
-                      </td>
-                      <td class="align-middle text-center">
-                        <?php echo $row['program']; ?>
-                      </td>
-                      <td class="align-middle text-center">
-                        <?php echo $row['year_level']; ?>
-                      </td>
-                      <td class="align-middle text-center">
-                        <a href='officer-student-view.php?account_number=<?php echo $row['account_number']; ?>&school_year=<?php echo $defaultYear; ?>&semester=<?php echo $defaultSemester; ?>'
-                          class='btn btn-success btn-sm'><i class="nav-icon fas fa-solid fa-hand-pointer"></i> Select</a>
-                        <a href='officer-student-delete.php?account_number=<?php echo $row['account_number']; ?>'
-                          class='btn btn-danger btn-sm'><i class="nav-icon fas fa-solid fa-trash"></i> Delete</a>
-                      </td>
-                    </tr>
-                    <?php
+                  $result = $conn->query($studentssql);
+                  if ($result->num_rows > 0) {
+                    while ($row = $result->fetch_assoc()) {
+                      ?>
+                      <tr>
+                        <td class="align-middle">
+                          <?php echo $row['account_number']; ?>
+                        </td>
+                        <td class="align-middle">
+                          <?php echo $row['username']; ?>
+                        </td>
+                        <td class="align-middle text-center">
+                          <?php echo $row['last_name']; ?>
+                        </td>
+                        <td class="align-middle text-center">
+                          <?php echo $row['first_name']; ?>
+                        </td>
+                        <td class="align-middle text-center">
+                          <?php echo $row['middle_name']; ?>
+                        </td>
+                        <td class="align-middle text-center">
+                          <?php echo $row['program']; ?>
+                        </td>
+                        <td class="align-middle text-center">
+                          <?php echo $row['year_level']; ?>
+                        </td>
+                        <td class="align-middle text-center">
+                          <a href='officer-student-view.php?account_number=<?php echo $row['account_number']; ?>&school_year=<?php echo $defaultYear; ?>&semester=<?php echo $defaultSemester; ?>'
+                            class='btn btn-success btn-sm'><i class="nav-icon fas fa-hand-pointer"></i> Select</a>
+                          <a href='officer-students-delete.php?account_number=<?php echo $row['account_number']; ?>'
+                            class='btn btn-danger btn-sm'><i class="nav-icon fas fa-trash"></i> Delete</a>
+                        </td>
+                      </tr>
+                      <?php
+                    }
+                  } else {
+                    echo "<tr><td colspan='8'>No students found.</td></tr>";
                   }
-                } else {
-                  echo "<tr><td colspan='7'>No students found.</td></tr>";
-                }
-                ?>
-              </tbody>
-            </table>
+                  ?>
+                </tbody>
+              </table>
+            </div>
           </div>
         </section>
       </div>
       <?php include 'layout/fixed-footer.php'; ?>
+
       <aside class="control-sidebar control-sidebar-dark">
       </aside>
     </div>

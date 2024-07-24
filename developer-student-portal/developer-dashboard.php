@@ -83,6 +83,13 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Developer' && $_SESSION['
       .bg-cbe {
         background-color: #E9BE00 !important;
       }
+
+      .cas-custom-background {
+            background-image: url('cas-student-portal/images/student-portal-background.png');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
     </style>
   </head>
 
