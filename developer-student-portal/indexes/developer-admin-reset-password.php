@@ -25,7 +25,7 @@ if (isset($_GET['account_number'])) {
 
     if ($result && $result->num_rows > 0) {
         $row = $result->fetch_assoc();
-        $defaultpassword = "admin";
+        $defaultpassword = "admin123";
         $defaulthashed_pass = password_hash($defaultpassword, PASSWORD_BCRYPT);
 
         // Update password in the database

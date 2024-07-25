@@ -4,6 +4,7 @@
  * Copyright 2011-2023 The Bootstrap Authors
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
  */
+ 
 :root,
 [data-bs-theme=light] {
   --bs-blue: #0d6efd;
@@ -1004,6 +1005,7 @@ progress {
 .gx-5 {
   --bs-gutter-x: 3rem;
 }
+
 
 .g-5,
 .gy-5 {
