@@ -1,13 +1,5 @@
 <?php
-/*
-officer-event-checking-be.php
-Authors:
-  - Lowie Jay Orillo (lowie.jaymier@gmail.com)
-  - Caryl Mae Subaldo (subaldomae29@gmail.com)
-  - Brian Angelo Bognot (c09651052069@gmail.com)
-Last Modified: June 19, 2024
-Overview: This file handles marking a student as present or absent in an event.
-*/
+
 
 session_start();
 require ('db_conn.php');

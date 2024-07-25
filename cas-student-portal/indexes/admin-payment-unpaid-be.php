@@ -1,13 +1,5 @@
 <?php
-/*
-admin-payment-unpaid-be.php
-Authors:
-  - Lowie Jay Orillo (lowie.jaymier@gmail.com)
-  - Caryl Mae Subaldo (subaldomae29@gmail.com)
-  - Brian Angelo Bognot (c09651052069@gmail.com)
-Last Modified: June 20, 2024
-Overview: Handles the processing to mark a payment as 'Unpaid', updating the payment records with the appropriate remarks and clearing payment date and received by information.
-*/
+
 
 session_start();
 require('db_conn.php');

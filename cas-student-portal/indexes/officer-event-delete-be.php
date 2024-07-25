@@ -1,13 +1,5 @@
 <?php
-/*
-Officer-event-delete-be.php and event deletion process in Officer
-Authors:
-  - Lowie Jay Orillo (lowie.jaymier@gmail.com)
-  - Caryl Mae Subaldo (subaldomae29@gmail.com)
-  - Brian Angelo Bognot (c09651052069@gmail.com)
-Last Modified: June 12, 2024
-Overview: This file handles the deletion of events.
-*/
+
 session_start();
 require('db_conn.php');
 

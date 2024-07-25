@@ -1,13 +1,5 @@
 <?php
-/*
-admin-changemail-be.php handles the process of changing the email address by admin after verification.
-Authors:
-  - Lowie Jay Orillo (lowie.jaymier@gmail.com)
-  - Caryl Mae Subaldo (subaldomae29@gmail.com)
-  - Brian Angelo Bognot (c09651052069@gmail.com)
-Last Modified: June 15, 2024
-Overview: This file handles the process of changing the email address by admin after verification.
-*/
+
 
 require('db_conn.php');
 session_start();

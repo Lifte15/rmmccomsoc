@@ -1,13 +1,4 @@
 <?php
-/*
-sendverificationcode.php handles the process of generating and sending a verification code to a user's email for account verification.
-Authors:
-  - Lowie Jay Orillo (lowie.jaymier@gmail.com)
-  - Caryl Mae Subaldo (subaldomae29@gmail.com)
-  - Brian Angelo Bognot (c09651052069@gmail.com)
-Last Modified: June 9, 2024
-Overview: This script validates the user account, generates a verification code, updates the user record, and sends an email with the code if the account is found.
-*/
 
 require ('db_conn.php');
 session_start();

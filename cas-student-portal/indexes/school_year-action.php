@@ -1,13 +1,5 @@
 <?php
-/*
-school_year-action.php sets a specified school year as the default.
-Authors:
-  - Lowie Jay Orillo (lowie.jaymier@gmail.com)
-  - Caryl Mae Subaldo (subaldomae29@gmail.com)
-  - Brian Angelo Bognot (c09651052069@gmail.com)
-Last Modified: June 9, 2024
-Overview: This script resets the default status of all school years and updates the specified school year as the default.
-*/
+
 
 session_start();
 include "db_conn.php";

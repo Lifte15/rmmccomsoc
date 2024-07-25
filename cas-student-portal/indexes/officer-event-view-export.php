@@ -1,13 +1,5 @@
 <?php
-/*
-officer-event-view-export.php for exporting event data
-Authors:
-  - Lowie Jay Orillo (lowie.jaymier@gmail.com)
-  - Caryl Mae Subaldo (subaldomae29@gmail.com)
-  - Brian Angelo Bognot (c09651052069@gmail.com)
-Last Modified: June 20, 2024
-Overview: This file handles exporting event details and student attendance data to an Excel file.
-*/
+
 
 session_start();
 include "db_conn.php";

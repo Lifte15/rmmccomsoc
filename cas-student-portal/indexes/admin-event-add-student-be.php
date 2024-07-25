@@ -1,13 +1,4 @@
 <?php
-/*
-admin-event-add-student-be.php
-Authors:
-  - Lowie Jay Orillo (lowie.jaymier@gmail.com)
-  - Caryl Mae Subaldo (subaldomae29@gmail.com)
-  - Brian Angelo Bognot (c09651052069@gmail.com)
-Last Modified: June 18, 2024
-Overview: This file handles adding a student to an event, recording their attendance.
-*/
 
 session_start();
 include "db_conn.php";

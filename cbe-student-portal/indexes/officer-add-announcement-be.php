@@ -1,14 +1,5 @@
 <?php
-/*
-officer-add-announcement-be.php and announcement addition process in officer
-Authors:
-  - Lowie Jay Orillo (lowie.jaymier@gmail.com)
-  - Caryl Mae Subaldo (subaldomae29@gmail.com)
-  - Brian Angelo Bognot (c09651052069@gmail.com)
-Last Modified: June 2, 2024
-Overview: This file handles the addition of new announcements, 
-    validating officer input and inserting the announcement into the database.
-*/
+
 session_start();
 require ('db_conn.php');
 

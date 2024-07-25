@@ -1,13 +1,5 @@
 <?php
-/*
-officer-enroll.php handles the process of enrolling a single student.
-Authors:
-  - Lowie Jay Orillo (lowie.jaymier@gmail.com)
-  - Caryl Mae Subaldo (subaldomae29@gmail.com)
-  - Brian Angelo Bognot (c09651052069@gmail.com)
-Last Modified: June 9, 2024
-Overview: This file allows officeristrators to enroll a single student in a specific school year, semester, program, and year level.
-*/
+
 
 session_start();
 include 'db_conn.php';

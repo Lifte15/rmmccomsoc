@@ -1,13 +1,5 @@
 <?php
-/*
-admin-add-announcement-be.php and processes the addition of new announcements by admin, including input validation and database insertion.
-Authors:
-  - Lowie Jay Orillo (lowie.jaymier@gmail.com)
-  - Caryl Mae Subaldo (subaldomae29@gmail.com)
-  - Brian Angelo Bognot (c09651052069@gmail.com)
-Last Modified: June 2, 2024
-Overview: This file handles the addition of new announcements, validating admin input and inserting the announcement into the database.
-*/
+
 
 session_start();
 require ('db_conn.php');

@@ -1,10 +1,3 @@
-<!-- verifyforgotpassword.php and to verify forgot password in CBE Student Portal.
-Authors:
-  - Lowie Jay Orillo (lowie.jaymier@gmail.com)
-  - Caryl Mae Subaldo (subaldomae29@gmail.com)
-  - Brian Angelo Bognot (c09651052069@gmail.com)
-Last Modified: June 21, 2024
-Brief overview of the file's contents. -->
 
 <?php
 session_start();

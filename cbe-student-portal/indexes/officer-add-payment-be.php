@@ -1,13 +1,5 @@
 <?php
-/*
-officer-add-payment-be.php and processes the addition of new payments by officer, including input validation and database insertion.
-Authors:
-  - Lowie Jay Orillo (lowie.jaymier@gmail.com)
-  - Caryl Mae Subaldo (subaldomae29@gmail.com)
-  - Brian Angelo Bognot (c09651052069@gmail.com)
-Last Modified: June 17, 2024
-Overview: This file handles the addition of new payments, validating officer input and inserting the payment into the database.
-*/
+
 session_start();
 require ('db_conn.php');
 

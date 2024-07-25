@@ -1,13 +1,5 @@
 <?php
-/*
-officer-unenroll.php
-Authors:
-  - Lowie Jay Orillo (lowie.jaymier@gmail.com)
-  - Caryl Mae Subaldo (subaldomae29@gmail.com)
-  - Brian Angelo Bognot (c09651052069@gmail.com)
-Last Modified: June 10, 2024
-Overview: Handles the unenrollment of a student from a specific school year and semester combination.
-*/
+
 
 session_start();
 include 'db_conn.php';

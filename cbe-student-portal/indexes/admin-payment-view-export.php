@@ -1,13 +1,4 @@
 <?php
-/*
-admin-payment-view-export.php
-Authors:
-  - Lowie Jay Orillo (lowie.jaymier@gmail.com)
-  - Caryl Mae Subaldo (subaldomae29@gmail.com)
-  - Brian Angelo Bognot (c09651052069@gmail.com)
-Last Modified: June 20, 2024
-Overview: Generates an Excel export of student payment details for a specific payment type identified by payment_for_id. Prompts download of an Excel file.
-*/
 
 session_start();
 include "db_conn.php";

@@ -1,13 +1,5 @@
 <?php
-/*
-officer-event-delete-all-students-be.php
-Authors:
-  - Lowie Jay Orillo (lowie.jaymier@gmail.com)
-  - Caryl Mae Subaldo (subaldomae29@gmail.com)
-  - Brian Angelo Bognot (c09651052069@gmail.com)
-Last Modified: June 18, 2024
-Overview: This file handles the deletion of all enrolled students from an event based on the event ID, program, and year level.
-*/
+
 
 session_start();
 require('db_conn.php');

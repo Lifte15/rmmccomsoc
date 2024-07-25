@@ -1,13 +1,4 @@
 <?php
-/*
-Officer-add-event-be.php and event addition process in Officer
-Authors:
-  - Lowie Jay Orillo (lowie.jaymier@gmail.com)
-  - Caryl Mae Subaldo (subaldomae29@gmail.com)
-  - Brian Angelo Bognot (c09651052069@gmail.com)
-Last Modified: June 11, 2024
-Overview: This file handles the addition of new events, validating Officer input and inserting the event into the database.
-*/
 
 session_start();
 require ('db_conn.php');

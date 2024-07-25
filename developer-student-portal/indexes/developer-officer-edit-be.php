@@ -1,13 +1,4 @@
 <?php
-/*
-admin-officer-edit-be.php for editing officer details
-Authors:
-  - Lowie Jay Orillo (lowie.jaymier@gmail.com)
-  - Caryl Mae Subaldo (subaldomae29@gmail.com)
-  - Brian Angelo Bognot (c09651052069@gmail.com)
-Last Modified: June 15, 2024
-Overview: This file handles the editing of officer details, validating input, and updating the database.
-*/
 
 
 session_start();

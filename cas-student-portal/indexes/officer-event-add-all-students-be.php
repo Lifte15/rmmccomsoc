@@ -1,13 +1,5 @@
 <?php
-/*
-officer-event-add-all-students-be.php
-Authors:
-  - Lowie Jay Orillo (lowie.jaymier@gmail.com)
-  - Caryl Mae Subaldo (subaldomae29@gmail.com)
-  - Brian Angelo Bognot (c09651052069@gmail.com)
-Last Modified: June 18, 2024
-Overview: This file allows officer to add all eligible students to an event based on program, year level, and search criteria.
-*/
+
 
 session_start();
 require('db_conn.php');

@@ -1,13 +1,5 @@
 <?php
-/*
-resetpassword-be.php handles the reset of user passwords based on account number, email, and verification code.
-Authors:
-  - Lowie Jay Orillo (lowie.jaymier@gmail.com)
-  - Caryl Mae Subaldo (subaldomae29@gmail.com)
-  - Brian Angelo Bognot (c09651052069@gmail.com)
-Last Modified: June 20, 2024
-Overview: This verifies the provided reset code and, if valid, resets the user's password to a default format based on their last name and account number.
-*/
+
 
 require ('db_conn.php');
 session_start();

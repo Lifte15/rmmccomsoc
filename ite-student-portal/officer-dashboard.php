@@ -1,10 +1,3 @@
- <!-- officer-dashboard.php and to see the data and the population of the student in officer form.
-Authors:
-  - Lowie Jay Orillo (lowie.jaymier@gmail.com)
-  - Caryl Mae Subaldo (subaldomae29@gmail.com)
-  - Brian Angelo Bognot (c09651052069@gmail.com)
-Last Modified: June 20, 2024
-Brief overview of the file's contents. -->
 
 <?php
 session_start();

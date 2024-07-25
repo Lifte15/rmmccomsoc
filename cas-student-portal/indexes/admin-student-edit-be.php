@@ -1,13 +1,5 @@
 <?php
-/*
-admin-student-edit-be.php and student update process in admin
-Authors:
-  - Lowie Jay Orillo (lowie.jaymier@gmail.com)
-  - Caryl Mae Subaldo (subaldomae29@gmail.com)
-  - Brian Angelo Bognot (c09651052069@gmail.com)
-Last Modified: May 28, 2024
-Overview: This file handles the updating of student information, validating admin input and updating the student in the database.
-*/
+
 session_start();
 require ('db_conn.php');
 require "../vendor/autoload.php";

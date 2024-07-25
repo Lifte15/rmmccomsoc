@@ -1,11 +1,3 @@
-<!-- officer-student-addbulk.php and to add bulk new student in officer form.
-Authors:
-  - Lowie Jay Orillo (lowie.jaymier@gmail.com)
-  - Caryl Mae Subaldo (subaldomae29@gmail.com)
-  - Brian Angelo Bognot (c09651052069@gmail.com)
-Last Modified: June 13, 2024
-Brief overview of the file's contents. -->
-
 
 <?php
 session_start();

@@ -1,10 +1,4 @@
-<!-- dashboard.php and to see the count of event and payment in student form.
-Authors:
-  - Lowie Jay Orillo (lowie.jaymier@gmail.com)
-  - Caryl Mae Subaldo (subaldomae29@gmail.com)
-  - Brian Angelo Bognot (c09651052069@gmail.com)
-Last Modified: June 20, 2024
-Brief overview of the file's contents. -->
+
 <?php
 session_start();
 if (isset($_SESSION['role']) && $_SESSION['role'] === 'Student' && $_SESSION['department'] === 'CE') {

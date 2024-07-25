@@ -1,10 +1,4 @@
-<!-- officer-student-view.php and to show that individual student registered in webpage in officer form.
-Authors:
-  - Lowie Jay Orillo (lowie.jaymier@gmail.com)
-  - Caryl Mae Subaldo (subaldomae29@gmail.com)
-  - Brian Angelo Bognot (c09651052069@gmail.com)
-Last Modified: May 28, 2024
-Brief overview of the file's contents. -->
+
 
 <?php
 session_start();

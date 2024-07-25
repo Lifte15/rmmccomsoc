@@ -1,13 +1,5 @@
 <?php
-/*
-verifyaccount.php handles the verification process of a user's account by checking the verification code.
-Authors:
-  - Lowie Jay Orillo (lowie.jaymier@gmail.com)
-  - Caryl Mae Subaldo (subaldomae29@gmail.com)
-  - Brian Angelo Bognot (c09651052069@gmail.com)
-Last Modified: June 21, 2024
-Overview: This validates the user input, checks the verification code against the database, updates the user record upon successful verification.
-*/
+
 
 require('db_conn.php');
 

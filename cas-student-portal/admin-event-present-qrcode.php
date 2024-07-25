@@ -1,10 +1,4 @@
-<!-- admin-event-present-qrcode.php and to present a student in that event by scanning qrcode in admin form.
-Authors:
-  - Lowie Jay Orillo (lowie.jaymier@gmail.com)
-  - Caryl Mae Subaldo (subaldomae29@gmail.com)
-  - Brian Angelo Bognot (c09651052069@gmail.com)
-Last Modified: June 21, 2024
-Brief overview of the file's contents. -->
+
 
 <?php
 session_start();

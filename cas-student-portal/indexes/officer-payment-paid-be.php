@@ -1,13 +1,5 @@
 <?php
-/*
-admin-payment-paid-be.php
-Authors:
-  - Lowie Jay Orillo (lowie.jaymier@gmail.com)
-  - Caryl Mae Subaldo (subaldomae29@gmail.com)
-  - Brian Angelo Bognot (c09651052069@gmail.com)
-Last Modified: June 25, 2024
-Overview: Handles the processing to mark a payment as 'Paid', updating the payment records with the payment date, received by information, and uploading proof of payment.
-*/
+
 
 session_start();
 require ('db_conn.php');

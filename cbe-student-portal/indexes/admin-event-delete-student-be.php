@@ -1,13 +1,5 @@
 <?php
-/*
-admin-event-delete-student-be.php for deleting a single student from an event
-Authors:
-  - Lowie Jay Orillo (lowie.jaymier@gmail.com)
-  - Caryl Mae Subaldo (subaldomae29@gmail.com)
-  - Brian Angelo Bognot (c09651052069@gmail.com)
-Last Modified: June 18, 2024
-Overview: This file handles the deletion of a single student from a specific event.
-*/
+
 
 session_start();
 include "db_conn.php";

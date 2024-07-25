@@ -1,13 +1,5 @@
 <?php
-/*
-admin-officer-reset-password.php for resetting officer passwords
-Authors:
-  - Lowie Jay Orillo (lowie.jaymier@gmail.com)
-  - Caryl Mae Subaldo (subaldomae29@gmail.com)
-  - Brian Angelo Bognot (c09651052069@gmail.com)
-Last Modified: June 15, 2024
-Overview: This file handles the resetting of an officer's password to a default value.
-*/
+
 
 session_start();
 

@@ -1,13 +1,5 @@
 <?php
-/*
-change-email-request-code.php 
-Authors:
-  - Lowie Jay Orillo (lowie.jaymier@gmail.com)
-  - Caryl Mae Subaldo (subaldomae29@gmail.com)
-  - Brian Angelo Bognot (c09651052069@gmail.com)
-Last Modified: June 15, 2024
-Overview: This file handles the email change request process, including validation, database update, and sending verification codes.
-*/
+
 
 require('db_conn.php');
 session_start();

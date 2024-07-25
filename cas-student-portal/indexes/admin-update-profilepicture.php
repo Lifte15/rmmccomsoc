@@ -1,14 +1,5 @@
 <?php
-/*
-admin-update-profilepicture.php and profile picture upload process in admin
-Authors:
-  - Lowie Jay Orillo (lowie.jaymier@gmail.com)
-  - Caryl Mae Subaldo (subaldomae29@gmail.com)
-  - Brian Angelo Bognot (c09651052069@gmail.com)
-Last Modified: June 1, 2024
-Overview: This file handles the update of profile pictures for admin accounts, 
-    validating input and updating the database with the new profile picture.
-*/
+
 session_start();
 
 include "db_conn.php";

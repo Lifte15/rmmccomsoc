@@ -1,13 +1,5 @@
 <?php
-/*
-admin-payment-delete-student-be.php
-Authors:
-  - Lowie Jay Orillo (lowie.jaymier@gmail.com)
-  - Caryl Mae Subaldo (subaldomae29@gmail.com)
-  - Brian Angelo Bognot (c09651052069@gmail.com)
-Last Modified: June 19, 2024
-Overview: Deletes a student's payment record from a specific payment type based on the provided student account number and payment ID.
-*/
+
 
 session_start();
 include "db_conn.php";

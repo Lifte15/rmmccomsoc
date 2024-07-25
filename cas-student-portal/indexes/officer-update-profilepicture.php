@@ -1,14 +1,5 @@
 <?php
-/*
-officer-update-profilepicture.php and profile picture upload process in officer
-Authors:
-  - Lowie Jay Orillo (lowie.jaymier@gmail.com)
-  - Caryl Mae Subaldo (subaldomae29@gmail.com)
-  - Brian Angelo Bognot (c09651052069@gmail.com)
-Last Modified: May 15, 2024
-Overview: This file handles the update of profile pictures for officer accounts, 
-    validating input and updating the database with the new profile picture.
-*/
+
 session_start();
 
 include "db_conn.php";

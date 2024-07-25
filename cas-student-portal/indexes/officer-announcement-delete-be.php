@@ -1,13 +1,5 @@
 <?php
-/*
-officer-announcement-delete-be.php and announcement deletion process in officer
-Authors:
-  - Lowie Jay Orillo (lowie.jaymier@gmail.com)
-  - Caryl Mae Subaldo (subaldomae29@gmail.com)
-  - Brian Angelo Bognot (c09651052069@gmail.com)
-Last Modified: June 2, 2024
-Overview: This file handles the deletion of announcements.
-*/
+
 session_start();
 require ('db_conn.php');
 

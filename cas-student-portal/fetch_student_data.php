@@ -1,12 +1,4 @@
 <?php
-/*
-fetch_student_data.php fetching student data.
-Authors:
-  - Lowie Jay Orillo (lowie.jaymier@gmail.com)
-  - Caryl Mae Subaldo (subaldomae29@gmail.com)
-  - Brian Angelo Bognot (c09651052069@gmail.com)
-Last Modified: June 27, 2024
-*/
 
 include "indexes/db_conn.php";
 

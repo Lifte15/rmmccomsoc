@@ -1,13 +1,5 @@
 <?php
-/*
-officer-payment-delete-be.php
-Authors:
-  - Lowie Jay Orillo (lowie.jaymier@gmail.com)
-  - Caryl Mae Subaldo (subaldomae29@gmail.com)
-  - Brian Angelo Bognot (c09651052069@gmail.com)
-Last Modified: June 17, 2024
-Overview: Deletes a payment record and its associated details based on the specified payment ID.
-*/
+
 
 session_start();
 require('db_conn.php');

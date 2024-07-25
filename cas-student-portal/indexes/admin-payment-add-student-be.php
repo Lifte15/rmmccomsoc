@@ -1,13 +1,5 @@
 <?php
-/*
-admin-payment-add-student-be.php handles the addition of a single student to a payment in admin
-Authors:
-  - Lowie Jay Orillo (lowie.jaymier@gmail.com)
-  - Caryl Mae Subaldo (subaldomae29@gmail.com)
-  - Brian Angelo Bognot (c09651052069@gmail.com)
-Last Modified: June 20, 2024
-Overview: This file processes the addition of a single student to a payment record, ensuring the payment for the specified payment ID and student account number is recorded with 'Unpaid' remarks.
-*/
+
 
 session_start();
 include "db_conn.php";

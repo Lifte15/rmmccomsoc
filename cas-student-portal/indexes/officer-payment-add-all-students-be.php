@@ -1,13 +1,5 @@
 <?php
-/*
-officer-payment-add-all-students-be.php for adding all students to a payment in bulk
-Authors:
-  - Lowie Jay Orillo (lowie.jaymier@gmail.com)
-  - Caryl Mae Subaldo (subaldomae29@gmail.com)
-  - Brian Angelo Bognot (c09651052069@gmail.com)
-Last Modified: June 20, 2024
-Overview: This file handles the bulk addition of eligible students to a payment based on criteria.
-*/
+
 
 session_start();
 require('db_conn.php');
