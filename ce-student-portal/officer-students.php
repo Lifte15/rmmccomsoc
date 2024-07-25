@@ -219,7 +219,7 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Officer' && $_SESSION['de
                         <td class="align-middle text-center">
                           <a href='officer-student-view.php?account_number=<?php echo $row['account_number']; ?>&school_year=<?php echo $defaultYear; ?>&semester=<?php echo $defaultSemester; ?>'
                             class='btn btn-success btn-sm'><i class="nav-icon fas fa-hand-pointer"></i> Select</a>
-                          <a href='officer-students-delete.php?account_number=<?php echo $row['account_number']; ?>'
+                          <a href='officer-student-delete.php?account_number=<?php echo $row['account_number']; ?>'
                             class='btn btn-danger btn-sm'><i class="nav-icon fas fa-trash"></i> Delete</a>
                         </td>
                       </tr>

@@ -71,8 +71,8 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Officer' && $_SESSION['de
                   <div class="card-header">
                     <h3 class="card-title text-center" style="font-size: 1.25rem; font-weight: bold;">
                       New Bulk Student</h3><br><br>
-                    <p class="text-muted">Please download this <a download="cas-student-portal-guide"
-                        href="excel/cas-student-portal-guide.xlsx">cas-portal-excel</a> for the guide:</strong></p>
+                    <p class="text-muted">Please download this <a download="cbe-student-portal-guide"
+                        href="excel/cbe-student-portal-guide.xlsx">cbe-portal-excel</a> for the guide:</strong></p>
                     <hr>
 
                     <?php if (isset($_GET['newStudentError'])) { ?>
