@@ -43,7 +43,7 @@ function validate($data)
     return mysqli_real_escape_string($conn, $data);
 }
 
-if (isset($_SESSION['role']) && $_SESSION['role'] === 'Admin'  && $_SESSION['department'] === 'CE') {
+if (isset($_SESSION['role']) && $_SESSION['role'] === 'Admin' && $_SESSION['department'] === 'CE') {
     if (isset($_GET['event_id'])) {
         $event_id = intval($_GET['event_id']);
 
@@ -95,8 +95,11 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Admin'  && $_SESSION['dep
                                 <form method="GET">
                                     <input type="hidden" name="event_id" value="<?php echo $event_id; ?>">
                                     <div class="input-group mb-3">
-                                        <input type="text" name="search_input" class="form-control col-5" placeholder="Search...">
-                                        <div class="input-group-prepend col-2">
+                                        <div class="col-md-4 mb-3">
+                                            <input type="text" name="search_input" class="form-control" placeholder="Search...">
+                                        </div>
+
+                                        <div class="col-md-2 mb-3">
                                             <select name="column" class="form-control">
                                                 <option value="u.account_number">Student Number</option>
                                                 <option value="u.last_name">Last Name</option>
@@ -104,7 +107,7 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Admin'  && $_SESSION['dep
                                                 <option value="u.middle_name">Middle Name</option>
                                             </select>
                                         </div>
-                                        <div class="input-group-prepend col-2">
+                                        <div class="col-md-2 mb-3">
                                             <select name="year_level" class="form-control">
                                                 <option value="">Year Level</option>
                                                 <option value="">All</option>
@@ -114,14 +117,14 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Admin'  && $_SESSION['dep
                                                 <option value="4">4</option>
                                             </select>
                                         </div>
-                                        <div class="input-group-prepend col-2">
+                                        <div class="col-md-2 mb-3">
                                             <select name="program" class="form-control">
                                                 <option value="">Program</option>
                                                 <option value="">All</option>
                                                 <option value="BSCE">BSCE</option>
                                             </select>
                                         </div>
-                                        <div class="input-group-append col-1">
+                                        <div class="col-md-1 mb-3">
                                             <button class="btn btn-outline-secondary" type="submit" name="search">Search</button>
                                         </div>
                                 </form>
@@ -210,7 +213,8 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Admin'  && $_SESSION['dep
                     }
                     $result = $conn->query($studentsql);
                     ?>
-                    <table class="table">
+                    <div class="table-responsive">
+                    <table class="table table-striped">
                         <thead>
                             <tr>
                                 <th class="col-2">Student Number</th>
@@ -242,7 +246,7 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Admin'  && $_SESSION['dep
                                                 <input type="hidden" name="account_number" value="<?php echo $row['account_number']; ?>">
                                                 <input type="hidden" name="previous_url"
                                                     value="<?php echo htmlspecialchars($current_url, ENT_QUOTES, 'UTF-8'); ?>">
-                                                <button class="btn btn-success" type="submit" name="enroll_student">Add</button>
+                                                <button class="btn btn-success" type="submit" name="add_student">Add</button>
                                             </form>
                                         </td>
                                     </tr>
@@ -254,6 +258,7 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Admin'  && $_SESSION['dep
                             <?php } ?>
                         </tbody>
                     </table>
+                    </div>
                 </div>
                 </section>
                 </div>

@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -45,7 +43,7 @@ function validate($data)
     return mysqli_real_escape_string($conn, $data);
 }
 
-if (isset($_SESSION['role']) && $_SESSION['role'] === 'Admin'  && $_SESSION['department'] === 'CCJ') {
+if (isset($_SESSION['role']) && $_SESSION['role'] === 'Admin' && $_SESSION['department'] === 'CCJ') {
     if (isset($_GET['event_id'])) {
         $event_id = intval($_GET['event_id']);
 
@@ -97,8 +95,10 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Admin'  && $_SESSION['dep
                                 <form method="GET">
                                     <input type="hidden" name="event_id" value="<?php echo $event_id; ?>">
                                     <div class="input-group mb-3">
-                                        <input type="text" name="search_input" class="form-control col-5" placeholder="Search...">
-                                        <div class="input-group-prepend col-2">
+                                        <div class="col-md-4 mb-3">
+                                            <input type="text" name="search_input" class="form-control" placeholder="Search...">
+                                        </div>
+                                        <div class="col-md-2 mb-3">
                                             <select name="column" class="form-control">
                                                 <option value="u.account_number">Student Number</option>
                                                 <option value="u.last_name">Last Name</option>
@@ -106,7 +106,7 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Admin'  && $_SESSION['dep
                                                 <option value="u.middle_name">Middle Name</option>
                                             </select>
                                         </div>
-                                        <div class="input-group-prepend col-2">
+                                        <div class="col-md-2 mb-3">
                                             <select name="year_level" class="form-control">
                                                 <option value="">Year Level</option>
                                                 <option value="">All</option>
@@ -116,14 +116,14 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Admin'  && $_SESSION['dep
                                                 <option value="4">4</option>
                                             </select>
                                         </div>
-                                        <div class="input-group-prepend col-2">
+                                        <div class="col-md-2 mb-3">
                                             <select name="program" class="form-control">
                                                 <option value="">Program</option>
                                                 <option value="">All</option>
                                                 <option value="BSCrim">BSCrim</option>
                                             </select>
                                         </div>
-                                        <div class="input-group-append col-1">
+                                        <div class="col-md-1 mb-3">
                                             <button class="btn btn-outline-secondary" type="submit" name="search">Search</button>
                                         </div>
                                 </form>
@@ -190,6 +190,7 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Admin'  && $_SESSION['dep
                         e.school_year = '$school_year'
                         AND e.semester = '$semester'
                         AND u.role = 'Student'
+                        AND u.department = 'CCJ'
                         AND $condition_string 
                     ORDER BY 
                         u.program ASC, u.year_level ASC, u.last_name ASC";
@@ -215,6 +216,7 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Admin'  && $_SESSION['dep
                         e.school_year = '$school_year'
                         AND e.semester = '$semester'
                         AND u.role = 'Student'
+                        AND u.department = 'CCJ'
                     ORDER BY 
                         u.program ASC, u.year_level ASC, u.last_name ASC";
                         }
@@ -240,57 +242,61 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Admin'  && $_SESSION['dep
                     e.school_year = '$school_year'
                     AND e.semester = '$semester'
                     AND u.role = 'Student'
+                    AND u.department = 'CCJ'
                 ORDER BY 
                     u.program ASC, u.year_level ASC, u.last_name ASC";
                     }
                     $result = $conn->query($studentsql);
                     ?>
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <th class="col-2">Student Number</th>
-                                <th class="col-2">Last Name</th>
-                                <th class="col-2">First Name</th>
-                                <th class="col-2">Middle Name</th>
-                                <th class="col-1">Program</th>
-                                <th class="col-1">Year Level</th>
-                                <th class="col-1 text-center">Action</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <?php
-                            if (isset($result) && $result->num_rows > 0) {
-                                while ($row = $result->fetch_assoc()) { ?>
+                    <div class="table-responsive">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th class="col-2">Student Number</th>
+                                    <th class="col-2">Last Name</th>
+                                    <th class="col-2">First Name</th>
+                                    <th class="col-2">Middle Name</th>
+                                    <th class="col-1">Program</th>
+                                    <th class="col-1">Year Level</th>
+                                    <th class="col-1 text-center">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php
+                                if (isset($result) && $result->num_rows > 0) {
+                                    while ($row = $result->fetch_assoc()) { ?>
+                                        <tr>
+                                            <td class="align-middle"><?php echo $row['account_number']; ?></td>
+                                            <td class="align-middle"><?php echo $row['last_name']; ?></td>
+                                            <td class="align-middle"><?php echo $row['first_name']; ?></td>
+                                            <td class="align-middle"><?php echo $row['middle_name']; ?></td>
+                                            <td class="align-middle"><?php echo $row['program']; ?></td>
+                                            <td class="align-middle"><?php echo $row['year_level']; ?></td>
+                                            <td class="align-middle text-center">
+                                                <?php
+                                                $current_url = $_SERVER['PHP_SELF'] . '?' . $_SERVER['QUERY_STRING'];
+                                                ?>
+                                                <form method="POST" action="indexes/admin-event-delete-student-be.php">
+                                                    <input type="hidden" name="event_id" value="<?php echo $event_id; ?>">
+                                                    <input type="hidden" name="account_number"
+                                                        value="<?php echo $row['account_number']; ?>">
+                                                    <input type="hidden" name="previous_url"
+                                                        value="<?php echo htmlspecialchars($current_url, ENT_QUOTES, 'UTF-8'); ?>">
+                                                    <button class="btn btn-danger" type="submit" name="enroll_student">Delete
+                                                    </button>
+                                                </form>
+                                            </td>
+                                        </tr>
+                                    <?php }
+                                } else { ?>
                                     <tr>
-                                        <td class="align-middle"><?php echo $row['account_number']; ?></td>
-                                        <td class="align-middle"><?php echo $row['last_name']; ?></td>
-                                        <td class="align-middle"><?php echo $row['first_name']; ?></td>
-                                        <td class="align-middle"><?php echo $row['middle_name']; ?></td>
-                                        <td class="align-middle"><?php echo $row['program']; ?></td>
-                                        <td class="align-middle"><?php echo $row['year_level']; ?></td>
-                                        <td class="align-middle text-center">
-                                            <?php
-                                            $current_url = $_SERVER['PHP_SELF'] . '?' . $_SERVER['QUERY_STRING'];
-                                            ?>
-                                            <form method="POST" action="indexes/admin-event-delete-student-be.php">
-                                                <input type="hidden" name="event_id" value="<?php echo $event_id; ?>">
-                                                <input type="hidden" name="account_number" value="<?php echo $row['account_number']; ?>">
-                                                <input type="hidden" name="previous_url"
-                                                    value="<?php echo htmlspecialchars($current_url, ENT_QUOTES, 'UTF-8'); ?>">
-                                                <button class="btn btn-danger" type="submit" name="enroll_student">Delete
-                                                </button>
-                                            </form>
+                                        <td colspan="7" class="text-center">No students found.
                                         </td>
                                     </tr>
-                                <?php }
-                            } else { ?>
-                                <tr>
-                                    <td colspan="7" class="text-center">No students found.
-                                    </td>
-                                </tr>
-                            <?php } ?>
-                        </tbody>
-                    </table>
+                                <?php } ?>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
                 </section>
                 </div>

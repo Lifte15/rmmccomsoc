@@ -1,11 +1,7 @@
-
 <?php
 session_start();
+include "indexes/db_conn.php";
 if (isset($_SESSION['role']) && $_SESSION['role'] === 'Officer' && $_SESSION['department'] === 'CAS') {
-  if ($_SESSION['position'] === 'Staff') {
-    header("Location: officer-announcement.php?school_year=$defaultYear&semester=$defaultSemester");
-    exit();
-  }
   ?>
 
   <!DOCTYPE html>
@@ -14,7 +10,7 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Officer' && $_SESSION['de
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Officer Student View | CAS Student Portal</title>
+    <title>Officer Student View | CAS Student Portal </title>
     <link rel="icon" type="image/png" href="favicon.ico" />
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet"
@@ -46,6 +42,7 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Officer' && $_SESSION['de
       <?php include 'layout/officer-sidebar.php'; ?>
 
       <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
         <div class="content-header">
           <div class="container-fluid">
             <div class="row mb-2 align-items-center">
@@ -105,7 +102,7 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Officer' && $_SESSION['de
                           style="height: 10rem; width: 10rem; border-radius: 50%; object-fit: cover;">
                       </div>
 
-                      <!-- Subject information column -->
+                      <!-- Student information column -->
                       <div class="col-md">
                         <div class="table-responsive">
                           <table class="subject-info">
@@ -163,7 +160,7 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Officer' && $_SESSION['de
                           <i class="fa-solid fa-pen-to-square"></i> View QR Code
                         </a>
 
-                        <!-- Modal Structure -->
+                        <!-- Modal For Student QR Code -->
                         <div class="modal fade" id="qrCodeModal" tabindex="-1" role="dialog"
                           aria-labelledby="qrCodeModalLabel" aria-hidden="true">
                           <div class="modal-dialog modal-dialog-centered" role="document">
@@ -340,38 +337,40 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Officer' && $_SESSION['de
               <div class="card-body">
                 <div class="tab-content">
 
+                  <!-- Attendance Tab -->
                   <div class="tab-pane active" id="attendance">
-                    <table class="table">
-                      <thead>
-                        <tr>
-                          <th class="col-3">Event Name</th>
-                          <th class="col-2 text-center">Date</th>
-                          <th class="col-2 text-center">School Year</th>
-                          <th class="col-2 text-center">Semester</th>
-                          <th class="col-2 text-center">Points</th>
-                          <th class="col-2 text-center">Remarks</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <?php
+                    <div class="table-responsive">
+                      <table class="table table-striped">
+                        <thead>
+                          <tr>
+                            <th class="col-3">Event Name</th>
+                            <th class="col-2 text-center">Date</th>
+                            <th class="col-2 text-center">School Year</th>
+                            <th class="col-2 text-center">Semester</th>
+                            <th class="col-2 text-center">Points</th>
+                            <th class="col-2 text-center">Remarks</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <?php
 
-                        $semester_condition = "";
-                        if (isset($_GET['semester']) && $_GET['semester'] != "") {
-                          $semester_condition = "AND e.semester = '" . $_GET['semester'] . "'";
-                        }
+                          $semester_condition = "";
+                          if (isset($_GET['semester']) && $_GET['semester'] != "") {
+                            $semester_condition = "AND e.semester = '" . $_GET['semester'] . "'";
+                          }
 
-                        $school_year_condition = "";
-                        if (isset($_GET['school_year']) && $_GET['school_year'] != "All") {
-                          $school_year_condition = "AND e.school_year = '" . $_GET['school_year'] . "'";
-                        }
+                          $school_year_condition = "";
+                          if (isset($_GET['school_year']) && $_GET['school_year'] != "All") {
+                            $school_year_condition = "AND e.school_year = '" . $_GET['school_year'] . "'";
+                          }
 
-                        if (isset($_GET['account_number'])) {
-                          $account_number = $_GET['account_number'];
-                        }
+                          if (isset($_GET['account_number'])) {
+                            $account_number = $_GET['account_number'];
+                          }
 
 
 
-                        $query = "SELECT 
+                          $query = "SELECT 
                       e.event_name, 
                       e.date, 
                       e.school_year, 
@@ -387,86 +386,89 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Officer' && $_SESSION['de
                       $semester_condition 
                       $school_year_condition";
 
-                        $result = $conn->query($query);
-                        if ($result->num_rows > 0) {
-                          while ($row = $result->fetch_assoc()) {
-                            ?>
-                            <tr>
-                              <td class="align-middle">
-                                <?php echo $row['event_name']; ?>
-                              </td>
-                              <td class="align-middle text-center">
-                                <?php echo $row['date']; ?>
-                              </td>
-                              <td class="align-middle text-center">
-                                <?php echo $row['school_year']; ?>
-                              </td>
-                              <td class="align-middle text-center">
-                                <?php echo $row['semester']; ?>
-                              </td>
-                              <td class="align-middle text-center">
-                                <?php echo $row['points']; ?>
-                              </td>
-                              <td class="align-middle text-center">
-                                <?php
-                                $remarks = $row['remarks'];
-                                if ($remarks == 'Present') {
-                                  echo '<button type="button" class="btn btn-success btn-sm">Present</button>';
-                                } elseif ($remarks == 'Absent') {
-                                  echo '<button type="button" class="btn btn-danger btn-sm">Absent</button>';
-                                } elseif ($remarks == 'Pending') {
-                                  echo '<button type="button" class="btn btn-secondary btn-sm">Pending</button>';
-                                } elseif (in_array($remarks, ['Excused', 'Exempted', 'Working'])) {
-                                  echo '<button type="button" class="btn btn-warning btn-sm">' . $remarks . '</button>';
-                                }
-                                ?>
-                              </td>
-                            </tr>
-                            <?php
+                          $result = $conn->query($query);
+                          if ($result->num_rows > 0) {
+                            while ($row = $result->fetch_assoc()) {
+                              ?>
+                              <tr>
+                                <td class="align-middle">
+                                  <?php echo $row['event_name']; ?>
+                                </td>
+                                <td class="align-middle text-center">
+                                  <?php echo $row['date']; ?>
+                                </td>
+                                <td class="align-middle text-center">
+                                  <?php echo $row['school_year']; ?>
+                                </td>
+                                <td class="align-middle text-center">
+                                  <?php echo $row['semester']; ?>
+                                </td>
+                                <td class="align-middle text-center">
+                                  <?php echo $row['points']; ?>
+                                </td>
+                                <td class="align-middle text-center">
+                                  <?php
+                                  $remarks = $row['remarks'];
+                                  if ($remarks == 'Present') {
+                                    echo '<button type="button" class="btn btn-success btn-sm">Present</button>';
+                                  } elseif ($remarks == 'Absent') {
+                                    echo '<button type="button" class="btn btn-danger btn-sm">Absent</button>';
+                                  } elseif ($remarks == 'Pending') {
+                                    echo '<button type="button" class="btn btn-secondary btn-sm">Pending</button>';
+                                  } elseif (in_array($remarks, ['Excused', 'Exempted', 'Working'])) {
+                                    echo '<button type="button" class="btn btn-warning btn-sm">' . $remarks . '</button>';
+                                  }
+                                  ?>
+                                </td>
+                              </tr>
+                              <?php
+                            }
+                          } else {
+                            echo "<tr><td colspan='6'>No data found.</td></tr>";
                           }
-                        } else {
-                          echo "<tr><td colspan='6'>No data found.</td></tr>";
-                        }
-                        ?>
-                      </tbody>
+                          ?>
+                        </tbody>
 
 
-                    </table>
+                      </table>
+                    </div>
                   </div>
 
+                  <!-- Payment Students Tab -->
                   <div class="tab-pane" id="payment">
-                    <table class="table">
-                      <thead>
-                        <tr>
-                          <th class="col-2">Payment Description</th>
-                          <th class="col-1 text-center">Date</th>
-                          <th class="col-1 text-center">School Year</th>
-                          <th class="col-2 text-center">Semester</th>
-                          <th class="col-1 text-center">Amount</th>
-                          <th class="col-2 text-center">Date Paid</th>
-                          <th class="col-2 text-center">Recieved By</th>
-                          <th class="col-1 text-center">Status</th>
-                      </thead>
-                      <tbody>
-                        <?php
+                    <div class="table-responsive">
+                      <table class="table table-striped">
+                        <thead>
+                          <tr>
+                            <th class="col-2">Payment Description</th>
+                            <th class="col-1 text-center">Date</th>
+                            <th class="col-1 text-center">School Year</th>
+                            <th class="col-2 text-center">Semester</th>
+                            <th class="col-1 text-center">Amount</th>
+                            <th class="col-2 text-center">Date Paid</th>
+                            <th class="col-2 text-center">Recieved By</th>
+                            <th class="col-1 text-center">Status</th>
+                        </thead>
+                        <tbody>
+                          <?php
 
-                        $semester_condition = "";
-                        if (isset($_GET['semester']) && $_GET['semester'] != "") {
-                          $semester_condition = "AND e.semester = '" . $_GET['semester'] . "'";
-                        }
+                          $semester_condition = "";
+                          if (isset($_GET['semester']) && $_GET['semester'] != "") {
+                            $semester_condition = "AND e.semester = '" . $_GET['semester'] . "'";
+                          }
 
-                        $school_year_condition = "";
-                        if (isset($_GET['school_year']) && $_GET['school_year'] != "All") {
-                          $school_year_condition = "AND e.school_year = '" . $_GET['school_year'] . "'";
-                        }
+                          $school_year_condition = "";
+                          if (isset($_GET['school_year']) && $_GET['school_year'] != "All") {
+                            $school_year_condition = "AND e.school_year = '" . $_GET['school_year'] . "'";
+                          }
 
-                        if (isset($_GET['account_number'])) {
-                          $account_number = $_GET['account_number'];
-                        }
+                          if (isset($_GET['account_number'])) {
+                            $account_number = $_GET['account_number'];
+                          }
 
 
 
-                        $query = "SELECT 
+                          $query = "SELECT 
                                       e.payment_description, 
                                       e.date, 
                                       e.school_year, 
@@ -484,53 +486,55 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Officer' && $_SESSION['de
                                       $semester_condition 
                                       $school_year_condition";
 
-                        $result = $conn->query($query);
-                        if ($result->num_rows > 0) {
-                          while ($row = $result->fetch_assoc()) {
-                            ?>
-                            <tr>
-                              <td class="align-middle">
-                                <?php echo $row['payment_description']; ?>
-                              </td>
-                              <td class="align-middle text-center">
-                                <?php echo $row['date']; ?>
-                              </td>
-                              <td class="align-middle text-center">
-                                <?php echo $row['school_year']; ?>
-                              </td>
-                              <td class="align-middle text-center">
-                                <?php echo $row['semester']; ?>
-                              </td>
-                              <td class="align-middle text-center"> ₱
-                                <?php echo $row['amount']; ?>
-                              </td>
-                              <td class="align-middle text-center">
-                                <?php echo $row['date_paid']; ?>
-                              </td>
-                              <td class="align-middle text-center">
-                                <?php echo $row['received_by']; ?>
-                              </td>
-                              <td class="align-middle text-center">
-                                <?php
-                                $remarks = $row['remarks'];
-                                if ($remarks == 'Paid') {
-                                  echo '<button type="button" class="btn btn-success btn-sm">Paid</button>';
-                                } elseif ($remarks == 'Unpaid') {
-                                  echo '<button type="button" class="btn btn-danger btn-sm">Unpaid</button>';
-                                }
-                                ?>
-                              </td>
-                            </tr>
-                            <?php
+                          $result = $conn->query($query);
+                          if ($result->num_rows > 0) {
+                            while ($row = $result->fetch_assoc()) {
+                              ?>
+                              <tr>
+                                <td class="align-middle">
+                                  <?php echo $row['payment_description']; ?>
+                                </td>
+                                <td class="align-middle text-center">
+                                  <?php echo $row['date']; ?>
+                                </td>
+                                <td class="align-middle text-center">
+                                  <?php echo $row['school_year']; ?>
+                                </td>
+                                <td class="align-middle text-center">
+                                  <?php echo $row['semester']; ?>
+                                </td>
+                                <td class="align-middle text-center"> ₱
+                                  <?php echo $row['amount']; ?>
+                                </td>
+                                <td class="align-middle text-center">
+                                  <?php echo ($row['date_paid'] == '0000-00-00') ? '' : $row['date_paid']; ?>
+                                </td>
+
+                                <td class="align-middle text-center">
+                                  <?php echo $row['received_by']; ?>
+                                </td>
+                                <td class="align-middle text-center">
+                                  <?php
+                                  $remarks = $row['remarks'];
+                                  if ($remarks == 'Paid') {
+                                    echo '<button type="button" class="btn btn-success btn-sm">Paid</button>';
+                                  } elseif ($remarks == 'Unpaid') {
+                                    echo '<button type="button" class="btn btn-danger btn-sm">Unpaid</button>';
+                                  }
+                                  ?>
+                                </td>
+                              </tr>
+                              <?php
+                            }
+                          } else {
+                            echo "<tr><td colspan='6'>No data found.</td></tr>";
                           }
-                        } else {
-                          echo "<tr><td colspan='6'>No data found.</td></tr>";
-                        }
-                        ?>
-                      </tbody>
+                          ?>
+                        </tbody>
 
 
-                    </table>
+                      </table>
+                    </div>
                   </div>
         </section>
         <aside class="control-sidebar control-sidebar-dark">
@@ -546,13 +550,11 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Officer' && $_SESSION['de
           $('#viewQRCodeBtn').click(function () {
             var accountNumber = $(this).data('account-number');
 
-            // Perform AJAX request to fetch student data
             $.ajax({
               url: 'fetch_student_data.php',
               type: 'POST',
               data: { account_number: accountNumber },
               success: function (response) {
-                // Parse JSON response
                 var data = JSON.parse(response);
 
                 $('#qrCodeImage').attr('src', 'qrCodeImages/' + data.code + '?' + new Date().getTime());

@@ -1,5 +1,3 @@
-
-
 <?php
 session_start();
 include "indexes/db_conn.php";
@@ -177,9 +175,12 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Admin' && $_SESSION['depa
                         <form method="GET">
                             <input type="hidden" name="event_id"
                                 value="<?php echo isset($_GET['event_id']) ? $_GET['event_id'] : ''; ?>">
-                            <div class="input-group mb-3">
-                                <input type="text" name="search_input" class="form-control col-5" placeholder="Search...">
-                                <div class="input-group-prepend col-2">
+                            <div class="form-row">
+                                <div class="col-md-5 mb-3">
+                                    <input type="text" name="search_input" class="form-control"
+                                        placeholder="Search event name">
+                                </div>
+                                <div class="col-md-2 mb-3">
                                     <select name="column" class="form-control">
                                         <option value="account_number">Student Number</option>
                                         <option value="last_name">Last Name</option>
@@ -187,7 +188,7 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Admin' && $_SESSION['depa
                                         <option value="middle_name">Middle Name</option>
                                     </select>
                                 </div>
-                                <div class="input-group-prepend col-2">
+                                <div class="col-md-2 mb-3">
                                     <select name="year_level" class="form-control">
                                         <option value="">Year Level</option>
                                         <option value="">All</option>
@@ -197,23 +198,23 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Admin' && $_SESSION['depa
                                         <option value="4">4</option>
                                     </select>
                                 </div>
-                                <div class="input-group-prepend col-2">
+                                <div class="col-md-2 mb-3">
                                     <select name="program" class="form-control">
                                         <option value="">Program</option>
                                         <option value="">All</option>
                                         <option value="BEEd">BEEd</option>
-                    <option value="BECEd">BECEd</option>
-                    <option value="BCAEd">BCAEd</option>
-                    <option value="BPEd">BPEd</option>
-                    <option value="BTLEd">BTLEd</option>
-                    <option value="BSEd-English">BSEd-English</option>
-                    <option value="BSEd-Filipino">BSEd-Filipino</option>
-                    <option value="BSEd-Math">BSEd-Math</option>
-                    <option value="BSEd-Science">BSEd-Science</option>
-                    <option value="BSEd-Social Studies">BSEd-Social Studies</option>
+                                        <option value="BECEd">BECEd</option>
+                                        <option value="BCAEd">BCAEd</option>
+                                        <option value="BPEd">BPEd</option>
+                                        <option value="BTLEd">BTLEd</option>
+                                        <option value="BSEd-English">BSEd-English</option>
+                                        <option value="BSEd-Filipino">BSEd-Filipino</option>
+                                        <option value="BSEd-Math">BSEd-Math</option>
+                                        <option value="BSEd-Science">BSEd-Science</option>
+                                        <option value="BSEd-Social Studies">BSEd-Social Studies</option>
                                     </select>
                                 </div>
-                                <div class="input-group-append col-1">
+                                <div class="col-md-1 mb-3">
                                     <button class="btn btn-outline-secondary" type="submit" name="search">Search</button>
                                 </div>
                             </div>
@@ -256,66 +257,71 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Admin' && $_SESSION['depa
                             <div class="card-body">
                                 <div class="tab-pane active" id="all">
                                     <?php if ($studentresult && $studentresult->num_rows > 0) { ?>
-                                        <table class="table">
-                                            <thead>
-                                                <tr>
-                                                    <th class="col-2">Student Number</th>
-                                                    <th class="col-2 text-center">Last Name</th>
-                                                    <th class="col-2 text-center">First Name</th>
-                                                    <th class="col-1 text-center">Program</th>
-                                                    <th class="col-1 text-center">Year Level</th>
-                                                    <th class="col-2 text-center">Marked By</th>
-                                                    <th class="col-1 text-center">Remarks</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <?php while ($studentrow = $studentresult->fetch_assoc()) { ?>
+                                        <div class="table-responsive">
+                                            <table class="table table-striped">
+                                                <thead>
                                                     <tr>
-                                                        <td class="align-middle"><?php echo $studentrow['account_number']; ?></td>
-                                                        <td class="align-middle text-center"><?php echo $studentrow['last_name']; ?>
-                                                        </td>
-                                                        <td class="align-middle text-center">
-                                                            <?php echo $studentrow['first_name']; ?>
-                                                        </td>
-                                                        <td class="align-middle text-center"><?php echo $studentrow['program']; ?>
-                                                        </td>
-                                                        <td class="align-middle text-center">
-                                                            <?php echo $studentrow['year_level']; ?>
-                                                        </td>
-                                                        <td class="align-middle text-center">
-                                                            <?php echo $studentrow['remarked_by']; ?>
-                                                        </td>
-                                                        <td class="align-middle text-center">
-                                                            <form method="POST" action="indexes/admin-event-checking-be.php">
-                                                                <?php
-                                                                $event_id = $_GET['event_id'];
-                                                                $account_number = $studentrow['account_number'];
-                                                                $remarks = $studentrow['remarks'];
-                                                                ?>
-                                                                <input type="hidden" name="event_id"
-                                                                    value="<?php echo $event_id; ?>">
-                                                                <input type="hidden" name="account_number"
-                                                                    value="<?php echo $account_number; ?>">
-                                                                <?php
-                                                                if ($remarks == 'Present') {
-                                                                    ?>
-                                                                    <button class="btn btn-success" type="submit"
-                                                                        name="markAsAbsent">Present</button>
-                                                                    <?php
-                                                                } elseif ($remarks == 'Absent') {
-                                                                    ?>
-                                                                    <button class="btn btn-danger" type="submit"
-                                                                        name="markAsPresent">Absent</button>
-                                                                    <?php
-                                                                }
-                                                                ?>
-                                                            </form>
-                                                        </td>
+                                                        <th class="col-2">Student Number</th>
+                                                        <th class="col-2 text-center">Last Name</th>
+                                                        <th class="col-2 text-center">First Name</th>
+                                                        <th class="col-1 text-center">Program</th>
+                                                        <th class="col-1 text-center">Year Level</th>
+                                                        <th class="col-2 text-center">Marked By</th>
+                                                        <th class="col-1 text-center">Remarks</th>
                                                     </tr>
-                                                <?php } ?>
+                                                </thead>
+                                                <tbody>
+                                                    <?php while ($studentrow = $studentresult->fetch_assoc()) { ?>
+                                                        <tr>
+                                                            <td class="align-middle"><?php echo $studentrow['account_number']; ?>
+                                                            </td>
+                                                            <td class="align-middle text-center">
+                                                                <?php echo $studentrow['last_name']; ?>
+                                                            </td>
+                                                            <td class="align-middle text-center">
+                                                                <?php echo $studentrow['first_name']; ?>
+                                                            </td>
+                                                            <td class="align-middle text-center">
+                                                                <?php echo $studentrow['program']; ?>
+                                                            </td>
+                                                            <td class="align-middle text-center">
+                                                                <?php echo $studentrow['year_level']; ?>
+                                                            </td>
+                                                            <td class="align-middle text-center">
+                                                                <?php echo $studentrow['remarked_by']; ?>
+                                                            </td>
+                                                            <td class="align-middle text-center">
+                                                                <form method="POST" action="indexes/admin-event-checking-be.php">
+                                                                    <?php
+                                                                    $event_id = $_GET['event_id'];
+                                                                    $account_number = $studentrow['account_number'];
+                                                                    $remarks = $studentrow['remarks'];
+                                                                    ?>
+                                                                    <input type="hidden" name="event_id"
+                                                                        value="<?php echo $event_id; ?>">
+                                                                    <input type="hidden" name="account_number"
+                                                                        value="<?php echo $account_number; ?>">
+                                                                    <?php
+                                                                    if ($remarks == 'Present') {
+                                                                        ?>
+                                                                        <button class="btn btn-success" type="submit"
+                                                                            name="markAsAbsent">Present</button>
+                                                                        <?php
+                                                                    } elseif ($remarks == 'Absent') {
+                                                                        ?>
+                                                                        <button class="btn btn-danger" type="submit"
+                                                                            name="markAsPresent">Absent</button>
+                                                                        <?php
+                                                                    }
+                                                                    ?>
+                                                                </form>
+                                                            </td>
+                                                        </tr>
+                                                    <?php } ?>
 
-                                            </tbody>
-                                        </table>
+                                                </tbody>
+                                            </table>
+                                        </div>
                                     <?php } else { ?>
                                         <p>No students found.</p>
                                     <?php } ?>

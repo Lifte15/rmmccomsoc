@@ -1,12 +1,10 @@
-
-
 <?php
 session_start();
-if (isset($_SESSION['role']) && $_SESSION['role'] === 'Officer' && $_SESSION['department'] === 'CTE') {
-  // Check if the user's position is not 'Staff'
-  if ($_SESSION['position'] === 'Staff') {
-    header("Location: officer-announcement.php?school_year=$defaultYear&semester=$defaultSemester");
-    exit();
+include "indexes/db_conn.php";
+if (isset($_SESSION['role']) && $_SESSION['role'] === 'Officer' && $_SESSION['department'] === 'CTE') { 
+	if ($_SESSION['position'] === 'Staff') {
+    	header("Location: officer-announcement.php?school_year=$defaultYear&semester=$defaultSemester");
+   	 exit();
   }
   ?>
 
@@ -16,7 +14,7 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Officer' && $_SESSION['de
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Officer Payments | CTE Student Portal</title>
+    <title>Officer Payment Page | CTE Student Portal </title>
     <link rel="icon" type="image/png" href="favicon.ico" />
 
     <!-- Google Font: Source Sans Pro -->
@@ -45,8 +43,8 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Officer' && $_SESSION['de
   <body class="hold-transition sidebar-mini layout-fixed">
     <div class="wrapper">
 
-      <?php include 'layout/officer-fixed-topnav.php'; ?>
-      <?php include 'layout/officer-sidebar.php'; ?>
+      <?php include 'layout/admin-fixed-topnav.php'; ?>
+      <?php include 'layout/admin-sidebar.php'; ?>
 
       <div class="content-wrapper">
         <div class="content-header">
@@ -56,7 +54,7 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Officer' && $_SESSION['de
                 <h1>Payments</h1>
               </div>
               <div class="col-sm-6 text-right">
-                <a id="addNewPaymentBtn" class="btn btn-success" href="officer-payment-addnew.php"><i
+                <a id="addNewPaymentBtn" class="btn btn-success" href="admin-payment-addnew.php"><i
                     class="nav-icon fas fa-solid fa-plus"></i> Add Payment</a>
               </div>
             </div>
@@ -69,14 +67,16 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Officer' && $_SESSION['de
             <!-- Search Form -->
             <form method="GET">
               <div class="input-group mb-3">
-                <input type="text" name="search_input" class="form-control col-5"
-                  placeholder="Search payment description">
+                <div class="col-md-4 mb-3">
+                  <input type="text" name="search_input" class="form-control" placeholder="Search Event">
+                </div>
 
-                <div class="input-group-prepend col-2">
+
+                <div class="col-md-2 mb-3">
                   <input type="date" class="form-control" name="date" id="date">
                 </div>
 
-                <div class="input-group-prepend col-2">
+                <div class="col-md-2 mb-3">
                   <select name="school_year" class="form-control">
                     <option value="">School Year</option>
                     <option value="">All</option>
@@ -90,7 +90,7 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Officer' && $_SESSION['de
                     <option value="2029-2030">2029-2030</option>
                   </select>
                 </div>
-                <div class="input-group-prepend col-2">
+                <div class="col-md-2 mb-3">
                   <select name="semester" class="form-control">
                     <option value="">Semester</option>
                     <option value="">All</option>
@@ -99,7 +99,7 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Officer' && $_SESSION['de
                     <option value="Third Semester">Third Semester</option>
                   </select>
                 </div>
-                <div class="input-group-append col-1">
+                <div class="col-md-1 mb-3">
                   <button class="btn btn-outline-secondary" type="submit" name="search">Search</button>
                 </div>
               </div>
@@ -123,84 +123,85 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Officer' && $_SESSION['de
               </div>
             <?php } ?>
 
-            <!-- Events table -->
-            <table class="table">
-              <thead>
-                <tr>
-                  <th class="col-4">Payment Description</th>
-                  <th class="col-2">Amount</th>
-                  <th class="col-1">Date</th>
-                  <th class="col-2 text-center">School Year</th>
-                  <th class="col-1 text-center">Semester</th>
-                  <th class="col-2 text-center">Action</th>
-                </tr>
-              </thead>
-              <tbody>
-                <?php
-                if (isset($_GET['search'])) {
-                  $search_input = $_GET['search_input'];
-                  $date = $_GET['date'];
-                  $school_year = $_GET['school_year'];
-                  $semester = $_GET['semester'];
+            <div class="table-responsive">
+              <table class="table table-striped">
+                <thead>
+                  <tr>
+                    <th class="col-4">Payment Description</th>
+                    <th class="col-2">Amount</th>
+                    <th class="col-1">Date</th>
+                    <th class="col-2 text-center">School Year</th>
+                    <th class="col-1 text-center">Semester</th>
+                    <th class="col-2 text-center">Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <?php
+                  if (isset($_GET['search'])) {
+                    $search_input = $_GET['search_input'];
+                    $date = $_GET['date'];
+                    $school_year = $_GET['school_year'];
+                    $semester = $_GET['semester'];
 
-                  $conditions = array();
+                    $conditions = array();
 
-                  if (!empty($date)) {
-                    $conditions[] = "date = '$date'";
-                  }
+                    if (!empty($date)) {
+                      $conditions[] = "date = '$date'";
+                    }
 
-                  if (!empty($school_year)) {
-                    $conditions[] = "school_year = '$school_year'";
-                  }
+                    if (!empty($school_year)) {
+                      $conditions[] = "school_year = '$school_year'";
+                    }
 
-                  if (!empty($semester)) {
-                    $conditions[] = "semester = '$semester'";
-                  }
+                    if (!empty($semester)) {
+                      $conditions[] = "semester = '$semester'";
+                    }
 
-                  if (!empty($conditions)) {
-                    $condition_string = implode(" AND ", $conditions);
-                    $eventssql = "SELECT * FROM payment_for WHERE $condition_string AND payment_description LIKE '%$search_input%' AND department='CTE'";
+                    if (!empty($conditions)) {
+                      $condition_string = implode(" AND ", $conditions);
+                      $eventssql = "SELECT * FROM payment_for WHERE $condition_string AND payment_description LIKE '%$search_input%'  AND department='CTE'";
+                    } else {
+                      $eventssql = "SELECT * FROM payment_for WHERE payment_description LIKE '%$search_input%' AND department='CTE'";
+                    }
                   } else {
-                    $eventssql = "SELECT * FROM payment_for WHERE payment_description LIKE '%$search_input%' AND department='CTE'";
+                    $eventssql = "SELECT * FROM payment_for WHERE department='CTE'";
                   }
-                } else {
-                  $eventssql = "SELECT * FROM payment_for WHERE department='CTE'";
-                }
-                $result = $conn->query($eventssql);
-                if ($result->num_rows > 0) {
-                  while ($row = $result->fetch_assoc()) {
-                    ?>
-                    <tr>
-                      <td class="align-middle">
-                        <?php echo $row['payment_description']; ?>
-                      </td>
-                      <td class="align-middle"> ₱
-                        <?php echo $row['amount']; ?>
-                      </td>
-                      <td class="align-middle">
-                        <?php echo $row['date']; ?>
-                      </td>
-                      <td class="align-middle text-center">
-                        <?php echo $row['school_year']; ?>
-                      </td>
-                      <td class="align-middle text-center">
-                        <?php echo $row['semester']; ?>
-                      </td>
-                      <td class="align-middle text-center">
-                        <a href='officer-payment-view.php?payment_for_id=<?php echo $row['payment_for_id']; ?>'
-                          class='btn btn-success btn-sm'><i class="nav-icon fas fa-solid fa-hand-pointer"></i> Select</a>
-                        <a href='officer-payment-delete.php?payment_for_id=<?php echo $row['payment_for_id']; ?>'
-                          class='btn btn-danger btn-sm'><i class="nav-icon fas fa-solid fa-trash"></i> Delete</a>
-                      </td>
-                    </tr>
-                    <?php
+                  $result = $conn->query($eventssql);
+                  if ($result->num_rows > 0) {
+                    while ($row = $result->fetch_assoc()) {
+                      ?>
+                      <tr>
+                        <td class="align-middle">
+                          <?php echo $row['payment_description']; ?>
+                        </td>
+                        <td class="align-middle">₱
+                          <?php echo $row['amount']; ?>
+                        </td>
+                        <td class="align-middle">
+                          <?php echo $row['date']; ?>
+                        </td>
+                        <td class="align-middle text-center">
+                          <?php echo $row['school_year']; ?>
+                        </td>
+                        <td class="align-middle text-center">
+                          <?php echo $row['semester']; ?>
+                        </td>
+                        <td class="align-middle text-center">
+                          <a href='admin-payment-view.php?payment_for_id=<?php echo $row['payment_for_id']; ?>'
+                            class='btn btn-success btn-sm'><i class="nav-icon fas fa-solid fa-hand-pointer"></i> Select</a>
+                          <a href='admin-payment-delete.php?payment_for_id=<?php echo $row['payment_for_id']; ?>'
+                            class='btn btn-danger btn-sm'><i class="nav-icon fas fa-solid fa-trash"></i> Delete</a>
+                        </td>
+                      </tr>
+                      <?php
+                    }
+                  } else {
+                    echo "<tr><td colspan='4'>No payment found.</td></tr>";
                   }
-                } else {
-                  echo "<tr><td colspan='4'>No payment found.</td></tr>";
-                }
-                ?>
-              </tbody>
-            </table>
+                  ?>
+                </tbody>
+              </table>
+            </div>
           </div>
         </section>
       </div>

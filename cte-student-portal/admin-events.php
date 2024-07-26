@@ -1,4 +1,3 @@
-
 <?php
 session_start();
 include "indexes/db_conn.php";
@@ -63,14 +62,16 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Admin' && $_SESSION['depa
 
             <!-- Search Form -->
             <form method="GET">
-              <div class="input-group mb-3">
-                <input type="text" name="search_input" class="form-control col-5" placeholder="Search event name">
+              <div class="form-row">
+                <div class="col-md-5 mb-3">
+                  <input type="text" name="search_input" class="form-control" placeholder="Search event name">
+                </div>
 
-                <div class="input-group-prepend col-2">
+                <div class="col-md-2 mb-3">
                   <input type="date" class="form-control" name="date" id="date">
                 </div>
 
-                <div class="input-group-prepend col-2">
+                <div class="col-md-2 mb-3">
                   <select name="school_year" class="form-control">
                     <option value="">School Year</option>
                     <option value="">All</option>
@@ -84,7 +85,7 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Admin' && $_SESSION['depa
                     <option value="2029-2030">2029-2030</option>
                   </select>
                 </div>
-                <div class="input-group-prepend col-2">
+                <div class="col-md-2 mb-3">
                   <select name="semester" class="form-control">
                     <option value="">Semester</option>
                     <option value="">All</option>
@@ -93,7 +94,7 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Admin' && $_SESSION['depa
                     <option value="Third Semester">Third Semester</option>
                   </select>
                 </div>
-                <div class="input-group-append col-1">
+                <div class="col-md-1 mb-3">
                   <button class="btn btn-outline-secondary" type="submit" name="search">Search</button>
                 </div>
               </div>
@@ -118,79 +119,81 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Admin' && $_SESSION['depa
             <?php } ?>
 
             <!-- Events table -->
-            <table class="table">
-              <thead>
-                <tr>
-                  <th class="col-4">Event Name</th>
-                  <th class="col-2">Date</th>
-                  <th class="col-2 text-center">School Year</th>
-                  <th class="col-2 text-center">Semester</th>
-                  <th class="col-2 text-center">Action</th>
-                </tr>
-              </thead>
-              <tbody>
-                <?php
-                if (isset($_GET['search'])) {
-                  $search_input = $_GET['search_input'];
-                  $date = $_GET['date'];
-                  $school_year = $_GET['school_year'];
-                  $semester = $_GET['semester'];
+            <div class="table-responsive">
+              <table class="table table-striped">
+                <thead>
+                  <tr>
+                    <th class="col-4">Event Name</th>
+                    <th class="col-2">Date</th>
+                    <th class="col-2 text-center">School Year</th>
+                    <th class="col-2 text-center">Semester</th>
+                    <th class="col-2 text-center">Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <?php
+                  if (isset($_GET['search'])) {
+                    $search_input = $_GET['search_input'];
+                    $date = $_GET['date'];
+                    $school_year = $_GET['school_year'];
+                    $semester = $_GET['semester'];
 
-                  $conditions = array();
+                    $conditions = array();
 
-                  if (!empty($date)) {
-                    $conditions[] = "date = '$date'";
-                  }
+                    if (!empty($date)) {
+                      $conditions[] = "date = '$date'";
+                    }
 
-                  if (!empty($school_year)) {
-                    $conditions[] = "school_year = '$school_year'";
-                  }
+                    if (!empty($school_year)) {
+                      $conditions[] = "school_year = '$school_year'";
+                    }
 
-                  if (!empty($semester)) {
-                    $conditions[] = "semester = '$semester'";
-                  }
+                    if (!empty($semester)) {
+                      $conditions[] = "semester = '$semester'";
+                    }
 
-                  if (!empty($conditions)) {
-                    $condition_string = implode(" AND ", $conditions);
-                    $eventssql = "SELECT * FROM events WHERE $condition_string AND event_name LIKE '%$search_input%' AND department='CTE'";
+                    if (!empty($conditions)) {
+                      $condition_string = implode(" AND ", $conditions);
+                      $eventssql = "SELECT * FROM events WHERE $condition_string AND event_name LIKE '%$search_input%' AND department='CTE'";
+                    } else {
+                      $eventssql = "SELECT * FROM events WHERE event_name LIKE '%$search_input%' AND department='CTE'";
+                    }
                   } else {
-                    $eventssql = "SELECT * FROM events WHERE event_name LIKE '%$search_input%' AND department='CTE'";
+                    $eventssql = "SELECT * FROM events WHERE department='CTE'";
                   }
-                } else {
-                  $eventssql = "SELECT * FROM events WHERE department='CTE'";
-                }
-                $result = $conn->query($eventssql);
-                if ($result->num_rows > 0) {
-                  while ($row = $result->fetch_assoc()) {
-                    ?>
-                    <tr>
-                      <td class="align-middle">
-                        <?php echo $row['event_name']; ?>
-                      </td>
-                      <td class="align-middle">
-                        <?php echo $row['date']; ?>
-                      </td>
-                      <td class="align-middle text-center">
-                        <?php echo $row['school_year']; ?>
-                      </td>
-                      <td class="align-middle text-center">
-                        <?php echo $row['semester']; ?>
-                      </td>
-                      <td class="align-middle text-center">
-                        <a href='admin-event-view.php?event_id=<?php echo $row['event_id']; ?>'
-                          class='btn btn-success btn-sm'><i class="nav-icon fas fa-solid fa-hand-pointer"></i> Select</a>
-                        <a href='admin-event-delete.php?event_id=<?php echo $row['event_id']; ?>'
-                          class='btn btn-danger btn-sm'><i class="nav-icon fas fa-solid fa-trash"></i> Delete</a>
-                      </td>
-                    </tr>
-                    <?php
+                  $result = $conn->query($eventssql);
+                  if ($result->num_rows > 0) {
+                    while ($row = $result->fetch_assoc()) {
+                      ?>
+                      <tr>
+                        <td class="align-middle">
+                          <?php echo $row['event_name']; ?>
+                        </td>
+                        <td class="align-middle">
+                          <?php echo $row['date']; ?>
+                        </td>
+                        <td class="align-middle text-center">
+                          <?php echo $row['school_year']; ?>
+                        </td>
+                        <td class="align-middle text-center">
+                          <?php echo $row['semester']; ?>
+                        </td>
+                        <td class="align-middle text-center">
+                          <a href='admin-event-view.php?event_id=<?php echo $row['event_id']; ?>'
+                            class='btn btn-success btn-sm'><i class="nav-icon fas fa-solid fa-hand-pointer"></i> Select</a>
+                          <a href='admin-event-delete.php?event_id=<?php echo $row['event_id']; ?>'
+                            class='btn btn-danger btn-sm'><i class="nav-icon fas fa-solid fa-trash"></i> Delete</a>
+                        </td>
+                      </tr>
+                      <?php
+                    }
+                  } else {
+                    echo "<tr><td colspan='4'>No event found.</td></tr>";
                   }
-                } else {
-                  echo "<tr><td colspan='4'>No event found.</td></tr>";
-                }
-                ?>
-              </tbody>
-            </table>
+                  ?>
+                </tbody>
+              </table>
+            </div>
           </div>
         </section>
       </div>
