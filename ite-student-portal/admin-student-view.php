@@ -218,7 +218,7 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Admin' && $_SESSION['depa
 
                         <form method="post" action="indexes/admin-students-reset-password.php" class="d-inline">
                           <input type="hidden" name="account_number" value="<?php echo $row['account_number']; ?>">
-                          <button type="submit" class="btn btn-danger btn-sm d-block">
+                          <button type="submit" class="btn btn-danger btn-sm d-block mb-2">
                             <i class="nav-icon fas fa-solid fa-arrows-rotate"></i> Reset Password
                           </button>
                         </form>
