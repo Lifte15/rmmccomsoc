@@ -2,7 +2,7 @@
 <?php
 session_start();
 include "indexes/db_conn.php";
-if (isset($_SESSION['role']) && $_SESSION['role'] === 'Admin' && $_SESSION['department'] === 'ITE') { // Check if the role is set and it's 'Admin'
+if (isset($_SESSION['role']) && $_SESSION['role'] === 'Admin' && $_SESSION['department'] === 'ITE') { 
     ?>
 
     <!DOCTYPE html>
@@ -11,7 +11,7 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Admin' && $_SESSION['depa
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Admin Announcement Page | ITE Student Portal</title>
+        <title>Admin Announcement Add New | ITE Student Portal </title>
         <link rel="icon" type="image/png" href="favicon.ico" />
 
         <!-- Google Font: Source Sans Pro -->
@@ -54,7 +54,7 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Admin' && $_SESSION['depa
                         </div>
                     </div>
                 </div>
-
+                
                 <section class="content">
                     <div class="container">
                         <div class="row justify-content-center">
@@ -169,7 +169,7 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Admin' && $_SESSION['depa
                                                     
                                                     <select class="form-control" id="semester" name="semester">
                                                         <option value="" disabled <?php if (!isset($_GET['semester'])) echo 'selected'; ?>>(Required)</option>
-                                                        <?php foreach ($semesters as $semester) { ?> 
+                                                        <?php foreach ($semesters as $semester) { ?>
                                                             <option value="<?php echo $semester['semester']; ?>" 
                                                                 <?php 
                                                                     if (isset($_GET['semester']) && $_GET['semester'] == $semester['semester']) {
@@ -193,6 +193,7 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Admin' && $_SESSION['depa
                                                 <a type="button" name="cancel" class="btn btn-secondary"
                                                     href="admin-announcement.php">Cancel</a>
                                             </div>
+
                                         </form>
                                     </div>
                                 </div>
@@ -204,6 +205,7 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Admin' && $_SESSION['depa
             
             
             <?php include 'layout/fixed-footer.php'; ?>
+
             <aside class="control-sidebar control-sidebar-dark">
             </aside>
         </div>

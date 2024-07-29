@@ -43,8 +43,8 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Officer' && $_SESSION['de
   <body class="hold-transition sidebar-mini layout-fixed">
     <div class="wrapper">
 
-      <?php include 'layout/admin-fixed-topnav.php'; ?>
-      <?php include 'layout/admin-sidebar.php'; ?>
+      <?php include 'layout/officer-fixed-topnav.php'; ?>
+      <?php include 'layout/officer-sidebar.php'; ?>
 
       <div class="content-wrapper">
         <div class="content-header">
@@ -54,7 +54,7 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Officer' && $_SESSION['de
                 <h1>Payments</h1>
               </div>
               <div class="col-sm-6 text-right">
-                <a id="addNewPaymentBtn" class="btn btn-success" href="admin-payment-addnew.php"><i
+                <a id="addNewPaymentBtn" class="btn btn-success" href="officer-payment-addnew.php"><i
                     class="nav-icon fas fa-solid fa-plus"></i> Add Payment</a>
               </div>
             </div>
@@ -187,16 +187,16 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Officer' && $_SESSION['de
                           <?php echo $row['semester']; ?>
                         </td>
                         <td class="align-middle text-center">
-                          <a href='admin-payment-view.php?payment_for_id=<?php echo $row['payment_for_id']; ?>'
+                          <a href='officer-payment-view.php?payment_for_id=<?php echo $row['payment_for_id']; ?>'
                             class='btn btn-success btn-sm'><i class="nav-icon fas fa-solid fa-hand-pointer"></i> Select</a>
-                          <a href='admin-payment-delete.php?payment_for_id=<?php echo $row['payment_for_id']; ?>'
+                          <a href='officer-payment-delete.php?payment_for_id=<?php echo $row['payment_for_id']; ?>'
                             class='btn btn-danger btn-sm'><i class="nav-icon fas fa-solid fa-trash"></i> Delete</a>
                         </td>
                       </tr>
                       <?php
                     }
                   } else {
-                    echo "<tr><td colspan='4'>No payment found.</td></tr>";
+                    echo "<tr><td colspan='10'>No payment found.</td></tr>";
                   }
                   ?>
                 </tbody>

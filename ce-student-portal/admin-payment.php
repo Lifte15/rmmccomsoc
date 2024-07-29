@@ -192,7 +192,7 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Admin' && $_SESSION['depa
                       <?php
                     }
                   } else {
-                    echo "<tr><td colspan='4'>No payment found.</td></tr>";
+                    echo "<tr><td colspan='10'>No payment found.</td></tr>";
                   }
                   ?>
                 </tbody>
