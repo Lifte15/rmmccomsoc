@@ -123,9 +123,10 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Admin' && $_SESSION['depa
               <table class="table table-striped">
                 <thead>
                   <tr>
-                    <th class="col-4">Payment Description</th>
-                    <th class="col-2">Amount</th>
-                    <th class="col-1">Date</th>
+                    <th class="col-3">Payment Description</th>
+                    <th class="col-2 text-center">Organization</th>
+                    <th class="col-1 text-center">Amount</th>
+                    <th class="col-1 text-center">Date</th>
                     <th class="col-2 text-center">School Year</th>
                     <th class="col-1 text-center">Semester</th>
                     <th class="col-2 text-center">Action</th>
@@ -167,13 +168,16 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Admin' && $_SESSION['depa
                     while ($row = $result->fetch_assoc()) {
                       ?>
                       <tr>
-                        <td class="align-middle">
+                        <td class="align-middle ">
                           <?php echo $row['payment_description']; ?>
                         </td>
-                        <td class="align-middle">₱
+                        <td class="align-middle text-center">
+                          <?php echo $row['organization']; ?>
+                        </td>
+                        <td class="align-middle text-center">₱
                           <?php echo $row['amount']; ?>
                         </td>
-                        <td class="align-middle">
+                        <td class="align-middl text-centere">
                           <?php echo $row['date']; ?>
                         </td>
                         <td class="align-middle text-center">

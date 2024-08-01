@@ -196,7 +196,11 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Officer' && $_SESSION['de
                       <?php
                     }
                   } else {
+<<<<<<< Updated upstream
                     echo "<tr><td colspan='10'>No payment found.</td></tr>";
+=======
+                    echo "<tr><td colspan='6'>No payment found.</td></tr>";
+>>>>>>> Stashed changes
                   }
                   ?>
                 </tbody>

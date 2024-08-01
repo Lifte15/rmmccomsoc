@@ -26,10 +26,12 @@ if (isset($_POST['editpaymentfor'])) {
     // Sanitize and validate 
     $payment_for_id = validate($_POST['payment_for_id']);
     $payment_description = validate($_POST['payment_description']);
+    $organization = isset($_POST['organization']) ? $_POST['organization'] : [];
     $date = validate($_POST['date']);
     $schoolyear = validate($_POST['school_year']);
     $semester = validate($_POST['semester']);
     $amount = validate($_POST['amount']);
+    $organizations = implode(", ", $organization);
 
 
     // Validate event name if empty
@@ -37,6 +39,10 @@ if (isset($_POST['editpaymentfor'])) {
         header("Location: ../admin-payment-edit.php?payment_for_id=$payment_for_id&editPaymentforError=Payment description is required");
         exit();
     } // Validate date if empty
+    elseif (empty($organizations)) {
+        header("Location: ../admin-payment-edit.php?payment_for_id=$payment_for_id&editPaymentforError=Organization is required");
+        exit();
+    } // Validate school year if empty
     elseif (empty($date)) {
         header("Location: ../admin-payment-edit.php?payment_for_id=$payment_for_id&editPaymentforError=Date is required");
         exit();
@@ -52,9 +58,9 @@ if (isset($_POST['editpaymentfor'])) {
         header("Location: ../admin-payment-edit.php?payment_for_id=$payment_for_id&editPaymentforError=Amount is required");
         exit();
     } else {
-        $sql_update_event = "UPDATE payment_for SET payment_description = ?, date = ?, school_year = ?, semester = ?, amount = ? WHERE payment_for_id = ?";
+        $sql_update_event = "UPDATE payment_for SET payment_description = ?, date = ?, school_year = ?, semester = ?, amount = ?, organization = ? WHERE payment_for_id = ?";
         $stmt_update_event = mysqli_prepare($conn, $sql_update_event);
-        mysqli_stmt_bind_param($stmt_update_event, "sssssi", $payment_description, $date, $schoolyear, $semester, $amount, $payment_for_id);
+        mysqli_stmt_bind_param($stmt_update_event, "ssssssi", $payment_description, $date, $schoolyear, $semester, $amount, $organizations, $payment_for_id);
         $result_update_event = mysqli_stmt_execute($stmt_update_event);
 
         // Redirect based on the result of the SQL query

@@ -238,6 +238,8 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Developer' && $_SESSION['
                   <div class="icon" style="position: absolute; top: 5px; right: 5px;">
                     <img src="images/ite.png" alt="CE Icon" style="width: 200px; height: auto;">
                   </div>
+                  <a href="developer-enrolled-student-view.php?school_year=<?php echo urlencode($schoolYear); ?>&semester=<?php echo urlencode($semester); ?>&department=ITE"
+                    class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
                 </div>
               </div>
 
@@ -270,6 +272,8 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Developer' && $_SESSION['
                   <div class="icon" style="position: absolute; top: 10px; right: 10px;">
                     <img src="images/CE.png" alt="CE Icon" style="width: 200px; height: auto;">
                   </div>
+                  <a href="developer-enrolled-student-view.php?school_year=<?php echo urlencode($schoolYear); ?>&semester=<?php echo urlencode($semester); ?>&department=CE"
+                    class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
                 </div>
               </div>
 
@@ -302,6 +306,8 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Developer' && $_SESSION['
                   <div class="icon" style="position: absolute; top: 10px; right: 10px;">
                     <img src="images/CCJ.png" alt="CE Icon" style="width: 200px; height: auto;">
                   </div>
+                  <a href="developer-enrolled-student-view.php?school_year=<?php echo urlencode($schoolYear); ?>&semester=<?php echo urlencode($semester); ?>&department=CCJ"
+                    class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
                 </div>
               </div>
 
@@ -333,6 +339,8 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Developer' && $_SESSION['
                   <div class="icon" style="position: absolute; top: 10px; right: 10px;">
                     <img src="images/CAS.png" alt="CE Icon" style="width: 200px; height: auto;">
                   </div>
+                  <a href="developer-enrolled-student-view.php?school_year=<?php echo urlencode($schoolYear); ?>&semester=<?php echo urlencode($semester); ?>&department=CAS"
+                    class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
                 </div>
               </div>
 
@@ -364,6 +372,8 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Developer' && $_SESSION['
                   <div class="icon" style="position: absolute; top: 10px; right: 10px;">
                     <img src="images/CTE.png" alt="CE Icon" style="width: 200px; height: auto;">
                   </div>
+                  <a href="developer-enrolled-student-view.php?school_year=<?php echo urlencode($schoolYear); ?>&semester=<?php echo urlencode($semester); ?>&department=CTE"
+                    class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
                 </div>
               </div>
 
@@ -396,6 +406,8 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Developer' && $_SESSION['
                   <div class="icon" style="position: absolute; top: 10px; right: 10px;">
                     <img src="images/CBE.png" alt="CE Icon" style="width: 200px; height: auto;">
                   </div>
+                  <a href="developer-enrolled-student-view.php?school_year=<?php echo urlencode($schoolYear); ?>&semester=<?php echo urlencode($semester); ?>&department=CBE"
+                    class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
                 </div>
               </div>
 

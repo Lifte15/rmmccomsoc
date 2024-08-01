@@ -21,7 +21,7 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Admin' && isset($_GET['ev
         $query = "SELECT user.account_number, user.first_name, user.last_name, user.middle_name, user.program, user.year_level, attendance.remarks
                   FROM attendance 
                   JOIN user ON attendance.account_number = user.account_number 
-                  WHERE attendance.event_id = '$event_id'
+                  WHERE attendance.event_id = '$event_id' AND user.department='CAS'
                   ORDER BY user.program ASC, user.year_level ASC, user.last_name ASC";
         $studentresult = $conn->query($query);
 

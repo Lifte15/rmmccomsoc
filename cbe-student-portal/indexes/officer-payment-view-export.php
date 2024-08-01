@@ -28,7 +28,7 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Officer' && isset($_GET['
         $query = "SELECT user.account_number, user.first_name, user.last_name, user.program, user.year_level, payment.date_paid, payment.received_by, payment.remarks 
                         FROM payment 
                         JOIN user ON payment.account_number = user.account_number 
-                        WHERE payment.payment_for_id = '$payment_for_id'
+                        WHERE payment.payment_for_id = '$payment_for_id' AND user.department='CBE'
                         ORDER BY user.program ASC, user.year_level ASC, user.last_name ASC";
         $studentresult = $conn->query($query);
 

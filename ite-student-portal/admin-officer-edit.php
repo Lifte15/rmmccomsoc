@@ -77,6 +77,7 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Admin' && $_SESSION['depa
                                             if (mysqli_num_rows($result) > 0) {
                                                 while ($row = mysqli_fetch_assoc($result)) {
                                                     $account_number = $row['account_number'];
+                                                    $organization = $row['organization'];
                                                     $position = $row['position'];
                                                     $last_name = $row['last_name'];
                                                     $first_name = $row['first_name'];
@@ -107,6 +108,18 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Admin' && $_SESSION['depa
                                                                 value="<?php echo $account_number; ?>">
                                                         </div>
                                                     </div>
+
+                                                    <div class="form-group row">
+                                                        <label for="organization" class="col-sm-3 col-form-label">Organization</label>
+                                                        <div class="col-sm-9">
+                                                            <select class="form-control" id="position" name="organization">
+                                                                <option value="" <?php if ($organization == 'DSC') echo 'selected'; ?>>(Required)</option>
+                                                                <option value="DSC" <?php if ($organization == 'DSC') echo 'selected'; ?>>Departmental Student Council</option>
+                                                                <option value="Computing Society" <?php if ($organization == 'Computing Society') echo 'selected'; ?>>Computing Society</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+
 
                                                     <div class="form-group row">
                                                         <label for="Position" class="col-sm-3 col-form-label">Position</label>

@@ -25,15 +25,20 @@ if (isset($_POST['addEvent'])) {
 
     // Sanitize and validate 
     $event_id = validate($_POST['event_id']);
+    $organization = isset($_POST['organization']) ? $_POST['organization'] : [];
     $event_name = validate($_POST['event_name']);
     $date = validate($_POST['date']);
     $schoolyear = validate($_POST['school_year']);
     $semester = validate($_POST['semester']);
     $points = validate($_POST['points']);
 
+    $organizations = implode(", ", $organization);
+
+
     // Construct user data string
     $user_data = 'event_id=' . $event_id .
         'event_name=' . $event_name .
+        '&organization=' . $organizations .
         '&date=' . $date .
         '&school_year=' . $schoolyear .
         '&points=' . $points .
@@ -49,6 +54,10 @@ if (isset($_POST['addEvent'])) {
         header("Location: ../admin-event-edit.php?newEventError=Date is required&$user_data");
         exit();
     } // Validate school year if empty
+    elseif (empty($organization)) {
+        header("Location: ../admin-event-edit.php?newEventError=Organization is required&$user_data");
+        exit();
+    } // Validate organization if empty
     elseif (empty($schoolyear)) {
         header("Location: ../admin-event-edit.php?newEventError=School year is required&$user_data");
         exit();
@@ -73,9 +82,9 @@ if (isset($_POST['addEvent'])) {
             exit();
         } else {
             // Update event
-            $sql_update_event = "UPDATE events SET event_name = ?, date = ?, school_year = ?, semester = ?, points = ? WHERE event_id = ?";
+            $sql_update_event = "UPDATE events SET event_name = ?, date = ?, school_year = ?, semester = ?, points = ?, organization = ? WHERE event_id = ?";
             $stmt_update_event = mysqli_prepare($conn, $sql_update_event);
-            mysqli_stmt_bind_param($stmt_update_event, "ssssii", $event_name, $date, $schoolyear, $semester, $points, $event_id);
+            mysqli_stmt_bind_param($stmt_update_event, "ssssisi", $event_name, $date, $schoolyear, $semester, $points, $organizations,  $event_id);
             $result_update_event = mysqli_stmt_execute($stmt_update_event);
 
             // Redirect based on the result of the SQL query

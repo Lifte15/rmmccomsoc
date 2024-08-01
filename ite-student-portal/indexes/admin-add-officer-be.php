@@ -26,6 +26,7 @@ if (isset($_POST['addOfficer'])) {
 
     // Sanitize and validate 
     $accountnumber = validate($_POST['accountnumber']);
+    $organization = validate($_POST['organization']);
     $position = validate($_POST['position']);
     $lastnameNotProper = validate($_POST['lastname']);
     $firstnameNotProper = validate($_POST['firstname']);
@@ -57,7 +58,8 @@ if (isset($_POST['addOfficer'])) {
     $enrolled_by = $_SESSION['username'];
 
     // Construct user data string
-    $user_data = 'accountnumber=' . $accountnumber .
+    $user_data = '&accountnumber=' . $accountnumber .
+        '&organization=' . $organization .
         '&position=' . $position .
         '&lastname=' . $lastname .
         '&firstname=' . $firstname .
@@ -76,6 +78,10 @@ if (isset($_POST['addOfficer'])) {
         header("Location: ../admin-officer-addnew.php?newOfficerError=Account Number is required$user_data");
         exit();
     } // Validate position if empty
+    else if (empty($organization)) {
+        header("Location: ../admin-officer-addnew.php?newOfficerError=Organization is required$user_data");
+        exit();
+    } // Validate organization if empty
     elseif (empty($position)) {
         header("Location: ../admin-officer-addnew.php?newOfficerError=Position is required&$user_data");
         exit();
@@ -106,10 +112,10 @@ if (isset($_POST['addOfficer'])) {
         } else {
             $is_verified = '1';
             // Insert new officer
-            $sql_newofficer_query = "INSERT INTO user(account_number, code, password, username, role, position, last_name, first_name, middle_name, gender, phone_number, enrolled_by, is_verified, department)
-        VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            $sql_newofficer_query = "INSERT INTO user(account_number, code, password, username, role, position, last_name, first_name, middle_name, gender, phone_number, enrolled_by, is_verified, department, organization)
+        VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
             $stmt_newofficer_query = mysqli_prepare($conn, $sql_newofficer_query);
-            mysqli_stmt_bind_param($stmt_newofficer_query, "ssssssssssssis", $accountnumber, $code, $defaulthashed_pass, $username, $role, $position, $lastname, $firstname, $middlename, $gender, $phonenumber, $enrolled_by, $is_verified, $department);
+            mysqli_stmt_bind_param($stmt_newofficer_query, "ssssssssssssiss", $accountnumber, $code, $defaulthashed_pass, $username, $role, $position, $lastname, $firstname, $middlename, $gender, $phonenumber, $enrolled_by, $is_verified, $department, $organization);
             $result_newofficer_query = mysqli_stmt_execute($stmt_newofficer_query);
 
             // Redirect based on the result of the SQL query

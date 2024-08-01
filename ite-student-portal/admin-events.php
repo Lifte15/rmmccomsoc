@@ -123,8 +123,9 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Admin' && $_SESSION['depa
               <table class="table table-striped">
                 <thead>
                   <tr>
-                    <th class="col-4">Event Name</th>
-                    <th class="col-2">Date</th>
+                    <th class="col-3">Event Name</th>
+                    <th class="col-2 text-center">Organization</th>
+                    <th class="col-1 text-center">Date</th>
                     <th class="col-2 text-center">School Year</th>
                     <th class="col-2 text-center">Semester</th>
                     <th class="col-2 text-center">Action</th>
@@ -169,7 +170,10 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Admin' && $_SESSION['depa
                         <td class="align-middle">
                           <?php echo $row['event_name']; ?>
                         </td>
-                        <td class="align-middle">
+                        <td class="align-middle text-center">
+                          <?php echo $row['organization']; ?>
+                        </td>
+                        <td class="align-middle text-center">
                           <?php echo $row['date']; ?>
                         </td>
                         <td class="align-middle text-center">

@@ -86,6 +86,7 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Admin' && $_SESSION['depa
                                             if (mysqli_num_rows($result) > 0) {
                                                 while ($row = mysqli_fetch_assoc($result)) {
                                                     $account_number = $row['account_number'];
+                                                    $organization = $row['organization'];
                                                     $username = $row['username'];
                                                     $position = $row['position'];
                                                     $last_name = $row['last_name'];
@@ -95,6 +96,7 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Admin' && $_SESSION['depa
                                                     $enrolled_by = $row['enrolled_by'];
 
                                                     $displayedaccount_number = $account_number;
+                                                    $displayedorganization = $organization;
                                                     $displayedusername = $username;
                                                     $displayedposition = $position;
                                                     $displayedlast_name = $last_name;
@@ -129,6 +131,20 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Admin' && $_SESSION['depa
                                                                 placeholder="(Required)" value="<?php echo $displayedusername; ?>"
                                                                 disabled>
                                                             <input type="hidden" name="username" value="<?php echo $username; ?>">
+                                                        </div>
+                                                    </div>
+                                                    
+                                                    <div class="form-group row">
+                                                        <label for="Organization" class="col-sm-3 col-form-label">Organization</label>
+                                                        <div class="col-sm-9">
+                                                            <input type="text" class="form-control" id="created_on_original"
+                                                                placeholder="(Required)" value="<?php if ($organization == 'DSC') {
+                                                                    echo "Departmental Student Council";
+                                                                    }else{
+                                                                        echo $organization;
+                                                                    } ?>"
+                                                                disabled>
+                                                            <input type="hidden" name="position" value="<?php echo $position; ?>">
                                                         </div>
                                                     </div>
 

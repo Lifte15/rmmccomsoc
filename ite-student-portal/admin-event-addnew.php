@@ -1,9 +1,7 @@
-
-
 <?php
 session_start();
 include "indexes/db_conn.php";
-if (isset($_SESSION['role']) && $_SESSION['role'] === 'Admin'  && $_SESSION['department'] === 'ITE') { // Check if the role is set and it's 'Admin'
+if (isset($_SESSION['role']) && $_SESSION['role'] === 'Admin' && $_SESSION['department'] === 'ITE') { // Check if the role is set and it's 'Admin'
   ?>
 
   <!DOCTYPE html>
@@ -88,6 +86,41 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Admin'  && $_SESSION['dep
                         </div>
                       </div>
 
+                      <label for="organization" class="col-sm-4 col-form-label">Organization</label>
+                      <div class="form-group row">
+                        <div class="col-sm-12 ml-4">
+                          <?php
+                          if (isset($_GET['organization'])) {
+                            $organizations = explode(',', $_GET['organization']);
+                            ?>
+                            <div class="form-check">
+                              <input class="form-check-input" type="checkbox" id="dsc" name="organization[]" value="DSC"
+                                <?php if (in_array('DSC', $organizations))
+                                  echo 'checked'; ?>>
+                              <label class="form-check-label" for="dsc">DSC</label>
+                            </div>
+                            <div class="form-check">
+                              <input class="form-check-input" type="checkbox" id="computing-society" name="organization[]"
+                                value="Computing Society" <?php if (in_array('Computing Society', $organizations))
+                                  echo 'checked'; ?>>
+                              <label class="form-check-label" for="computing-society">Computing Society</label>
+                            </div>
+                          <?php } else { ?>
+                            <div class="form-check">
+                              <input class="form-check-input" type="checkbox" id="dsc" name="organization[]" value="DSC">
+                              <label class="form-check-label" for="dsc">DSC</label>
+                            </div>
+                            <div class="form-check">
+                              <input class="form-check-input" type="checkbox" id="computing-society" name="organization[]"
+                                value="Computing Society">
+                              <label class="form-check-label" for="computing-society">Computing Society</label>
+                            </div>
+                          <?php } ?>
+                        </div>
+                      </div>
+
+
+
 
                       <label for="date" class="col-sm-4 col-form-label">Date</label>
                       <div class="form-group row">
@@ -148,7 +181,7 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Admin'  && $_SESSION['dep
                           <?php
                           $query = "SELECT * FROM semester";
                           $result = mysqli_query($conn, $query);
-                          $semesters = []; 
+                          $semesters = [];
                           $defaultsemester = '';
 
                           if ($result && mysqli_num_rows($result) > 0) {
@@ -165,7 +198,7 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Admin'  && $_SESSION['dep
                             <option value="" disabled <?php if (!isset($_GET['semester']))
                               echo 'selected'; ?>>(Required)
                             </option>
-                            <?php foreach ($semesters as $semester) { ?> 
+                            <?php foreach ($semesters as $semester) { ?>
                               <option value="<?php echo $semester['semester']; ?>" <?php
                                  if (isset($_GET['semester']) && $_GET['semester'] == $semester['semester']) {
                                    echo 'selected';

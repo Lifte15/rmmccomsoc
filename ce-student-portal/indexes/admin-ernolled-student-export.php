@@ -30,7 +30,7 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Admin') {
         $sql = "SELECT u.account_number, u.last_name, u.first_name, u.middle_name, u.gender, u.program, u.year_level 
                 FROM user u
                 INNER JOIN enrolled e ON u.account_number = e.account_number
-                WHERE e.school_year = '$school_year' AND e.semester = '$semester' 
+                WHERE e.school_year = '$school_year' AND e.semester = '$semester'  AND u.department='CE'
                 ORDER BY u.program ASC, u.year_level ASC, u.last_name ASC";
         $result = $conn->query($sql);
 
