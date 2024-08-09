@@ -133,34 +133,46 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Officer' && $_SESSION['de
                 <tbody>
                   <?php
                   if (isset($_GET['search'])) {
-                    $search_input = $_GET['search_input'];
-                    $date = $_GET['date'];
-                    $school_year = $_GET['school_year'];
-                    $semester = $_GET['semester'];
-
+                    // Sanitize user inputs to prevent SQL injection
+                    $search_input = mysqli_real_escape_string($conn, $_GET['search_input']);
+                    $date = mysqli_real_escape_string($conn, $_GET['date']);
+                    $school_year = mysqli_real_escape_string($conn, $_GET['school_year']);
+                    $semester = mysqli_real_escape_string($conn, $_GET['semester']);
+                    $organization = mysqli_real_escape_string($conn, $_SESSION['organization']);
+                
                     $conditions = array();
-
+                
                     if (!empty($date)) {
-                      $conditions[] = "date = '$date'";
+                        $conditions[] = "date = '$date'";
                     }
-
+                
                     if (!empty($school_year)) {
-                      $conditions[] = "school_year = '$school_year'";
+                        $conditions[] = "school_year = '$school_year'";
                     }
-
+                
                     if (!empty($semester)) {
-                      $conditions[] = "semester = '$semester'";
+                        $conditions[] = "semester = '$semester'";
                     }
-
+                
                     if (!empty($conditions)) {
-                      $condition_string = implode(" AND ", $conditions);
-                      $eventssql = "SELECT * FROM events WHERE $condition_string AND event_name LIKE '%$search_input%' AND department='ITE'";
+                        $condition_string = implode(" AND ", $conditions);
+                        if (!empty($search_input)) {
+                            $eventssql = "SELECT * FROM events WHERE $condition_string AND event_name LIKE '%$search_input%' AND department='ITE' AND FIND_IN_SET('$organization', organization)";
+                        } else {
+                            $eventssql = "SELECT * FROM events WHERE $condition_string AND department='ITE' AND FIND_IN_SET('$organization', organization)";
+                        }
                     } else {
-                      $eventssql = "SELECT * FROM events WHERE event_name LIKE '%$search_input%' AND department='ITE'";
+                        if (!empty($search_input)) {
+                            $eventssql = "SELECT * FROM events WHERE event_name LIKE '%$search_input%' AND department='ITE' AND FIND_IN_SET('$organization', organization)";
+                        } else {
+                            $eventssql = "SELECT * FROM events WHERE department='ITE' AND FIND_IN_SET('$organization', organization)";
+                        }
                     }
-                  } else {
-                    $eventssql = "SELECT * FROM events WHERE department='ITE'";
-                  }
+                } else {
+                    $organization = mysqli_real_escape_string($conn, $_SESSION['organization']);
+                    $eventssql = "SELECT * FROM events WHERE department='ITE' AND FIND_IN_SET('$organization', organization)";
+                }
+                
                   $result = $conn->query($eventssql);
                   if ($result->num_rows > 0) {
                     while ($row = $result->fetch_assoc()) {
@@ -188,11 +200,7 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Officer' && $_SESSION['de
                       <?php
                     }
                   } else {
-<<<<<<< Updated upstream
-                    echo "<tr><td colspan='10'>No event found.</td></tr>";
-=======
                     echo "<tr><td colspan='5'>No event found.</td></tr>";
->>>>>>> Stashed changes
                   }
                   ?>
                 </tbody>

@@ -22,7 +22,7 @@ if (isset($_POST['addEvent'])) {
     $points = validate($_POST['points']);
     $department = 'ITE';
 
-    $organizations = implode(", ", $organization);
+    $organizations = implode(",", $organization);
 
     // Construct user data string
     $user_data = 'eventname=' . $eventname .

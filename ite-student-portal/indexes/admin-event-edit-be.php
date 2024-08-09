@@ -32,7 +32,7 @@ if (isset($_POST['addEvent'])) {
     $semester = validate($_POST['semester']);
     $points = validate($_POST['points']);
 
-    $organizations = implode(", ", $organization);
+    $organizations = implode(",", $organization);
 
 
     // Construct user data string

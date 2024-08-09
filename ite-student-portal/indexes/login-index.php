@@ -100,6 +100,7 @@ if (isset($_POST['login'])) {
                 $_SESSION['gender'] = $row['gender'];
                 $_SESSION['code'] = $row['code'];
                 $_SESSION['department'] = $row['department'];
+                $_SESSION['organization'] = $row['organization'];
 
                 // Redirect based on user role
                 if ($role == "Admin") {

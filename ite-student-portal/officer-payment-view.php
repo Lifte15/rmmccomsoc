@@ -319,24 +319,28 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Officer' && $_SESSION['de
                                                                 $proof_pic = $studentrow['proof_pic'];
                                                                 $date_paid = $studentrow['date_paid'];
                                                                 if ($remarks == 'Paid') {
+                                                                    if($_SESSION['position'] == "President"){
                                                                     echo '<button type="button" class="btn btn-success btn-sm mark-unpaid-btn" data-toggle="modal" data-target="#markUnpaidModal"
-                                                    data-student-name="' . $student_name . '" 
-                                                    data-received-by="' . $received_by . '" 
-                                                    data-program="' . $program . '" 
-                                                    data-account-number="' . $account_number . '" 
-                                                    data-payment-for-id="' . $payment_for_id . '"
-                                                    data-year-level="' . $year_level . '"
-                                                    data-cn-number="' . $cn_number . '"
-                                                    data-date-paid="' . $date_paid . '"
-                                                    data-proof-pic="' . $proof_pic . '">Paid</button>';
+                                                                        data-student-name="' . $student_name . '" 
+                                                                        data-received-by="' . $received_by . '" 
+                                                                        data-program="' . $program . '" 
+                                                                        data-account-number="' . $account_number . '" 
+                                                                        data-payment-for-id="' . $payment_for_id . '"
+                                                                        data-year-level="' . $year_level . '"
+                                                                        data-cn-number="' . $cn_number . '"
+                                                                        data-date-paid="' . $date_paid . '"
+                                                                        data-proof-pic="' . $proof_pic . '">Paid</button>';
+                                                                    } else {}
                                                                 } elseif ($remarks == 'Unpaid') {
+                                                                    
                                                                     echo '<button type="button" class="btn btn-danger btn-sm mark-paid-btn" data-toggle="modal" data-target="#markPaidModal"
-                                                    data-student-name="' . $student_name . '" 
-                                                    data-received-by="' . $received_by . '" 
-                                                    data-program="' . $program . '" 
-                                                    data-account-number="' . $account_number . '" 
-                                                    data-payment-for-id="' . $payment_for_id . '"
-                                                    data-year-level="' . $year_level . '">Unpaid</button>';
+                                                                        data-student-name="' . $student_name . '" 
+                                                                        data-received-by="' . $received_by . '" 
+                                                                        data-program="' . $program . '" 
+                                                                        data-account-number="' . $account_number . '" 
+                                                                        data-payment-for-id="' . $payment_for_id . '"
+                                                                        data-year-level="' . $year_level . '">Unpaid</button>';
+                                                                    
                                                                 }
                                                                 ?>
                                                             </td>
