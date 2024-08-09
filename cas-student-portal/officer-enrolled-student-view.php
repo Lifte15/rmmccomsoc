@@ -1,10 +1,4 @@
-<!-- officer-enrolled-student-view.php and to see the student enrolled in that SY and Semester in officer form.
-Authors:
-  - Lowie Jay Orillo (lowie.jaymier@gmail.com)
-  - Caryl Mae Subaldo (subaldomae29@gmail.com)
-  - Brian Angelo Bognot (c09651052069@gmail.com)
-Last Modified: June 13, 2024
-Brief overview of the file's contents. -->
+
 <?php
 session_start();
 include "indexes/db_conn.php";
@@ -21,7 +15,7 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Officer' && $_SESSION['de
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Admin Enroll Page | CAS Student Portal </title>
+    <title>Officer Enroll Page | CAS Student Portal </title>
     <link rel="icon" type="image/png" href="favicon.ico" />
 
     <!-- Google Font: Source Sans Pro -->
