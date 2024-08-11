@@ -123,8 +123,9 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Officer' && $_SESSION['de
               <table class="table table-striped">
                 <thead>
                   <tr>
-                    <th class="col-4">Event Name</th>
-                    <th class="col-2">Date</th>
+                    <th class="col-2">Event Name</th>
+                    <th class="col-2 text-center">Organization</th>
+                    <th class="col-1 text-center">Date</th>
                     <th class="col-2 text-center">School Year</th>
                     <th class="col-2 text-center">Semester</th>
                     <th class="col-2 text-center">Action</th>
@@ -139,40 +140,40 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Officer' && $_SESSION['de
                     $school_year = mysqli_real_escape_string($conn, $_GET['school_year']);
                     $semester = mysqli_real_escape_string($conn, $_GET['semester']);
                     $organization = mysqli_real_escape_string($conn, $_SESSION['organization']);
-                
+
                     $conditions = array();
-                
+
                     if (!empty($date)) {
-                        $conditions[] = "date = '$date'";
+                      $conditions[] = "date = '$date'";
                     }
-                
+
                     if (!empty($school_year)) {
-                        $conditions[] = "school_year = '$school_year'";
+                      $conditions[] = "school_year = '$school_year'";
                     }
-                
+
                     if (!empty($semester)) {
-                        $conditions[] = "semester = '$semester'";
+                      $conditions[] = "semester = '$semester'";
                     }
-                
+
                     if (!empty($conditions)) {
-                        $condition_string = implode(" AND ", $conditions);
-                        if (!empty($search_input)) {
-                            $eventssql = "SELECT * FROM events WHERE $condition_string AND event_name LIKE '%$search_input%' AND department='ITE' AND FIND_IN_SET('$organization', organization)";
-                        } else {
-                            $eventssql = "SELECT * FROM events WHERE $condition_string AND department='ITE' AND FIND_IN_SET('$organization', organization)";
-                        }
+                      $condition_string = implode(" AND ", $conditions);
+                      if (!empty($search_input)) {
+                        $eventssql = "SELECT * FROM events WHERE $condition_string AND event_name LIKE '%$search_input%' AND department='ITE' AND FIND_IN_SET('$organization', organization)";
+                      } else {
+                        $eventssql = "SELECT * FROM events WHERE $condition_string AND department='ITE' AND FIND_IN_SET('$organization', organization)";
+                      }
                     } else {
-                        if (!empty($search_input)) {
-                            $eventssql = "SELECT * FROM events WHERE event_name LIKE '%$search_input%' AND department='ITE' AND FIND_IN_SET('$organization', organization)";
-                        } else {
-                            $eventssql = "SELECT * FROM events WHERE department='ITE' AND FIND_IN_SET('$organization', organization)";
-                        }
+                      if (!empty($search_input)) {
+                        $eventssql = "SELECT * FROM events WHERE event_name LIKE '%$search_input%' AND department='ITE' AND FIND_IN_SET('$organization', organization)";
+                      } else {
+                        $eventssql = "SELECT * FROM events WHERE department='ITE' AND FIND_IN_SET('$organization', organization)";
+                      }
                     }
-                } else {
+                  } else {
                     $organization = mysqli_real_escape_string($conn, $_SESSION['organization']);
                     $eventssql = "SELECT * FROM events WHERE department='ITE' AND FIND_IN_SET('$organization', organization)";
-                }
-                
+                  }
+
                   $result = $conn->query($eventssql);
                   if ($result->num_rows > 0) {
                     while ($row = $result->fetch_assoc()) {
@@ -181,7 +182,10 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Officer' && $_SESSION['de
                         <td class="align-middle">
                           <?php echo $row['event_name']; ?>
                         </td>
-                        <td class="align-middle">
+                        <td class="align-middle text-center">
+                          <?php echo $row['organization']; ?>
+                        </td>
+                        <td class="align-middle text-center">
                           <?php echo $row['date']; ?>
                         </td>
                         <td class="align-middle text-center">

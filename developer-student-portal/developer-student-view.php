@@ -50,9 +50,15 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Developer' && $_SESSION['
                 <h1>Student Profile</h1>
               </div>
               <div class="col-sm-6 text-right">
-                <a id="addNewSubjectBtn" class="btn btn-secondary" href="developer-enrolled-student-view.php">
+                <?php
+                $schoolyear = $_GET['school_year'];
+                $semester = $_GET['semester'];
+                ?>
+
+                <a id="addNewSubjectBtn" class="btn btn-secondary" href="<?= $_SERVER['HTTP_REFERER']; ?>">
                   <i class="nav-icon fas fa-solid fa-chevron-left"></i> Back to Student
                 </a>
+
               </div>
             </div>
           </div>

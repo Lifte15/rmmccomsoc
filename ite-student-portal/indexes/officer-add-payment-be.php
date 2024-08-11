@@ -24,6 +24,7 @@ if (isset($_POST['addEvent'])) {
 
     // Sanitize and validate 
     $payment_description = validate($_POST['payment_description']);
+    $organizations = $_SESSION['organization'];
     $date = validate($_POST['date']);
     $schoolyear = validate($_POST['school_year']);
     $semester = validate($_POST['semester']);
@@ -59,10 +60,10 @@ if (isset($_POST['addEvent'])) {
         exit();
     } else {
         // Insert new event
-        $sql_newevent_query = "INSERT INTO payment_for(payment_description, date, school_year, semester, amount, department)
-                VALUES(?, ?, ?, ?, ?, ?)";
+        $sql_newevent_query = "INSERT INTO payment_for(payment_description, date, school_year, semester, amount, department, organization)
+                VALUES(?, ?, ?, ?, ?, ?, ?)";
         $stmt_newevent_query = mysqli_prepare($conn, $sql_newevent_query);
-        mysqli_stmt_bind_param($stmt_newevent_query, "ssssss", $payment_description, $date, $schoolyear, $semester, $amount, $department);
+        mysqli_stmt_bind_param($stmt_newevent_query, "sssssss", $payment_description, $date, $schoolyear, $semester, $amount, $department, $organizations);
         $result_newevent_query = mysqli_stmt_execute($stmt_newevent_query);
 
         // Redirect based on the result of the SQL query

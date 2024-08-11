@@ -115,10 +115,10 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Developer' && $_SESSION['
                     </div>
                   </div>
 
-                  <div class="col-md-auto ml-auto">
+                  <!-- <div class="col-md-auto ml-auto">
                     <a href="developer-enrolled-add.php?school_year=<?php echo $_GET['school_year']; ?>&semester=<?php echo $_GET['semester']; ?>"
                       class="btn btn-success btn-sm">+ Add Student</a>
-                  </div>
+                  </div> -->
                 </div>
               </div>
             </div>
@@ -301,12 +301,24 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Developer' && $_SESSION['
                         <td class="text-center"><?php echo $row['middle_name']; ?></td>
                         <td class="text-center"><?php echo $row['program']; ?></td>
                         <td class="text-center"><?php echo $row['year_level']; ?></td>
+
                         <td class="text-center">
                           <?php
                           $current_url = $_SERVER['PHP_SELF'] . '?' . $_SERVER['QUERY_STRING'];
                           ?>
-                          <a href='developer-student-view.php?account_number=<?php echo $row['account_number']; ?>&school_year=<?php echo $defaultYear; ?>&semester=<?php echo $defaultSemester; ?>'
-                          class='btn btn-success btn-sm'><i class="nav-icon fas fa-hand-pointer"></i> Select</a>
+                          <form method="POST">
+                            <input type="hidden" value="<?php echo $row['account_number']; ?>">
+                            <input type="hidden" value="<?php echo $defaultYear;
+                            ; ?>">
+                            <input type="hidden" value="<?php echo $defaultSemester; ?>">
+                            <input type="hidden" value="<?php echo $department;
+                            ; ?>">
+                            <input type="hidden" value="<?php echo htmlspecialchars($current_url, ENT_QUOTES, 'UTF-8'); ?>">
+                            <a href='developer-student-view.php?account_number=<?php echo $row['account_number']; ?>&school_year=<?php echo $defaultYear; ?>&semester=<?php echo $defaultSemester; ?>&department=<?php echo $department; ?>'
+                              class='btn btn-success btn-sm'><i class="nav-icon fas fa-hand-pointer"></i> Select</a>
+                          </form>
+
+
                         </td>
                       </tr>
                       <?php

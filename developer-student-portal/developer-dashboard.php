@@ -84,6 +84,10 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Developer' && $_SESSION['
         background-color: #E9BE00 !important;
       }
 
+      .bg-COAHS {
+        background-color: #062885 !important;
+      }
+
       .cas-custom-background {
             background-image: url('cas-student-portal/images/student-portal-background.png');
             background-size: cover;
@@ -413,6 +417,38 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Developer' && $_SESSION['
 
 
 
+              <!-- for number of students of CBE -->
+              <?php
+
+              $COAHSStudentquery = "SELECT COUNT(*) AS count FROM user 
+                 INNER JOIN enrolled ON user.account_number = enrolled.account_number 
+                 WHERE user.role = 'Student' 
+                 AND enrolled.school_year = '$schoolYear' 
+                 AND enrolled.semester = '$semester'
+                 AND user.department='COAHS'";
+              $COAHSStudentresult = mysqli_query($conn, $COAHSStudentquery);
+
+              if ($COAHSStudentresult) {
+                $COAHSStudentrow = mysqli_fetch_assoc($COAHSStudentresult);
+                $COAHSStudentcount = $COAHSStudentrow['count'];
+              } else {
+                $COAHSStudentcount = 0;
+              }
+              ?>
+
+              <div class="col-lg-3 col-6">
+                <div class="small-box bg-COAHS">
+                  <div class="inner text-white">
+                    <h1 style="font-size: 50px;"><strong><?php echo $COAHSStudentcount; ?></strong></h1>
+                    <p>COAHS Student/s</p>
+                  </div>
+                  <div class="icon" style="position: absolute; top: 10px; right: 10px;">
+                    <img src="images/COAHS.png" alt="CE Icon" style="width: 200px; height: auto;">
+                  </div>
+                  <a href="developer-enrolled-student-view.php?school_year=<?php echo urlencode($schoolYear); ?>&semester=<?php echo urlencode($semester); ?>&department=COAHS"
+                    class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                </div>
+              </div>
 
 
 

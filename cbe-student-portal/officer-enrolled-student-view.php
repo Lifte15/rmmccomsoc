@@ -240,25 +240,27 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Officer' && $_SESSION['de
                         <td class="text-center"><?php echo $row['middle_name']; ?></td>
                         <td class="text-center"><?php echo $row['program']; ?></td>
                         <td class="text-center"><?php echo $row['year_level']; ?></td>
-                        <td class="text-center">
-                          <?php
-                          $current_url = $_SERVER['PHP_SELF'] . '?' . $_SERVER['QUERY_STRING'];
-                          ?>
-                          <form method="POST" action="indexes/officer-unenroll.php">
-                            <input type="hidden" name="account_number" value="<?php echo $row['account_number']; ?>">
-                            <input type="hidden" name="school_year"
-                              value="<?php echo isset($_GET['school_year']) ? htmlspecialchars($_GET['school_year']) : ''; ?>">
-                            <input type="hidden" name="semester"
-                              value="<?php echo isset($_GET['semester']) ? htmlspecialchars($_GET['semester']) : ''; ?>">
-                            <input type="hidden" name="program"
-                              value="<?php echo isset($_GET['program']) ? htmlspecialchars($_GET['program']) : ''; ?>">
-                            <input type="hidden" name="year_level"
-                              value="<?php echo isset($_GET['year_level']) ? htmlspecialchars($_GET['year_level']) : ''; ?>">
-                            <input type="hidden" name="previous_url"
-                              value="<?php echo htmlspecialchars($current_url, ENT_QUOTES, 'UTF-8'); ?>">
-                            <button class="btn btn-danger btn-sm" type="submit">Unenroll</button>
-                          </form>
-                        </td>
+                        <?php if ($_SESSION['position'] == 'President' && $_SESSION['organization'] == 'DSC'): ?>
+                          <td class="text-center">
+                            <?php
+                            $current_url = $_SERVER['PHP_SELF'] . '?' . $_SERVER['QUERY_STRING'];
+                            ?>
+                            <form method="POST" action="indexes/officer-unenroll.php">
+                              <input type="hidden" name="account_number" value="<?php echo $row['account_number']; ?>">
+                              <input type="hidden" name="school_year"
+                                value="<?php echo isset($_GET['school_year']) ? htmlspecialchars($_GET['school_year']) : ''; ?>">
+                              <input type="hidden" name="semester"
+                                value="<?php echo isset($_GET['semester']) ? htmlspecialchars($_GET['semester']) : ''; ?>">
+                              <input type="hidden" name="program"
+                                value="<?php echo isset($_GET['program']) ? htmlspecialchars($_GET['program']) : ''; ?>">
+                              <input type="hidden" name="year_level"
+                                value="<?php echo isset($_GET['year_level']) ? htmlspecialchars($_GET['year_level']) : ''; ?>">
+                              <input type="hidden" name="previous_url"
+                                value="<?php echo htmlspecialchars($current_url, ENT_QUOTES, 'UTF-8'); ?>">
+                              <button class="btn btn-danger btn-sm" type="submit">Unenroll</button>
+                            </form>
+                          </td>
+                        <?php endif; ?>
                       </tr>
                       <?php
                     }

@@ -127,9 +127,10 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Officer' && $_SESSION['de
               <table class="table table-striped">
                 <thead>
                   <tr>
-                    <th class="col-4">Payment Description</th>
-                    <th class="col-2">Amount</th>
-                    <th class="col-1">Date</th>
+                    <th class="col-3">Payment Description</th>
+                    <th class="col-2 text-center">Organization</th>
+                    <th class="col-1 text-center">Amount</th>
+                    <th class="col-1 text-center">Date</th>
                     <th class="col-2 text-center">School Year</th>
                     <th class="col-1 text-center">Semester</th>
                     <th class="col-2 text-center">Action</th>
@@ -142,6 +143,7 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Officer' && $_SESSION['de
                     $date = $_GET['date'];
                     $school_year = $_GET['school_year'];
                     $semester = $_GET['semester'];
+                    $organization = mysqli_real_escape_string($conn, $_SESSION['organization']);
 
                     $conditions = array();
 
@@ -159,12 +161,18 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Officer' && $_SESSION['de
 
                     if (!empty($conditions)) {
                       $condition_string = implode(" AND ", $conditions);
-                      $eventssql = "SELECT * FROM payment_for WHERE $condition_string AND payment_description LIKE '%$search_input%'  AND department='ITE'";
+                      if (!empty($search_input)) {
+                        $eventssql = "SELECT * FROM payment_for WHERE $condition_string AND payment_description LIKE '%$search_input%' AND department='ITE' AND FIND_IN_SET('$organization', organization)";
+                      } else {
+                        $eventssql = "SELECT * FROM payment_for WHERE $condition_string AND department='ITE' AND FIND_IN_SET('$organization', organization)";
+                      }
                     } else {
-                      $eventssql = "SELECT * FROM payment_for WHERE payment_description LIKE '%$search_input%' AND department='ITE'";
+                      if (!empty($search_input)) {
+                        $eventssql = "SELECT * FROM payment_for WHERE payment_description LIKE '%$search_input%' AND department='ITE' AND FIND_IN_SET('$organization', organization)";
+                      } else {
+                        $eventssql = "SELECT * FROM payment_for WHERE department='ITE' AND FIND_IN_SET('$organization', organization)";
+                      }
                     }
-                  } else {
-                    $eventssql = "SELECT * FROM payment_for WHERE department='ITE'";
                   }
                   $result = $conn->query($eventssql);
                   if ($result->num_rows > 0) {
@@ -174,10 +182,13 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Officer' && $_SESSION['de
                         <td class="align-middle">
                           <?php echo $row['payment_description']; ?>
                         </td>
-                        <td class="align-middle">₱
+                        <td class="align-middle text-center">
+                          <?php echo $row['organization']; ?>
+                        </td>
+                        <td class="align-middle text-center">₱
                           <?php echo $row['amount']; ?>
                         </td>
-                        <td class="align-middle">
+                        <td class="align-middle text-center">
                           <?php echo $row['date']; ?>
                         </td>
                         <td class="align-middle text-center">

@@ -60,7 +60,7 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Developer' && $_SESSION['
             </div>
           </div>
         </div>
-        
+
         <section class="content">
           <div class="container">
             <div class="row justify-content-center">
@@ -147,14 +147,16 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Developer' && $_SESSION['
                                 echo 'selected'; ?>>ITE</option>
                               <option value="CE" <?php if ($_GET['department'] == 'CE')
                                 echo 'selected'; ?>>CE</option>
-                                <option value="CAS" <?php if ($_GET['department'] == 'CAS')
+                              <option value="CAS" <?php if ($_GET['department'] == 'CAS')
                                 echo 'selected'; ?>>CAS</option>
                               <option value="CCJ" <?php if ($_GET['department'] == 'CCJ')
                                 echo 'selected'; ?>>CCJ</option>
-                                <option value="CBE" <?php if ($_GET['department'] == 'CBE')
+                              <option value="CBE" <?php if ($_GET['department'] == 'CBE')
                                 echo 'selected'; ?>>CBE</option>
                               <option value="CTE" <?php if ($_GET['department'] == 'CTE')
                                 echo 'selected'; ?>>CTE</option>
+                              <option value="COAHS" <?php if ($_GET['department'] == 'COAHS')
+                                echo 'selected'; ?>>COAHS</option>
                             </select>
                           <?php } else { ?>
                             <select class="form-control" id="department" name="department">
@@ -165,6 +167,7 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Developer' && $_SESSION['
                               <option value="CCJ">CCJ</option>
                               <option value="CBE">CBE</option>
                               <option value="CTE">CTE</option>
+                              <option value="COAHS">COAHS</option>
                             </select>
                           <?php } ?>
                         </div>

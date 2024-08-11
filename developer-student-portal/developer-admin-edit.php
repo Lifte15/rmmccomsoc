@@ -66,11 +66,11 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Developer' && $_SESSION['
                     <div class="container">
                         <div class="row justify-content-center">
                             <div class="col-md-8">
-                            <?php if (isset($_GET['editOfficerError'])) { ?>
-                                            <div class="alert alert-danger">
-                                                <?php echo $_GET['editOfficerError']; ?>
-                                            </div>
-                                        <?php } ?>
+                                <?php if (isset($_GET['editOfficerError'])) { ?>
+                                    <div class="alert alert-danger">
+                                        <?php echo $_GET['editOfficerError']; ?>
+                                    </div>
+                                <?php } ?>
                                 <div class="card card-primary card-outline bg-white" for="new-subject">
                                     <div class="card-header">
                                         <form action="indexes/developer-admin-edit-be.php" method="post">
@@ -93,11 +93,41 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Developer' && $_SESSION['
 
                                                     $displayedaccount_number = $account_number;
                                                     ?>
+                                                    <?php
+                                                    $base_url = "";
+
+                                                    switch ($department) {
+                                                        case 'ITE':
+                                                            $base_url = "../ite-student-portal/profile-pictures/";
+                                                            break;
+                                                        case 'CE':
+                                                            $base_url = "../ce-student-portal/profile-pictures/";
+                                                            break;
+                                                        case 'CAS':
+                                                            $base_url = "../cas-student-portal/profile-pictures/";
+                                                            break;
+                                                        case 'CCJ':
+                                                            $base_url = "../ccj-student-portal/profile-pictures/";
+                                                            break;
+                                                        case 'CTE':
+                                                            $base_url = "../cte-student-portal/profile-pictures/";
+                                                            break;
+                                                        case 'CBE':
+                                                            $base_url = "../cbe-student-portal/profile-pictures/";
+                                                            break;
+                                                        case 'COAHS':
+                                                            $base_url = "../coahs-student-portal/profile-pictures/";
+                                                            break;
+                                                        default:
+                                                            $base_url = "profile-pictures/"; // default path if department doesn't match any case
+                                                            break;
+                                                    }
+                                                    ?>
 
                                                     <div class="text-center">
                                                         <img class="profile-picture img-fluid rounded-circle"
                                                             style="width: 200px; height: 200px; border-radius: 50%; object-fit: cover;"
-                                                            src="profile-pictures/<?php echo $profile_picture; ?>?<?php echo time(); ?>"
+                                                            src="<?php echo $base_url . $profile_picture . '?' . time(); ?>"
                                                             alt="User profile picture">
                                                     </div>
                                                     <br>
@@ -118,12 +148,21 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Developer' && $_SESSION['
                                                         <label for="Department" class="col-sm-3 col-form-label">Department</label>
                                                         <div class="col-sm-9">
                                                             <select class="form-control" id="department" name="department">
-                                                                <option value="President" <?php if ($department == 'ITE') echo 'selected'; ?>>ITE</option>
-                                                                <option value="Vice-President" <?php if ($department == 'CE') echo 'selected'; ?>>CE</option>
-                                                                <option value="Secretary" <?php if ($department == 'CCJ') echo 'selected'; ?>>CCJ</option>
-                                                                <option value="Treasurer" <?php if ($department == 'CAS') echo 'selected'; ?>>CAS</option>
-                                                                <option value="Auditor" <?php if ($department == 'CBE') echo 'selected'; ?>>CBE</option>
-                                                                <option value="Staff" <?php if ($department == 'CTE') echo 'selected'; ?>>CTE</option>
+                                                                <option value="ITE" <?php if ($department == 'ITE')
+                                                                    echo 'selected'; ?>>ITE</option>
+                                                                <option value="CE" <?php if ($department == 'CE')
+                                                                    echo 'selected'; ?>>
+                                                                    CE</option>
+                                                                <option value="CCJ" <?php if ($department == 'CCJ')
+                                                                    echo 'selected'; ?>>CCJ</option>
+                                                                <option value="CAS" <?php if ($department == 'CAS')
+                                                                    echo 'selected'; ?>>CAS</option>
+                                                                <option value="CBE" <?php if ($department == 'CBE')
+                                                                    echo 'selected'; ?>>CBE</option>
+                                                                <option value="CTE" <?php if ($department == 'CTE')
+                                                                    echo 'selected'; ?>>CTE</option>
+                                                                <option value="COAHS" <?php if ($department == 'COAHS')
+                                                                    echo 'selected'; ?>>COAHS</option>
                                                             </select>
                                                         </div>
                                                     </div>

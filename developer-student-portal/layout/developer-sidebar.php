@@ -84,8 +84,9 @@ Brief overview of the file's contents. -->
           </a>
         </li>
 
-
-
+        
+        
+        
         <!-- <li class="nav-item ">
           <a href="developer-announcement.php?school_year=<?php echo $defaultYear; ?>&semester=<?php echo $defaultSemester; ?>" class="nav-link">
             <i class="nav-icon fas fa-solid fa-bullhorn"></i>
@@ -94,7 +95,7 @@ Brief overview of the file's contents. -->
             </p>
           </a>
         </li> -->
-
+        
         <li class="nav-item ">
           <a href="developer-admin.php" class="nav-link">
             <i class="nav-icon fas fa-solid fa-user-tie"></i>
@@ -103,9 +104,18 @@ Brief overview of the file's contents. -->
             </p>
           </a>
         </li>
+        
+        <li class="nav-item ">
+          <a href="developer-enrolled-students.php" class="nav-link">
+            <i class="nav-icon fas fa-solid fa-users"></i>
+            <p>
+              All Students
+            </p>
+          </a>
+        </li>
 
         <!--
-        <li class="nav-item ">
+          <li class="nav-item ">
           <a href="developer-students.php" class="nav-link">
             <i class="nav-icon fas fa-solid fa-users"></i>
             <p>

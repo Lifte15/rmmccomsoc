@@ -148,6 +148,9 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Developer' && $_SESSION['
                           case 'CBE':
                             $base_url = "../cbe-student-portal/profile-pictures/";
                             break;
+                          case 'COAHS':
+                            $base_url = "../coahs-student-portal/profile-pictures/";
+                            break;
                           default:
                             $base_url = "profile-pictures/"; // default path if department doesn't match any case
                             break;
