@@ -108,6 +108,7 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Admin' && $_SESSION['depa
               if (mysqli_num_rows($result) > 0) {
                 while ($row = mysqli_fetch_assoc($result)) {
                   $username = $row['username'];
+                  $organization = $row['organization'];
                   $account_number = $row['account_number'];
                   $position = $row['position'];
                   $last_name = $row['last_name'];
@@ -128,6 +129,7 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Admin' && $_SESSION['depa
                         <h1 class="text-center" style="font-size: 24px;"><strong><?php echo $username; ?></strong></h1>
                         <hr>
                         Account Number: <?php echo $account_number; ?><br>
+                        Organization: <?php echo $organization; ?><br>
                         Position: <?php echo $position; ?><br>
                         Last Name: <?php echo $last_name; ?><br>
                         First Name: <?php echo $first_name; ?><br>

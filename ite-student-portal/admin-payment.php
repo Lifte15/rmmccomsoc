@@ -177,7 +177,7 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Admin' && $_SESSION['depa
                         <td class="align-middle text-center">₱
                           <?php echo $row['amount']; ?>
                         </td>
-                        <td class="align-middl text-centere">
+                        <td class="align-middle text-center">
                           <?php echo $row['date']; ?>
                         </td>
                         <td class="align-middle text-center">

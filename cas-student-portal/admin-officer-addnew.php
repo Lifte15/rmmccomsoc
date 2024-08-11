@@ -88,6 +88,36 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Admin' && $_SESSION['depa
                         </div>
                       </div>
 
+                      <label for="organization" class="col-sm-4 col-form-label">Organization</label>
+                      <div class="form-group row">
+                        <div class="col-sm-12">
+                          <?php if (isset($_GET['organization'])) { ?>
+                            <select class="form-control" id="organization" name="organization">
+                              <option value="" disabled <?php if ($_GET['organization'] == '')
+                                echo 'selected'; ?>>(Required)
+                              </option>
+                              <option value="DSC" <?php if ($_GET['organization'] == 'DSC')
+                                echo 'selected'; ?>>Departmental Student Council</option>
+                              <option value="Junior Ecologist Movement" <?php if ($_GET['organization'] == 'Junior Ecologist Movement')
+                                echo 'selected'; ?>>Junior Ecologist Movement</option>
+                                <option value="Junior Social Workers Association of the Philippines" <?php if ($_GET['organization'] == 'Junior Social Workers Association of the Philippines')
+                                echo 'selected'; ?>>Junior Social Workers Association of the Philippines</option>
+                                <option value="Movement for Participatory Leadership in Social Work" <?php if ($_GET['organization'] == 'Movement for Participatory Leadership in Social Work')
+                                echo 'selected'; ?>>Movement for Participatory Leadership in Social Work</option>
+                              
+                            </select>
+                          <?php } else { ?>
+                            <select class="form-control" id="organization" name="organization">
+                              <option value="" selected disabled>(Required)</option>
+                              <option value="DSC">Departmental Student Council</option>
+                              <option value="Junior Ecologist Movement">Junior Ecologist Movement</option>
+                              <option value="Junior Social Workers Association of the Philippines">Junior Social Workers Association of the Philippines</option>
+                              <option value="Movement for Participatory Leadership in Social Work">Movement for Participatory Leadership in Social Work</option>
+                            </select>
+                          <?php } ?>
+                        </div>
+                      </div>
+
                       <label for="position" class="col-sm-4 col-form-label">Position</label>
                       <div class="form-group row">
                         <div class="col-sm-12">

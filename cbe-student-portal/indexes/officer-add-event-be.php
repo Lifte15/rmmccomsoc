@@ -17,18 +17,19 @@ if (isset($_POST['addEvent'])) {
 
     // Sanitize and validate 
     $eventname = validate($_POST['eventname']);
+    $organizations = $_SESSION['organization'];
     $date = validate($_POST['date']);
     $schoolyear = validate($_POST['school_year']);
     $semester = validate($_POST['semester']);
     $points = validate($_POST['points']);
-    $department='CBE';
+    $department = 'CBE';
 
     // Construct user data string
     $user_data = 'eventname=' . $eventname .
-    '&date=' . $date .
-    '&school_year=' . $schoolyear .
-    '&points=' . $points .
-    '&semester=' . $semester;
+        '&date=' . $date .
+        '&school_year=' . $schoolyear .
+        '&points=' . $points .
+        '&semester=' . $semester;
 
 
     // Validate event name if empty
@@ -47,15 +48,14 @@ if (isset($_POST['addEvent'])) {
     elseif (empty($semester)) {
         header("Location: ../officer-event-addnew.php?newEventError=Semester is required&$user_data");
         exit();
-    } 
-    elseif (empty($points)) {
+    } elseif (empty($points)) {
         header("Location: ../officer-event-addnew.php?newEventError=Points is required&$user_data");
         exit();
     } else {
         // Check if event name already exists
         $sql_check_existing = "SELECT * FROM events WHERE event_name=?";
         $stmt_check_existing = mysqli_prepare($conn, $sql_check_existing);
-        mysqli_stmt_bind_param($stmt_check_existing, "s", $eventname,);
+        mysqli_stmt_bind_param($stmt_check_existing, "s", $eventname, );
         mysqli_stmt_execute($stmt_check_existing);
         $result_check_existing = mysqli_stmt_get_result($stmt_check_existing);
 
@@ -65,10 +65,10 @@ if (isset($_POST['addEvent'])) {
             exit();
         } else {
             // Insert new event
-            $sql_newevent_query = "INSERT INTO events(event_name, date, school_year, semester, points, department)
-                VALUES(?, ?, ?, ?, ?, ?)";
+            $sql_newevent_query = "INSERT INTO events(event_name, date, school_year, semester, points, department, organization)
+            VALUES(?, ?, ?, ?, ?, ?, ?)";
             $stmt_newevent_query = mysqli_prepare($conn, $sql_newevent_query);
-            mysqli_stmt_bind_param($stmt_newevent_query, "ssssis", $eventname, $date, $schoolyear, $semester, $points, $department);
+            mysqli_stmt_bind_param($stmt_newevent_query, "ssssiss", $eventname, $date, $schoolyear, $semester, $points, $department, $organizations);
             $result_newevent_query = mysqli_stmt_execute($stmt_newevent_query);
 
             // Redirect based on the result of the SQL query

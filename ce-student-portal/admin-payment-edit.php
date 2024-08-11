@@ -105,6 +105,35 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Admin'  && $_SESSION['dep
                                                    value="<?php echo $paymentfor['payment_description']; ?>" >
                                         </div>
 
+                                        <label for="organization" class="col-sm-4 col-form-label">Organization</label>
+                                            <div class="form-group row">
+                                                <div class="col-sm-12 ml-4">
+                                                    <?php
+                                                        $organizations = explode(',', $event['organization']);
+                                                        ?>
+                                                        <div class="form-check">
+                                                            <input class="form-check-input" type="checkbox" id="dsc"
+                                                                name="organization[]" value="DSC" <?php if (in_array('DSC', $organizations))
+                                                                    echo 'checked'; ?>>
+                                                            <label class="form-check-label" for="dsc">DSC</label>
+                                                        </div>
+                                                        <div class="form-check">
+                                                            <input class="form-check-input" type="checkbox"
+                                                                id="pice" name="organization[]"
+                                                                value="Philippine Institute of Civil Engineering" <?php if (in_array('Philippine Institute of Civil Engineering', $organizations))
+                                                                    echo 'checked'; ?>>
+                                                            <label class="form-check-label" for="pice">Philippine Institute of Civil Engineering</label>
+                                                        </div>
+                                                        <div class="form-check">
+                                                            <input class="form-check-input" type="checkbox"
+                                                                id="tpp" name="organization[]"
+                                                                value="The Pillar Publication" <?php if (in_array('The Pillar Publication', $organizations))
+                                                                    echo 'checked'; ?>>
+                                                            <label class="form-check-label" for="tpp">The Pillar Publication</label>
+                                                        </div>
+                                                </div>
+                                            </div>
+
                                         <div class="form-group">
                                             <label for="date">Date</label>
                                             <input type="date" class="form-control" name="date" id="date"

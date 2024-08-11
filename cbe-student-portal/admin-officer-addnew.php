@@ -87,6 +87,36 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Admin' && $_SESSION['depa
                         </div>
                       </div>
 
+                      <label for="organization" class="col-sm-4 col-form-label">Organization</label>
+                      <div class="form-group row">
+                        <div class="col-sm-12">
+                          <?php if (isset($_GET['organization'])) { ?>
+                            <select class="form-control" id="organization" name="organization">
+                              <option value="" disabled <?php if ($_GET['organization'] == '')
+                                echo 'selected'; ?>>(Required)
+                              </option>
+                              <option value="DSC" <?php if ($_GET['organization'] == 'DSC')
+                                echo 'selected'; ?>>Departmental Student Council</option>
+                              <option value="Junior Philippine Institute of Accountants RMMC Gensan Chapter" <?php if ($_GET['organization'] == 'Junior Philippine Institute of Accountants RMMC Gensan Chapter')
+                                echo 'selected'; ?>>Junior Philippine Institute of Accountants RMMC Gensan Chapter</option>
+                                <option value="Philippine Society of Customs" <?php if ($_GET['organization'] == 'Philippine Society of Customs')
+                                echo 'selected'; ?>>Philippine Society of Customs</option>
+                                <option value="Philippine Association of Students in Office Administration" <?php if ($_GET['organization'] == 'Philippine Association of Students in Office Administration')
+                                echo 'selected'; ?>>Philippine Association of Students in Office Administration</option>
+                              
+                            </select>
+                          <?php } else { ?>
+                            <select class="form-control" id="organization" name="organization">
+                              <option value="" selected disabled>(Required)</option>
+                              <option value="DSC">Departmental Student Council</option>
+                              <option value="Junior Philippine Institute of Accountants RMMC Gensan Chapter">Junior Philippine Institute of Accountants RMMC Gensan Chapter</option>
+                              <option value="Philippine Society of Customs">Philippine Society of Customs</option>
+                              <option value="Philippine Association of Students in Office Administration">Philippine Association of Students in Office Administration</option>
+                            </select>
+                          <?php } ?>
+                        </div>
+                      </div>
+
                       <label for="position" class="col-sm-4 col-form-label">Position</label>
                       <div class="form-group row">
                         <div class="col-sm-12">

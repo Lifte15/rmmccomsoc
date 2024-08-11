@@ -1,10 +1,4 @@
-<!-- officer-sidebar.php and sidebar of officer form.
-Author:
-  Lowie Jay Orillo lowie.jaymier@gmail.com, 
-  Caryl Mae Subaldo subaldomae29@gmail.com, 
-  Brian Angelo Bognot c09651052069@gmail.com.
-Last Modified: June 2, 2024
-Brief overview of the file's contents. -->
+ 
 
 <!-- Main Sidebar Container -->
 <aside class="main-sidebar sidebar-dark-primary elevation-2"

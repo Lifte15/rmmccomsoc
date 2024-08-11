@@ -1,9 +1,7 @@
-
-
 <?php
 session_start();
 include "indexes/db_conn.php";
-if (isset($_SESSION['role']) && $_SESSION['role'] === 'Admin'  && $_SESSION['department'] === 'CAS') {
+if (isset($_SESSION['role']) && $_SESSION['role'] === 'Admin' && $_SESSION['department'] === 'CAS') {
   ?>
 
   <!DOCTYPE html>
@@ -88,6 +86,62 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Admin'  && $_SESSION['dep
                         </div>
                       </div>
 
+                      <label for="organization" class="col-sm-4 col-form-label">Organization</label>
+                      <div class="form-group row">
+                        <div class="col-sm-12 ml-4">
+                          <?php
+                          if (isset($_GET['organization'])) {
+                            $organizations = explode(',', $_GET['organization']);
+                            ?>
+                            <div class="form-check">
+                              <input class="form-check-input" type="checkbox" id="dsc" name="organization[]" value="DSC"
+                                <?php if (in_array('DSC', $organizations))
+                                  echo 'checked'; ?>>
+                              <label class="form-check-label" for="dsc">DSC</label>
+                            </div>
+                            <div class="form-check">
+                              <input class="form-check-input" type="checkbox" id="jem" name="organization[]"
+                                value="Junior Ecologist Movement" <?php if (in_array('Junior Ecologist Movement', $organizations))
+                                  echo 'checked'; ?>>
+                              <label class="form-check-label" for="jem">Junior Ecologist Movement</label>
+                            </div>
+                            <div class="form-check">
+                              <input class="form-check-input" type="checkbox" id="jswap" name="organization[]" value="Junior Social Workers Association of the Philippines"
+                                <?php if (in_array('Junior Social Workers Association of the Philippines', $organizations))
+                                  echo 'checked'; ?>>
+                              <label class="form-check-label" for="jswap">Junior Social Workers Association of the Philippines</label>
+                            </div>
+                            <div class="form-check">
+                              <input class="form-check-input" type="checkbox" id="mplsw" name="organization[]"
+                                value="Movement for Participatory Leadership in Social Work" <?php if (in_array('Movement for Participatory Leadership in Social Work', $organizations))
+                                  echo 'checked'; ?>>
+                              <label class="form-check-label" for="mplsw">Movement for Participatory Leadership in Social Work</label>
+                            </div>
+                          <?php } else { ?>
+                            <div class="form-check">
+                              <input class="form-check-input" type="checkbox" id="dsc" name="organization[]" value="DSC">
+                              <label class="form-check-label" for="dsc">DSC</label>
+                            </div>
+                            <div class="form-check">
+                              <input class="form-check-input" type="checkbox" id="jem" name="organization[]"
+                                value="Junior Ecologist Movement">
+                              <label class="form-check-label" for="jem">Junior Ecologist Movement</label>
+                            </div>
+                            <div class="form-check">
+                              <input class="form-check-input" type="checkbox" id="jswap" name="organization[]" value="Junior Social Workers Association of the Philippines">
+                              <label class="form-check-label" for="jswap">Junior Social Workers Association of the Philippines</label>
+                            </div>
+                            <div class="form-check">
+                              <input class="form-check-input" type="checkbox" id="mplsw" name="organization[]"
+                                value="Movement for Participatory Leadership in Social Work">
+                              <label class="form-check-label" for="mplsw">Movement for Participatory Leadership in Social Work</label>
+                            </div>
+                          <?php } ?>
+                        </div>
+                      </div>
+
+
+
 
                       <label for="date" class="col-sm-4 col-form-label">Date</label>
                       <div class="form-group row">
@@ -148,7 +202,7 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Admin'  && $_SESSION['dep
                           <?php
                           $query = "SELECT * FROM semester";
                           $result = mysqli_query($conn, $query);
-                          $semesters = []; 
+                          $semesters = [];
                           $defaultsemester = '';
 
                           if ($result && mysqli_num_rows($result) > 0) {
@@ -165,7 +219,7 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Admin'  && $_SESSION['dep
                             <option value="" disabled <?php if (!isset($_GET['semester']))
                               echo 'selected'; ?>>(Required)
                             </option>
-                            <?php foreach ($semesters as $semester) { ?> 
+                            <?php foreach ($semesters as $semester) { ?>
                               <option value="<?php echo $semester['semester']; ?>" <?php
                                  if (isset($_GET['semester']) && $_GET['semester'] == $semester['semester']) {
                                    echo 'selected';

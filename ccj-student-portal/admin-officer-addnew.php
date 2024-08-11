@@ -87,6 +87,39 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Admin' && $_SESSION['depa
                         </div>
                       </div>
 
+                      <label for="organization" class="col-sm-4 col-form-label">Organization</label>
+                      <div class="form-group row">
+                        <div class="col-sm-12">
+                          <?php if (isset($_GET['organization'])) { ?>
+                            <select class="form-control" id="organization" name="organization">
+                              <option value="" disabled <?php if ($_GET['organization'] == '')
+                                echo 'selected'; ?>>(Required)
+                              </option>
+                              <option value="DSC" <?php if ($_GET['organization'] == 'DSC')
+                                echo 'selected'; ?>>Departmental Student Council</option>
+                              <option value="Junior Professional Criminologist Association of the Philippines" <?php if ($_GET['organization'] == 'Junior Professional Criminologist Association of the Philippines')
+                                echo 'selected'; ?>>Junior Professional Criminologist Association of the Philippines</option>
+                                <option value="Bulls Eye Publication" <?php if ($_GET['organization'] == 'Bulls Eye Publication')
+                                echo 'selected'; ?>>Bulls Eye Publication</option>
+                                <option value="Reserve Officer Training Corps" <?php if ($_GET['organization'] == 'Reserve Officer Training Corps')
+                                echo 'selected'; ?>>Reserve Officer Training Corps</option>
+                                <option value="Criminology Intern Unit" <?php if ($_GET['organization'] == 'Criminology Intern Unit')
+                                echo 'selected'; ?>>Criminology Intern Unit</option>
+                              
+                            </select>
+                          <?php } else { ?>
+                            <select class="form-control" id="organization" name="organization">
+                              <option value="" selected disabled>(Required)</option>
+                              <option value="DSC">Departmental Student Council</option>
+                              <option value="Junior Professional Criminologist Association of the Philippines">Junior Professional Criminologist Association of the Philippines</option>
+                              <option value="Bulls Eye Publication">Bulls Eye Publication</option>
+                              <option value="Reserve Officer Training Corps">Reserve Officer Training Corps</option>
+                              <option value="Criminology Intern Unit">Criminology Intern Unit</option>
+                            </select>
+                          <?php } ?>
+                        </div>
+                      </div>
+
                       <label for="position" class="col-sm-4 col-form-label">Position</label>
                       <div class="form-group row">
                         <div class="col-sm-12">

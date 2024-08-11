@@ -1,10 +1,3 @@
-<!-- admin-payment-edit.php and to edit payments in admin form.
-Authors:
-  - Lowie Jay Orillo (lowie.jaymier@gmail.com)
-  - Caryl Mae Subaldo (subaldomae29@gmail.com)
-  - Brian Angelo Bognot (c09651052069@gmail.com)
-Last Modified: June 17, 2024
-Brief overview of the file's contents. -->
 
 <?php
 session_start();
@@ -110,6 +103,49 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Admin'  && $_SESSION['dep
                                             <input type="text" class="form-control" id="paymentfor_name" name="payment_description"
                                                    value="<?php echo $paymentfor['payment_description']; ?>" >
                                         </div>
+
+                                        <label for="organization" class="col-sm-4 col-form-label">Organization</label>
+                                            <div class="form-group row">
+                                                <div class="col-sm-12 ml-4">
+                                                    <?php
+                                                        $organizations = explode(',', $event['organization']);
+                                                        ?>
+                                                        <div class="form-check">
+                                                            <input class="form-check-input" type="checkbox" id="dsc"
+                                                                name="organization[]" value="DSC" <?php if (in_array('DSC', $organizations))
+                                                                    echo 'checked'; ?>>
+                                                            <label class="form-check-label" for="dsc">DSC</label>
+                                                        </div>
+                                                        <div class="form-check">
+                                                            <input class="form-check-input" type="checkbox"
+                                                                id="jpcap" name="organization[]"
+                                                                value="Junior Professional Criminologist Association of the Philippines" <?php if (in_array('Junior Professional Criminologist Association of the Philippines', $organizations))
+                                                                    echo 'checked'; ?>>
+                                                            <label class="form-check-label" for="jpcap">Junior Professional Criminologist Association of the Philippines</label>
+                                                        </div>
+                                                        <div class="form-check">
+                                                            <input class="form-check-input" type="checkbox"
+                                                                id="bep" name="organization[]"
+                                                                value="Bulls Eye Publication" <?php if (in_array('Bulls Eye Publication', $organizations))
+                                                                    echo 'checked'; ?>>
+                                                            <label class="form-check-label" for="bep">Bulls Eye Publication</label>
+                                                        </div>
+                                                        <div class="form-check">
+                                                            <input class="form-check-input" type="checkbox"
+                                                                id="rotc" name="organization[]"
+                                                                value="Reserve Officer Training Corps" <?php if (in_array('Reserve Officer Training Corps', $organizations))
+                                                                    echo 'checked'; ?>>
+                                                            <label class="form-check-label" for="rotc">Reserve Officer Training Corps</label>
+                                                        </div>
+                                                        <div class="form-check">
+                                                            <input class="form-check-input" type="checkbox"
+                                                                id="ciu" name="organization[]"
+                                                                value="Criminology Intern Unit" <?php if (in_array('Criminology Intern Unit', $organizations))
+                                                                    echo 'checked'; ?>>
+                                                            <label class="form-check-label" for="ciu">Criminology Intern Unit</label>
+                                                        </div>
+                                                </div>
+                                            </div>
 
                                         <div class="form-group">
                                             <label for="date">Date</label>

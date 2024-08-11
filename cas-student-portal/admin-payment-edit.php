@@ -104,6 +104,42 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Admin'  && $_SESSION['dep
                                                    value="<?php echo $paymentfor['payment_description']; ?>" >
                                         </div>
 
+                                        <label for="organization" class="col-sm-4 col-form-label">Organization</label>
+                                            <div class="form-group row">
+                                                <div class="col-sm-12 ml-4">
+                                                    <?php
+                                                        $organizations = explode(',', $event['organization']);
+                                                        ?>
+                                                        <div class="form-check">
+                                                            <input class="form-check-input" type="checkbox" id="dsc"
+                                                                name="organization[]" value="DSC" <?php if (in_array('DSC', $organizations))
+                                                                    echo 'checked'; ?>>
+                                                            <label class="form-check-label" for="dsc">DSC</label>
+                                                        </div>
+                                                        <div class="form-check">
+                                                            <input class="form-check-input" type="checkbox"
+                                                                id="jem" name="organization[]"
+                                                                value="Junior Ecologist Movement" <?php if (in_array('Junior Ecologist Movement', $organizations))
+                                                                    echo 'checked'; ?>>
+                                                            <label class="form-check-label" for="jem">Junior Ecologist Movement</label>
+                                                        </div>
+                                                        <div class="form-check">
+                                                            <input class="form-check-input" type="checkbox"
+                                                                id="jswap" name="organization[]"
+                                                                value="Junior Social Workers Association of the Philippines" <?php if (in_array('Junior Social Workers Association of the Philippines', $organizations))
+                                                                    echo 'checked'; ?>>
+                                                            <label class="form-check-label" for="jswap">Junior Social Workers Association of the Philippines</label>
+                                                        </div>
+                                                        <div class="form-check">
+                                                            <input class="form-check-input" type="checkbox"
+                                                                id="mplsw" name="organization[]"
+                                                                value="Movement for Participatory Leadership in Social Work" <?php if (in_array('Movement for Participatory Leadership in Social Work', $organizations))
+                                                                    echo 'checked'; ?>>
+                                                            <label class="form-check-label" for="mplsw">Movement for Participatory Leadership in Social Work</label>
+                                                        </div>
+                                                </div>
+                                            </div>
+
                                         <div class="form-group">
                                             <label for="date">Date</label>
                                             <input type="date" class="form-control" name="date" id="date"
