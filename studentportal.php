@@ -62,6 +62,13 @@
             background-repeat: no-repeat;
         }
 
+        .coahs-custom-background {
+            background-image: url('coachs-student-portal/images/student-portal-background.png');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+
         .square-card {
             aspect-ratio: 1 / 1;
             display: flex;
@@ -70,11 +77,8 @@
             align-items: center;
             overflow: hidden;
             border: none;
-            /* Ensure no border is adding extra space */
             margin: 0;
-            /* Remove margin if any */
             padding: 0;
-            /* Remove padding if any */
         }
 
         .square-card img {
@@ -89,9 +93,7 @@
 
         .card {
             margin: 0;
-            /* Ensure no margin on card */
             padding: 0;
-            /* Ensure no padding on card */
         }
 
         .small-box {
@@ -109,50 +111,65 @@
 <body>
     <section>
         <img src="images/heading-image.png" class="heading-image text-center" alt="RMMC Student Portal">
-        <div class="container d-flex justify-content-center align-items-center" style="min-height: 50vh;">
+        <div class="container d-flex justify-content-center align-items-center" style="min-height: 80vh;">
             <div class="row w-100">
-                <a class="col-6 col-md-4 mb-4" href="cas-student-portal/login.php">
+
+                <a class="col-6 col-md-3 mb-3" href="cas-student-portal/login.php">
                     <div class="card small-box bg-cas square-card cas-custom-background">
                         <div class="card-body">
                             <img src="images/cas.png" class="card-img-top" alt="CAS">
                         </div>
                     </div>
                 </a>
-                <a class="col-6 col-md-4 mb-4" href="cbe-student-portal/login.php">
+
+                <a class="col-6 col-md-3 mb-3" href="cbe-student-portal/login.php">
                     <div class="card small-box bg-cbe square-card cbe-custom-background">
                         <div class="card-body">
                             <img src="images/cbe.png" class="card-img-top" alt="CBE">
                         </div>
                     </div>
                 </a>
-                <a class="col-6 col-md-4 mb-4" href="ccj-student-portal/login.php">
+
+                <a class="col-6 col-md-3 mb-3" href="ccj-student-portal/login.php">
                     <div class="card small-box bg-ccj square-card ccj-custom-background">
                         <div class="card-body">
                             <img src="images/ccj.png" class="card-img-top" alt="CCJ">
                         </div>
                     </div>
                 </a>
-                <a class="col-6 col-md-4 mb-4" href="ce-student-portal/login.php">
+
+                <a class="col-6 col-md-3 mb-3" href="ce-student-portal/login.php">
                     <div class="card small-box bg-ce square-card ce-custom-background">
                         <div class="card-body">
                             <img src="images/ce.png" class="card-img-top" alt="CE">
                         </div>
                     </div>
                 </a>
-                <a class="col-6 col-md-4 mb-4" href="cte-student-portal/login.php">
+
+                <a class="col-6 col-md-3 mb-3" href="cte-student-portal/login.php">
                     <div class="card small-box bg-cte square-card cte-custom-background">
                         <div class="card-body">
                             <img src="images/cte.png" class="card-img-top" alt="CTE">
                         </div>
                     </div>
                 </a>
-                <a class="col-6 col-md-4 mb-4" href="ite-student-portal/login.php">
+
+                <a class="col-6 col-md-3 mb-3" href="ite-student-portal/login.php">
                     <div class="card small-box bg-ite square-card ite-custom-background">
                         <div class="card-body">
                             <img src="images/ite.png" class="card-img-top" alt="ITE">
                         </div>
                     </div>
                 </a>
+
+                <a class="col-6 col-md-3 mb-3" href="coahs-student-portal/login.php">
+                    <div class="card small-box bg-coahs square-card coahs-custom-background">
+                        <div class="card-body">
+                            <img src="images/coahs.png" class="card-img-top" alt="COAHS">
+                        </div>
+                    </div>
+                </a>
+
             </div>
         </div>
     </section>
