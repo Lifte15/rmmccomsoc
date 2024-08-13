@@ -1,25 +1,4 @@
-<!-- officer-sidebar.php and sidebar of officer form.
-Author:
-  Lowie Jay Orillo lowie.jaymier@gmail.com, 
-  Caryl Mae Subaldo subaldomae29@gmail.com, 
-  Brian Angelo Bognot c09651052069@gmail.com.
-Last Modified: June 2, 2024
-Brief overview of the file's contents. -->
-
-<!-- Main Sidebar Container -->
-<aside class="main-sidebar sidebar-dark-primary elevation-2"
-  style="background-image: url('images/sidebar-background.png'); background-size: cover; background-position: center;">
-  <!-- Brand Logo -->
-  <a href="officer-dashboard.php" class="brand-link">
-    <img src="images/iteportal-sidebar-logo.png" alt="AdminLTE Logo" class="brand-image elevation-3"
-      style="opacity: .8">
-    <span class="brand-text font-weight-light">ITE Student Portal</span>
-  </a>
-
-
-
-
-  <?php
+<?php
   include "indexes/db_conn.php";
 
 
@@ -55,6 +34,15 @@ Brief overview of the file's contents. -->
   }
   ?>
 
+<!-- Main Sidebar Container -->
+<aside class="main-sidebar sidebar-dark-primary elevation-2"
+  style="background-image: url('images/sidebar-background.png'); background-size: cover; background-position: center;">
+  <!-- Brand Logo -->
+  <a href="officer-dashboard.php?school_year=<?php echo $defaultYear; ?>&semester=<?php echo $defaultSemester; ?>" class="brand-link">
+    <img src="images/iteportal-sidebar-logo.png" alt="AdminLTE Logo" class="brand-image elevation-3"
+      style="opacity: .8">
+    <span class="brand-text font-weight-light">ITE Student Portal</span>
+  </a>
 
   <!-- Sidebar -->
   <div class="sidebar">

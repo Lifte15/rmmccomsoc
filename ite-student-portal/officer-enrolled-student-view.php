@@ -168,7 +168,7 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Officer' && $_SESSION['de
                     <th class="text-center">Middle Name</th>
                     <th class="text-center">Program</th>
                     <th class="text-center">Year Level</th>
-                    <th class="text-center">Unenroll</th>
+                    <th class="text-center">Action</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -228,9 +228,7 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Officer' && $_SESSION['de
                         <td class="text-center"><?php echo $row['middle_name']; ?></td>
                         <td class="text-center"><?php echo $row['program']; ?></td>
                         <td class="text-center"><?php echo $row['year_level']; ?></td>
-                        
-                        <?php if ($_SESSION['position'] == 'President' && $_SESSION['organization'] == 'DSC'): ?>
-                          <td class="text-center">
+                          <td class="align-middle text-center">
                             <?php
                             $current_url = $_SERVER['PHP_SELF'] . '?' . $_SERVER['QUERY_STRING'];
                             ?>
@@ -246,6 +244,9 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Officer' && $_SESSION['de
                                 value="<?php echo isset($_GET['year_level']) ? htmlspecialchars($_GET['year_level']) : ''; ?>">
                               <input type="hidden" name="previous_url"
                                 value="<?php echo htmlspecialchars($current_url, ENT_QUOTES, 'UTF-8'); ?>">
+                                <a href='officer-enrolled-student-view-indi.php?account_number=<?php echo $row['account_number']; ?>&school_year=<?php echo $school_year; ?>&semester=<?php echo $semester; ?>'
+                              class='btn btn-success btn-sm'><i class="nav-icon fas fa-hand-pointer"></i> Select</a>
+                              <?php if ($_SESSION['position'] == 'President' && $_SESSION['organization'] == 'DSC'): ?>
                               <button class="btn btn-danger btn-sm" type="submit">Unenroll</button>
                             </form>
                           </td>
