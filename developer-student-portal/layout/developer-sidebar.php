@@ -1,23 +1,6 @@
-<!-- developer-sidebar.php and sidebar of developer form.
-Author:
-  Lowie Jay Orillo lowie.jaymier@gmail.com, 
-  Caryl Mae Subaldo subaldomae29@gmail.com, 
-  Brian Angelo Bognot c09651052069@gmail.com.
-Last Modified: May 15, 2024
-Brief overview of the file's contents. -->
-
-<!-- Main Sidebar Container -->
-<aside class="main-sidebar sidebar-dark-danger elevation-4"
-  style="background-image: url('images/sidebar-background.png'); background-size: cover; background-position: center;">
-  <!-- Brand Logo -->
-  <a href="developer-dashboard.php" class="brand-link">
-    <img src="images/developer-logo.png" alt="AdminLTE Logo" class="brand-image elevation-3"
-      style="opacity: .8">
-    <span class="brand-text font-weight-light">Developer Portal</span>
-  </a>
 
 
-  <?php
+<?php
   include "indexes/db_conn.php";
   $query = "SELECT * FROM semester";
   $result = mysqli_query($conn, $query);
@@ -47,6 +30,18 @@ Brief overview of the file's contents. -->
     }
   }
   ?>
+
+<aside class="main-sidebar sidebar-dark-danger elevation-4"
+  style="background-image: url('images/sidebar-background.png'); background-size: cover; background-position: center;">
+  <!-- Brand Logo -->
+  <a href="developer-dashboard.php?school_year=<?php echo $defaultYear; ?>&semester=<?php echo $defaultSemester; ?>" class="brand-link">
+    <img src="images/developer-logo.png" alt="AdminLTE Logo" class="brand-image elevation-3"
+      style="opacity: .8">
+    <span class="brand-text font-weight-light">Developer Portal</span>
+  </a>
+
+
+ 
 
 
   <!-- Sidebar -->
