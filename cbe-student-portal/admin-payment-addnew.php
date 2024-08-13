@@ -91,6 +91,65 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Admin' && $_SESSION['depa
                                                 </div>
                                             </div>
 
+                                            <label for="organization" class="col-sm-4 col-form-label">Organization</label>
+                      <div class="form-group row">
+                        <div class="col-sm-12 ml-4">
+                          <?php
+                          if (isset($_GET['organization'])) {
+                            $organizations = explode(',', $_GET['organization']);
+                            ?>
+                            <div class="form-check">
+                              <input class="form-check-input" type="checkbox" id="dsc" name="organization[]" value="DSC"
+                                <?php if (in_array('DSC', $organizations))
+                                  echo 'checked'; ?>>
+                              <label class="form-check-label" for="dsc">DSC</label>
+                            </div>
+                            <div class="form-check">
+                              <input class="form-check-input" type="checkbox" id="jpia" name="organization[]"
+                                value="Junior Philippine Institute of Accountants RMMC Gensan Chapter" <?php if (in_array('Junior Philippine Institute of Accountants RMMC Gensan Chapter', $organizations))
+                                  echo 'checked'; ?>>
+                              <label class="form-check-label" for="jpia">Junior Philippine Institute of Accountants RMMC
+                                Gensan Chapter</label>
+                            </div>
+                            <div class="form-check">
+                              <input class="form-check-input" type="checkbox" id="psc" name="organization[]"
+                                value="Philippine Society of Customs" <?php if (in_array('Philippine Society of Customs', $organizations))
+                                  echo 'checked'; ?>>
+                              <label class="form-check-label" for="psc">Philippine Society of Customs</label>
+                            </div>
+                            <div class="form-check">
+                              <input class="form-check-input" type="checkbox" id="pasoa" name="organization[]"
+                                value="Philippine Association of Students in Office Administration" <?php if (in_array('Philippine Association of Students in Office Administration', $organizations))
+                                  echo 'checked'; ?>>
+                              <label class="form-check-label" for="pasoa">Philippine Association of Students in Office
+                                Administration</label>
+                            </div>
+                          <?php } else { ?>
+                            <div class="form-check">
+                              <input class="form-check-input" type="checkbox" id="dsc" name="organization[]" value="DSC">
+                              <label class="form-check-label" for="dsc">DSC</label>
+                            </div>
+                            <div class="form-check">
+                              <input class="form-check-input" type="checkbox" id="jpia" name="organization[]"
+                                value="Junior Philippine Institute of Accountants RMMC Gensan Chapter">
+                              <label class="form-check-label" for="jpia">Junior Philippine Institute of Accountants RMMC
+                                Gensan Chapter</label>
+                            </div>
+                            <div class="form-check">
+                              <input class="form-check-input" type="checkbox" id="psc" name="organization[]"
+                                value="Philippine Society of Customs">
+                              <label class="form-check-label" for="psc">Philippine Society of Customs</label>
+                            </div>
+                            <div class="form-check">
+                              <input class="form-check-input" type="checkbox" id="pasoa" name="organization[]"
+                                value="Philippine Association of Students in Office Administration">
+                              <label class="form-check-label" for="pasoa">Philippine Association of Students in Office
+                                Administration</label>
+                            </div>
+                          <?php } ?>
+                        </div>
+                      </div>
+
 
                                             <label for="date" class="col-sm-4 col-form-label">Date</label>
                                             <div class="form-group row">

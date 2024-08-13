@@ -91,8 +91,6 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Admin' && $_SESSION['depa
 
                                                     if ($result && $result->num_rows > 0) {
                                                         $row = $result->fetch_assoc();
-
-                                                        // Query to count the number of 'Paid' remarks
                                                         $countPaidSql = "SELECT COUNT(remarks) AS paid_count FROM payment WHERE payment_for_id = '$payment_for_id' AND remarks='Paid'";
                                                         $countResult = $conn->query($countPaidSql);
                                                         $paid = 0;
@@ -101,7 +99,7 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Admin' && $_SESSION['depa
                                                             $countRow = $countResult->fetch_assoc();
                                                             $paid = $countRow['paid_count'];
                                                         }
-                                                        // Query to count the number of 'Unpaid' remarks
+                                                        
                                                         $countUnpaidSql = "SELECT COUNT(remarks) AS paid_count FROM payment WHERE payment_for_id = '$payment_for_id' AND remarks='Unpaid'";
                                                         $countUnpaidResult = $conn->query($countUnpaidSql);
                                                         $unpaid = 0;
@@ -115,6 +113,10 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Admin' && $_SESSION['depa
                                                             <tr>
                                                                 <td class="col-md-3"><strong>Payment Description:</strong></td>
                                                                 <td class="col-md-9"><?php echo $row['payment_description']; ?></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="col-md-3"><strong>Organization:</strong></td>
+                                                                <td class="col-md-9"><?php echo $row['organization']; ?></td>
                                                             </tr>
                                                             <tr>
                                                                 <td class="col-md-3"><strong>Date:</strong></td>

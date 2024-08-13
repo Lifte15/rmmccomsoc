@@ -113,7 +113,6 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Admin' && $_SESSION['depa
                                                         <label for="organization" class="col-sm-3 col-form-label">Organization</label>
                                                         <div class="col-sm-9">
                                                             <select class="form-control" id="position" name="organization">
-                                                                <option value="" <?php if ($organization == 'DSC') echo 'selected'; ?>>(Required)</option>
                                                                 <option value="DSC" <?php if ($organization == 'DSC') echo 'selected'; ?>>Departmental Student Council</option>
                                                                 <option value="Computing Society" <?php if ($organization == 'Computing Society') echo 'selected'; ?>>Computing Society</option>
                                                             </select>
@@ -156,7 +155,7 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Admin' && $_SESSION['depa
                                                         <label for="Middle Name" class="col-sm-3 col-form-label">Middle Name</label>
                                                         <div class="col-sm-9">
                                                             <input type="text" class="form-control" id="middle_name"
-                                                                name="middle_name" placeholder="(Required)"
+                                                                name="middle_name" placeholder=""
                                                                 value="<?php echo $middle_name; ?>">
                                                         </div>
                                                     </div>
@@ -176,7 +175,7 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Admin' && $_SESSION['depa
                                                             Number</label>
                                                         <div class="col-sm-9">
                                                             <input type="text" class="form-control" id="phone_number"
-                                                                name="phone_number" placeholder="(Required)"
+                                                                name="phone_number" placeholder=""
                                                                 value="<?php echo $phone_number; ?>">
                                                         </div>
                                                     </div>

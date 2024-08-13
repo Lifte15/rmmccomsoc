@@ -1,14 +1,5 @@
 <?php
-/*
-admin-changepassword-be.php handles the process of changing the password for admin accounts after validation.
-Authors:
-  - Lowie Jay Orillo (lowie.jaymier@gmail.com)
-  - Caryl Mae Subaldo (subaldomae29@gmail.com)
-  - Brian Angelo Bognot (c09651052069@gmail.com)
-Last Modified: June 1, 2024
-Overview: This file handles the change of password for admin accounts, 
-    validating input and updating the password in the database.
-*/
+
 
 session_start();
 

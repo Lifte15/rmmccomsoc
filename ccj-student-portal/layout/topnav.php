@@ -1,10 +1,4 @@
- <!-- topnav.php and top navigation bar of student form.
-Author:
-  Lowie Jay Orillo lowie.jaymier@gmail.com, 
-  Caryl Mae Subaldo subaldomae29@gmail.com, 
-  Brian Angelo Bognot c09651052069@gmail.com.
-Last Modified: June 15, 2024
-Brief overview of the file's contents. -->
+
 
 <!-- Navbar -->
 <nav class="main-header navbar navbar-expand navbar-white navbar-light">

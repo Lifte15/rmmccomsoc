@@ -133,10 +133,11 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Officer' && $_SESSION['de
                 <tbody>
                   <?php
                   if (isset($_GET['search'])) {
-                    $search_input = $_GET['search_input'];
-                    $date = $_GET['date'];
-                    $school_year = $_GET['school_year'];
-                    $semester = $_GET['semester'];
+                    $search_input = mysqli_real_escape_string($conn, $_GET['search_input']);
+                    $date = mysqli_real_escape_string($conn, $_GET['date']);
+                    $school_year = mysqli_real_escape_string($conn, $_GET['school_year']);
+                    $semester = mysqli_real_escape_string($conn, $_GET['semester']);
+                    $organization = mysqli_real_escape_string($conn, $_SESSION['organization']);
 
                     $conditions = array();
 
@@ -154,13 +155,22 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Officer' && $_SESSION['de
 
                     if (!empty($conditions)) {
                       $condition_string = implode(" AND ", $conditions);
-                      $eventssql = "SELECT * FROM events WHERE $condition_string AND event_name LIKE '%$search_input%' AND department='CAS'";
+                      if (!empty($search_input)) {
+                        $eventssql = "SELECT * FROM events WHERE $condition_string AND event_name LIKE '%$search_input%' AND department='CAS' AND FIND_IN_SET('$organization', organization)";
                     } else {
-                      $eventssql = "SELECT * FROM events WHERE event_name LIKE '%$search_input%' AND department='CAS'";
+                      $eventssql = "SELECT * FROM events WHERE $condition_string AND department='CAS' AND FIND_IN_SET('$organization', organization)";
                     }
                   } else {
-                    $eventssql = "SELECT * FROM events WHERE department='CAS'";
+                    if (!empty($search_input)) {
+                      $eventssql = "SELECT * FROM events WHERE event_name LIKE '%$search_input%' AND department='CAS' AND FIND_IN_SET('$organization', organization)";
+                  } else {
+                      $eventssql = "SELECT * FROM events WHERE department='CAS' AND FIND_IN_SET('$organization', organization)";
                   }
+                  }
+                } else {
+                  $organization = mysqli_real_escape_string($conn, $_SESSION['organization']);
+                  $eventssql = "SELECT * FROM events WHERE department='CAS' AND FIND_IN_SET('$organization', organization)";
+              }
                   $result = $conn->query($eventssql);
                   if ($result->num_rows > 0) {
                     while ($row = $result->fetch_assoc()) {

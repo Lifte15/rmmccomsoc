@@ -118,7 +118,6 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Admin' && $_SESSION['depa
               </div>
             <?php } ?>
 
-            <!-- Events table -->
             <div class="table-responsive">
               <table class="table table-striped">
                 <thead>

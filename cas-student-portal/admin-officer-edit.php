@@ -77,6 +77,7 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Admin' && $_SESSION['depa
                                             if (mysqli_num_rows($result) > 0) {
                                                 while ($row = mysqli_fetch_assoc($result)) {
                                                     $account_number = $row['account_number'];
+                                                    $organization = $row['organization'];
                                                     $position = $row['position'];
                                                     $last_name = $row['last_name'];
                                                     $first_name = $row['first_name'];
@@ -105,6 +106,18 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Admin' && $_SESSION['depa
                                                                 value="<?php echo $displayedaccount_number; ?>" disabled>
                                                             <input type="hidden" name="account_number"
                                                                 value="<?php echo $account_number; ?>">
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group row">
+                                                        <label for="organization" class="col-sm-3 col-form-label">Organization</label>
+                                                        <div class="col-sm-9">
+                                                            <select class="form-control" id="position" name="organization">
+                                                                <option value="DSC" <?php if ($organization == 'DSC') echo 'selected'; ?>>Departmental Student Council</option>
+                                                                <option value="Junior Ecologist Movement" <?php if ($organization == 'Junior Ecologist Movement') echo 'selected'; ?>>Junior Ecologist Movement</option>
+                                                                <option value="Junior Social Workers Association of the Philippines" <?php if ($organization == 'Junior Social Workers Association of the Philippines') echo 'selected'; ?>>Junior Social Workers Association of the Philippines</option>
+                                                                <option value="Movement for Participatory Leadership in Social Work" <?php if ($organization == 'Movement for Participatory Leadership in Social Work') echo 'selected'; ?>>Movement for Participatory Leadership in Social Work</option>
+                                                            </select>
                                                         </div>
                                                     </div>
 
@@ -143,7 +156,7 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Admin' && $_SESSION['depa
                                                         <label for="Middle Name" class="col-sm-3 col-form-label">Middle Name</label>
                                                         <div class="col-sm-9">
                                                             <input type="text" class="form-control" id="middle_name"
-                                                                name="middle_name" placeholder="(Required)"
+                                                                name="middle_name" placeholder=""
                                                                 value="<?php echo $middle_name; ?>">
                                                         </div>
                                                     </div>
@@ -163,7 +176,7 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Admin' && $_SESSION['depa
                                                             Number</label>
                                                         <div class="col-sm-9">
                                                             <input type="text" class="form-control" id="phone_number"
-                                                                name="phone_number" placeholder="(Required)"
+                                                                name="phone_number" placeholder=""
                                                                 value="<?php echo $phone_number; ?>">
                                                         </div>
                                                     </div>

@@ -116,6 +116,10 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Admin' && $_SESSION['depa
                                                                 <td class="col-md-9"><?php echo $row['event_name']; ?></td>
                                                             </tr>
                                                             <tr>
+                                                                <td class="col-md-3"><strong>Organization:</strong></td>
+                                                                <td class="col-md-9"><?php echo $row['organization']; ?></td>
+                                                            </tr>
+                                                            <tr>
                                                                 <td class="col-md-3"><strong>Date:</strong></td>
                                                                 <td class="col-md-9"><?php echo $row['date']; ?></td>
                                                             </tr>

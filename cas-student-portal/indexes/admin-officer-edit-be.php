@@ -18,6 +18,7 @@ if (isset($_POST['editOfficer'])) {
     // Sanitize and validate 
     $account_number = validate($_POST['account_number']);
     $code = validate($_POST['code']);
+    $organization = validate($_POST['organization']);
     $position = validate($_POST['position']);
     $lastnameNotProper = validate($_POST['last_name']);
     $firstnameNotProper = validate($_POST['first_name']);
@@ -45,6 +46,10 @@ if (isset($_POST['editOfficer'])) {
         header("Location: ../admin-officer-edit.php?account_number=$account_number&editOfficerError=Position is required");
         exit();
     } // Validate last name if empty
+    elseif (empty($organization)) {
+        header("Location: ../admin-officer-edit.php?account_number=$account_number&editOfficerError=Organization is required");
+        exit();
+    } // Validate first name if empty
     elseif (empty($lastname)) {
         header("Location: ../admin-officer-edit.php?account_number=$account_number&editOfficerError=Last Name is required");
         exit();
@@ -58,9 +63,9 @@ if (isset($_POST['editOfficer'])) {
         exit();
     } else {
             // Update officer
-            $sql_updateofficer_query = "UPDATE user SET username=?, position=?, last_name=?, first_name=?, middle_name=?, gender=?, phone_number=? WHERE account_number=?";
+            $sql_updateofficer_query = "UPDATE user SET username=?, position=?, last_name=?, first_name=?, middle_name=?, gender=?, phone_number=?, organization=? WHERE account_number=?";
             $stmt_updateofficer_query = mysqli_prepare($conn, $sql_updateofficer_query);
-            mysqli_stmt_bind_param($stmt_updateofficer_query, "ssssssss", $username, $position, $lastname, $firstname, $middlename, $gender, $phonenumber, $account_number);
+            mysqli_stmt_bind_param($stmt_updateofficer_query, "sssssssss", $username, $position, $lastname, $firstname, $middlename, $gender, $phonenumber, $organization, $account_number);
             $result_updateofficer_query = mysqli_stmt_execute($stmt_updateofficer_query);
 
             // Redirect based on the result of the SQL query

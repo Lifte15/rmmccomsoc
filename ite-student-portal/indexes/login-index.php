@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-include "db_conn.php"; // include the database script to establish a connection with the database
+include "db_conn.php"; 
 
 // check if the fields in the form are set
 if (isset($_POST['login'])) {

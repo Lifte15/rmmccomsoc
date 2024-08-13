@@ -77,6 +77,7 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Admin' && $_SESSION['depa
                                             if (mysqli_num_rows($result) > 0) {
                                                 while ($row = mysqli_fetch_assoc($result)) {
                                                     $account_number = $row['account_number'];
+                                                    $organization = $row['organization'];
                                                     $position = $row['position'];
                                                     $last_name = $row['last_name'];
                                                     $first_name = $row['first_name'];
@@ -105,6 +106,19 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Admin' && $_SESSION['depa
                                                                 value="<?php echo $displayedaccount_number; ?>" disabled>
                                                             <input type="hidden" name="account_number"
                                                                 value="<?php echo $account_number; ?>">
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group row">
+                                                        <label for="organization" class="col-sm-3 col-form-label">Organization</label>
+                                                        <div class="col-sm-9">
+                                                            <select class="form-control" id="position" name="organization">
+                                                                <option value="DSC" <?php if ($organization == 'DSC') echo 'selected'; ?>>Departmental Student Council</option>
+                                                                <option value="Junior Professional Criminologist Association of the Philippines" <?php if ($organization == 'Junior Professional Criminologist Association of the Philippines') echo 'selected'; ?>>Junior Professional Criminologist Association of the Philippines</option>
+                                                                <option value="Bulls Eye Publication" <?php if ($organization == 'Bulls Eye Publication') echo 'selected'; ?>>Bulls Eye Publication</option>
+                                                                <option value="Reserve Officer Training Corps" <?php if ($organization == 'Reserve Officer Training Corps') echo 'selected'; ?>>Reserve Officer Training Corps</option>
+                                                                <option value="Criminology Intern Unit" <?php if ($organization == 'Criminology Intern Unit') echo 'selected'; ?>>Criminology Intern Unit</option>
+                                                            </select>
                                                         </div>
                                                     </div>
 
