@@ -55,11 +55,12 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Developer' && $_SESSION['
                 $semester = $_GET['semester'];
                 ?>
 
-<?php
-    $current_url =  isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : '/';
-?>
+                <?php
+                $current_url = isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : '/';
+                ?>
 
-                <a id="addNewSubjectBtn" class="btn btn-secondary" href="<?php echo htmlspecialchars($current_url, ENT_QUOTES, 'UTF-8'); ?>">
+                <a id="addNewSubjectBtn" class="btn btn-secondary"
+                  href="<?php echo htmlspecialchars($current_url, ENT_QUOTES, 'UTF-8'); ?>">
                   <i class="nav-icon fas fa-solid fa-chevron-left"></i> Back to Student
                 </a>
 
@@ -105,10 +106,44 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Developer' && $_SESSION['
 
                     if ($result && $result->num_rows > 0) {
                       $row = $result->fetch_assoc();
+
+                      $department = $row['department'];
+                      $profile_picture = $row['profile_picture'];
                       ?>
                       <!-- Image column -->
                       <div class="col-md-auto">
-                        <img src="profile-pictures/<?php echo $row['profile_picture']; ?>" alt="Student Profile Picture"
+
+                      <?php
+                        $base_url = "";
+
+                        switch ($department) {
+                          case 'ITE':
+                            $base_url = "../ite-student-portal/profile-pictures/";
+                            break;
+                          case 'CE':
+                            $base_url = "../ce-student-portal/profile-pictures/";
+                            break;
+                          case 'CAS':
+                            $base_url = "../cas-student-portal/profile-pictures/";
+                            break;
+                          case 'CCJ':
+                            $base_url = "../ccj-student-portal/profile-pictures/";
+                            break;
+                          case 'CTE':
+                            $base_url = "../cte-student-portal/profile-pictures/";
+                            break;
+                          case 'CBE':
+                            $base_url = "../cbe-student-portal/profile-pictures/";
+                            break;
+                          case 'COAHS':
+                            $base_url = "../coahs-student-portal/profile-pictures/";
+                            break;
+                          default:
+                            $base_url = "profile-pictures/"; // default path if department doesn't match any case
+                            break;
+                        }
+                        ?>
+                        <img src="<?php echo $base_url . $profile_picture . '?' . time(); ?>" alt="Student Profile Picture"
                           style="height: 10rem; width: 10rem; border-radius: 50%; object-fit: cover;">
                       </div>
 
@@ -166,7 +201,8 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Developer' && $_SESSION['
                         </a>
 
                         <a id="viewQRCodeBtn" class="btn btn-success btn-sm d-block mb-2"
-                          data-account-number="<?php echo $row['account_number']; ?>">
+                          data-account-number="<?php echo $row['account_number']; ?>"
+                          data-department="<?php echo $row['department']; ?>">
                           <i class="fa-solid fa-pen-to-square"></i> View QR Code
                         </a>
 
@@ -560,32 +596,62 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Developer' && $_SESSION['
       <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
       <!-- Script for QR Code -->
-      <script>
-        $(document).ready(function () {
-          $('#viewQRCodeBtn').click(function () {
-            var accountNumber = $(this).data('account-number');
+<script>
+  $(document).ready(function () {
+    $('#viewQRCodeBtn').click(function () {
+      var accountNumber = $(this).data('account-number');
+      var department = $(this).data('department');
+      var imagePath = '';
 
-            $.ajax({
-              url: 'fetch_student_data.php',
-              type: 'POST',
-              data: { account_number: accountNumber },
-              success: function (response) {
-                var data = JSON.parse(response);
+      // Determine the correct image path based on department
+      switch(department) {
+        case 'CAS':
+          imagePath = '../cas-student-portal/qrCodeImages/';
+          break;
+        case 'CBE':
+          imagePath = '../cbe-student-portal/qrCodeImages/';
+          break;
+        case 'CCJ':
+          imagePath = '../ccj-student-portal/qrCodeImages/';
+          break;
+        case 'CE':
+          imagePath = '../ce-student-portal/qrCodeImages/';
+          break;
+        case 'COAHS':
+          imagePath = '../coahs-student-portal/qrCodeImages/';
+          break;
+        case 'CTE':
+          imagePath = '../cte-student-portal/qrCodeImages/';
+          break;
+        case 'ITE':
+          imagePath = '../ite-student-portal/qrCodeImages/';
+          break;
+        default:
+          imagePath = ''; // Default path or handle error
+      }
 
-                $('#qrCodeImage').attr('src', 'qrCodeImages/' + data.code + '?' + new Date().getTime());
-                $('#studentName').text(data.last_name.toUpperCase() + ', ' + data.first_name.toUpperCase() + ' ' + data.middle_name.charAt(0).toUpperCase() + '.');
-                $('#studentProgram').text(data.program);
-                $('#studentNumber').text(data.account_number);
+      $.ajax({
+        url: 'fetch_student_data.php',
+        type: 'POST',
+        data: { account_number: accountNumber },
+        success: function (response) {
+          var data = JSON.parse(response);
 
-                $('#qrCodeModal').modal('show');
-              },
-              error: function () {
-                alert('Failed to fetch student data.');
-              }
-            });
-          });
-        });
-      </script>
+          // Set the src attribute with the correct image path
+          $('#qrCodeImage').attr('src', imagePath + data.code + '?' + new Date().getTime());
+          $('#studentName').text(data.last_name.toUpperCase() + ', ' + data.first_name.toUpperCase() + ' ' + data.middle_name.charAt(0).toUpperCase() + '.');
+          $('#studentProgram').text(data.program);
+          $('#studentNumber').text(data.account_number);
+
+          $('#qrCodeModal').modal('show');
+        },
+        error: function () {
+          alert('Failed to fetch student data.');
+        }
+      });
+    });
+  });
+</script>
 
 
 
