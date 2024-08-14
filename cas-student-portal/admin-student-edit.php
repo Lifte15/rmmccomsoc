@@ -72,7 +72,7 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Admin' && $_SESSION['depa
                                     <div class="card-header">
                                         <h3 class="card-title text-center" style="font-size: 1.25rem; font-weight: bold;">
                                             Editing student</h3><br>
-                                        <p class="text-muted">Note: Do what makes you happy.
+                                        <p class="text-muted">Note: Ensure all changes are accurate and up-to-date. Verify the information before saving to prevent errors.
                                         </p>
                                         <hr>
 

@@ -1,10 +1,4 @@
-<!-- developer-enrolled-student-view.php and to see the student enrolled in that SY and Semester in officer form.
-Authors:
-  - Lowie Jay Orillo (lowie.jaymier@gmail.com)
-  - Caryl Mae Subaldo (subaldomae29@gmail.com)
-  - Brian Angelo Bognot (c09651052069@gmail.com)
-Last Modified: June 13, 2024
-Brief overview of the file's contents. -->
+
 <?php
 session_start();
 include "indexes/db_conn.php";
@@ -314,7 +308,7 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Developer' && $_SESSION['
                             <input type="hidden" value="<?php echo $department;
                             ; ?>">
                             <input type="hidden" value="<?php echo htmlspecialchars($current_url, ENT_QUOTES, 'UTF-8'); ?>">
-                            <a href='developer-student-view.php?account_number=<?php echo $row['account_number']; ?>&school_year=<?php echo $defaultYear; ?>&semester=<?php echo $defaultSemester; ?>&department=<?php echo $department; ?>'
+                            <a href='developer-student-view1.php?account_number=<?php echo $row['account_number']; ?>&school_year=<?php echo $defaultYear; ?>&semester=<?php echo $defaultSemester; ?>&department=<?php echo $department; ?>'
                               class='btn btn-success btn-sm'><i class="nav-icon fas fa-hand-pointer"></i> Select</a>
                           </form>
 
