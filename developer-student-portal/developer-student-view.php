@@ -10,7 +10,7 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Developer' && $_SESSION['
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Admin Student View | CTE Student Portal </title>
+    <title>Developer Student View | Dev Portal </title>
     <link rel="icon" type="image/png" href="favicon.ico" />
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet"
@@ -57,10 +57,14 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Developer' && $_SESSION['
 
                 <?php
                 $current_url = isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : '/';
+                $parsed_url = parse_url($current_url);
+                $base_url = 'developer-student-list.php';
+                $query_string = isset($parsed_url['query']) ? $parsed_url['query'] : '';
+                $new_url = $base_url . ($query_string ? '?' . $query_string : '');
                 ?>
 
                 <a id="addNewSubjectBtn" class="btn btn-secondary"
-                  href="<?php echo htmlspecialchars($current_url, ENT_QUOTES, 'UTF-8'); ?>">
+                  href="<?php echo htmlspecialchars($new_url, ENT_QUOTES, 'UTF-8'); ?>">
                   <i class="nav-icon fas fa-solid fa-chevron-left"></i> Back to Student
                 </a>
 
@@ -261,9 +265,14 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Developer' && $_SESSION['
                             </div>
                           </div>
                         </div>
+                        <?php
+                        
+                        ?>
 
                         <form method="post" action="indexes/developer-students-reset-password.php" class="d-inline">
                           <input type="hidden" name="account_number" value="<?php echo $row['account_number']; ?>">
+                          <input type="hidden" name="school_year" value="<?php echo $_GET['school_year']; ?>">
+                          <input type="hidden" name="semester" value="<?php echo $_GET['semester']; ?>">
                           <button type="submit" class="btn btn-danger btn-sm d-block">
                             <i class="nav-icon fas fa-solid fa-arrows-rotate"></i> Reset Password
                           </button>

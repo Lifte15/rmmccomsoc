@@ -1,20 +1,13 @@
 <?php
-/*
-admin-students-reset-password.php
-Authors:
-  - Lowie Jay Orillo (lowie.jaymier@gmail.com)
-  - Caryl Mae Subaldo (subaldomae29@gmail.com)
-  - Brian Angelo Bognot (c09651052069@gmail.com)
-Last Modified: June 20, 2024
-Overview: Resets the password for a student account by generating a default password based on the student's last name without spaces and their account number.
-*/
 
 session_start();
 
 include "db_conn.php";
 
-if (isset($_POST['account_number'])) {
+if (isset($_POST['account_number'])&& isset($_POST['school_year'])&& isset($_POST['semester'])) {
     $account_number = $_POST['account_number'];
+    $school_year = $_POST['school_year'];
+    $semester = $_POST['semester'];
 
     // Fetch user details
     $studentsql = "SELECT * FROM user WHERE account_number = ?";
@@ -34,12 +27,12 @@ if (isset($_POST['account_number'])) {
         $update_stmt = $conn->prepare($update_sql);
         $update_stmt->bind_param("ss", $defaulthashed_pass, $account_number);
         if ($update_stmt->execute()) {
-            header("Location: ../admin-student-view.php?account_number=$account_number&resetSuccess=Password reset successfully");
+            header("Location: ../developer-student-view.php?account_number=$account_number&school_year=$school_year&semester=$semester&resetSuccess=Password reset successfully");
         } else {
-            header("Location: ../admin-student-view.php?account_number=$account_number&resetError=Failed to reset password");
+            header("Location: ../developer-student-view.php?account_number=$account_number&school_year=$school_year&semester=$semester&resetError=Failed to reset password");
         }
     } else {
-        header("Location: ../admin-student-view.php?account_number=$account_number&resetError=Student not found");
+        header("Location: ../developer-student-view.php?account_number=$account_number&school_year=$school_year&semester=$semester&resetError=Student not found");
     }
 } else {
     header("Location: ../login.php");
