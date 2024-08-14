@@ -44,7 +44,7 @@ if (isset($_POST['addOfficer'])) {
     $code = mt_rand(10000, 99999);
 
     // Get the username of the admin who enrolled the officer
-    $enrolled_by = $_SESSION['username'];
+    $enrolled_by = $_SESSION['last_name'] . ", " . $_SESSION['first_name'];
 
     // Construct user data string
     $user_data = '&accountnumber=' . $accountnumber .

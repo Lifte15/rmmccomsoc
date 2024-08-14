@@ -1,5 +1,3 @@
-
-
 <?php
 session_start();
 include "indexes/db_conn.php";
@@ -55,7 +53,7 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Developer' && $_SESSION['
                         </div>
                     </div>
                 </div>
-                
+
                 <section class="content">
                     <div class="container">
 
@@ -114,12 +112,42 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Developer' && $_SESSION['
                                                     $displayedmiddle_name = $middle_name;
                                                     $displayedenrolled_by = $enrolled_by;
                                                     $displayedphone_number = $phone_number;
+
+
+                                                    $base_url = "";
+
+                                                    switch ($department) {
+                                                        case 'ITE':
+                                                            $base_url = "../ite-student-portal/profile-pictures/";
+                                                            break;
+                                                        case 'CE':
+                                                            $base_url = "../ce-student-portal/profile-pictures/";
+                                                            break;
+                                                        case 'CAS':
+                                                            $base_url = "../cas-student-portal/profile-pictures/";
+                                                            break;
+                                                        case 'CCJ':
+                                                            $base_url = "../ccj-student-portal/profile-pictures/";
+                                                            break;
+                                                        case 'CTE':
+                                                            $base_url = "../cte-student-portal/profile-pictures/";
+                                                            break;
+                                                        case 'CBE':
+                                                            $base_url = "../cbe-student-portal/profile-pictures/";
+                                                            break;
+                                                        case 'COAHS':
+                                                            $base_url = "../coahs-student-portal/profile-pictures/";
+                                                            break;
+                                                        default:
+                                                            $base_url = "profile-pictures/"; // default path if department doesn't match any case
+                                                            break;
+                                                    }
                                                     ?>
 
-                                                    <div class="text-center"> 
+                                                    <div class="text-center">
                                                         <img class="profile-picture img-fluid rounded-circle"
                                                             style="width: 200px; height: 200px; border-radius: 50%; object-fit: cover;"
-                                                            src="profile-pictures/<?php echo $profile_picture; ?>?<?php echo time(); ?>"
+                                                            src="<?php echo $base_url . $profile_picture . '?' . time(); ?>"
                                                             alt="User profile picture">
                                                     </div>
                                                     <br>
@@ -142,7 +170,7 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Developer' && $_SESSION['
                                                             <select class="form-control" id="program" name="program">
                                                                 <?php
                                                                 if ($department == "CTE") {
-                                                                $programs = ['BEEd', 'BECEd', 'BCAEd', 'BPEd', 'BTLEd', 'BSEd-English', 'BSEd-Filipino', 'BSEd-Math', 'BSEd-Science', 'BSEd-Social Studies'];
+                                                                    $programs = ['BEEd', 'BECEd', 'BCAEd', 'BPEd', 'BTLEd', 'BSEd-English', 'BSEd-Filipino', 'BSEd-Math', 'BSEd-Science', 'BSEd-Social Studies'];
                                                                 } elseif ($department == "CAS") {
                                                                     $programs = ['BAELS', 'BAPsyc', 'BACommArts', 'BSES', 'BSMath', 'BSSW', 'BPA', 'BPA-Dance', 'BSBio', 'BSESS-FSM'];
                                                                 } elseif ($department == "CBE") {
@@ -155,7 +183,7 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Developer' && $_SESSION['
                                                                     $programs = ['BSN', 'BSP', 'BSM'];
                                                                 } elseif ($department == "ITE") {
                                                                     $programs = ['BSIT', 'BSCS', 'BLIS', 'ACT'];
-                                                                } 
+                                                                }
                                                                 $cuProgram = htmlspecialchars($program, ENT_QUOTES, 'UTF-8');
                                                                 foreach ($programs as $prog) {
                                                                     $selected = $prog === $cuProgram ? 'selected' : '';

@@ -112,7 +112,7 @@ if (isset($_POST['addStudent'])) {
     $role = "Student";
 
     // Get the username of the officer who enrolled the student
-    $enrolled_by = $_SESSION['username'];
+    $enrolled_by = $_SESSION['last_name'] . ", " . $_SESSION['first_name'];
 
     $qrcodeImage = $code . ".png";
 

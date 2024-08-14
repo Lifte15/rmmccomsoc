@@ -237,7 +237,6 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Student' && $_SESSION['de
                 </section>
             </div>
             <?php include 'layout/fixed-footer.php'; ?>
-
             <aside class="control-sidebar control-sidebar-dark">
             </aside>
         </div>
