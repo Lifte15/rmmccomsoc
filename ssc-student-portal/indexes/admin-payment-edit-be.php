@@ -1,0 +1,70 @@
+<?php
+session_start();
+require ('db_conn.php');
+
+if (isset($_POST['editpaymentfor'])) {
+
+    // Function to validate and sanitize user input
+    function validate($data)
+    {
+        $data = trim($data); // Remove whitespace from the beginning and end of string
+        $data = stripslashes($data); // Remove backslashes
+        $data = htmlspecialchars($data); // Convert special characters to HTML entities
+        return $data;
+    }
+
+    // Sanitize and validate 
+    $payment_for_id = validate($_POST['payment_for_id']);
+    $payment_description = validate($_POST['payment_description']);
+    $organization = isset($_POST['organization']) ? $_POST['organization'] : [];
+    $date = validate($_POST['date']);
+    $schoolyear = validate($_POST['school_year']);
+    $semester = validate($_POST['semester']);
+    $amount = validate($_POST['amount']);
+    $organizations = implode(", ", $organization);
+
+
+    // Validate event name if empty
+    if (empty($payment_description)) {
+        header("Location: ../admin-payment-edit.php?payment_for_id=$payment_for_id&editPaymentforError=Payment description is required");
+        exit();
+    } // Validate date if empty
+    elseif (empty($organizations)) {
+        header("Location: ../admin-payment-edit.php?payment_for_id=$payment_for_id&editPaymentforError=Organization is required");
+        exit();
+    } // Validate school year if empty
+    elseif (empty($date)) {
+        header("Location: ../admin-payment-edit.php?payment_for_id=$payment_for_id&editPaymentforError=Date is required");
+        exit();
+    } // Validate school year if empty
+    elseif (empty($schoolyear)) {
+        header("Location: ../admin-payment-edit.php?payment_for_id=$payment_for_id&editPaymentforError=School year is required");
+        exit();
+    } // Validate semester if empty
+    elseif (empty($semester)) {
+        header("Location: ../admin-payment-edit.php?payment_for_id=$payment_for_id&editPaymentforError=Semester is required");
+        exit();
+    } elseif (empty($amount)) {
+        header("Location: ../admin-payment-edit.php?payment_for_id=$payment_for_id&editPaymentforError=Amount is required");
+        exit();
+    } else {
+        $sql_update_event = "UPDATE payment_for SET payment_description = ?, date = ?, school_year = ?, semester = ?, amount = ?, organization = ? WHERE payment_for_id = ?";
+        $stmt_update_event = mysqli_prepare($conn, $sql_update_event);
+        mysqli_stmt_bind_param($stmt_update_event, "ssssssi", $payment_description, $date, $schoolyear, $semester, $amount, $organizations, $payment_for_id);
+        $result_update_event = mysqli_stmt_execute($stmt_update_event);
+
+        // Redirect based on the result of the SQL query
+        if ($result_update_event) {
+            header("Location: ../admin-payment-view.php?payment_for_id=$payment_for_id&updatePaymentforSuccess=Updating payment information successfully");
+            exit();
+        } else {
+            header("Location: ../admin-payment-edit.php?payment_for_id=$payment_for_id&editPaymentforError=Failed to update event");
+            exit();
+        }
+    }
+
+} else {
+    header("Location: ../login.php");
+    exit();
+}
+?>
