@@ -55,7 +55,11 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Developer' && $_SESSION['
                 $semester = $_GET['semester'];
                 ?>
 
-                <a id="addNewSubjectBtn" class="btn btn-secondary" href="<?= $_SERVER['HTTP_REFERER']; ?>">
+<?php
+    $current_url =  isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : '/';
+?>
+
+                <a id="addNewSubjectBtn" class="btn btn-secondary" href="<?php echo htmlspecialchars($current_url, ENT_QUOTES, 'UTF-8'); ?>">
                   <i class="nav-icon fas fa-solid fa-chevron-left"></i> Back to Student
                 </a>
 
@@ -157,7 +161,7 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Developer' && $_SESSION['
                       </div>
                       <div class="col-md-auto ml-auto">
                         <a id="editStudentButton" class="btn btn-primary btn-sm d-block mb-2"
-                          href="developer-student-edit.php?account_number=<?php echo $row['account_number']; ?>">
+                          href="developer-student-edit.php?account_number=<?php echo $row['account_number']; ?>&school_year=<?php echo $_GET['school_year']; ?>&semester=<?php echo $_GET['semester']; ?>">
                           <i class="fa-solid fa-pen-to-square"></i> Edit this Student
                         </a>
 
@@ -349,12 +353,13 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Developer' && $_SESSION['
                       <table class="table table-striped">
                         <thead>
                           <tr>
-                            <th class="col-3">Event Name</th>
+                            <th class="col-2">Event Name</th>
+                            <th class="col-2 text-center">Event By</th>
                             <th class="col-2 text-center">Date</th>
                             <th class="col-2 text-center">School Year</th>
                             <th class="col-2 text-center">Semester</th>
                             <th class="col-2 text-center">Points</th>
-                            <th class="col-2 text-center">Remarks</th>
+                            <th class="col-1 text-center">Remarks</th>
                           </tr>
                         </thead>
                         <tbody>
@@ -378,6 +383,7 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Developer' && $_SESSION['
 
                           $query = "SELECT 
                       e.event_name, 
+                      e.department,
                       e.date, 
                       e.school_year, 
                       e.semester, 
@@ -399,6 +405,9 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Developer' && $_SESSION['
                               <tr>
                                 <td class="align-middle">
                                   <?php echo $row['event_name']; ?>
+                                </td>
+                                <td class="align-middle text-center">
+                                  <?php echo $row['department']; ?>
                                 </td>
                                 <td class="align-middle text-center">
                                   <?php echo $row['date']; ?>
@@ -430,7 +439,7 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Developer' && $_SESSION['
                               <?php
                             }
                           } else {
-                            echo "<tr><td colspan='6'>No data found.</td></tr>";
+                            echo "<tr><td colspan='7'>No data found.</td></tr>";
                           }
                           ?>
                         </tbody>
@@ -533,7 +542,7 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Developer' && $_SESSION['
                               <?php
                             }
                           } else {
-                            echo "<tr><td colspan='6'>No data found.</td></tr>";
+                            echo "<tr><td colspan='8'>No data found.</td></tr>";
                           }
                           ?>
                         </tbody>

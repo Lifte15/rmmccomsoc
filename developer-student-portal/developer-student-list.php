@@ -211,7 +211,7 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Developer' && $_SESSION['
                     <th class="text-center">Program</th>
                     <th class="text-center">Year Level</th>
                     <th class="text-center">College</th>
-                    <!-- <th class="text-center">Unenroll</th> -->
+                    <th class="text-center">Action</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -289,11 +289,14 @@ if (mysqli_num_rows($students) > 0) {
             <td class="text-center"><?php echo $row['program']; ?></td>
             <td class="text-center"><?php echo $row['year_level']; ?></td>
             <td class="text-center"><?php echo $row['department']; ?></td>
+            <td class="text-center">
+            <a href='developer-student-view.php?account_number=<?php echo $row['account_number']; ?>&school_year=<?php echo $school_year; ?>&semester=<?php echo $semester; ?>'
+                          class='btn btn-success btn-sm'><i class="nav-icon fas fa-hand-pointer"></i> Select</a></td>
         </tr>
         <?php
     }
 } else {
-    echo "<tr><td colspan='8' class='text-center'>No students found for the specified School Year and Semester.</td></tr>";
+    echo "<tr><td colspan='9' class='text-center'>No students found for the specified School Year and Semester.</td></tr>";
 }
 ?>
 
