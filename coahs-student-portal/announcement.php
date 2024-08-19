@@ -230,7 +230,7 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Student' && $_SESSION['de
                                 echo "<div class='col-12 text-center row justify-content-center align-items-center' style='height: 50vh;'><h2><strong>No posted announcement</strong></h2></div>";
                             }
                         } else {
-                            echo "<div class='col-12 text-center row justify-content-center align-items-center' style='height: 50vh;'><h2><strong>Hala dika pa enrolled? lala mo</strong></h2></div>";
+                            echo "<div class='col-12 text-center row justify-content-center align-items-center' style='height: 50vh;'><h2><strong>Enrollment not found</strong></h2></div>";
                         }
                         ?>
                     </div>

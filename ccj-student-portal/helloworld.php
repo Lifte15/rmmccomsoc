@@ -34,9 +34,9 @@
 <body>
     <section>
         <div class="container">
-           <h1 class="helloworld"><bdo dir="rtl">Hala bat ka nag IT?! lala mo!</bdo></h1>
-           <h2 class="helloworld"><bdo dir="rtl">Stop this MADNESS!!! mag shift kana!</bdo></h2>
-           <h2 class="helloworld"><bdo dir="rtl">Please lang maawa ka sa sarili mo huhuhuhu</bdo></h2>
+        <h1 class="helloworld"><bdo dir="rtl">Hala Pulis ka?!Pwede ba ikulong mo na lang ako!</bdo></h1>
+           <h2 class="helloworld"><bdo dir="rtl">Gusto ko nalang nasa PRESINTO! kaysa pagpatuloy ang BSIT!</bdo></h2>
+           <h2 class="helloworld"><bdo dir="rtl">Please lang, maawa ka sa akin, huhuhuhu</bdo></h2>
         </div>
     </section>
 </body>
