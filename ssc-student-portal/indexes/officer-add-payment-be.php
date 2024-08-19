@@ -29,7 +29,7 @@ if (isset($_POST['addEvent'])) {
     $schoolyear = validate($_POST['school_year']);
     $semester = validate($_POST['semester']);
     $amount = validate($_POST['amount']);
-    $department='ITE';
+    $department='SSC';
 
     // Construct user data string
     $user_data = 'payment_description=' . $payment_description .

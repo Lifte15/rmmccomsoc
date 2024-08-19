@@ -3,7 +3,7 @@
 
 <?php
 session_start();
-if (isset($_SESSION['role']) && $_SESSION['role'] === 'Officer' && $_SESSION['department'] === 'ITE') {
+if (isset($_SESSION['role']) && $_SESSION['role'] === 'Officer' && $_SESSION['department'] === 'SSC') {
   if ($_SESSION['position'] === 'Staff') {
     header("Location: officer-announcement.php?school_year=$defaultYear&semester=$defaultSemester");
     exit();
@@ -16,7 +16,7 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Officer' && $_SESSION['de
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Officer Add Bulk Student | ITE Student Portal</title>
+    <title>Officer Add Bulk Student | SSC Student Portal</title>
     <link rel="icon" type="image/png" href="favicon.ico" />
 
     <!-- Google Font: Source Sans Pro -->

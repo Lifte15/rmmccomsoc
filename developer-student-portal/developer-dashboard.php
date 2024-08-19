@@ -417,7 +417,7 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Developer' && $_SESSION['
 
 
 
-              <!-- for number of students of CBE -->
+              <!-- for number of students of COAHS -->
               <?php
 
               $COAHSStudentquery = "SELECT COUNT(*) AS count FROM user 
@@ -449,13 +449,7 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Developer' && $_SESSION['
                     class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
                 </div>
               </div>
-
-
-
-
-
             </div>
-
 
         </section>
       </div>

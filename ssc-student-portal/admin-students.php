@@ -1,7 +1,7 @@
 <?php
 session_start();
 include "indexes/db_conn.php";
-if (isset($_SESSION['role']) && $_SESSION['role'] === 'Admin' && $_SESSION['department'] === 'ITE') {
+if (isset($_SESSION['role']) && $_SESSION['role'] === 'Admin' && $_SESSION['department'] === 'SSC') {
 ?>
 
 <!DOCTYPE html>
@@ -10,7 +10,7 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Admin' && $_SESSION['depa
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Admin Student Page | ITE Student Portal</title>
+  <title>Admin Student Page | SSC Student Portal</title>
   <link rel="icon" type="image/png" href="favicon.ico" />
 
   <!-- Google Font: Source Sans Pro -->
@@ -186,12 +186,12 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Admin' && $_SESSION['depa
                   $condition_string = implode(" AND ", $conditions);
 
                   if (!empty($condition_string)) {
-                    $studentssql = "SELECT * FROM user WHERE $condition_string AND $column LIKE '%$search_input%' AND role = 'Student' AND department = 'ITE' ORDER BY program ASC, year_level ASC, last_name ASC";
+                    $studentssql = "SELECT * FROM user WHERE $condition_string AND $column LIKE '%$search_input%' AND role = 'Student' AND department = 'SSC' ORDER BY program ASC, year_level ASC, last_name ASC";
                   } else {
-                    $studentssql = "SELECT * FROM user WHERE $column LIKE '%$search_input%' AND role = 'Student' AND department = 'ITE' ORDER BY program ASC, year_level ASC, last_name ASC";
+                    $studentssql = "SELECT * FROM user WHERE $column LIKE '%$search_input%' AND role = 'Student' AND department = 'SSC' ORDER BY program ASC, year_level ASC, last_name ASC";
                   }
                 } else {
-                  $studentssql = "SELECT * FROM user WHERE role = 'Student' AND department = 'ITE' ORDER BY program ASC, year_level ASC, last_name ASC";
+                  $studentssql = "SELECT * FROM user WHERE role = 'Student' AND department = 'SSC' ORDER BY program ASC, year_level ASC, last_name ASC";
                 }
                 $result = $conn->query($studentssql);
                 if ($result->num_rows > 0) {

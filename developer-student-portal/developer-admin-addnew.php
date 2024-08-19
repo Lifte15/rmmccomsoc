@@ -151,6 +151,8 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Developer' && $_SESSION['
                                 echo 'selected'; ?>>CTE</option>
                               <option value="COAHS" <?php if ($_GET['department'] == 'COAHS')
                                 echo 'selected'; ?>>COAHS</option>
+                              <option value="SSC" <?php if ($_GET['department'] == 'SSC')
+                                echo 'selected'; ?>>SSC</option>
                             </select>
                           <?php } else { ?>
                             <select class="form-control" id="department" name="department">
@@ -162,6 +164,7 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Developer' && $_SESSION['
                               <option value="CBE">CBE</option>
                               <option value="CTE">CTE</option>
                               <option value="COAHS">COAHS</option>
+                              <option value="SSC">SSC</option>
                             </select>
                           <?php } ?>
                         </div>

@@ -31,13 +31,13 @@ session_start();
   }
 
 
-if (isset($_SESSION['role']) && $_SESSION['role'] === 'Admin' && $_SESSION['department'] === 'ITE') {
+if (isset($_SESSION['role']) && $_SESSION['role'] === 'Admin' && $_SESSION['department'] === 'SSC') {
     header("Location: ../admin-dashboard.php?school_year=$defaultYear&semester=$defaultSemester");
     exit();
-}elseif (isset($_SESSION['role']) && $_SESSION['role'] === 'Officer' && $_SESSION['department'] === 'ITE') {
+}elseif (isset($_SESSION['role']) && $_SESSION['role'] === 'Officer' && $_SESSION['department'] === 'SSC') {
     header("Location: ../officer-dashboard.php?school_year=$defaultYear&semester=$defaultSemester");
     exit();
-}elseif (isset($_SESSION['role']) && $_SESSION['role'] === 'Student' && $_SESSION['department'] === 'ITE') {
+}elseif (isset($_SESSION['role']) && $_SESSION['role'] === 'Student' && $_SESSION['department'] === 'SSC') {
     header("Location: ../dashboard.php?school_year=$defaultYear&semester=$defaultSemester");
     exit();
 }else{

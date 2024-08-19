@@ -17,7 +17,7 @@ if (isset($_GET['code'])) {
     $googleEmail = $google_account_info['email'];
 
     //checking if email is existing in the database
-    $stmt = $conn->prepare("SELECT * FROM user WHERE email = ? AND department='ITE'");
+    $stmt = $conn->prepare("SELECT * FROM user WHERE email = ? AND department='SSC'");
     $stmt->bind_param("s", $googleEmail);
     $stmt->execute();
     $result = $stmt->get_result();

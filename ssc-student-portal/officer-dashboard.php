@@ -1,7 +1,7 @@
 
 <?php
 session_start();
-if (isset($_SESSION['role']) && $_SESSION['role'] === 'Officer' && $_SESSION['department'] === 'ITE') { 
+if (isset($_SESSION['role']) && $_SESSION['role'] === 'Officer' && $_SESSION['department'] === 'SSC') { 
   // Check if the user's position is not 'Staff'
   if ($_SESSION['position'] === 'Staff') {
     header("Location: officer-announcement.php?school_year=$defaultYear&semester=$defaultSemester");
@@ -15,7 +15,7 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Officer' && $_SESSION['de
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Officer Dashboard | ITE Student Portal</title>
+    <title>Officer Dashboard | SSC Student Portal</title>
     <link rel="icon" type="image/png" href="favicon.ico" />
 
     <!-- Google Font: Source Sans Pro -->
@@ -165,7 +165,7 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Officer' && $_SESSION['de
                  WHERE user.role = 'Student' 
                  AND enrolled.school_year = '$schoolYear' 
                  AND enrolled.semester = '$semester'
-                 AND user.department='ITE'";
+                 AND user.department='SSC'";
               $studentresult = mysqli_query($conn, $studentquery);
 
               if ($studentresult) {
@@ -202,7 +202,7 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Officer' && $_SESSION['de
               $eventsquery = "SELECT COUNT(*) AS count FROM events 
                  WHERE events.school_year = '$schoolYear' 
                  AND events.semester = '$semester'
-                 AND events.department='ITE'";
+                 AND events.department='SSC'";
               $eventsresult = mysqli_query($conn, $eventsquery);
 
               if ($eventsresult) {
@@ -236,7 +236,7 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Officer' && $_SESSION['de
               $paymentforquery = "SELECT COUNT(*) AS count FROM payment_for
                  WHERE payment_for.school_year = '$schoolYear' 
                  AND payment_for.semester = '$semester'
-                 AND payment_for.department='ITE'";
+                 AND payment_for.department='SSC'";
               $paymentforresult = mysqli_query($conn, $paymentforquery);
 
               if ($paymentforresult) {
@@ -488,7 +488,7 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Officer' && $_SESSION['de
                      AND u.year_level = '1' 
                      AND e.school_year = '$schoolYear' 
                      AND e.semester = '$semester'
-                     AND u.department='ITE'";
+                     AND u.department='SSC'";
     $FirstYearresult = mysqli_query($conn, $FirstYearquery);
 
     if ($FirstYearresult) {
@@ -506,7 +506,7 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Officer' && $_SESSION['de
                      AND u.year_level = '2' 
                      AND e.school_year = '$schoolYear' 
                      AND e.semester = '$semester'
-                     AND u.department='ITE'";
+                     AND u.department='SSC'";
     $SecondYearresult = mysqli_query($conn, $SecondYearquery);
 
     if ($SecondYearresult) {
@@ -524,7 +524,7 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Officer' && $_SESSION['de
                      AND u.year_level = '3' 
                      AND e.school_year = '$schoolYear' 
                      AND e.semester = '$semester'
-                     AND u.department='ITE'";
+                     AND u.department='SSC'";
     $ThirdYearresult = mysqli_query($conn, $ThirdYearquery);
 
     if ($ThirdYearresult) {
@@ -542,7 +542,7 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Officer' && $_SESSION['de
                      AND u.year_level = '4' 
                      AND e.school_year = '$schoolYear' 
                      AND e.semester = '$semester'
-                     AND u.department='ITE'";
+                     AND u.department='SSC'";
     $FourthYearresult = mysqli_query($conn, $FourthYearquery);
 
     if ($FourthYearresult) {

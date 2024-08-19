@@ -22,7 +22,7 @@ if (isset($_POST['addOfficer'])) {
     $middlenameNotProper = validate($_POST['middlename']);
     $phonenumber = validate($_POST['phonenumber']);
     $gender = validate($_POST['gender']);
-    $department = "ITE";
+    $department = "SSC";
 
     // Convert the names to proper case
     $lastname = ucwords(strtolower($lastnameNotProper));

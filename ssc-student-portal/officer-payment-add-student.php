@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Officer Payment Add Student | ITE Student Portal </title>
+    <title>Officer Payment Add Student | SSC Student Portal </title>
     <link rel="icon" type="image/png" href="favicon.ico" />
 
     <!-- Google Font: Source Sans Pro -->
@@ -43,7 +43,7 @@ function validate($data)
     return mysqli_real_escape_string($conn, $data);
 }
 
-if (isset($_SESSION['role']) && $_SESSION['role'] === 'Officer' && $_SESSION['department'] === 'ITE') {
+if (isset($_SESSION['role']) && $_SESSION['role'] === 'Officer' && $_SESSION['department'] === 'SSC') {
     if (isset($_GET['payment_for_id'])) {
         $payment_for_id = intval($_GET['payment_for_id']);
 
@@ -183,7 +183,7 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Officer' && $_SESSION['de
                                  AND u.role = 'Student'
                                  AND p.account_number IS NULL
                                  AND $condition_string
-                                 AND u.department='ITE'
+                                 AND u.department='SSC'
                                ORDER BY u.program ASC, u.year_level ASC, u.last_name ASC";
 
                         } else {
@@ -195,7 +195,7 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Officer' && $_SESSION['de
                                  AND e.semester = '$semester'
                                  AND u.role = 'Student'
                                  AND p.account_number IS NULL
-                                 AND u.department='ITE'
+                                 AND u.department='SSC'
                                ORDER BY u.program ASC, u.year_level ASC, u.last_name ASC";
                         }
                     } else {
@@ -207,7 +207,7 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Officer' && $_SESSION['de
                                  AND e.semester = '$semester'
                                  AND u.role = 'Student'
                                  AND p.account_number IS NULL
-                                 AND u.department='ITE'
+                                 AND u.department='SSC'
                                ORDER BY u.program ASC, u.year_level ASC, u.last_name ASC";
                     }
                     $result = $conn->query($studentsql);

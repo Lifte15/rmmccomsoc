@@ -1,5 +1,3 @@
-
-
 <?php
 session_start();
 include "indexes/db_conn.php";
@@ -143,6 +141,9 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Developer' && $_SESSION['
                             $base_url = "../cbe-student-portal/profile-pictures/";
                             break;
                           case 'COAHS':
+                            $base_url = "../coahs-student-portal/profile-pictures/";
+                            break;
+                          case 'SSC':
                             $base_url = "../coahs-student-portal/profile-pictures/";
                             break;
                           default:

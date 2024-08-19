@@ -4,7 +4,7 @@
 <?php
 session_start();
 include "indexes/db_conn.php";
-if (isset($_SESSION['role']) && $_SESSION['role'] === 'Officer' && $_SESSION['department'] === 'ITE') { 
+if (isset($_SESSION['role']) && $_SESSION['role'] === 'Officer' && $_SESSION['department'] === 'SSC') { 
   ?>
 
   <!DOCTYPE html>
@@ -13,7 +13,7 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Officer' && $_SESSION['de
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Officer Announcement | ITE Student Portal</title>
+    <title>Officer Announcement | SSC Student Portal</title>
     <link rel="icon" type="image/png" href="favicon.ico" />
 
     <!-- Google Font: Source Sans Pro -->
@@ -161,7 +161,7 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Officer' && $_SESSION['de
           <?php
           $school_year_filter = isset($_GET['school_year']) && $_GET['school_year'] != 'All' ? $_GET['school_year'] : '';
           $semester_filter = isset($_GET['semester']) && $_GET['semester'] != 'All' ? $_GET['semester'] : '';
-          $department_filter = 'ITE';  
+          $department_filter = 'SSC';  
         
           $sql = "SELECT * FROM announcement";
           if ($school_year_filter || $semester_filter || $department_filter) {

@@ -3,7 +3,7 @@
 <?php
 session_start();
 include "indexes/db_conn.php";
-if (isset($_SESSION['role']) && $_SESSION['role'] === 'Admin' && $_SESSION['department'] === 'ITE') {
+if (isset($_SESSION['role']) && $_SESSION['role'] === 'Admin' && $_SESSION['department'] === 'SSC') {
   ?>
 
   <!DOCTYPE html>
@@ -12,7 +12,7 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Admin' && $_SESSION['depa
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Admin Enroll Page | ITE Student Portal </title>
+    <title>Admin Enroll Page | SSC Student Portal </title>
     <link rel="icon" type="image/png" href="favicon.ico" />
 
     <!-- Google Font: Source Sans Pro -->
@@ -199,7 +199,7 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Admin' && $_SESSION['depa
                                 WHERE $column LIKE '%$search_input%' 
                                 AND e.school_year = '$school_year' 
                                 AND e.semester = '$semester' 
-                                AND u.department='ITE'
+                                AND u.department='SSC'
                                 $condition_string";
 
                     $students = mysqli_query($conn, $studentssql);
@@ -210,7 +210,7 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Admin' && $_SESSION['depa
                                 ON u.account_number = e.account_number
                                 WHERE e.school_year = '$school_year' 
                                 AND e.semester = '$semester'
-                                AND u.department='ITE'";
+                                AND u.department='SSC'";
 
                     $students = mysqli_query($conn, $studentssql);
                   }

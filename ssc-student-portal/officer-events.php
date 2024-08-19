@@ -1,7 +1,7 @@
 <?php
 session_start();
 include "indexes/db_conn.php";
-if (isset($_SESSION['role']) && $_SESSION['role'] === 'Officer' && $_SESSION['department'] === 'ITE') {
+if (isset($_SESSION['role']) && $_SESSION['role'] === 'Officer' && $_SESSION['department'] === 'SSC') {
   ?>
 
   <!DOCTYPE html>
@@ -10,7 +10,7 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Officer' && $_SESSION['de
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Officer Events Page | ITE Student Portal</title>
+    <title>Officer Events Page | SSC Student Portal</title>
     <link rel="icon" type="image/png" href="favicon.ico" />
 
     <!-- Google Font: Source Sans Pro -->
@@ -158,20 +158,20 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Officer' && $_SESSION['de
                     if (!empty($conditions)) {
                       $condition_string = implode(" AND ", $conditions);
                       if (!empty($search_input)) {
-                        $eventssql = "SELECT * FROM events WHERE $condition_string AND event_name LIKE '%$search_input%' AND department='ITE' AND FIND_IN_SET('$organization', organization)";
+                        $eventssql = "SELECT * FROM events WHERE $condition_string AND event_name LIKE '%$search_input%' AND department='SSC' AND FIND_IN_SET('$organization', organization)";
                       } else {
-                        $eventssql = "SELECT * FROM events WHERE $condition_string AND department='ITE' AND FIND_IN_SET('$organization', organization)";
+                        $eventssql = "SELECT * FROM events WHERE $condition_string AND department='SSC' AND FIND_IN_SET('$organization', organization)";
                       }
                     } else {
                       if (!empty($search_input)) {
-                        $eventssql = "SELECT * FROM events WHERE event_name LIKE '%$search_input%' AND department='ITE' AND FIND_IN_SET('$organization', organization)";
+                        $eventssql = "SELECT * FROM events WHERE event_name LIKE '%$search_input%' AND department='SSC' AND FIND_IN_SET('$organization', organization)";
                       } else {
-                        $eventssql = "SELECT * FROM events WHERE department='ITE' AND FIND_IN_SET('$organization', organization)";
+                        $eventssql = "SELECT * FROM events WHERE department='SSC' AND FIND_IN_SET('$organization', organization)";
                       }
                     }
                   } else {
                     $organization = mysqli_real_escape_string($conn, $_SESSION['organization']);
-                    $eventssql = "SELECT * FROM events WHERE department='ITE' AND FIND_IN_SET('$organization', organization)";
+                    $eventssql = "SELECT * FROM events WHERE department='SSC' AND FIND_IN_SET('$organization', organization)";
                   }
 
                   $result = $conn->query($eventssql);

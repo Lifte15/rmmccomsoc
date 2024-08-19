@@ -15,7 +15,7 @@ if (isset($_SESSION['verify'])) {
     <head>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="icon" type="image/png" href="favicon.ico" />
-        <title>Account Verification | ITE Student Portal</title>
+        <title>Account Verification | SSC Student Portal</title>
         <!-- Font Awesome -->
         <link rel="stylesheet" href="AdminLTE-3.2.0/plugins/fontawesome-free/css/all.min.css">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">

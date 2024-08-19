@@ -41,7 +41,7 @@
   <a href="officer-dashboard.php?school_year=<?php echo $defaultYear; ?>&semester=<?php echo $defaultSemester; ?>" class="brand-link">
     <img src="images/iteportal-sidebar-logo.png" alt="AdminLTE Logo" class="brand-image elevation-3"
       style="opacity: .8">
-    <span class="brand-text font-weight-light">ITE Student Portal</span>
+    <span class="brand-text font-weight-light">SSC Student Portal</span>
   </a>
 
   <!-- Sidebar -->
@@ -99,14 +99,14 @@
         <?php
         if ($position != 'Staff') {
           ?>
-          <li class="nav-item ">
+          <!-- <li class="nav-item ">
             <a href="officer-students.php" class="nav-link">
               <i class="nav-icon fas fa-solid fa-users"></i>
               <p>
                 Students
               </p>
             </a>
-          </li>
+          </li> -->
 
           <li class="nav-item ">
             <a href="officer-enrolled-students.php" class="nav-link">

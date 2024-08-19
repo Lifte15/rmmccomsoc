@@ -6,7 +6,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Officer Import Attendance | ITE Student Portal</title>
+  <title>Officer Import Attendance | SSC Student Portal</title>
   <link rel="icon" type="image/png" href="favicon.ico" />
 
   <!-- Google Font: Source Sans Pro -->
@@ -44,7 +44,7 @@ function validate($data)
   return mysqli_real_escape_string($conn, $data);
 }
 
-if (isset($_SESSION['role']) && $_SESSION['role'] === 'Officer' && $_SESSION['department'] === 'ITE') {
+if (isset($_SESSION['role']) && $_SESSION['role'] === 'Officer' && $_SESSION['department'] === 'SSC') {
   if (isset($_GET['event_id'])) {
     $event_id = intval($_GET['event_id']);
 

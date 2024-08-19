@@ -31,7 +31,7 @@ if (isset($_POST['addAnnouncement'])) {
 
     // Get the user role from the session
     $postedBy = $_SESSION['position'] ;
-    $department = 'ITE';
+    $department = 'SSC';
 
     // Set the default timezone and the current date and time
     date_default_timezone_set('Asia/Manila');

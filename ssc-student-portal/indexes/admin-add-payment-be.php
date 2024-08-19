@@ -20,7 +20,7 @@ if (isset($_POST['addEvent'])) {
     $schoolyear = validate($_POST['school_year']);
     $semester = validate($_POST['semester']);
     $amount = validate($_POST['amount']);
-    $department='ITE';
+    $department='SSC';
 
     $organizations = implode(", ", $organization);
 

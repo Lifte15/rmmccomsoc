@@ -62,7 +62,7 @@ if (isset($_POST['login'])) {
         }
 
         // Select account based on account number and role
-        $sql = "SELECT * FROM user WHERE account_number=? AND role=? AND department='ITE'";
+        $sql = "SELECT * FROM user WHERE account_number=? AND role=? AND department='SSC'";
         $stmt = mysqli_prepare($conn, $sql);
         mysqli_stmt_bind_param($stmt, "ss", $accountnumber, $role);
         mysqli_stmt_execute($stmt);

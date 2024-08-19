@@ -3,7 +3,7 @@
 <?php
 session_start();
 include "indexes/db_conn.php";
-if (isset($_SESSION['role']) && $_SESSION['role'] === 'Officer' && $_SESSION['department'] === 'ITE') {
+if (isset($_SESSION['role']) && $_SESSION['role'] === 'Officer' && $_SESSION['department'] === 'SSC') {
   $school_year = $_GET['school_year'];
   $semester = $_GET['semester'];
 
@@ -15,7 +15,7 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Officer' && $_SESSION['de
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Officer Add Enrolee Page | ITE Student Portal</title>
+    <title>Officer Add Enrolee Page | SSC Student Portal</title>
     <link rel="icon" type="image/png" href="favicon.ico" />
 
     <!-- Google Font: Source Sans Pro -->
@@ -141,7 +141,7 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Officer' && $_SESSION['de
                                 WHERE u.role = 'Student' 
                                 AND e.account_number IS NULL 
                                 AND $condition_string 
-                                AND u.department='ITE'
+                                AND u.department='SSC'
                                 ORDER BY u.program ASC, u.year_level ASC, u.last_name ASC";
               } else {
                 $studentsql = "SELECT u.account_number, u.last_name, u.first_name, u.middle_name, u.program, u.year_level 
@@ -151,7 +151,7 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Officer' && $_SESSION['de
                             AND e.school_year = '$school_year' 
                             AND e.semester = '$semester' 
                             WHERE u.role = 'Student' 
-                            AND u.department='ITE'
+                            AND u.department='SSC'
                             AND e.account_number IS NULL
                             ORDER BY u.program ASC, u.year_level ASC, u.last_name ASC";
               }
@@ -164,7 +164,7 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Officer' && $_SESSION['de
                             AND e.school_year = '$school_year' 
                             AND e.semester = '$semester' 
                             WHERE u.role = 'Student' 
-                            AND u.department='ITE'
+                            AND u.department='SSC'
                             AND e.account_number IS NULL
                             ORDER BY u.program ASC, u.year_level ASC, u.last_name ASC";
             }

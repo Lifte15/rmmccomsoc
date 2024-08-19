@@ -215,35 +215,35 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Developer' && $_SESSION['
                   </tr>
                 </thead>
                 <tbody>
-                <?php
-if (isset($_GET['search'])) {
-    $search_input = $_GET['search_input'];
-    $column = $_GET['column'];
-    $year_level = $_GET['year_level'];
-    $program = $_GET['program'];
-    $department = $_GET['department'];
+                  <?php
+                  if (isset($_GET['search'])) {
+                    $search_input = $_GET['search_input'];
+                    $column = $_GET['column'];
+                    $year_level = $_GET['year_level'];
+                    $program = $_GET['program'];
+                    $department = $_GET['department'];
 
-    $conditions = array();
+                    $conditions = array();
 
-    if (!empty($year_level)) {
-        $conditions[] = "u.year_level = '$year_level'";
-    }
+                    if (!empty($year_level)) {
+                      $conditions[] = "u.year_level = '$year_level'";
+                    }
 
-    if (!empty($program)) {
-        $conditions[] = "u.program = '$program'";
-    }
+                    if (!empty($program)) {
+                      $conditions[] = "u.program = '$program'";
+                    }
 
-    if (!empty($department)) {
-        $conditions[] = "u.department = '$department'";
-    }
+                    if (!empty($department)) {
+                      $conditions[] = "u.department = '$department'";
+                    }
 
-    $condition_string = implode(" AND ", $conditions);
+                    $condition_string = implode(" AND ", $conditions);
 
-    if (!empty($condition_string)) {
-        $condition_string = "AND " . $condition_string;
-    }
+                    if (!empty($condition_string)) {
+                      $condition_string = "AND " . $condition_string;
+                    }
 
-    $studentssql = "SELECT u.account_number, u.last_name, u.first_name, u.middle_name, u.program, u.year_level, u.department 
+                    $studentssql = "SELECT u.account_number, u.last_name, u.first_name, u.middle_name, u.program, u.year_level, u.department 
                     FROM user u
                     INNER JOIN enrolled e 
                     ON u.account_number = e.account_number
@@ -253,15 +253,15 @@ if (isset($_GET['search'])) {
                     $condition_string
                     ORDER BY u.department ASC, u.program ASC, u.year_level ASC, u.last_name ASC";
 
-    $students = mysqli_query($conn, $studentssql);
+                    $students = mysqli_query($conn, $studentssql);
 
-    if (!$students) {
-        // Display SQL error for debugging
-        echo "SQL Error: " . mysqli_error($conn);
-        exit();
-    }
-} else {
-    $studentssql = "SELECT u.account_number, u.last_name, u.first_name, u.middle_name, u.program, u.year_level, u.department 
+                    if (!$students) {
+                      // Display SQL error for debugging
+                      echo "SQL Error: " . mysqli_error($conn);
+                      exit();
+                    }
+                  } else {
+                    $studentssql = "SELECT u.account_number, u.last_name, u.first_name, u.middle_name, u.program, u.year_level, u.department 
                     FROM user u
                     INNER JOIN enrolled e 
                     ON u.account_number = e.account_number
@@ -269,36 +269,37 @@ if (isset($_GET['search'])) {
                     AND e.semester = '$semester'
                     ORDER BY u.department ASC, u.program ASC, u.year_level ASC, u.last_name ASC";
 
-    $students = mysqli_query($conn, $studentssql);
+                    $students = mysqli_query($conn, $studentssql);
 
-    if (!$students) {
-        // Display SQL error for debugging
-        echo "SQL Error: " . mysqli_error($conn);
-        exit();
-    }
-}
+                    if (!$students) {
+                      // Display SQL error for debugging
+                      echo "SQL Error: " . mysqli_error($conn);
+                      exit();
+                    }
+                  }
 
-if (mysqli_num_rows($students) > 0) {
-    while ($row = mysqli_fetch_assoc($students)) {
-        ?>
-        <tr>
-            <td><?php echo $row['account_number']; ?></td>
-            <td class="text-center"><?php echo $row['last_name']; ?></td>
-            <td class="text-center"><?php echo $row['first_name']; ?></td>
-            <td class="text-center"><?php echo $row['middle_name']; ?></td>
-            <td class="text-center"><?php echo $row['program']; ?></td>
-            <td class="text-center"><?php echo $row['year_level']; ?></td>
-            <td class="text-center"><?php echo $row['department']; ?></td>
-            <td class="text-center">
-            <a href='developer-student-view.php?account_number=<?php echo $row['account_number']; ?>&school_year=<?php echo $school_year; ?>&semester=<?php echo $semester; ?>'
-                          class='btn btn-success btn-sm'><i class="nav-icon fas fa-hand-pointer"></i> Select</a></td>
-        </tr>
-        <?php
-    }
-} else {
-    echo "<tr><td colspan='9' class='text-center'>No students found for the specified School Year and Semester.</td></tr>";
-}
-?>
+                  if (mysqli_num_rows($students) > 0) {
+                    while ($row = mysqli_fetch_assoc($students)) {
+                      ?>
+                      <tr>
+                        <td><?php echo $row['account_number']; ?></td>
+                        <td class="text-center"><?php echo $row['last_name']; ?></td>
+                        <td class="text-center"><?php echo $row['first_name']; ?></td>
+                        <td class="text-center"><?php echo $row['middle_name']; ?></td>
+                        <td class="text-center"><?php echo $row['program']; ?></td>
+                        <td class="text-center"><?php echo $row['year_level']; ?></td>
+                        <td class="text-center"><?php echo $row['department']; ?></td>
+                        <td class="text-center">
+                          <a href='developer-student-view.php?account_number=<?php echo $row['account_number']; ?>&school_year=<?php echo $school_year; ?>&semester=<?php echo $semester; ?>'
+                            class='btn btn-success btn-sm'><i class="nav-icon fas fa-hand-pointer"></i> Select</a>
+                        </td>
+                      </tr>
+                      <?php
+                    }
+                  } else {
+                    echo "<tr><td colspan='9' class='text-center'>No students found for the specified School Year and Semester.</td></tr>";
+                  }
+                  ?>
 
                 </tbody>
               </table>

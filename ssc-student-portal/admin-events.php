@@ -1,7 +1,7 @@
 <?php
 session_start();
 include "indexes/db_conn.php";
-if (isset($_SESSION['role']) && $_SESSION['role'] === 'Admin' && $_SESSION['department'] === 'ITE') {
+if (isset($_SESSION['role']) && $_SESSION['role'] === 'Admin' && $_SESSION['department'] === 'SSC') {
   ?>
 
   <!DOCTYPE html>
@@ -10,7 +10,7 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Admin' && $_SESSION['depa
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Admin Events Page | ITE Student Portal</title>
+    <title>Admin Events Page | SSC Student Portal</title>
     <link rel="icon" type="image/png" href="favicon.ico" />
 
     <!-- Google Font: Source Sans Pro -->
@@ -123,7 +123,7 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Admin' && $_SESSION['depa
                 <thead>
                   <tr>
                     <th class="col-3">Event Name</th>
-                    <th class="col-2 text-center">Organization</th>
+                    <!-- <th class="col-2 text-center">Organization</th> -->
                     <th class="col-1 text-center">Date</th>
                     <th class="col-2 text-center">School Year</th>
                     <th class="col-2 text-center">Semester</th>
@@ -154,12 +154,12 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Admin' && $_SESSION['depa
 
                     if (!empty($conditions)) {
                       $condition_string = implode(" AND ", $conditions);
-                      $eventssql = "SELECT * FROM events WHERE $condition_string AND event_name LIKE '%$search_input%' AND department='ITE'";
+                      $eventssql = "SELECT * FROM events WHERE $condition_string AND event_name LIKE '%$search_input%' AND department='SSC'";
                     } else {
-                      $eventssql = "SELECT * FROM events WHERE event_name LIKE '%$search_input%' AND department='ITE'";
+                      $eventssql = "SELECT * FROM events WHERE event_name LIKE '%$search_input%' AND department='SSC'";
                     }
                   } else {
-                    $eventssql = "SELECT * FROM events WHERE department='ITE'";
+                    $eventssql = "SELECT * FROM events WHERE department='SSC'";
                   }
                   $result = $conn->query($eventssql);
                   if ($result->num_rows > 0) {
@@ -169,9 +169,9 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Admin' && $_SESSION['depa
                         <td class="align-middle">
                           <?php echo $row['event_name']; ?>
                         </td>
-                        <td class="align-middle text-center">
+                        <!-- <td class="align-middle text-center">
                           <?php echo $row['organization']; ?>
-                        </td>
+                        </td> -->
                         <td class="align-middle text-center">
                           <?php echo $row['date']; ?>
                         </td>

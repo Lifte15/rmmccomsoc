@@ -3,7 +3,7 @@
 <?php
 session_start();
 include "indexes/db_conn.php";
-if (isset($_SESSION['role']) && $_SESSION['role'] === 'Admin' && $_SESSION['department'] === 'ITE') {
+if (isset($_SESSION['role']) && $_SESSION['role'] === 'Admin' && $_SESSION['department'] === 'SSC') {
   ?>
 
   <!DOCTYPE html>
@@ -12,7 +12,7 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Admin' && $_SESSION['depa
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Admin Dashboard | ITE Student Portal </title>
+    <title>Admin Dashboard | SSC Student Portal </title>
     <link rel="icon" type="image/png" href="favicon.ico" />
 
     <!-- Google Font: Source Sans Pro -->
@@ -151,7 +151,7 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Admin' && $_SESSION['depa
             <!-- For number of officers -->
             <div class="row">
               <?php
-              $officerquery = "SELECT COUNT(*) AS count FROM user WHERE role = 'Officer' AND department='ITE'";
+              $officerquery = "SELECT COUNT(*) AS count FROM user WHERE role = 'Officer' AND department='SSC'";
               $officerresult = mysqli_query($conn, $officerquery);
 
               $rofficerow = mysqli_fetch_assoc($officerresult);
@@ -162,7 +162,7 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Admin' && $_SESSION['depa
                 <div class="small-box bg-info">
                   <div class="inner">
                     <h1 style="font-size: 50px;"><strong><?php echo $officercount; ?></strong></h1>
-                    <p>Officer/s</p>
+                    <p>SSC Officer/s</p>
                   </div>
                   <div class="icon">
                     <i class="nav-icon fas fa-solid fa-user-tie"></i>
@@ -184,8 +184,7 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Admin' && $_SESSION['depa
                  INNER JOIN enrolled ON user.account_number = enrolled.account_number 
                  WHERE user.role = 'Student' 
                  AND enrolled.school_year = '$schoolYear' 
-                 AND enrolled.semester = '$semester'
-                 AND user.department = 'ITE'";
+                 AND enrolled.semester = '$semester'  ";
               $studentresult = mysqli_query($conn, $studentquery);
 
               if ($studentresult) {
@@ -222,7 +221,7 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Admin' && $_SESSION['depa
               $eventsquery = "SELECT COUNT(*) AS count FROM events 
                  WHERE events.school_year = '$schoolYear' 
                  AND events.semester = '$semester'
-                 AND events.department='ITE'";
+                 AND events.department='SSC'";
               $eventsresult = mysqli_query($conn, $eventsquery);
 
               if ($eventsresult) {
@@ -243,7 +242,7 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Admin' && $_SESSION['depa
                     <i class="nav-icon fas fa-solid fa-calendar-check"></i>
                   </div>
                   <a href="admin-events.php?search_input=&date=&school_year=<?php echo urlencode($schoolYear); ?>&semester=<?php echo urlencode($semester); ?>&search="
-                    class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                    class="small-box-footer">More info +<i class="fas fa-arrow-circle-right"></i></a>
                 </div>
               </div>
 
@@ -256,7 +255,7 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Admin' && $_SESSION['depa
               $paymentforquery = "SELECT COUNT(*) AS count FROM payment_for
                  WHERE payment_for.school_year = '$schoolYear' 
                  AND payment_for.semester = '$semester'
-                 AND payment_for.department = 'ITE'";
+                 AND payment_for.department = 'SSC'";
               $paymentforresult = mysqli_query($conn, $paymentforquery);
 
               if ($paymentforresult) {
@@ -289,7 +288,7 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Admin' && $_SESSION['depa
               <div class="col-lg-6 col-6">
                 <div class="card card-danger">
                   <div class="card-header">
-                    <h3 class="card-title">Program Population</h3>
+                    <h3 class="card-title">College Population</h3>
 
                     <div class="card-tools">
                       <button type="button" class="btn btn-tool" data-card-widget="collapse">
@@ -382,74 +381,111 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Admin' && $_SESSION['depa
     $schoolYear = isset($_GET['school_year']) ? mysqli_real_escape_string($conn, $_GET['school_year']) : '';
     $semester = isset($_GET['semester']) ? mysqli_real_escape_string($conn, $_GET['semester']) : '';
 
-    // BSIT
-    $BSITProgramquery = "SELECT COUNT(DISTINCT u.account_number) AS count 
+    // CET
+    $CETProgramquery = "SELECT COUNT(DISTINCT u.account_number) AS count 
                      FROM user u
                      INNER JOIN enrolled e ON u.account_number = e.account_number 
                      WHERE u.role = 'Student' 
-                     AND u.program = 'BSIT' 
+                     AND u.department IN ('ITE', 'CE') 
                      AND e.school_year = '$schoolYear' 
                      AND e.semester = '$semester'";
-    $BSITProgramresult = mysqli_query($conn, $BSITProgramquery);
+    $CETProgramresult = mysqli_query($conn, $CETProgramquery);
 
-    if ($BSITProgramresult) {
-      $BSITProgramrow = mysqli_fetch_assoc($BSITProgramresult);
-      $BSITProgramCount = $BSITProgramrow['count'];
+    if ($CETProgramresult) {
+      $CETProgramrow = mysqli_fetch_assoc($CETProgramresult);
+      $CETProgramCount = $CETProgramrow['count'];
     } else {
-      $BSITProgramCount = 0;
+      $CETProgramCount = 0;
     }
 
-    // BSCS
-    $BSCSProgramquery = "SELECT COUNT(DISTINCT u.account_number) AS count 
+    // CCJ
+    $CCJProgramquery = "SELECT COUNT(DISTINCT u.account_number) AS count 
                      FROM user u
                      INNER JOIN enrolled e ON u.account_number = e.account_number 
                      WHERE u.role = 'Student' 
-                     AND u.program = 'BSCS' 
+                     AND u.department = 'CCJ' 
                      AND e.school_year = '$schoolYear' 
                      AND e.semester = '$semester'";
-    $BSCSProgramresult = mysqli_query($conn, $BSCSProgramquery);
+    $CCJProgramresult = mysqli_query($conn, $CCJProgramquery);
 
-    if ($BSCSProgramresult) {
-      $BSCSProgramrow = mysqli_fetch_assoc($BSCSProgramresult);
-      $BSCSProgramCount = $BSCSProgramrow['count'];
+    if ($CCJProgramresult) {
+      $CCJProgramrow = mysqli_fetch_assoc($CCJProgramresult);
+      $CCJProgramCount = $CCJProgramrow['count'];
     } else {
-      $BSCSProgramCount = 0;
+      $CCJProgramCount = 0;
     }
 
-    // BLIS
-    $BLISProgramquery = "SELECT COUNT(DISTINCT u.account_number) AS count 
+    // CAS
+    $CASProgramquery = "SELECT COUNT(DISTINCT u.account_number) AS count 
                      FROM user u
                      INNER JOIN enrolled e ON u.account_number = e.account_number 
                      WHERE u.role = 'Student' 
-                     AND u.program = 'BLIS' 
+                     AND u.department = 'CAS'  
                      AND e.school_year = '$schoolYear' 
                      AND e.semester = '$semester'";
-    $BLISProgramresult = mysqli_query($conn, $BLISProgramquery);
+    $CASProgramresult = mysqli_query($conn, $CASProgramquery);
 
-    if ($BLISProgramresult) {
-      $BLISProgramrow = mysqli_fetch_assoc($BLISProgramresult);
-      $BLISProgramCount = $BLISProgramrow['count'];
+    if ($CASProgramresult) {
+      $CASProgramrow = mysqli_fetch_assoc($CASProgramresult);
+      $CASProgramCount = $CASProgramrow['count'];
     } else {
-      $BLISProgramCount = 0;
+      $CASProgramCount = 0;
     }
 
-    // ACT
-    $ACTProgramquery = "SELECT COUNT(DISTINCT u.account_number) AS count 
+    // CBE
+    $CBEProgramquery = "SELECT COUNT(DISTINCT u.account_number) AS count 
                      FROM user u
                      INNER JOIN enrolled e ON u.account_number = e.account_number 
                      WHERE u.role = 'Student' 
-                     AND u.program = 'ACT' 
+                     AND u.department = 'CBE' 
                      AND e.school_year = '$schoolYear' 
                      AND e.semester = '$semester'";
-    $ACTProgramresult = mysqli_query($conn, $ACTProgramquery);
+    $CBEProgramresult = mysqli_query($conn, $CBEProgramquery);
 
-    if ($ACTProgramresult) {
-      $ACTProgramrow = mysqli_fetch_assoc($ACTProgramresult);
-      $ACTProgramCount = $ACTProgramrow['count'];
+    if ($CBEProgramresult) {
+      $CBEProgramrow = mysqli_fetch_assoc($CBEProgramresult);
+      $CBEProgramCount = $CBEProgramrow['count'];
     } else {
-      $ACTProgramCount = 0;
+      $CBEProgramCount = 0;
     }
+
+    // CTE
+    $CTEProgramquery = "SELECT COUNT(DISTINCT u.account_number) AS count 
+                     FROM user u
+                     INNER JOIN enrolled e ON u.account_number = e.account_number 
+                     WHERE u.role = 'Student' 
+                     AND u.department = 'CTE' 
+                     AND e.school_year = '$schoolYear' 
+                     AND e.semester = '$semester'";
+    $CTEProgramresult = mysqli_query($conn, $CTEProgramquery);
+
+    if ($CTEProgramresult) {
+      $CTEProgramrow = mysqli_fetch_assoc($CTEProgramresult);
+      $CTEProgramCount = $CTEProgramrow['count'];
+    } else {
+      $CTEProgramCount = 0;
+    }
+
+    // COAHS
+    $COAHSProgramquery = "SELECT COUNT(DISTINCT u.account_number) AS count 
+                     FROM user u
+                     INNER JOIN enrolled e ON u.account_number = e.account_number 
+                     WHERE u.role = 'Student' 
+                     AND u.department = 'CBE' 
+                     AND e.school_year = '$schoolYear' 
+                     AND e.semester = '$semester'";
+    $COAHSProgramresult = mysqli_query($conn, $COAHSProgramquery);
+
+    if ($COAHSProgramresult) {
+      $COAHSProgramrow = mysqli_fetch_assoc($COAHSProgramresult);
+      $COAHSProgramCount = $COAHSProgramrow['count'];
+    } else {
+      $COAHSProgramCount = 0;
+    }
+
     ?>
+
+    
 
     <!-- for program population -->
     <script>
@@ -460,21 +496,25 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Admin' && $_SESSION['depa
         //-------------
         // Get context with jQuery - using jQuery's .get() method.
         var donutChartCanvas = $('#donutChart').get(0).getContext('2d')
-        var BSITProgramCount = <?php echo $BSITProgramCount; ?>;
-        var BSCSProgramCount = <?php echo $BSCSProgramCount; ?>;
-        var BLISProgramCount = <?php echo $BLISProgramCount; ?>;
-        var ACTProgramCount = <?php echo $ACTProgramCount; ?>;
+        var CETProgramCount = <?php echo $CETProgramCount; ?>;
+        var CCJProgramCount = <?php echo $CCJProgramCount; ?>;
+        var CASProgramCount = <?php echo $CASProgramCount; ?>;
+        var CBEProgramCount = <?php echo $CBEProgramCount; ?>;
+        var CTEProgramCount = <?php echo $CTEProgramCount; ?>;
+        var COAHSProgramCount = <?php echo $COAHSProgramCount; ?>;
         var donutData = {
           labels: [
-            'BSIT',
-            'BSCS',
-            'BLIS',
-            'ACT',
+            'CET',
+            'CCJ',
+            'CAS',
+            'CBE',
+            'CTE',
+            'COAHS',
           ],
           datasets: [
             {
-              data: [BSITProgramCount, BSCSProgramCount, BLISProgramCount, ACTProgramCount],
-              backgroundColor: ['#f56954', '#00a65a', '#f39c12', '#00c0ef'],
+              data: [CETProgramCount, CCJProgramCount, CASProgramCount, CBEProgramCount, CTEProgramCount, COAHSProgramCount],
+              backgroundColor: ['#f56954', '#800080', '#00a65a', '#f39c12', '#00c0ef'],
             }
           ]
         }
@@ -503,8 +543,7 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Admin' && $_SESSION['depa
                      WHERE u.role = 'Student' 
                      AND u.year_level = '1' 
                      AND e.school_year = '$schoolYear' 
-                     AND e.semester = '$semester'
-                     AND u.department='ITE'";
+                     AND e.semester = '$semester'";
     $FirstYearresult = mysqli_query($conn, $FirstYearquery);
 
     if ($FirstYearresult) {
@@ -521,8 +560,7 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Admin' && $_SESSION['depa
                      WHERE u.role = 'Student' 
                      AND u.year_level = '2' 
                      AND e.school_year = '$schoolYear' 
-                     AND e.semester = '$semester'
-                     AND u.department='ITE'";
+                     AND e.semester = '$semester'";
     $SecondYearresult = mysqli_query($conn, $SecondYearquery);
 
     if ($SecondYearresult) {
@@ -539,8 +577,7 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Admin' && $_SESSION['depa
                      WHERE u.role = 'Student' 
                      AND u.year_level = '3' 
                      AND e.school_year = '$schoolYear' 
-                     AND e.semester = '$semester'
-                     AND u.department='ITE'";
+                     AND e.semester = '$semester'";
     $ThirdYearresult = mysqli_query($conn, $ThirdYearquery);
 
     if ($ThirdYearresult) {
@@ -557,8 +594,7 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Admin' && $_SESSION['depa
                      WHERE u.role = 'Student' 
                      AND u.year_level = '4' 
                      AND e.school_year = '$schoolYear' 
-                     AND e.semester = '$semester'
-                     AND u.department='ITE'";
+                     AND e.semester = '$semester'";
     $FourthYearresult = mysqli_query($conn, $FourthYearquery);
 
     if ($FourthYearresult) {

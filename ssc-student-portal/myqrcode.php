@@ -3,7 +3,7 @@
 <?php
 session_start();
 include "indexes/db_conn.php";
-if (isset($_SESSION['role']) && $_SESSION['role'] === 'Student' && $_SESSION['department'] === 'ITE') { 
+if (isset($_SESSION['role']) && $_SESSION['role'] === 'Student' && $_SESSION['department'] === 'SSC') { 
   ?>
 
   <!DOCTYPE html>
@@ -12,7 +12,7 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Student' && $_SESSION['de
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>My QR Code | ITE Student Portal</title>
+    <title>My QR Code | SSC Student Portal</title>
     <link rel="icon" type="image/png" href="favicon.ico" />
     <link rel="stylesheet" type="text/css" href="qr-code.css">
 

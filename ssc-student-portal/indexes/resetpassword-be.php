@@ -32,11 +32,11 @@ session_start();
 //         $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
 //         $mail->Port = 587;
 
-//         $mail->setFrom('itestudentportal@gmail.com', 'Reset Password Code | ITE Student Portal');
+//         $mail->setFrom('itestudentportal@gmail.com', 'Reset Password Code | SSC Student Portal');
 //         $mail->addAddress($email);
 
 //         $mail->isHTML(true);
-//         $mail->Subject = 'Hello ITE Student | ITE Student Portal';
+//         $mail->Subject = 'Hello ITE Student | SSC Student Portal';
 //         $mail->Body = "
 //         <html>
 

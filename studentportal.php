@@ -69,6 +69,13 @@
             background-repeat: no-repeat;
         }
 
+        .ssc-custom-background {
+            background-image: url('ssc-student-portal/images/student-portal-background.png');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+
         .square-card {
             aspect-ratio: 1 / 1;
             display: flex;
@@ -166,6 +173,14 @@
                     <div class="card small-box bg-coahs square-card coahs-custom-background">
                         <div class="card-body">
                             <img src="images/coahs.png" class="card-img-top" alt="COAHS">
+                        </div>
+                    </div>
+                </a>
+
+                <a class="col-6 col-md-3 mb-3" href="ssc-student-portal/login.php">
+                    <div class="card small-box bg-coahs square-card ssc-custom-background">
+                        <div class="card-body">
+                            <img src="images/ssc.png" class="card-img-top" alt="SSC">
                         </div>
                     </div>
                 </a>

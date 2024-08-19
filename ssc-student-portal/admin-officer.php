@@ -2,7 +2,7 @@
 <?php
 session_start();
 include "indexes/db_conn.php";
-if (isset($_SESSION['role']) && $_SESSION['role'] === 'Admin' && $_SESSION['department'] === 'ITE') {
+if (isset($_SESSION['role']) && $_SESSION['role'] === 'Admin' && $_SESSION['department'] === 'SSC') {
   ?>
 
   <!DOCTYPE html>
@@ -11,7 +11,7 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Admin' && $_SESSION['depa
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Admin Officers | ITE Student Portal</title>
+    <title>Admin Officers | SSC Student Portal</title>
     <link rel="icon" type="image/png" href="favicon.ico" />
 
     <!-- Google Font: Source Sans Pro -->
@@ -95,7 +95,7 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Admin' && $_SESSION['depa
             <div class="row">
 
               <?php
-              $sql = "SELECT * FROM user WHERE role = 'Officer' AND department='ITE'";
+              $sql = "SELECT * FROM user WHERE role = 'Officer' AND department='SSC'";
               $result = mysqli_query($conn, $sql);
 
               if (!$result) {

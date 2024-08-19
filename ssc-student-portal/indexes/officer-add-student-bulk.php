@@ -58,7 +58,7 @@ if (isset($_POST['save_excel_data'])) {
                     $phonenumber = empty($phonenumberdefault) ? '' : "0" . $phonenumberdefault;
                 }
 
-                $department = "ITE";
+                $department = "SSC";
 
                 if (empty($lastnameNotProper) || empty($firstnameNotProper) || empty($program) || empty($yearlevel) || empty($gender)) {
                     continue;

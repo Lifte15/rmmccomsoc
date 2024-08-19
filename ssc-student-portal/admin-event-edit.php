@@ -1,7 +1,7 @@
 <?php
 session_start();
 include "indexes/db_conn.php";
-if (isset($_SESSION['role']) && $_SESSION['role'] === 'Admin' && $_SESSION['department'] === 'ITE') {
+if (isset($_SESSION['role']) && $_SESSION['role'] === 'Admin' && $_SESSION['department'] === 'SSC') {
     ?>
 
     <!DOCTYPE html>
@@ -10,7 +10,7 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Admin' && $_SESSION['depa
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Admin Edit Event Information | ITE Student Portal</title>
+        <title>Admin Edit Event Information | SSC Student Portal</title>
         <link rel="icon" type="image/png" href="favicon.ico" />
 
         <!-- Google Font: Source Sans Pro -->
@@ -104,7 +104,7 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Admin' && $_SESSION['depa
                                                     value="<?php echo $event['event_name']; ?>">
                                             </div>
 
-                                            <label for="organization" class="col-sm-4 col-form-label">Organization</label>
+                                            <!-- <label for="organization" class="col-sm-4 col-form-label">Organization</label>
                                             <div class="form-group row">
                                                 <div class="col-sm-12 ml-4">
                                                     <?php
@@ -125,7 +125,7 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Admin' && $_SESSION['depa
                                                                 Society</label>
                                                         </div>
                                                 </div>
-                                            </div>
+                                            </div> -->
 
                                             <div class="form-group">
                                                 <label for="date">Date</label>

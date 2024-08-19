@@ -4,7 +4,7 @@
 session_start();
 include "indexes/db_conn.php";
 
-if (isset($_SESSION['role']) && $_SESSION['role'] === 'Student' && $_SESSION['department'] === 'ITE') {
+if (isset($_SESSION['role']) && $_SESSION['role'] === 'Student' && $_SESSION['department'] === 'SSC') {
     $account_number = $_SESSION['account_number'];
 
     $sql = "SELECT DISTINCT semester, school_year FROM enrolled WHERE account_number = '$account_number'";
@@ -29,7 +29,7 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Student' && $_SESSION['de
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Announcements | ITE Student Portal</title>
+        <title>Announcements | SSC Student Portal</title>
         <link rel="icon" type="image/png" href="favicon.ico" />
 
         <!-- Google Font: Source Sans Pro -->
@@ -160,7 +160,7 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Student' && $_SESSION['de
                             $searchSchoolYear = isset($_GET['school_year']) ? $_GET['school_year'] : 'All';
                             $searchSemester = isset($_GET['semester']) ? $_GET['semester'] : 'All';
 
-                            $sql = "SELECT * FROM announcement WHERE 1=1 AND department='ITE'";
+                            $sql = "SELECT * FROM announcement WHERE 1=1 AND department='SSC'";
                             if ($searchSchoolYear != 'All') {
                                 $sql .= " AND school_year = '$searchSchoolYear'";
                             } else {

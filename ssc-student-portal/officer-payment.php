@@ -1,7 +1,7 @@
 <?php
 session_start();
 include "indexes/db_conn.php";
-if (isset($_SESSION['role']) && $_SESSION['role'] === 'Officer' && $_SESSION['department'] === 'ITE') { 
+if (isset($_SESSION['role']) && $_SESSION['role'] === 'Officer' && $_SESSION['department'] === 'SSC') { 
 	if ($_SESSION['position'] === 'Staff') {
     	header("Location: officer-announcement.php?school_year=$defaultYear&semester=$defaultSemester");
    	 exit();
@@ -14,7 +14,7 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Officer' && $_SESSION['de
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Officer Payment Page | ITE Student Portal </title>
+    <title>Officer Payment Page | SSC Student Portal </title>
     <link rel="icon" type="image/png" href="favicon.ico" />
 
     <!-- Google Font: Source Sans Pro -->
@@ -162,15 +162,15 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Officer' && $_SESSION['de
                     if (!empty($conditions)) {
                       $condition_string = implode(" AND ", $conditions);
                       if (!empty($search_input)) {
-                        $eventssql = "SELECT * FROM payment_for WHERE $condition_string AND payment_description LIKE '%$search_input%' AND department='ITE' AND FIND_IN_SET('$organization', organization)";
+                        $eventssql = "SELECT * FROM payment_for WHERE $condition_string AND payment_description LIKE '%$search_input%' AND department='SSC' AND FIND_IN_SET('$organization', organization)";
                       } else {
-                        $eventssql = "SELECT * FROM payment_for WHERE $condition_string AND department='ITE' AND FIND_IN_SET('$organization', organization)";
+                        $eventssql = "SELECT * FROM payment_for WHERE $condition_string AND department='SSC' AND FIND_IN_SET('$organization', organization)";
                       }
                     } else {
                       if (!empty($search_input)) {
-                        $eventssql = "SELECT * FROM payment_for WHERE payment_description LIKE '%$search_input%' AND department='ITE' AND FIND_IN_SET('$organization', organization)";
+                        $eventssql = "SELECT * FROM payment_for WHERE payment_description LIKE '%$search_input%' AND department='SSC' AND FIND_IN_SET('$organization', organization)";
                       } else {
-                        $eventssql = "SELECT * FROM payment_for WHERE department='ITE' AND FIND_IN_SET('$organization', organization)";
+                        $eventssql = "SELECT * FROM payment_for WHERE department='SSC' AND FIND_IN_SET('$organization', organization)";
                       }
                     }
                   }

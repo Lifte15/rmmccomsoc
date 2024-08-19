@@ -9,7 +9,7 @@ require_once 'googleconfig.php';
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/png" href="favicon.ico" />
-    <title>ITE Student Portal</title>
+    <title>SSC Student Portal</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link rel="stylesheet" type="text/css" href="AdminLTE-3.2.0/dist/css/bootstrap.css">
     <style>
@@ -75,10 +75,10 @@ require_once 'googleconfig.php';
                                                             <option value="Officer" <?php if (isset($_GET['role']) && $_GET['role'] == 'Officer')
                                                                 echo 'selected'; ?>>Officer
                                                             </option>
-                                                            <option value="Student" <?php if (!isset($_GET['role']) || $_GET['role'] == 'Student')
+                                                            <!-- <option value="Student" <?php if (!isset($_GET['role']) || $_GET['role'] == 'Student')
                                                                 echo 'selected'; ?>>Student
-                                                            </option>
-                                                        </select>
+                                                            </option> -->
+                                                        </select> 
                                                         <label for="entry" class="form-label">Entry Type</label>
                                                     </div>
                                                 </div>

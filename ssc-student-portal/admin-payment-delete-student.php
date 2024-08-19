@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Admin Delete Student to Payment | ITE Student Portal</title>
+    <title>Admin Delete Student to Payment | SSC Student Portal</title>
     <link rel="icon" type="image/png" href="favicon.ico" />
 
     <!-- Google Font: Source Sans Pro -->
@@ -43,7 +43,7 @@ function validate($data)
     return mysqli_real_escape_string($conn, $data);
 }
 
-if (isset($_SESSION['role']) && $_SESSION['role'] === 'Admin' && $_SESSION['department'] === 'ITE') {
+if (isset($_SESSION['role']) && $_SESSION['role'] === 'Admin' && $_SESSION['department'] === 'SSC') {
     if (isset($_GET['payment_for_id'])) {
         $payment_for_id = intval($_GET['payment_for_id']);
 
@@ -195,7 +195,7 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Admin' && $_SESSION['depa
                         e.school_year = '$school_year'
                         AND e.semester = '$semester'
                         AND u.role = 'Student'
-                        AND u.department = 'ITE'
+                        AND u.department = 'SSC'
                         AND $condition_string 
                     ORDER BY 
                         u.program ASC, u.year_level ASC, u.last_name ASC";
@@ -221,7 +221,7 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Admin' && $_SESSION['depa
                         e.school_year = '$school_year'
                         AND e.semester = '$semester'
                         AND u.role = 'Student'
-                        AND u.department = 'ITE'
+                        AND u.department = 'SSC'
                     ORDER BY 
                         u.program ASC, u.year_level ASC, u.last_name ASC";
                         }
@@ -247,7 +247,7 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Admin' && $_SESSION['depa
                         e.school_year = '$school_year'
                         AND e.semester = '$semester'
                         AND u.role = 'Student'
-                        AND u.department = 'ITE'
+                        AND u.department = 'SSC'
                     ORDER BY 
                         u.program ASC, u.year_level ASC, u.last_name ASC";
                     }

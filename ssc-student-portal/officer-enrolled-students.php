@@ -2,7 +2,7 @@
 session_start();
 include "indexes/db_conn.php";
 
-if (isset($_SESSION['role']) && $_SESSION['role'] === 'Officer' && $_SESSION['department'] === 'ITE') {
+if (isset($_SESSION['role']) && $_SESSION['role'] === 'Officer' && $_SESSION['department'] === 'SSC') {
 ?>
 
 <!DOCTYPE html>
@@ -11,7 +11,7 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Officer' && $_SESSION['de
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Officer Query Page | ITE Student Portal</title>
+    <title>Officer Query Page | SSC Student Portal</title>
     <link rel="icon" type="image/png" href="favicon.ico" />
 
     <!-- Google Font: Source Sans Pro -->
@@ -178,7 +178,7 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Officer' && $_SESSION['de
                                 FROM school_year sy
                                 CROSS JOIN semester sem
                                 LEFT JOIN enrolled e ON e.school_year = sy.school_year AND e.semester = sem.semester
-                                LEFT JOIN user u ON e.account_number = u.account_number AND u.department = 'ITE'
+                                LEFT JOIN user u ON e.account_number = u.account_number AND u.department = 'SSC'
                                 WHERE 1=1 $school_year_condition $semester_condition 
                                 GROUP BY sy.school_year, sem.semester
                                 ORDER BY sy.school_year, sem.semester";

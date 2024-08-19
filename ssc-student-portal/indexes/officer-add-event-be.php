@@ -22,7 +22,7 @@ if (isset($_POST['addEvent'])) {
     $schoolyear = validate($_POST['school_year']);
     $semester = validate($_POST['semester']);
     $points = validate($_POST['points']);
-    $department = 'ITE';
+    $department = 'SSC';
 
     // Construct user data string
     $user_data = 'eventname=' . $eventname .

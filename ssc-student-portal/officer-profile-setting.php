@@ -3,7 +3,7 @@
 <?php
 session_start();
 include "indexes/db_conn.php";
-if (isset($_SESSION['role']) && $_SESSION['role'] === 'Officer' && $_SESSION['department'] === 'ITE') {
+if (isset($_SESSION['role']) && $_SESSION['role'] === 'Officer' && $_SESSION['department'] === 'SSC') {
     ?>
     <!DOCTYPE html>
     <html lang="en">
@@ -11,7 +11,7 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Officer' && $_SESSION['de
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Officer Profile Settings | ITE Student Portal</title>
+        <title>Officer Profile Settings | SSC Student Portal</title>
         <link rel="icon" type="image/ico" href="favicon.ico">
 
         <!-- Google Font: Source Sans Pro -->

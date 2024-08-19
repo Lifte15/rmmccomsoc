@@ -1,7 +1,7 @@
 <?php
 session_start();
 include "indexes/db_conn.php";
-if (isset($_SESSION['role']) && $_SESSION['role'] === 'Admin' && $_SESSION['department'] === 'ITE') {
+if (isset($_SESSION['role']) && $_SESSION['role'] === 'Admin' && $_SESSION['department'] === 'SSC') {
     ?>
 
     <!DOCTYPE html>
@@ -10,7 +10,7 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Admin' && $_SESSION['depa
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Admin Payment View | ITE Student Portal </title>
+        <title>Admin Payment View | SSC Student Portal </title>
         <link rel="icon" type="image/png" href="favicon.ico" />
 
         <!-- Google Font: Source Sans Pro -->
@@ -86,7 +86,7 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Admin' && $_SESSION['depa
                                                 <?php
                                                 if (isset($_GET['payment_for_id'])) {
                                                     $payment_for_id = $_GET['payment_for_id'];
-                                                    $eventsql = "SELECT * FROM payment_for WHERE payment_for_id = '$payment_for_id' AND department='ITE'";
+                                                    $eventsql = "SELECT * FROM payment_for WHERE payment_for_id = '$payment_for_id' AND department='SSC'";
                                                     $result = $conn->query($eventsql);
 
                                                     if ($result && $result->num_rows > 0) {
@@ -228,7 +228,7 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Admin' && $_SESSION['depa
                         payment.received_by, payment.proof_pic, payment.cn_number, payment.date_paid
                         FROM payment 
                         JOIN user ON payment.account_number = user.account_number 
-                        WHERE payment.payment_for_id = '$payment_for_id'  AND user.department='ITE'";
+                        WHERE payment.payment_for_id = '$payment_for_id'  AND user.department='SSC'";
 
                         $filters = [];
                         if ($search_input && $column) {

@@ -1,7 +1,7 @@
 <?php
 session_start();
 include "indexes/db_conn.php";
-if (isset($_SESSION['role']) && $_SESSION['role'] === 'Officer' && $_SESSION['department'] === 'ITE') {
+if (isset($_SESSION['role']) && $_SESSION['role'] === 'Officer' && $_SESSION['department'] === 'SSC') {
     ?>
 
     <!DOCTYPE html>
@@ -10,7 +10,7 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Officer' && $_SESSION['de
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Officer Event View | ITE Student Portal </title>
+        <title>Officer Event View | SSC Student Portal </title>
         <link rel="icon" type="image/png" href="favicon.ico" />
 
         <!-- Google Font: Source Sans Pro -->
@@ -86,7 +86,7 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Officer' && $_SESSION['de
                                                 <?php
                                                 if (isset($_GET['event_id'])) {
                                                     $event_id = $_GET['event_id'];
-                                                    $eventsql = "SELECT * FROM events WHERE event_id = '$event_id' AND department='ITE'";
+                                                    $eventsql = "SELECT * FROM events WHERE event_id = '$event_id' AND department='SSC'";
                                                     $result = $conn->query($eventsql);
 
                                                     if ($result && $result->num_rows > 0) {
@@ -225,7 +225,7 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Officer' && $_SESSION['de
 
                         $query = "SELECT user.account_number, user.username, user.first_name, user.last_name, user.middle_name, user.program, user.year_level, attendance.remarks, attendance.remarked_by
                         FROM attendance 
-                        JOIN user ON attendance.account_number = user.account_number AND user.department = 'ITE'
+                        JOIN user ON attendance.account_number = user.account_number AND user.department = 'SSC'
                         WHERE attendance.event_id = '$event_id'";
 
                         $filters = [];

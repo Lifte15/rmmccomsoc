@@ -1,7 +1,7 @@
 <?php
 session_start();
 include "indexes/db_conn.php";
-if (isset($_SESSION['role']) && $_SESSION['role'] === 'Admin' && $_SESSION['department'] === 'ITE') {
+if (isset($_SESSION['role']) && $_SESSION['role'] === 'Admin' && $_SESSION['department'] === 'SSC') {
   ?>
 
   <!DOCTYPE html>
@@ -10,7 +10,7 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Admin' && $_SESSION['depa
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Admin Payment Page | ITE Student Portal </title>
+    <title>Admin Payment Page | SSC Student Portal </title>
     <link rel="icon" type="image/png" href="favicon.ico" />
 
     <!-- Google Font: Source Sans Pro -->
@@ -156,12 +156,12 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Admin' && $_SESSION['depa
 
                     if (!empty($conditions)) {
                       $condition_string = implode(" AND ", $conditions);
-                      $eventssql = "SELECT * FROM payment_for WHERE $condition_string AND payment_description LIKE '%$search_input%'  AND department='ITE'";
+                      $eventssql = "SELECT * FROM payment_for WHERE $condition_string AND payment_description LIKE '%$search_input%'  AND department='SSC'";
                     } else {
-                      $eventssql = "SELECT * FROM payment_for WHERE payment_description LIKE '%$search_input%' AND department='ITE'";
+                      $eventssql = "SELECT * FROM payment_for WHERE payment_description LIKE '%$search_input%' AND department='SSC'";
                     }
                   } else {
-                    $eventssql = "SELECT * FROM payment_for WHERE department='ITE'";
+                    $eventssql = "SELECT * FROM payment_for WHERE department='SSC'";
                   }
                   $result = $conn->query($eventssql);
                   if ($result->num_rows > 0) {
