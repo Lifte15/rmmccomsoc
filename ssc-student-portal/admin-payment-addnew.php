@@ -89,44 +89,6 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Admin' && $_SESSION['depa
                                                 </div>
                                             </div>
 
-                                            <label for="organization" class="col-sm-4 col-form-label">Organization</label>
-                                            <div class="form-group row">
-                                                <div class="col-sm-12 ml-4">
-                                                    <?php
-                                                    if (isset($_GET['organization'])) {
-                                                        $organizations = explode(',', $_GET['organization']);
-                                                        ?>
-                                                        <div class="form-check">
-                                                            <input class="form-check-input" type="checkbox" id="dsc"
-                                                                name="organization[]" value="DSC" <?php if (in_array('DSC', $organizations))
-                                                                    echo 'checked'; ?>>
-                                                            <label class="form-check-label" for="dsc">DSC</label>
-                                                        </div>
-                                                        <div class="form-check">
-                                                            <input class="form-check-input" type="checkbox"
-                                                                id="computing-society" name="organization[]"
-                                                                value="Computing Society" <?php if (in_array('Computing Society', $organizations))
-                                                                    echo 'checked'; ?>>
-                                                            <label class="form-check-label" for="computing-society">Computing
-                                                                Society</label>
-                                                        </div>
-                                                    <?php } else { ?>
-                                                        <div class="form-check">
-                                                            <input class="form-check-input" type="checkbox" id="dsc"
-                                                                name="organization[]" value="DSC">
-                                                            <label class="form-check-label" for="dsc">DSC</label>
-                                                        </div>
-                                                        <div class="form-check">
-                                                            <input class="form-check-input" type="checkbox"
-                                                                id="computing-society" name="organization[]"
-                                                                value="Computing Society">
-                                                            <label class="form-check-label" for="computing-society">Computing
-                                                                Society</label>
-                                                        </div>
-                                                    <?php } ?>
-                                                </div>
-                                            </div>
-
 
                                             <label for="date" class="col-sm-4 col-form-label">Date</label>
                                             <div class="form-group row">

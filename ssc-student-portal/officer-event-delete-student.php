@@ -95,9 +95,10 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Officer' && $_SESSION['de
                                 <form method="GET">
                                     <input type="hidden" name="event_id" value="<?php echo $event_id; ?>">
                                     <div class="input-group mb-3">
-                                        <div class="col-md-4 mb-3">
+                                        <div class="col-md-2 mb-3">
                                             <input type="text" name="search_input" class="form-control" placeholder="Search...">
                                         </div>
+
                                         <div class="col-md-2 mb-3">
                                             <select name="column" class="form-control">
                                                 <option value="u.account_number">Student Number</option>
@@ -117,13 +118,60 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Officer' && $_SESSION['de
                                             </select>
                                         </div>
                                         <div class="col-md-2 mb-3">
-                                            <select name="program" class="form-control">
-                                                <option value="">Program</option>
-                                                <option value="">All</option>
+                                            <select id="department" name="department" class="form-control"
+                                                onchange="updateProgramOptions()">
+                                                <option value="">All Department</option>
+                                                <option value="ITE">ITE</option>
+                                                <option value="CE">CE</option>
+                                                <option value="CCJ">CCJ</option>
+                                                <option value="CAS">CAS</option>
+                                                <option value="CTE">CTE</option>
+                                                <option value="CBE">CBE</option>
+                                                <option value="COAHS">COAHS</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-2 mb-3">
+                                            <select id="program" name="program" class="form-control">
+                                                <option value="">All Program</option>
                                                 <option value="BSIT">BSIT</option>
                                                 <option value="BSCS">BSCS</option>
                                                 <option value="BLIS">BLIS</option>
                                                 <option value="ACT">ACT</option>
+                                                <option value="BSCE">BSCE</option>
+                                                <option value="BSCrim">BSCrim</option>
+                                                <option value="BAELS">BAELS</option>
+                                                <option value="BAPsyc">BAPsyc</option>
+                                                <option value="BACommArts">BACommArts</option>
+                                                <option value="BSES">BSES</option>
+                                                <option value="BSMath">BSMath</option>
+                                                <option value="BSSW">BSSW</option>
+                                                <option value="BPA">BPA</option>
+                                                <option value="BPA-Dance">BPA-Dance</option>
+                                                <option value="BSBio">BSBio</option>
+                                                <option value="BSESS-FSM">BSESS-FSM</option>
+                                                <option value="BEEd">BEEd</option>
+                                                <option value="BECEd">BECEd</option>
+                                                <option value="BCAEd">BCAEd</option>
+                                                <option value="BPEd">BPEd</option>
+                                                <option value="BTLEd">BTLEd</option>
+                                                <option value="BSEd-English">BSEd-English</option>
+                                                <option value="BSEd-Filipino">BSEd-Filipino</option>
+                                                <option value="BSEd-Math">BSEd-Math</option>
+                                                <option value="BSEd-Science">BSEd-Science</option>
+                                                <option value="BSEd-Social Studies">BSEd-Social Studies</option>
+                                                <option value="BSA">BSA</option>
+                                                <option value="BSMA">BSMA</option>
+                                                <option value="BSBA-FM">BSBA-FM</option>
+                                                <option value="BSBA-MM">BSBA-MM</option>
+                                                <option value="BSBA-OM">BSBA-OM</option>
+                                                <option value="BSOA">BSOA</option>
+                                                <option value="BSCA">BSCA</option>
+                                                <option value="BSREM">BSREM</option>
+                                                <option value="BSTM">BSTM</option>
+                                                <option value="BSHM">BSHM</option>
+                                                <option value="BSN">BSN</option>
+                                                <option value="BSP">BSP</option>
+                                                <option value="BSM">BSM</option>
                                             </select>
                                         </div>
                                         <div class="col-md-1 mb-3">
@@ -140,9 +188,11 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Officer' && $_SESSION['de
                                             value="<?php echo isset($_GET['search_input']) ? $_GET['search_input'] : ''; ?>">
                                         <input type="hidden" name="program"
                                             value="<?php echo isset($_GET['program']) ? $_GET['program'] : ''; ?>">
+                                            <input type="hidden" name="department"
+                                            value="<?php echo isset($_GET['department']) ? $_GET['department'] : ''; ?>">
                                         <input type="hidden" name="year_level"
                                             value="<?php echo isset($_GET['year_level']) ? $_GET['year_level'] : ''; ?>">
-                                        <button class="btn btn-outline-danger" type="submit" name="delete_all">Delete All</button>
+                                        <button class="btn btn-outline-danger btn-sm" type="submit" name="delete_all">Delete All</button>
                                     </form>
                                 </div>
                             </div>
@@ -155,6 +205,7 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Officer' && $_SESSION['de
                     if (isset($_GET['search'])) {
                         $program = $_GET['program'];
                         $year_level = $_GET['year_level'];
+                        $department = $_GET['department'];
                         $search_input = $_GET['search_input'];
                         $column = $_GET['column'];
 
@@ -162,6 +213,9 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Officer' && $_SESSION['de
 
                         if (!empty($program)) {
                             $conditions[] = "u.program = '$program'";
+                        }
+                        if (!empty($department)) {
+                            $conditions[] = "u.department = '$department'";
                         }
                         if (!empty($year_level)) {
                             $conditions[] = "u.year_level = '$year_level'";
@@ -193,7 +247,7 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Officer' && $_SESSION['de
                         e.school_year = '$school_year'
                         AND e.semester = '$semester'
                         AND u.role = 'Student'
-                        AND u.department = 'SSC'
+
                         AND $condition_string 
                     ORDER BY 
                         u.program ASC, u.year_level ASC, u.last_name ASC";
@@ -219,7 +273,6 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Officer' && $_SESSION['de
                         e.school_year = '$school_year'
                         AND e.semester = '$semester'
                         AND u.role = 'Student'
-                        AND u.department = 'SSC'
                     ORDER BY 
                         u.program ASC, u.year_level ASC, u.last_name ASC";
                         }
@@ -245,7 +298,6 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Officer' && $_SESSION['de
                     e.school_year = '$school_year'
                     AND e.semester = '$semester'
                     AND u.role = 'Student'
-                    AND u.department = 'SSC'
                 ORDER BY 
                     u.program ASC, u.year_level ASC, u.last_name ASC";
                     }

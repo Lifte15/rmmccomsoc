@@ -153,10 +153,10 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Student' && $_SESSION['de
                 <tr>
                   <th class="col-2">Payment Description</th>
                   <th class="col-1 text-center">Date</th>
-                  <th class="col-1 text-center">School Year</th>
+                  <th class="col-2 text-center">School Year</th>
                   <th class="col-2 text-center">Semester</th>
                   <th class="col-1 text-center">Amount</th>
-                  <th class="col-2 text-center">Date Paid</th>
+                  <th class="col-1 text-center">Date Paid</th>
                   <th class="col-2 text-center">Recieved By</th>
                   <th class="col-1 text-center">Status</th>
                 </tr>
@@ -182,6 +182,7 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Student' && $_SESSION['de
                       p.school_year, 
                       p.semester, 
                       p.amount, 
+                      p.department,
                       a.date_paid, 
                       a.received_by, 
                       a.remarks
@@ -200,6 +201,7 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Student' && $_SESSION['de
                     ?>
                     <tr>
                       <td class="align-middle">
+                      <?php echo $row['department']; ?> | 
                         <?php echo $row['payment_description']; ?>
                       </td>
                       <td class="align-middle text-center">

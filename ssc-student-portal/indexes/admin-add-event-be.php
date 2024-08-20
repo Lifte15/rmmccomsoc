@@ -15,19 +15,14 @@ if (isset($_POST['addEvent'])) {
 
     // Sanitize and validate
     $eventname = validate($_POST['eventname']);
-    // $organization = isset($_POST['organization']) ? $_POST['organization'] : [];
     $date = validate($_POST['date']);
     $schoolyear = validate($_POST['school_year']);
     $semester = validate($_POST['semester']);
     $points = validate($_POST['points']);
     $department = 'SSC';
 
-    // $organizations = implode(",", $organization);
-
-    // Construct user data string
     $user_data = 'eventname=' . $eventname .
     '&date=' . $date .
-    '&organization=' . $organizations .
     '&school_year=' . $schoolyear .
     '&points=' . $points .
     '&semester=' . $semester;
@@ -36,12 +31,7 @@ if (isset($_POST['addEvent'])) {
     if (empty($eventname)) {
         header("Location: ../admin-event-addnew.php?newEventError=Event name is required&$user_data");
         exit();
-    } 
-    // elseif (empty($organization)) {
-    //     header("Location: ../admin-event-addnew.php?newEventError=Organization is required&$user_data");
-    //     exit();
-    // } 
-    elseif (empty($date)) {
+    } elseif (empty($date)) {
         header("Location: ../admin-event-addnew.php?newEventError=Date is required&$user_data");
         exit();
     } elseif (empty($schoolyear)) {

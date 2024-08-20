@@ -1,14 +1,4 @@
 <?php
-/*
-admin-payment-delete-all-students-be.php handles the deletion of all eligible students from a payment record in admin
-Authors:
-  - Lowie Jay Orillo (lowie.jaymier@gmail.com)
-  - Caryl Mae Subaldo (subaldomae29@gmail.com)
-  - Brian Angelo Bognot (c09651052069@gmail.com)
-Last Modified: June 19, 2024
-Overview: This file processes the deletion of all eligible students from a payment record identified by the payment ID.
-*/
-
 session_start();
 require('db_conn.php');
 
@@ -28,6 +18,7 @@ if (isset($_POST['delete_all'])) {
     $column = isset($_POST['column']) ? validate($_POST['column']) : 'u.account_number';
     $search_input = isset($_POST['search_input']) ? validate($_POST['search_input']) : '';
     $program = isset($_POST['program']) ? validate($_POST['program']) : '';
+    $department = isset($_POST['department']) ? validate($_POST['department']) : '';
     $year_level = isset($_POST['year_level']) ? validate($_POST['year_level']) : '';
 
     // Validate payment ID if empty
@@ -51,6 +42,9 @@ if (isset($_POST['delete_all'])) {
         if (!empty($program)) {
             $conditions[] = "u.program = '$program'";
         }
+        if (!empty($department)) {
+            $conditions[] = "u.department = '$department'";
+        }
         if (!empty($year_level)) {
             $conditions[] = "u.year_level = '$year_level'";
         }
@@ -70,7 +64,6 @@ if (isset($_POST['delete_all'])) {
                        WHERE e.school_year = ?
                          AND e.semester = ?
                          AND u.role = 'Student'
-                         AND u.department = 'SSC'
                          $whereClause";
         $stmt = mysqli_prepare($conn, $studentsql);
         mysqli_stmt_bind_param($stmt, "iss", $payment_for_id, $school_year, $semester);

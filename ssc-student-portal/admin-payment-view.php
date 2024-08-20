@@ -117,10 +117,6 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Admin' && $_SESSION['depa
                                                                 <td class="col-md-9"><?php echo $row['payment_description']; ?></td>
                                                             </tr>
                                                             <tr>
-                                                                <td class="col-md-3"><strong>Organization:</strong></td>
-                                                                <td class="col-md-9"><?php echo $row['organization']; ?></td>
-                                                            </tr>
-                                                            <tr>
                                                                 <td class="col-md-3"><strong>Date:</strong></td>
                                                                 <td class="col-md-9"><?php echo $row['date']; ?></td>
                                                             </tr>
@@ -172,11 +168,11 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Admin' && $_SESSION['depa
                         <hr>
 
                         <form method="GET">
-                            <input type="hidden" name="payment_for_id"
-                                value="<?php echo isset($_GET['payment_for_id']) ? $_GET['payment_for_id'] : ''; ?>">
-                            <div class="input-group mb-3">
-                                <div class="col-md-4 mb-3">
-                                    <input type="text" name="search_input" class="form-control" placeholder="Search Event">
+                        <input type="hidden" name="payment_for_id"
+                        value="<?php echo isset($_GET['payment_for_id']) ? $_GET['payment_for_id'] : ''; ?>">
+                            <div class="form-row">
+                                <div class="col-md-3 mb-3">
+                                    <input type="text" name="search_input" class="form-control" placeholder="Search...">
                                 </div>
                                 <div class="col-md-2 mb-3">
                                     <select name="column" class="form-control">
@@ -184,8 +180,6 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Admin' && $_SESSION['depa
                                         <option value="last_name">Last Name</option>
                                         <option value="first_name">First Name</option>
                                         <option value="middle_name">Middle Name</option>
-                                        <option value="year_level">Year Level</option>
-                                        <option value="program">Program</option>
                                     </select>
                                 </div>
                                 <div class="col-md-2 mb-3">
@@ -199,18 +193,67 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Admin' && $_SESSION['depa
                                     </select>
                                 </div>
                                 <div class="col-md-2 mb-3">
-                                    <select name="program" class="form-control">
-                                        <option value="">Program</option>
-                                        <option value="">All</option>
+                                    <select id="department" name="department" class="form-control"
+                                        onchange="updateProgramOptions()">
+                                        <option value="">All Department</option>
+                                        <option value="ITE">ITE</option>
+                                        <option value="CE">CE</option>
+                                        <option value="CCJ">CCJ</option>
+                                        <option value="CAS">CAS</option>
+                                        <option value="CTE">CTE</option>
+                                        <option value="CBE">CBE</option>
+                                        <option value="COAHS">COAHS</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-2 mb-3">
+                                    <select id="program" name="program" class="form-control">
+                                        <option value="">All Program</option>
                                         <option value="BSIT">BSIT</option>
                                         <option value="BSCS">BSCS</option>
                                         <option value="BLIS">BLIS</option>
                                         <option value="ACT">ACT</option>
+                                        <option value="BSCE">BSCE</option>
+                                        <option value="BSCrim">BSCrim</option>
+                                        <option value="BAELS">BAELS</option>
+                                        <option value="BAPsyc">BAPsyc</option>
+                                        <option value="BACommArts">BACommArts</option>
+                                        <option value="BSES">BSES</option>
+                                        <option value="BSMath">BSMath</option>
+                                        <option value="BSSW">BSSW</option>
+                                        <option value="BPA">BPA</option>
+                                        <option value="BPA-Dance">BPA-Dance</option>
+                                        <option value="BSBio">BSBio</option>
+                                        <option value="BSESS-FSM">BSESS-FSM</option>
+                                        <option value="BEEd">BEEd</option>
+                                        <option value="BECEd">BECEd</option>
+                                        <option value="BCAEd">BCAEd</option>
+                                        <option value="BPEd">BPEd</option>
+                                        <option value="BTLEd">BTLEd</option>
+                                        <option value="BSEd-English">BSEd-English</option>
+                                        <option value="BSEd-Filipino">BSEd-Filipino</option>
+                                        <option value="BSEd-Math">BSEd-Math</option>
+                                        <option value="BSEd-Science">BSEd-Science</option>
+                                        <option value="BSEd-Social Studies">BSEd-Social Studies</option>
+                                        <option value="BSA">BSA</option>
+                                        <option value="BSMA">BSMA</option>
+                                        <option value="BSBA-FM">BSBA-FM</option>
+                                        <option value="BSBA-MM">BSBA-MM</option>
+                                        <option value="BSBA-OM">BSBA-OM</option>
+                                        <option value="BSOA">BSOA</option>
+                                        <option value="BSCA">BSCA</option>
+                                        <option value="BSREM">BSREM</option>
+                                        <option value="BSTM">BSTM</option>
+                                        <option value="BSHM">BSHM</option>
+                                        <option value="BSN">BSN</option>
+                                        <option value="BSP">BSP</option>
+                                        <option value="BSM">BSM</option>
                                     </select>
                                 </div>
                                 <div class="col-md-1 mb-3">
                                     <button class="btn btn-outline-secondary" type="submit" name="search">Search</button>
                                 </div>
+                                <input type="hidden" name="school_year" value="<?php echo $school_year; ?>">
+                                <input type="hidden" name="semester" value="<?php echo $semester; ?>">
                             </div>
                         </form>
 
@@ -220,19 +263,23 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Admin' && $_SESSION['depa
                         $payment_for_id = isset($_GET['payment_for_id']) ? $_GET['payment_for_id'] : '';
                         $search_input = isset($_GET['search_input']) ? $_GET['search_input'] : '';
                         $column = isset($_GET['column']) ? $_GET['column'] : '';
+                        $department = isset($_GET['department']) ? $_GET['department'] : '';
                         $year_level = isset($_GET['year_level']) ? $_GET['year_level'] : '';
                         $program = isset($_GET['program']) ? $_GET['program'] : '';
 
                         $query = "SELECT user.account_number, user.username, user.first_name, user.last_name, 
                         user.middle_name, user.program, user.year_level, payment.remarks, payment.date_paid, 
-                        payment.received_by, payment.proof_pic, payment.cn_number, payment.date_paid
+                        payment.received_by, payment.proof_pic, payment.cn_number, payment.date_paid, user.department
                         FROM payment 
                         JOIN user ON payment.account_number = user.account_number 
-                        WHERE payment.payment_for_id = '$payment_for_id'  AND user.department='SSC'";
+                        WHERE payment.payment_for_id = '$payment_for_id'";
 
                         $filters = [];
                         if ($search_input && $column) {
                             $filters[] = "user.$column LIKE '%$search_input%'";
+                        }
+                        if ($department) {
+                            $filters[] = "user.department = '$department'";
                         }
                         if ($year_level) {
                             $filters[] = "user.year_level = '$year_level'";

@@ -178,7 +178,7 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Admin' && $_SESSION['depa
                                 FROM school_year sy
                                 CROSS JOIN semester sem
                                 LEFT JOIN enrolled e ON e.school_year = sy.school_year AND e.semester = sem.semester
-                                LEFT JOIN user u ON e.account_number = u.account_number AND u.department = 'SSC'
+                                LEFT JOIN user u ON e.account_number = u.account_number
                                 WHERE 1=1 $school_year_condition $semester_condition 
                                 GROUP BY sy.school_year, sem.semester
                                 ORDER BY sy.school_year, sem.semester";

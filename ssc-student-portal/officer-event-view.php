@@ -115,6 +115,10 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Officer' && $_SESSION['de
                                                                 <td class="col-md-3"><strong>Event Name:</strong></td>
                                                                 <td class="col-md-9"><?php echo $row['event_name']; ?></td>
                                                             </tr>
+                                                            <!-- <tr>
+                                                                <td class="col-md-3"><strong>Organization:</strong></td>
+                                                                <td class="col-md-9"><?php echo $row['organization']; ?></td>
+                                                            </tr> -->
                                                             <tr>
                                                                 <td class="col-md-3"><strong>Date:</strong></td>
                                                                 <td class="col-md-9"><?php echo $row['date']; ?></td>
@@ -161,6 +165,8 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Officer' && $_SESSION['de
                                                         class="nav-icon fas fa-solid fa-qrcode"></i> Scan QR Code</a>
                                             </div>
                                             <?php
+                                            $school_year = $row['school_year'];
+                                            $semester = $row['semester'];
                                                     } else {
                                                         echo "Event may not be existing.";
                                                     }
@@ -172,20 +178,21 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Officer' && $_SESSION['de
 
                         <hr>
 
+
+                        <!-- Search Form -->
                         <form method="GET">
-                            <input type="hidden" name="event_id"
-                                value="<?php echo isset($_GET['event_id']) ? $_GET['event_id'] : ''; ?>">
+                        <input type="hidden" name="event_id"
+                        value="<?php echo isset($_GET['event_id']) ? $_GET['event_id'] : ''; ?>">
                             <div class="form-row">
-                                <div class="col-md-5 mb-3">
-                                    <input type="text" name="search_input" class="form-control"
-                                        placeholder="Search event name">
+                                <div class="col-md-3 mb-3">
+                                    <input type="text" name="search_input" class="form-control" placeholder="Search...">
                                 </div>
                                 <div class="col-md-2 mb-3">
                                     <select name="column" class="form-control">
-                                        <option value="account_number">Student Number</option>
-                                        <option value="last_name">Last Name</option>
-                                        <option value="first_name">First Name</option>
-                                        <option value="middle_name">Middle Name</option>
+                                        <option value="u.account_number">Student Number</option>
+                                        <option value="u.last_name">Last Name</option>
+                                        <option value="u.first_name">First Name</option>
+                                        <option value="u.middle_name">Middle Name</option>
                                     </select>
                                 </div>
                                 <div class="col-md-2 mb-3">
@@ -199,18 +206,67 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Officer' && $_SESSION['de
                                     </select>
                                 </div>
                                 <div class="col-md-2 mb-3">
-                                    <select name="program" class="form-control">
-                                        <option value="">Program</option>
-                                        <option value="">All</option>
+                                    <select id="department" name="department" class="form-control"
+                                        onchange="updateProgramOptions()">
+                                        <option value="">All Department</option>
+                                        <option value="ITE">ITE</option>
+                                        <option value="CE">CE</option>
+                                        <option value="CCJ">CCJ</option>
+                                        <option value="CAS">CAS</option>
+                                        <option value="CTE">CTE</option>
+                                        <option value="CBE">CBE</option>
+                                        <option value="COAHS">COAHS</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-2 mb-3">
+                                    <select id="program" name="program" class="form-control">
+                                        <option value="">All Program</option>
                                         <option value="BSIT">BSIT</option>
                                         <option value="BSCS">BSCS</option>
                                         <option value="BLIS">BLIS</option>
                                         <option value="ACT">ACT</option>
+                                        <option value="BSCE">BSCE</option>
+                                        <option value="BSCrim">BSCrim</option>
+                                        <option value="BAELS">BAELS</option>
+                                        <option value="BAPsyc">BAPsyc</option>
+                                        <option value="BACommArts">BACommArts</option>
+                                        <option value="BSES">BSES</option>
+                                        <option value="BSMath">BSMath</option>
+                                        <option value="BSSW">BSSW</option>
+                                        <option value="BPA">BPA</option>
+                                        <option value="BPA-Dance">BPA-Dance</option>
+                                        <option value="BSBio">BSBio</option>
+                                        <option value="BSESS-FSM">BSESS-FSM</option>
+                                        <option value="BEEd">BEEd</option>
+                                        <option value="BECEd">BECEd</option>
+                                        <option value="BCAEd">BCAEd</option>
+                                        <option value="BPEd">BPEd</option>
+                                        <option value="BTLEd">BTLEd</option>
+                                        <option value="BSEd-English">BSEd-English</option>
+                                        <option value="BSEd-Filipino">BSEd-Filipino</option>
+                                        <option value="BSEd-Math">BSEd-Math</option>
+                                        <option value="BSEd-Science">BSEd-Science</option>
+                                        <option value="BSEd-Social Studies">BSEd-Social Studies</option>
+                                        <option value="BSA">BSA</option>
+                                        <option value="BSMA">BSMA</option>
+                                        <option value="BSBA-FM">BSBA-FM</option>
+                                        <option value="BSBA-MM">BSBA-MM</option>
+                                        <option value="BSBA-OM">BSBA-OM</option>
+                                        <option value="BSOA">BSOA</option>
+                                        <option value="BSCA">BSCA</option>
+                                        <option value="BSREM">BSREM</option>
+                                        <option value="BSTM">BSTM</option>
+                                        <option value="BSHM">BSHM</option>
+                                        <option value="BSN">BSN</option>
+                                        <option value="BSP">BSP</option>
+                                        <option value="BSM">BSM</option>
                                     </select>
                                 </div>
                                 <div class="col-md-1 mb-3">
                                     <button class="btn btn-outline-secondary" type="submit" name="search">Search</button>
                                 </div>
+                                <input type="hidden" name="school_year" value="<?php echo $school_year; ?>">
+                                <input type="hidden" name="semester" value="<?php echo $semester; ?>">
                             </div>
                         </form>
 
@@ -221,11 +277,12 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Officer' && $_SESSION['de
                         $search_input = isset($_GET['search_input']) ? $_GET['search_input'] : '';
                         $column = isset($_GET['column']) ? $_GET['column'] : '';
                         $year_level = isset($_GET['year_level']) ? $_GET['year_level'] : '';
+                        $department = isset($_GET['department']) ? $_GET['department'] : '';
                         $program = isset($_GET['program']) ? $_GET['program'] : '';
 
-                        $query = "SELECT user.account_number, user.username, user.first_name, user.last_name, user.middle_name, user.program, user.year_level, attendance.remarks, attendance.remarked_by
+                        $query = "SELECT user.account_number, user.username, user.first_name, user.last_name, user.middle_name, user.program, user.department, user.year_level, attendance.remarks, attendance.remarked_by
                         FROM attendance 
-                        JOIN user ON attendance.account_number = user.account_number AND user.department = 'SSC'
+                        JOIN user ON attendance.account_number = user.account_number 
                         WHERE attendance.event_id = '$event_id'";
 
                         $filters = [];
@@ -234,6 +291,9 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Officer' && $_SESSION['de
                         }
                         if ($year_level) {
                             $filters[] = "user.year_level = '$year_level'";
+                        }
+                        if ($department) {
+                            $filters[] = "user.department = '$department'";
                         }
                         if ($program) {
                             $filters[] = "user.program = '$program'";
@@ -332,6 +392,83 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Officer' && $_SESSION['de
             <aside class="control-sidebar control-sidebar-dark">
             </aside>
         </div>
+
+        <script>
+            const programs = {
+                "ITE": [
+                    { value: "BSIT", text: "BSIT" },
+                    { value: "BSCS", text: "BSCS" },
+                    { value: "BLIS", text: "BLIS" },
+                    { value: "ACT", text: "ACT" }
+                ],
+                "CE": [
+                    { value: "BSCE", text: "BSCE" }
+                ],
+                "CCJ": [
+                    { value: "BSCrim", text: "BSCrim" }
+                ],
+                "CAS": [
+                    { value: "BAELS", text: "BAELS" },
+                    { value: "BAPsyc", text: "BAPsyc" },
+                    { value: "BACommArts", text: "BACommArts" },
+                    { value: "BSES", text: "BSES" },
+                    { value: "BSMath", text: "BSMath" },
+                    { value: "BSSW", text: "BSSW" },
+                    { value: "BPA", text: "BPA" },
+                    { value: "BPA-Dance", text: "BPA-Dance" },
+                    { value: "BSBio", text: "BSBio" },
+                    { value: "BSESS-FSM", text: "BSESS-FSM" }
+                ],
+                "CTE": [
+                    { value: "BEEd", text: "BEEd" },
+                    { value: "BECEd", text: "BECEd" },
+                    { value: "BCAEd", text: "BCAEd" },
+                    { value: "BPEd", text: "BPEd" },
+                    { value: "BTLEd", text: "BTLEd" },
+                    { value: "BSEd-English", text: "BSEd-English" },
+                    { value: "BSEd-Filipino", text: "BSEd-Filipino" },
+                    { value: "BSEd-Math", text: "BSEd-Math" },
+                    { value: "BSEd-Science", text: "BSEd-Science" },
+                    { value: "BSEd-Social Studies", text: "BSEd-Social Studies" }
+                ],
+                "CBE": [
+                    { value: "BSA", text: "BSA" },
+                    { value: "BSMA", text: "BSMA" },
+                    { value: "BSBA-FM", text: "BSBA-FM" },
+                    { value: "BSBA-MM", text: "BSBA-MM" },
+                    { value: "BSBA-OM", text: "BSBA-OM" },
+                    { value: "BSOA", text: "BSOA" },
+                    { value: "BSCA", text: "BSCA" },
+                    { value: "BSREM", text: "BSREM" },
+                    { value: "BSTM", text: "BSTM" },
+                    { value: "BSHM", text: "BSHM" }
+                ],
+                "COAHS": [
+                    { value: "BSN", text: "BSN" },
+                    { value: "BSP", text: "BSP" },
+                    { value: "BSM", text: "BSM" }
+                ]
+            };
+
+            function updateProgramOptions() {
+                const departmentSelect = document.getElementById("department");
+                const programSelect = document.getElementById("program");
+
+                const selectedDepartment = departmentSelect.value;
+
+                // Clear existing options
+                programSelect.innerHTML = '<option value="">All Program</option>';
+
+                if (selectedDepartment in programs) {
+                    programs[selectedDepartment].forEach(program => {
+                        const option = document.createElement("option");
+                        option.value = program.value;
+                        option.textContent = program.text;
+                        programSelect.appendChild(option);
+                    });
+                }
+            }
+        </script>
 
         <!-- jQuery -->
         <script src="AdminLTE-3.2.0/plugins/jquery/jquery.min.js"></script>

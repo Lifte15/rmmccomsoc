@@ -34,7 +34,7 @@
 <body>
     <section>
         <div class="container">
-           <h1 class="helloworld"><bdo dir="rtl">Hala Mentors ka?! hala help me!</bdo></h1>
+           <h1 class="helloworld"><bdo dir="rtl">Hala Mentors ka?! Help me!</bdo></h1>
            <h2 class="helloworld"><bdo dir="rtl">Teach me how to survive this BSIT course!</bdo></h2>
            <h2 class="helloworld"><bdo dir="rtl">Please lang, maawa ka sa akin, huhuhuhu</bdo></h2>
         </div>

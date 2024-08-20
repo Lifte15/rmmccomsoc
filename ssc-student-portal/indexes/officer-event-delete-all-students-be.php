@@ -1,13 +1,4 @@
 <?php
-/*
-officer-event-delete-all-students-be.php
-Authors:
-  - Lowie Jay Orillo (lowie.jaymier@gmail.com)
-  - Caryl Mae Subaldo (subaldomae29@gmail.com)
-  - Brian Angelo Bognot (c09651052069@gmail.com)
-Last Modified: June 18, 2024
-Overview: This file handles the deletion of all enrolled students from an event based on the event ID, program, and year level.
-*/
 
 session_start();
 require('db_conn.php');
@@ -28,6 +19,7 @@ if (isset($_POST['delete_all'])) {
     $column = isset($_POST['column']) ? validate($_POST['column']) : 'u.account_number';
     $search_input = isset($_POST['search_input']) ? validate($_POST['search_input']) : '';
     $program = isset($_POST['program']) ? validate($_POST['program']) : '';
+    $department = isset($_POST['department']) ? validate($_POST['department']) : '';
     $year_level = isset($_POST['year_level']) ? validate($_POST['year_level']) : '';
 
     // Validate event ID if empty
@@ -56,6 +48,9 @@ if (isset($_POST['delete_all'])) {
         if (!empty($program)) {
             $conditions[] = "u.program = '$program'";
         }
+        if (!empty($department)) {
+            $conditions[] = "u.department = '$department'";
+        }
         if (!empty($year_level)) {
             $conditions[] = "u.year_level = '$year_level'";
         }
@@ -76,7 +71,6 @@ if (isset($_POST['delete_all'])) {
                          AND e.school_year = ?
                          AND e.semester = ?
                          AND u.role = 'Student'
-                         AND u.department = 'SSC'
                          $whereClause";
         $stmt = mysqli_prepare($conn, $studentsql);
         if (!$stmt) {

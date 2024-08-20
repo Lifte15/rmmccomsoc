@@ -181,6 +181,7 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Student' && $_SESSION['de
                       e.school_year, 
                       e.semester, 
                       e.points, 
+                      e.department,
                       a.remarks
                   FROM 
                       events e
@@ -197,6 +198,7 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Student' && $_SESSION['de
                     ?>
                     <tr>
                       <td class="align-middle">
+                      <?php echo $row['department']; ?> |
                         <?php echo $row['event_name']; ?>
                       </td>
                       <td class="align-middle text-center">

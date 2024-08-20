@@ -115,44 +115,92 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Admin' && $_SESSION['depa
 
             <!-- Search Form -->
             <form method="GET">
-              <div class="form-row">
-                <div class="col-md-5 mb-3">
-                  <input type="text" name="search_input" class="form-control" placeholder="Search...">
-                </div>
-                <div class="col-md-2 mb-3">
-                  <select name="column" class="form-control">
-                    <option value="u.account_number">Student Number</option>
-                    <option value="u.last_name">Last Name</option>
-                    <option value="u.first_name">First Name</option>
-                    <option value="u.middle_name">Middle Name</option>
-                  </select>
-                </div>
-                <div class="col-md-2 mb-3">
-                  <select name="year_level" class="form-control">
-                    <option value="">Year Level</option>
-                    <option value="">All</option>
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                  </select>
-                </div>
-                <div class="col-md-2 mb-3">
-                  <select name="program" class="form-control">
-                    <option value="">Program</option>
-                    <option value="">All</option>
-                    <option value="BSIT">BSIT</option>
-                    <option value="BSCS">BSCS</option>
-                    <option value="BLIS">BLIS</option>
-                    <option value="ACT">ACT</option>
-                  </select>
-                </div>
-                <div class="col-md-1 mb-3">
-                  <button class="btn btn-outline-secondary" type="submit" name="search">Search</button>
-                </div>
-                <input type="hidden" name="school_year" value="<?php echo $school_year; ?>">
-                <input type="hidden" name="semester" value="<?php echo $semester; ?>">
-            </form>
+                            <div class="form-row">
+                                <div class="col-md-3 mb-3">
+                                    <input type="text" name="search_input" class="form-control" placeholder="Search...">
+                                </div>
+                                <div class="col-md-2 mb-3">
+                                    <select name="column" class="form-control">
+                                        <option value="u.account_number">Student Number</option>
+                                        <option value="u.last_name">Last Name</option>
+                                        <option value="u.first_name">First Name</option>
+                                        <option value="u.middle_name">Middle Name</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-2 mb-3">
+                                    <select name="year_level" class="form-control">
+                                        <option value="">Year Level</option>
+                                        <option value="">All</option>
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                        <option value="4">4</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-2 mb-3">
+                                    <select id="department" name="department" class="form-control"
+                                        onchange="updateProgramOptions()">
+                                        <option value="">All Department</option>
+                                        <option value="ITE">ITE</option>
+                                        <option value="CE">CE</option>
+                                        <option value="CCJ">CCJ</option>
+                                        <option value="CAS">CAS</option>
+                                        <option value="CTE">CTE</option>
+                                        <option value="CBE">CBE</option>
+                                        <option value="COAHS">COAHS</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-2 mb-3">
+                                    <select id="program" name="program" class="form-control">
+                                        <option value="">All Program</option>
+                                        <option value="BSIT">BSIT</option>
+                                        <option value="BSCS">BSCS</option>
+                                        <option value="BLIS">BLIS</option>
+                                        <option value="ACT">ACT</option>
+                                        <option value="BSCE">BSCE</option>
+                                        <option value="BSCrim">BSCrim</option>
+                                        <option value="BAELS">BAELS</option>
+                                        <option value="BAPsyc">BAPsyc</option>
+                                        <option value="BACommArts">BACommArts</option>
+                                        <option value="BSES">BSES</option>
+                                        <option value="BSMath">BSMath</option>
+                                        <option value="BSSW">BSSW</option>
+                                        <option value="BPA">BPA</option>
+                                        <option value="BPA-Dance">BPA-Dance</option>
+                                        <option value="BSBio">BSBio</option>
+                                        <option value="BSESS-FSM">BSESS-FSM</option>
+                                        <option value="BEEd">BEEd</option>
+                                        <option value="BECEd">BECEd</option>
+                                        <option value="BCAEd">BCAEd</option>
+                                        <option value="BPEd">BPEd</option>
+                                        <option value="BTLEd">BTLEd</option>
+                                        <option value="BSEd-English">BSEd-English</option>
+                                        <option value="BSEd-Filipino">BSEd-Filipino</option>
+                                        <option value="BSEd-Math">BSEd-Math</option>
+                                        <option value="BSEd-Science">BSEd-Science</option>
+                                        <option value="BSEd-Social Studies">BSEd-Social Studies</option>
+                                        <option value="BSA">BSA</option>
+                                        <option value="BSMA">BSMA</option>
+                                        <option value="BSBA-FM">BSBA-FM</option>
+                                        <option value="BSBA-MM">BSBA-MM</option>
+                                        <option value="BSBA-OM">BSBA-OM</option>
+                                        <option value="BSOA">BSOA</option>
+                                        <option value="BSCA">BSCA</option>
+                                        <option value="BSREM">BSREM</option>
+                                        <option value="BSTM">BSTM</option>
+                                        <option value="BSHM">BSHM</option>
+                                        <option value="BSN">BSN</option>
+                                        <option value="BSP">BSP</option>
+                                        <option value="BSM">BSM</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-1 mb-3">
+                                    <button class="btn btn-outline-secondary" type="submit" name="search">Search</button>
+                                </div>
+                                <input type="hidden" name="school_year" value="<?php echo $school_year; ?>">
+                                <input type="hidden" name="semester" value="<?php echo $semester; ?>">
+                            </div>
+                        </form>
 
             <!-- list of student table -->
             <div class="table-responsive">
@@ -175,11 +223,16 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Admin' && $_SESSION['depa
                     $column = $_GET['column'];
                     $year_level = $_GET['year_level'];
                     $program = $_GET['program'];
+                    $department = $_GET['department'];
 
                     $conditions = array();
 
                     if (!empty($year_level)) {
                       $conditions[] = "u.year_level = '$year_level'";
+                    }
+
+                    if (!empty($department)) {
+                      $conditions[] = "u.department = '$department'";
                     }
 
                     if (!empty($program)) {
@@ -199,7 +252,6 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Admin' && $_SESSION['depa
                                 WHERE $column LIKE '%$search_input%' 
                                 AND e.school_year = '$school_year' 
                                 AND e.semester = '$semester' 
-                                AND u.department='SSC'
                                 $condition_string";
 
                     $students = mysqli_query($conn, $studentssql);
@@ -209,8 +261,7 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Admin' && $_SESSION['depa
                                 INNER JOIN enrolled e 
                                 ON u.account_number = e.account_number
                                 WHERE e.school_year = '$school_year' 
-                                AND e.semester = '$semester'
-                                AND u.department='SSC'";
+                                AND e.semester = '$semester'";
 
                     $students = mysqli_query($conn, $studentssql);
                   }
@@ -264,6 +315,83 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Admin' && $_SESSION['depa
       <aside class="control-sidebar control-sidebar-dark">
       </aside>
     </div>
+
+    <script>
+            const programs = {
+                "ITE": [
+                    { value: "BSIT", text: "BSIT" },
+                    { value: "BSCS", text: "BSCS" },
+                    { value: "BLIS", text: "BLIS" },
+                    { value: "ACT", text: "ACT" }
+                ],
+                "CE": [
+                    { value: "BSCE", text: "BSCE" }
+                ],
+                "CCJ": [
+                    { value: "BSCrim", text: "BSCrim" }
+                ],
+                "CAS": [
+                    { value: "BAELS", text: "BAELS" },
+                    { value: "BAPsyc", text: "BAPsyc" },
+                    { value: "BACommArts", text: "BACommArts" },
+                    { value: "BSES", text: "BSES" },
+                    { value: "BSMath", text: "BSMath" },
+                    { value: "BSSW", text: "BSSW" },
+                    { value: "BPA", text: "BPA" },
+                    { value: "BPA-Dance", text: "BPA-Dance" },
+                    { value: "BSBio", text: "BSBio" },
+                    { value: "BSESS-FSM", text: "BSESS-FSM" }
+                ],
+                "CTE": [
+                    { value: "BEEd", text: "BEEd" },
+                    { value: "BECEd", text: "BECEd" },
+                    { value: "BCAEd", text: "BCAEd" },
+                    { value: "BPEd", text: "BPEd" },
+                    { value: "BTLEd", text: "BTLEd" },
+                    { value: "BSEd-English", text: "BSEd-English" },
+                    { value: "BSEd-Filipino", text: "BSEd-Filipino" },
+                    { value: "BSEd-Math", text: "BSEd-Math" },
+                    { value: "BSEd-Science", text: "BSEd-Science" },
+                    { value: "BSEd-Social Studies", text: "BSEd-Social Studies" }
+                ],
+                "CBE": [
+                    { value: "BSA", text: "BSA" },
+                    { value: "BSMA", text: "BSMA" },
+                    { value: "BSBA-FM", text: "BSBA-FM" },
+                    { value: "BSBA-MM", text: "BSBA-MM" },
+                    { value: "BSBA-OM", text: "BSBA-OM" },
+                    { value: "BSOA", text: "BSOA" },
+                    { value: "BSCA", text: "BSCA" },
+                    { value: "BSREM", text: "BSREM" },
+                    { value: "BSTM", text: "BSTM" },
+                    { value: "BSHM", text: "BSHM" }
+                ],
+                "COAHS": [
+                    { value: "BSN", text: "BSN" },
+                    { value: "BSP", text: "BSP" },
+                    { value: "BSM", text: "BSM" }
+                ]
+            };
+
+            function updateProgramOptions() {
+                const departmentSelect = document.getElementById("department");
+                const programSelect = document.getElementById("program");
+
+                const selectedDepartment = departmentSelect.value;
+
+                // Clear existing options
+                programSelect.innerHTML = '<option value="">All Program</option>';
+
+                if (selectedDepartment in programs) {
+                    programs[selectedDepartment].forEach(program => {
+                        const option = document.createElement("option");
+                        option.value = program.value;
+                        option.textContent = program.text;
+                        programSelect.appendChild(option);
+                    });
+                }
+            }
+        </script>
 
     <!-- jQuery -->
     <script src="AdminLTE-3.2.0/plugins/jquery/jquery.min.js"></script>

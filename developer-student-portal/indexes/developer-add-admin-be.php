@@ -39,7 +39,7 @@ if (isset($_POST['addOfficer'])) {
     $middlename = ucwords(strtolower($middlenameNotProper));
 
     // Set the password and hashed it
-    $defaultpassword = "admin123";
+    $defaultpassword = "admin";
     $defaulthashed_pass = password_hash($defaultpassword, PASSWORD_BCRYPT);
 
     // Get the first letter of the first name

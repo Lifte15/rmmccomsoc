@@ -19,6 +19,7 @@ if (isset($_POST['add_all'])) {
     $column = isset($_POST['column']) ? validate($_POST['column']) : 'u.account_number';
     $search_input = isset($_POST['search_input']) ? validate($_POST['search_input']) : '';
     $program = isset($_POST['program']) ? validate($_POST['program']) : '';
+    $department = isset($_POST['department']) ? validate($_POST['department']) : '';
     $year_level = isset($_POST['year_level']) ? validate($_POST['year_level']) : '';
 
     // Validate event ID if empty
@@ -44,6 +45,9 @@ if (isset($_POST['add_all'])) {
         if (!empty($program)) {
             $conditions[] = "u.program = '$program'";
         }
+        if (!empty($department)) {
+            $conditions[] = "u.department = '$department'";
+        }
         if (!empty($year_level)) {
             $conditions[] = "u.year_level = '$year_level'";
         }
@@ -65,7 +69,6 @@ if (isset($_POST['add_all'])) {
                        WHERE e.school_year = ?
                          AND e.semester = ?
                          AND u.role = 'Student'
-                         AND u.department = 'SSC'
                          AND a.account_number IS NULL
                          $whereClause";
         $stmt = mysqli_prepare($conn, $studentsql);

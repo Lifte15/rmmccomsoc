@@ -471,7 +471,7 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Admin' && $_SESSION['depa
                      FROM user u
                      INNER JOIN enrolled e ON u.account_number = e.account_number 
                      WHERE u.role = 'Student' 
-                     AND u.department = 'CBE' 
+                     AND u.department = 'COAHS' 
                      AND e.school_year = '$schoolYear' 
                      AND e.semester = '$semester'";
     $COAHSProgramresult = mysqli_query($conn, $COAHSProgramquery);

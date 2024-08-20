@@ -165,6 +165,8 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Admin' && $_SESSION['depa
                                                         class="nav-icon fas fa-solid fa-qrcode"></i> Scan QR Code</a>
                                             </div>
                                             <?php
+                                            $school_year = $row['school_year'];
+                                            $semester = $row['semester'];
                                                     } else {
                                                         echo "Event may not be existing.";
                                                     }
@@ -176,18 +178,21 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Admin' && $_SESSION['depa
 
                         <hr>
 
+
                         <!-- Search Form -->
                         <form method="GET">
+                        <input type="hidden" name="event_id"
+                        value="<?php echo isset($_GET['event_id']) ? $_GET['event_id'] : ''; ?>">
                             <div class="form-row">
                                 <div class="col-md-3 mb-3">
                                     <input type="text" name="search_input" class="form-control" placeholder="Search...">
                                 </div>
                                 <div class="col-md-2 mb-3">
                                     <select name="column" class="form-control">
-                                        <option value="u.account_number">Student Number</option>
-                                        <option value="u.last_name">Last Name</option>
-                                        <option value="u.first_name">First Name</option>
-                                        <option value="u.middle_name">Middle Name</option>
+                                        <option value="account_number">Student Number</option>
+                                        <option value="last_name">Last Name</option>
+                                        <option value="first_name">First Name</option>
+                                        <option value="middle_name">Middle Name</option>
                                     </select>
                                 </div>
                                 <div class="col-md-2 mb-3">

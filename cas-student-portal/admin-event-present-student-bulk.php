@@ -96,7 +96,7 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Admin' && $_SESSION['depa
                       <div class="card-header">
                         <h3 class="card-title text-center" style="font-size: 1.25rem; font-weight: bold;">
                           Marking Present using Excel</h3><br><br>
-                        <p class="text-muted">Yey Wow Magic</p>
+                        <p class="text-muted">Upload your Excel file to mark students present for this event.</p>
                         <hr>
 
                         <?php if (isset($_GET['newStudentError'])) { ?>
@@ -116,7 +116,7 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Admin' && $_SESSION['depa
                           <input type="text" class="form-control" name="event_id" value="<?php echo $event_id ?>" hidden>
 
                           <div class="offset-sm-2 col-sm-10">
-                            <button type="submit" value="Submit" name="save_excel_data" class="btn btn-success">Do it</button>
+                            <button type="submit" value="Submit" name="save_excel_data" class="btn btn-success">Upload</button>
                           </div>
 
                         </form>

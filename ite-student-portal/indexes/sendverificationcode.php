@@ -1,16 +1,7 @@
 <?php
-/*
-sendverificationcode.php handles the process of generating and sending a verification code to a user's email for account verification.
-Authors:
-  - Lowie Jay Orillo (lowie.jaymier@gmail.com)
-  - Caryl Mae Subaldo (subaldomae29@gmail.com)
-  - Brian Angelo Bognot (c09651052069@gmail.com)
-Last Modified: June 9, 2024
-Overview: This script validates the user account, generates a verification code, updates the user record, and sends an email with the code if the account is found.
-*/
-
 require ('db_conn.php');
 session_start();
+
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
@@ -167,7 +158,7 @@ if (isset($_POST['sendCode'])) {
             mysqli_stmt_bind_param($stmt_update, "iss", $v_code, $email, $account_number);
             $result_update = mysqli_stmt_execute($stmt_update);
 
-            if ($result_update && sendMail($_POST['email'], $v_code, $last_name, $first_name, $middle_name, $program, $year_level, $username)) {
+            if ($result_update && sendMail($email, $v_code, $last_name, $first_name, $middle_name, $program, $year_level, $username)) {
                 header("Location: ../verify-email.php?codeSentSuccess=Your Verification Code has been sent to your email.&$user_data");
                 exit();
             } else {
