@@ -13,6 +13,9 @@ use Endroid\QrCode\Writer\PngWriter;
 if (isset($_POST['save_excel_data'])) {
 
     function validate($data) {
+        if (is_null($data)) {
+            return '';
+        }
         $data = trim($data); 
         $data = stripslashes($data); 
         $data = htmlspecialchars($data); 
@@ -60,7 +63,7 @@ if (isset($_POST['save_excel_data'])) {
 
                 $department = "ITE";
 
-                if (empty($lastnameNotProper) || empty($firstnameNotProper) || empty($program) || empty($yearlevel) || empty($gender)) {
+                if (empty($lastnameNotProper) || empty($firstnameNotProper) || empty($program) || empty($yearlevel)) {
                     continue;
                 }
 
@@ -76,11 +79,15 @@ if (isset($_POST['save_excel_data'])) {
                     continue;
                 }
 
-                if (!in_array(trim($gender), ['M', 'F'])) {
+                if (!empty($gender) && !in_array(trim($gender), ['M', 'F'])) {
                     continue;
                 }
 
-                $gender = $gender == 'M' ? 'Male' : 'Female';
+                if (!empty($gender)) {
+                    $gender = $gender == 'M' ? 'Male' : 'Female';
+                } else {
+                    $gender = '';  // Set gender to empty if it's not provided
+                }
 
                 $lastname = ucwords(strtolower($lastnameNotProper));
                 $firstname = ucwords(strtolower($firstnameNotProper));
