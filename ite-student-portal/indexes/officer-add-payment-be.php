@@ -1,13 +1,4 @@
 <?php
-/*
-officer-add-payment-be.php and processes the addition of new payments by officer, including input validation and database insertion.
-Authors:
-  - Lowie Jay Orillo (lowie.jaymier@gmail.com)
-  - Caryl Mae Subaldo (subaldomae29@gmail.com)
-  - Brian Angelo Bognot (c09651052069@gmail.com)
-Last Modified: June 17, 2024
-Overview: This file handles the addition of new payments, validating officer input and inserting the payment into the database.
-*/
 session_start();
 require ('db_conn.php');
 
@@ -68,7 +59,7 @@ if (isset($_POST['addEvent'])) {
 
         // Redirect based on the result of the SQL query
         if ($result_newevent_query) {
-            header("Location: ../officer-payment.php?newPaymentSuccess=New payment added successfully");
+            header("Location: ../officer-payment.php?newPaymentSuccess=New payment added successfully&search_input=&date=&school_year=$schoolyear&semester=$semester&search=");
             exit();
         } else {
             header("Location: ../officer-payment-addnew.php?newPaymentError=Failed to add new event&$user_data");

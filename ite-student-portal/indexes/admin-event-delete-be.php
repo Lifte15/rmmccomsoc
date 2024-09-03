@@ -1,13 +1,4 @@
 <?php
-/*
-admin-event-delete-be.php and event deletion process in admin
-Authors:
-  - Lowie Jay Orillo (lowie.jaymier@gmail.com)
-  - Caryl Mae Subaldo (subaldomae29@gmail.com)
-  - Brian Angelo Bognot (c09651052069@gmail.com)
-Last Modified: June 1, 2024
-Overview: This file handles the deletion of events.
-*/
 session_start();
 require('db_conn.php');
 
@@ -25,6 +16,14 @@ if (isset($_POST['deleteEvent'])) {
     // Sanitize and validate 
     $event_id = validate($_POST['event_id']);
 
+    $query = "SELECT school_year, semester FROM events WHERE event_id = ?";
+    $stmt = mysqli_prepare($conn, $query);
+    mysqli_stmt_bind_param($stmt, "i", $event_id);
+    mysqli_stmt_execute($stmt);
+    mysqli_stmt_bind_result($stmt, $schoolyear, $semester);
+    mysqli_stmt_fetch($stmt);
+    mysqli_stmt_close($stmt);
+
     // Delete attendance records related to the event
     $delete_attendance_query = "DELETE FROM attendance WHERE event_id = ?";
     $delete_attendance_stmt = mysqli_prepare($conn, $delete_attendance_query);
@@ -40,10 +39,10 @@ if (isset($_POST['deleteEvent'])) {
 
     // Redirect based on the result of the SQL query
     if ($affected_rows > 0) {
-        header("Location: ../admin-events.php?deleteEventSuccess=Successfully deleted the event");
+        header("Location: ../admin-events.php?deleteEventSuccess=Successfully deleted the event&search_input=&date=&school_year=$schoolyear&semester=$semester&search=");
         exit();
     } else {
-        header("Location: ../admin-events.php?deleteEventError=Failed to delete the event");
+        header("Location: ../admin-events.php?deleteEventError=Failed to delete the event&search_input=&date=&school_year=$schoolyear&semester=$semester&search=");
         exit();
     }
 

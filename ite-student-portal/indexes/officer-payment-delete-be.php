@@ -41,10 +41,10 @@ if (isset($_POST['deletePayment'])) {
 
     // // Redirect based on the result of the SQL query
     if ($affected_rows > 0) {
-        header("Location: ../officer-payment.php?deletePaymentSuccess=Successfully deleted the event");
+        header("Location: ../officer-payment.php?deletePaymentSuccess=Successfully deleted the payment&search_input=&date=&school_year=$schoolyear&semester=$semester&search=");
         exit();
     } else {
-        header("Location: ../officer-payment.php?deletePaymentError=Failed to delete the event");
+        header("Location: ../officer-payment.php?deletePaymentError=Failed to delete the payment&search_input=&date=&school_year=$schoolyear&semester=$semester&search=");
         exit();
     }
 

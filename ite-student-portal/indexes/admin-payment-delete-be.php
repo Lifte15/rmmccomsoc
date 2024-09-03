@@ -1,14 +1,4 @@
 <?php
-/*
-admin-payment-delete-be.php
-Authors:
-  - Lowie Jay Orillo (lowie.jaymier@gmail.com)
-  - Caryl Mae Subaldo (subaldomae29@gmail.com)
-  - Brian Angelo Bognot (c09651052069@gmail.com)
-Last Modified: June 17, 2024
-Overview: Deletes a payment record and its associated details based on the specified payment ID.
-*/
-
 session_start();
 require('db_conn.php');
 
@@ -26,6 +16,14 @@ if (isset($_POST['deletePayment'])) {
     // Sanitize and validate 
     $payment_for_id = validate($_POST['payment_for_id']);
 
+    $query = "SELECT school_year, semester FROM events WHERE payment_for_id = ?";
+    $stmt = mysqli_prepare($conn, $query);
+    mysqli_stmt_bind_param($stmt, "i", $payment_for_id);
+    mysqli_stmt_execute($stmt);
+    mysqli_stmt_bind_result($stmt, $schoolyear, $semester);
+    mysqli_stmt_fetch($stmt);
+    mysqli_stmt_close($stmt);
+
     // Delete the payment
     $delete_event_query = "DELETE FROM payment WHERE payment_for_id = ?";
     $delete_event_stmt = mysqli_prepare($conn, $delete_event_query);
@@ -41,10 +39,10 @@ if (isset($_POST['deletePayment'])) {
 
     // // Redirect based on the result of the SQL query
     if ($affected_rows > 0) {
-        header("Location: ../admin-payment.php?deletePaymentSuccess=Successfully deleted the event");
+        header("Location: ../admin-payment.php?deletePaymentSuccess=Successfully deleted the payment&search_input=&date=&school_year=$schoolyear&semester=$semester&search=");
         exit();
     } else {
-        header("Location: ../admin-payment.php?deletePaymentError=Failed to delete the event");
+        header("Location: ../admin-payment.php?deletePaymentError=Failed to delete the payment&search_input=&date=&school_year=$schoolyear&semester=$semester&search=");
         exit();
     }
 

@@ -204,7 +204,7 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Officer' && $_SESSION['de
                                                 <button type="submit" value="Submit" name="addEvent"
                                                     class="btn btn-success">Add</button>
                                                 <a type="button" name="cancel" class="btn btn-secondary"
-                                                    href="officer-payment.php">Cancel</a>
+                                                    href="officer-payment.php?search_input=&date=&school_year=<?php echo $defaultYear; ?>&semester=<?php echo $defaultSemester; ?>&search="></a>">Cancel</a>
                                             </div>
 
                                         </form>

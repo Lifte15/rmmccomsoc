@@ -43,6 +43,33 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Officer' && $_SESSION['de
             <?php include 'layout/officer-fixed-topnav.php'; ?>
 
             <?php include 'layout/officer-sidebar.php'; ?>
+            <?php
+                                                if (isset($_GET['event_id'])) {
+                                                    $event_id = $_GET['event_id'];
+                                                    $eventsql = "SELECT * FROM events WHERE event_id = '$event_id' AND department='ITE'";
+                                                    $result = $conn->query($eventsql);
+
+                                                    if ($result && $result->num_rows > 0) {
+                                                        $row = $result->fetch_assoc();
+                                                        // Query to count the number of 'Present' remarks
+                                                        $countPresentSql = "SELECT COUNT(remarks) AS remark_count FROM attendance WHERE event_id = '$event_id' AND remarks='Present'";
+                                                        $countResult = $conn->query($countPresentSql);
+                                                        $Present = 0;
+
+                                                        if ($countResult && $countResult->num_rows > 0) {
+                                                            $countRow = $countResult->fetch_assoc();
+                                                            $Present = $countRow['remark_count'];
+                                                        }
+                                                        // Query to count the number of 'Absent' remarks
+                                                        $countAbsentSql = "SELECT COUNT(remarks) AS remark_count FROM attendance WHERE event_id = '$event_id' AND remarks='Absent'";
+                                                        $countAbsentResult = $conn->query($countAbsentSql);
+                                                        $Absent = 0;
+
+                                                        if ($countAbsentResult && $countAbsentResult->num_rows > 0) {
+                                                            $countAbsentRow = $countAbsentResult->fetch_assoc();
+                                                            $Absent = $countAbsentRow['remark_count'];
+                                                        }
+                                                        ?>
 
             <div class="content-wrapper">
                 <div class="content-header">
@@ -52,7 +79,7 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Officer' && $_SESSION['de
                                 <h1>Event</h1>
                             </div>
                             <div class="col-sm-6 text-right">
-                                <a id="addNewSubjectBtn" class="btn btn-secondary" href="officer-events.php"><i
+                                <a id="addNewSubjectBtn" class="btn btn-secondary" href="officer-events.php?search_input=&date=&school_year=<?php echo $row['school_year']; ?>&semester=<?php echo $row['semester']; ?>"><i
                                         class="nav-icon fas fa-solid fa-chevron-left"></i> Back to Events</a>
                                 <a href="indexes/officer-event-view-export.php?event_id=<?php echo $_GET['event_id']; ?>"
                                     class="btn btn-primary">
@@ -83,33 +110,6 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Officer' && $_SESSION['de
                                     <div class="col-md">
                                         <div class="table-responsive">
                                             <table class="subject-info">
-                                                <?php
-                                                if (isset($_GET['event_id'])) {
-                                                    $event_id = $_GET['event_id'];
-                                                    $eventsql = "SELECT * FROM events WHERE event_id = '$event_id' AND department='ITE'";
-                                                    $result = $conn->query($eventsql);
-
-                                                    if ($result && $result->num_rows > 0) {
-                                                        $row = $result->fetch_assoc();
-                                                        // Query to count the number of 'Present' remarks
-                                                        $countPresentSql = "SELECT COUNT(remarks) AS remark_count FROM attendance WHERE event_id = '$event_id' AND remarks='Present'";
-                                                        $countResult = $conn->query($countPresentSql);
-                                                        $Present = 0;
-
-                                                        if ($countResult && $countResult->num_rows > 0) {
-                                                            $countRow = $countResult->fetch_assoc();
-                                                            $Present = $countRow['remark_count'];
-                                                        }
-                                                        // Query to count the number of 'Absent' remarks
-                                                        $countAbsentSql = "SELECT COUNT(remarks) AS remark_count FROM attendance WHERE event_id = '$event_id' AND remarks='Absent'";
-                                                        $countAbsentResult = $conn->query($countAbsentSql);
-                                                        $Absent = 0;
-
-                                                        if ($countAbsentResult && $countAbsentResult->num_rows > 0) {
-                                                            $countAbsentRow = $countAbsentResult->fetch_assoc();
-                                                            $Absent = $countAbsentRow['remark_count'];
-                                                        }
-                                                        ?>
                                                         <table class="subject-info">
                                                             <tr>
                                                                 <td class="col-md-3"><strong>Event Name:</strong></td>

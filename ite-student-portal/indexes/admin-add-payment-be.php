@@ -66,7 +66,7 @@ if (isset($_POST['addEvent'])) {
 
         // Redirect based on the result of the SQL query
         if ($result_newevent_query) {
-            header("Location: ../admin-payment.php?newPaymentSuccess=New payment added successfully");
+            header("Location: ../admin-payment.php?newPaymentSuccess=New payment added successfully&search_input=&date=&school_year=$schoolyear&semester=$semester&search=");
             exit();
         } else {
             header("Location: ../admin-payment-addnew.php?newPaymentError=Failed to add new event&$user_data");

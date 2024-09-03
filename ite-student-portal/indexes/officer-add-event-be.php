@@ -73,7 +73,7 @@ if (isset($_POST['addEvent'])) {
 
             // Redirect based on the result of the SQL query
             if ($result_newevent_query) {
-                header("Location: ../officer-events.php?newEventSuccess=New event added successfully");
+                header("Location: ../officer-events.php?newEventSuccess=New event added successfully&search_input=&date=&school_year=$schoolyear&semester=$semester&search=");
                 exit();
             } else {
                 header("Location: ../officer-event-addnew.php?newEventError=Failed to add new event&$user_data");

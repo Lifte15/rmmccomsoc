@@ -48,6 +48,34 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Officer' && $_SESSION['de
 
             <?php include 'layout/officer-fixed-topnav.php'; ?>
             <?php include 'layout/officer-sidebar.php'; ?>
+            <?php
+                                                if (isset($_GET['payment_for_id'])) {
+                                                    $payment_for_id = $_GET['payment_for_id'];
+                                                    $eventsql = "SELECT * FROM payment_for WHERE payment_for_id = '$payment_for_id' AND department='ITE'";
+                                                    $result = $conn->query($eventsql);
+
+                                                    if ($result && $result->num_rows > 0) {
+                                                        $row = $result->fetch_assoc();
+
+                                                        // Query to count the number of 'Paid' remarks
+                                                        $countPaidSql = "SELECT COUNT(remarks) AS paid_count FROM payment WHERE payment_for_id = '$payment_for_id' AND remarks='Paid'";
+                                                        $countResult = $conn->query($countPaidSql);
+                                                        $paid = 0;
+
+                                                        if ($countResult && $countResult->num_rows > 0) {
+                                                            $countRow = $countResult->fetch_assoc();
+                                                            $paid = $countRow['paid_count'];
+                                                        }
+                                                        // Query to count the number of 'Unpaid' remarks
+                                                        $countUnpaidSql = "SELECT COUNT(remarks) AS paid_count FROM payment WHERE payment_for_id = '$payment_for_id' AND remarks='Unpaid'";
+                                                        $countUnpaidResult = $conn->query($countUnpaidSql);
+                                                        $unpaid = 0;
+
+                                                        if ($countUnpaidResult && $countUnpaidResult->num_rows > 0) {
+                                                            $countUnpaidRow = $countUnpaidResult->fetch_assoc();
+                                                            $unpaid = $countUnpaidRow['paid_count'];
+                                                        }
+                                                        ?>
 
             <div class="content-wrapper">
                 <div class="content-header">
@@ -57,7 +85,7 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Officer' && $_SESSION['de
                                 <h1>Payment</h1>
                             </div>
                             <div class="col-sm-6 text-right">
-                                <a id="addNewSubjectBtn" class="btn btn-secondary" href="officer-payment.php"><i
+                                <a id="addNewSubjectBtn" class="btn btn-secondary" href="officer-payment.php?search_input=&date=&school_year=<?php echo $row['school_year']; ?>&semester=<?php echo $row['semester']; ?>&search="><i
                                         class="nav-icon fas fa-solid fa-chevron-left"></i> Back to Payments</a>
                                 <a id="exportDataBtn" class="btn btn-primary"
                                     href="indexes/officer-payment-view-export.php?payment_for_id=<?php echo $_GET['payment_for_id']; ?>">
@@ -87,34 +115,6 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Officer' && $_SESSION['de
                                     <div class="col-md">
                                         <div class="table-responsive">
                                             <table class="subject-info">
-                                                <?php
-                                                if (isset($_GET['payment_for_id'])) {
-                                                    $payment_for_id = $_GET['payment_for_id'];
-                                                    $eventsql = "SELECT * FROM payment_for WHERE payment_for_id = '$payment_for_id' AND department='ITE'";
-                                                    $result = $conn->query($eventsql);
-
-                                                    if ($result && $result->num_rows > 0) {
-                                                        $row = $result->fetch_assoc();
-
-                                                        // Query to count the number of 'Paid' remarks
-                                                        $countPaidSql = "SELECT COUNT(remarks) AS paid_count FROM payment WHERE payment_for_id = '$payment_for_id' AND remarks='Paid'";
-                                                        $countResult = $conn->query($countPaidSql);
-                                                        $paid = 0;
-
-                                                        if ($countResult && $countResult->num_rows > 0) {
-                                                            $countRow = $countResult->fetch_assoc();
-                                                            $paid = $countRow['paid_count'];
-                                                        }
-                                                        // Query to count the number of 'Unpaid' remarks
-                                                        $countUnpaidSql = "SELECT COUNT(remarks) AS paid_count FROM payment WHERE payment_for_id = '$payment_for_id' AND remarks='Unpaid'";
-                                                        $countUnpaidResult = $conn->query($countUnpaidSql);
-                                                        $unpaid = 0;
-
-                                                        if ($countUnpaidResult && $countUnpaidResult->num_rows > 0) {
-                                                            $countUnpaidRow = $countUnpaidResult->fetch_assoc();
-                                                            $unpaid = $countUnpaidRow['paid_count'];
-                                                        }
-                                                        ?>
                                                         <table class="subject-info">
                                                             <tr>
                                                                 <td class="col-md-3"><strong>Payment Description:</strong></td>
