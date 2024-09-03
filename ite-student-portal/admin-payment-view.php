@@ -53,7 +53,7 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Admin' && $_SESSION['depa
                                 <h1>Payment</h1>
                             </div>
                             <div class="col-sm-6 text-right">
-                                <a id="addNewSubjectBtn" class="btn btn-secondary" href="admin-payment.php"><i
+                                <a id="addNewSubjectBtn" class="btn btn-secondary" href="admin-payment.php?search_input=&date=&school_year=<?php echo $defaultYear; ?>&semester=<?php echo $defaultSemester; ?>&search="><i
                                         class="nav-icon fas fa-solid fa-chevron-left"></i> Back to Payments</a>
                                 <a id="exportDataBtn" class="btn btn-primary"
                                     href="indexes/admin-payment-view-export.php?payment_for_id=<?php echo $_GET['payment_for_id']; ?>">

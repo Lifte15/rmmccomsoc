@@ -52,7 +52,7 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Admin' && $_SESSION['depa
                                 <h1>Event</h1>
                             </div>
                             <div class="col-sm-6 text-right">
-                                <a id="addNewSubjectBtn" class="btn btn-secondary" href="admin-events.php"><i
+                                <a id="addNewSubjectBtn" class="btn btn-secondary" href="admin-events.php?search_input=&date=&school_year=<?php echo $defaultYear; ?>&semester=<?php echo $defaultSemester; ?>&search="><i
                                         class="nav-icon fas fa-solid fa-chevron-left"></i> Back to Events</a>
                                 <a href="indexes/admin-event-view-export.php?event_id=<?php echo $_GET['event_id']; ?>"
                                     class="btn btn-primary">
