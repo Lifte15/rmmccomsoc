@@ -14,11 +14,11 @@ if (isset($_POST['save_excel_data'])) {
 
     function validate($data) {
         if (is_null($data)) {
-            return '';
+            return ''; // Return empty string if the data is null
         }
         $data = trim($data); 
         $data = stripslashes($data); 
-        $data = htmlspecialchars($data); 
+        $data = htmlspecialchars($data, ENT_QUOTES, 'UTF-8'); // Ensure HTML entities are properly handled
         return $data;
     }
 
@@ -47,15 +47,17 @@ if (isset($_POST['save_excel_data'])) {
                     continue; 
                 }
                 
-                $lastnameNotProper = validate($row[1]);
-                $firstnameNotProper = validate($row[2]);
-                $middlenameNotProper = validate($row[3]);
+                // Ensure data is encoded in UTF-8 before processing
+                $lastnameNotProper = $row[1] !== null ? mb_convert_encoding($row[1], 'UTF-8', 'auto') : '';
+                $firstnameNotProper = $row[2] !== null ? mb_convert_encoding($row[2], 'UTF-8', 'auto') : '';
+                $middlenameNotProper = $row[3] !== null ? mb_convert_encoding($row[3], 'UTF-8', 'auto') : '';
+                
                 $program = validate($row[4]);
                 $yearlevel = validate($row[5]);
                 $gender = validate($row[6]);
                 $phonenumberdefault = validate($row[7]);
                 
-                if (!empty($phonenumberdefault) && (!preg_match('/^9\d{9}$/', $phonenumberdefault))) {
+                if (!empty($phonenumberdefault) && !preg_match('/^9\d{9}$/', $phonenumberdefault)) {
                     $phonenumber = '';
                 } else {
                     $phonenumber = empty($phonenumberdefault) ? '' : "0" . $phonenumberdefault;
@@ -67,7 +69,7 @@ if (isset($_POST['save_excel_data'])) {
                     continue;
                 }
 
-                if (!preg_match('/^[a-zA-Z ]+$/', $lastnameNotProper) || !preg_match('/^[a-zA-Z ]+$/', $firstnameNotProper) || (!empty($middlenameNotProper) && !preg_match('/^[a-zA-Z ]+$/', $middlenameNotProper))) {
+                if (!preg_match('/^[a-zA-ZÑñ ]+$/u', $lastnameNotProper) || !preg_match('/^[a-zA-ZÑñ ]+$/u', $firstnameNotProper) || (!empty($middlenameNotProper) && !preg_match('/^[a-zA-ZÑñ ]+$/u', $middlenameNotProper))) {
                     continue;
                 }
 
@@ -89,18 +91,17 @@ if (isset($_POST['save_excel_data'])) {
                     $gender = '';  // Set gender to empty if it's not provided
                 }
 
-                $lastname = ucwords(strtolower($lastnameNotProper));
-                $firstname = ucwords(strtolower($firstnameNotProper));
-                $middlename = ucwords(strtolower($middlenameNotProper));
+                $lastname = mb_convert_case($lastnameNotProper, MB_CASE_TITLE, "UTF-8");
+                $firstname = mb_convert_case($firstnameNotProper, MB_CASE_TITLE, "UTF-8");
+                $middlename = mb_convert_case($middlenameNotProper, MB_CASE_TITLE, "UTF-8");
                 
                 $lastnameremovespace = str_replace(' ', '', $lastname);
 
                 $defaultpassword = $lastnameremovespace . $accountnumber;
                 $defaulthashed_pass = password_hash($defaultpassword, PASSWORD_BCRYPT);
 
-                $first_letter = substr($firstname, 0, 1);
-
-                $first_letter_middlename = substr($middlename, 0, 1);
+                $first_letter = mb_substr($firstname, 0, 1, "UTF-8");
+                $first_letter_middlename = $middlename ? mb_substr($middlename, 0, 1, "UTF-8") : '';
                 
                 $code = strtoupper($lastname . " , " . $firstname . " " . $first_letter_middlename . ". - " . $accountnumber . " - " . $program);
 

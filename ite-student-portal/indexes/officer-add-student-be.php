@@ -1,13 +1,5 @@
 <?php
-/*
-officer-add-student-be.php and student addition process in officer
-Authors:
-  - Lowie Jay Orillo (lowie.jaymier@gmail.com)
-  - Caryl Mae Subaldo (subaldomae29@gmail.com)
-  - Brian Angelo Bognot (c09651052069@gmail.com)
-Last Modified: June 10, 2024
-Overview: This file handles the addition of new students, validating officer input and inserting the student into the database.
-*/
+
 session_start();
 require('db_conn.php');
 require "../vendor/autoload.php";
@@ -38,9 +30,9 @@ if (isset($_POST['addStudent'])) {
     $department = "ITE";
 
     // Convert the names to proper case
-    $lastname = ucwords(strtolower($lastnameNotProper));
-    $firstname = ucwords(strtolower($firstnameNotProper));
-    $middlename = ucwords(strtolower($middlenameNotProper));
+    $lastname = mb_convert_case($lastnameNotProper, MB_CASE_TITLE, "UTF-8");
+    $firstname = mb_convert_case($firstnameNotProper, MB_CASE_TITLE, "UTF-8");
+    $middlename = mb_convert_case($middlenameNotProper, MB_CASE_TITLE, "UTF-8");
 
         // Construct user data string
         $user_data = 'accountnumber=' . $accountnumber .
@@ -91,10 +83,11 @@ if (isset($_POST['addStudent'])) {
     $defaulthashed_pass = password_hash($defaultpassword, PASSWORD_BCRYPT);
 
     // Get the first letter of the first name
-    $first_letter = substr($firstname, 0, 1);
+    $first_letter = mb_substr($firstname, 0, 1, "UTF-8");
 
     // Get the first letter of the middle name
-    $first_letter_middlename = substr($middlename, 0, 1);
+    $first_letter_middlename = mb_substr($middlename, 0, 1, "UTF-8");
+
 
     // Generate the code
     $code = strtoupper($lastname . " , " . $firstname . " " . $first_letter_middlename . ". - " . $accountnumber . " - " . $program);
