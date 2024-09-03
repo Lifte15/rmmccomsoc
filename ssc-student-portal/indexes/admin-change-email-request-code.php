@@ -18,12 +18,12 @@ function sendMail($newEmail, $verificationCode, $username)
         $mail->isSMTP();
         $mail->Host = 'smtp.gmail.com';
         $mail->SMTPAuth = true;
-        $mail->Username = 'itestudentportal@gmail.com';
-        $mail->Password = 'gdlu jbkq oeir bybu';
+        $mail->Username = 'studentportal.comsoc@gmail.com';
+        $mail->Password = 'rend npyn fvjg hmds';
         $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
         $mail->Port = 587;
 
-        $mail->setFrom('itestudentportal@gmail.com', 'Change Email Address Request Code | SSC Student Portal');
+        $mail->setFrom('studentportal.comsoc@gmail.com', 'Change Email Address Request Code | SSC Student Portal');
         $mail->addAddress($newEmail);
 
         $mail->isHTML(true);
