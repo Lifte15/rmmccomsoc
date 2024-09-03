@@ -18,12 +18,12 @@ function sendMail($email, $v_code, $last_name, $first_name, $middle_name, $progr
         $mail->isSMTP();
         $mail->Host = 'smtp.gmail.com';
         $mail->SMTPAuth = true;
-        $mail->Username = 'itestudentportal@gmail.com';
-        $mail->Password = 'gdlu jbkq oeir bybu';
+        $mail->Username = 'studentportal.comsoc@gmail.com';
+        $mail->Password = 'rend npyn fvjg hmds';
         $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
         $mail->Port = 587;
 
-        $mail->setFrom('itestudentportal@gmail.com', 'Account Verification Code | ITEStudent Portal');
+        $mail->setFrom('studentportal.comsoc@gmail.com', 'Account Verification Code | ITEStudent Portal');
         $mail->addAddress($email);
 
         $mail->isHTML(true);

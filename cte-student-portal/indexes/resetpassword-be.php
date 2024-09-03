@@ -27,12 +27,12 @@ session_start();
 //         $mail->isSMTP();
 //         $mail->Host = 'smtp.gmail.com';
 //         $mail->SMTPAuth = true;
-//         $mail->Username = 'itestudentportal@gmail.com';
-//         $mail->Password = 'gdlu jbkq oeir bybu';
+//         $mail->Username = 'studentportal.comsoc@gmail.com';
+//         $mail->Password = 'rend npyn fvjg hmds';
 //         $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
 //         $mail->Port = 587;
 
-//         $mail->setFrom('itestudentportal@gmail.com', 'Reset Password Code | CTE Student Portal');
+//         $mail->setFrom('studentportal.comsoc@gmail.com', 'Reset Password Code | CTE Student Portal');
 //         $mail->addAddress($email);
 
 //         $mail->isHTML(true);
