@@ -394,13 +394,16 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Admin' && $_SESSION['depa
                       e.school_year, 
                       e.semester, 
                       e.points, 
+                      e.department,
                       a.remarks
+                      
                   FROM 
                       events e
                   JOIN 
                       attendance a ON e.event_id = a.event_id
                   WHERE 
-                      a.account_number = '$account_number' 
+                      a.account_number = '$account_number'
+                      AND e.department = 'SSC' 
                       $semester_condition 
                       $school_year_condition";
 
@@ -492,6 +495,7 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Admin' && $_SESSION['depa
                                       e.school_year, 
                                       e.semester, 
                                       e.amount, 
+                                      e.department,
                                       a.date_paid, 
                                       a.received_by, 
                                       a.remarks
@@ -501,6 +505,7 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Admin' && $_SESSION['depa
                                       payment a ON e.payment_for_id = a.payment_for_id
                                   WHERE 
                                       a.account_number = '$account_number' 
+                                      AND e.department = 'SSC' 
                                       $semester_condition 
                                       $school_year_condition";
 

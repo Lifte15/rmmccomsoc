@@ -119,7 +119,7 @@ if (isset($_POST['save_excel_data'])) {
                 
                 $role = "Student";
                 
-                $enrolled_by = $_SESSION['username'];
+                $enrolled_by = $_SESSION['last_name'] . ", " . $_SESSION['first_name'];
 
                 $sql_check_account = "SELECT account_number FROM user WHERE account_number = ?";
                 $stmt_check_account = mysqli_prepare($conn, $sql_check_account);
