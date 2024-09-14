@@ -178,7 +178,7 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Admin' && $_SESSION['depa
                                                         <label for="Middle Name" class="col-sm-3 col-form-label">Middle Name</label>
                                                         <div class="col-sm-9">
                                                             <input type="text" class="form-control" id="created_on_original"
-                                                                placeholder="(Required)"
+                                                                placeholder=""
                                                                 value="<?php echo $displayedmiddle_name; ?>" disabled>
                                                             <input type="hidden" name="middle_name"
                                                                 value="<?php echo $middle_name; ?>">

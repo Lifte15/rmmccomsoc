@@ -1,13 +1,5 @@
 <?php
-/*
-officer-student-delete-be.php and student deletion process in officer
-Authors:
-  - Lowie Jay Orillo (lowie.jaymier@gmail.com)
-  - Caryl Mae Subaldo (subaldomae29@gmail.com)
-  - Brian Angelo Bognot (c09651052069@gmail.com)
-Last Modified: May 28, 2024
-Overview: This file handles the deletion of student.
-*/
+
 session_start();
 require ('db_conn.php');
 
@@ -53,9 +45,9 @@ if (isset($_POST['deleteStudent'])) {
         mysqli_stmt_execute($delete_payment_stmt);
 
         // Prepare and execute deletion from user table
-        $delete_user_query = "DELETE FROM user WHERE account_number = ? AND username = ? AND program = ? AND year_level = ? AND last_name = ? AND first_name = ? AND middle_name = ?";
+        $delete_user_query = "DELETE FROM user WHERE account_number = ?";
         $delete_user_stmt = mysqli_prepare($conn, $delete_user_query);
-        mysqli_stmt_bind_param($delete_user_stmt, "sssssss", $account_number, $username, $program, $year_level, $last_name, $first_name, $middle_name);
+        mysqli_stmt_bind_param($delete_user_stmt, "s", $account_number);
         mysqli_stmt_execute($delete_user_stmt);
 
         // Commit transaction
