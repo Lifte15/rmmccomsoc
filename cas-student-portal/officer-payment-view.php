@@ -1,11 +1,11 @@
 <?php
 session_start();
 include "indexes/db_conn.php";
-if (isset($_SESSION['role']) && $_SESSION['role'] === 'Officer' && $_SESSION['department'] === 'ITE') {
+if (isset($_SESSION['role']) && $_SESSION['role'] === 'Officer' && $_SESSION['department'] === 'CAS') {
     if ($_SESSION['position'] === 'Staff') {
-    	header("Location: officer-announcement.php?school_year=$defaultYear&semester=$defaultSemester");
-   	 exit();
-  }
+        header("Location: officer-announcement.php?school_year=$defaultYear&semester=$defaultSemester");
+        exit();
+    }
     ?>
 
     <!DOCTYPE html>
@@ -14,7 +14,7 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Officer' && $_SESSION['de
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Officer Payment View | ITE Student Portal </title>
+        <title>Officer Payment View | CAS Student Portal </title>
         <link rel="icon" type="image/png" href="favicon.ico" />
 
         <!-- Google Font: Source Sans Pro -->
@@ -90,7 +90,7 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Officer' && $_SESSION['de
                                                 <?php
                                                 if (isset($_GET['payment_for_id'])) {
                                                     $payment_for_id = $_GET['payment_for_id'];
-                                                    $eventsql = "SELECT * FROM payment_for WHERE payment_for_id = '$payment_for_id' AND department='ITE'";
+                                                    $eventsql = "SELECT * FROM payment_for WHERE payment_for_id = '$payment_for_id' AND department='CAS'";
                                                     $result = $conn->query($eventsql);
 
                                                     if ($result && $result->num_rows > 0) {
@@ -234,7 +234,7 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Officer' && $_SESSION['de
                         payment.received_by, payment.proof_pic, payment.cn_number, payment.date_paid
                         FROM payment 
                         JOIN user ON payment.account_number = user.account_number 
-                        WHERE payment.payment_for_id = '$payment_for_id'  AND user.department='ITE'";
+                        WHERE payment.payment_for_id = '$payment_for_id'  AND user.department='CAS'";
 
                         $filters = [];
                         if ($search_input && $column) {
@@ -325,26 +325,27 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Officer' && $_SESSION['de
                                                                 $proof_pic = $studentrow['proof_pic'];
                                                                 $date_paid = $studentrow['date_paid'];
                                                                 if ($remarks == 'Paid') {
-                                                                    if($_SESSION['position'] == "President"){
-                                                                    echo '<button type="button" class="btn btn-success btn-sm mark-unpaid-btn" data-toggle="modal" data-target="#markUnpaidModal"
-                                                    data-student-name="' . $student_name . '" 
-                                                    data-received-by="' . $received_by . '" 
-                                                    data-program="' . $program . '" 
-                                                    data-account-number="' . $account_number . '" 
-                                                    data-payment-for-id="' . $payment_for_id . '"
-                                                    data-year-level="' . $year_level . '"
-                                                    data-cn-number="' . $cn_number . '"
-                                                    data-date-paid="' . $date_paid . '"
-                                                    data-proof-pic="' . $proof_pic . '">Paid</button>';
-                                                } else {}
+                                                                    if ($_SESSION['position'] == "President") {
+                                                                        echo '<button type="button" class="btn btn-success btn-sm mark-unpaid-btn" data-toggle="modal" data-target="#markUnpaidModal"
+                                                                                data-student-name="' . $student_name . '" 
+                                                                                data-received-by="' . $received_by . '" 
+                                                                                data-program="' . $program . '" 
+                                                                                data-account-number="' . $account_number . '" 
+                                                                                data-payment-for-id="' . $payment_for_id . '"
+                                                                                data-year-level="' . $year_level . '"
+                                                                                data-cn-number="' . $cn_number . '"
+                                                                                data-date-paid="' . $date_paid . '"
+                                                                                data-proof-pic="' . $proof_pic . '">Paid</button>';
+                                                                    } else {
+                                                                    }
                                                                 } elseif ($remarks == 'Unpaid') {
                                                                     echo '<button type="button" class="btn btn-danger btn-sm mark-paid-btn" data-toggle="modal" data-target="#markPaidModal"
-                                                    data-student-name="' . $student_name . '" 
-                                                    data-received-by="' . $received_by . '" 
-                                                    data-program="' . $program . '" 
-                                                    data-account-number="' . $account_number . '" 
-                                                    data-payment-for-id="' . $payment_for_id . '"
-                                                    data-year-level="' . $year_level . '">Unpaid</button>';
+                                                                                data-student-name="' . $student_name . '" 
+                                                                                data-received-by="' . $received_by . '" 
+                                                                                data-program="' . $program . '" 
+                                                                                data-account-number="' . $account_number . '" 
+                                                                                data-payment-for-id="' . $payment_for_id . '"
+                                                                                data-year-level="' . $year_level . '">Unpaid</button>';
                                                                 }
                                                                 ?>
                                                             </td>
@@ -537,52 +538,52 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Officer' && $_SESSION['de
                     var formattedToday = today.toISOString().split('T')[0];
 
                     $('#markPaidModal').find('.modal-body').html(`
-                                            <form id="markPaidForm" method="POST" action="indexes/officer-payment-paid-be.php" enctype="multipart/form-data">
-                                                Are you sure you want to mark ${studentName} as paid?
-                                                <table class="subject-info">
-                                                <tr>
-                                                    <td class="col-md-5"><strong>Student Name:</strong></td>
-                                                    <td class="col-md-7">${studentName}</td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="col-md-5"><strong>Program:</strong></td>
-                                                    <td class="col-md-7">${program}</td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="col-md-5"><strong>Year Level:</strong></td>
-                                                    <td class="col-md-7">${yearLevel}</td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="col-md-5"><strong>Payment Description:</strong></td>
-                                                    <td class="col-md-7"><?php echo $row['payment_description']; ?></td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="col-md-5"><strong>Amount:</strong></td>
-                                                    <td class="col-md-7"><?php echo $row['amount']; ?></td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="col-md-5"><strong>Date:</strong></td>
-                                                    <td class="col-md-7"><input type="date" name="date_paid" id="paymentDate" value="${formattedToday}"></td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="col-md-5"><strong>CN Number:</strong></td>
-                                                    <td class="col-md-7"><input type="text" name="cn_number" id="cnNumber" value="${cnNumber !== undefined ? cnNumber : ''}"></td>
-                                                </tr>
-                                                <tr>
-                                                        <td class="col-md-5"><strong>Proof of Payment:</strong></td>
-                                                        <td class="col-md-7"><input type="file" name="file" >
-                                                        </td>
+                                                <form id="markPaidForm" method="POST" action="indexes/officer-payment-paid-be.php" enctype="multipart/form-data">
+                                                    Are you sure you want to mark ${studentName} as paid?
+                                                    <table class="subject-info">
+                                                    <tr>
+                                                        <td class="col-md-5"><strong>Student Name:</strong></td>
+                                                        <td class="col-md-7">${studentName}</td>
                                                     </tr>
-                                            </table>
-                                            <input type="hidden" name="payment_for_id" id="modalPaymentForId" value="${paymentForID}">
-                                            <input type="hidden" name="account_number" id="modalAccountNumber" value="${accountNumber}">
-                                            <input type="hidden" name="received_by" id="modalReceivedBy" value="${receivedBy}">
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
-                                                <button type="submit" class="btn btn-primary" id="confirmMarkPaid" name="confirmMarkPaid">Yes</button>
-                                            </div>
-                                        </form>
-                                    `);
+                                                    <tr>
+                                                        <td class="col-md-5"><strong>Program:</strong></td>
+                                                        <td class="col-md-7">${program}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="col-md-5"><strong>Year Level:</strong></td>
+                                                        <td class="col-md-7">${yearLevel}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="col-md-5"><strong>Payment Description:</strong></td>
+                                                        <td class="col-md-7"><?php echo $row['payment_description']; ?></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="col-md-5"><strong>Amount:</strong></td>
+                                                        <td class="col-md-7"><?php echo $row['amount']; ?></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="col-md-5"><strong>Date:</strong></td>
+                                                        <td class="col-md-7"><input type="date" name="date_paid" id="paymentDate" value="${formattedToday}"></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="col-md-5"><strong>CN Number:</strong></td>
+                                                        <td class="col-md-7"><input type="text" name="cn_number" id="cnNumber" value="${cnNumber !== undefined ? cnNumber : ''}"></td>
+                                                    </tr>
+                                                    <tr>
+                                                            <td class="col-md-5"><strong>Proof of Payment:</strong></td>
+                                                            <td class="col-md-7"><input type="file" name="file" >
+                                                            </td>
+                                                        </tr>
+                                                </table>
+                                                <input type="hidden" name="payment_for_id" id="modalPaymentForId" value="${paymentForID}">
+                                                <input type="hidden" name="account_number" id="modalAccountNumber" value="${accountNumber}">
+                                                <input type="hidden" name="received_by" id="modalReceivedBy" value="${receivedBy}">
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+                                                    <button type="submit" class="btn btn-primary" id="confirmMarkPaid" name="confirmMarkPaid">Yes</button>
+                                                </div>
+                                            </form>
+                                        `);
                 });
             });
         </script>
@@ -602,62 +603,62 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Officer' && $_SESSION['de
                     var datePaid = $(this).data('date-paid');
 
                     $('#markUnpaidModal').find('.modal-body').html(`
-                                            <table class="subject-info">
-                                                <tr>
-                                                    <td class="col-md-5"><strong>Student Name:</strong></td>
-                                                    <td class="col-md-7">${studentName}</td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="col-md-5"><strong>Program:</strong></td>
-                                                    <td class="col-md-7">${program}</td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="col-md-5"><strong>Year Level:</strong></td>
-                                                    <td class="col-md-7">${yearLevel}</td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="col-md-5"><strong>Payment Description:</strong></td>
-                                                    <td class="col-md-7"><?php echo $row['payment_description']; ?></td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="col-md-5"><strong>Amount:</strong></td>
-                                                    <td class="col-md-7"><?php echo $row['amount']; ?></td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="col-md-5"><strong>Received By:</strong></td>
-                                                    <td class="col-md-7">${receivedBy}</td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="col-md-5"><strong>Date Paid:</strong></td>
-                                                    <td class="col-md-7">${datePaid}</td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="col-md-5"><strong>CN Number:</strong></td>
-                                                    <td class="col-md-7">${cnNumber}</td>
-                                                </tr>
-                                                <tr>
-                                <td colspan="2" style="text-align: center;"><strong>Proof of Payment:</strong></td>
-                                <td class="col-md-0"></td>
-                            </tr>
-                            <tr>
-                                <td colspan="2" style="text-align: center;">
-                                    ${proofPic ? '<img src="proof-of-payment/' + proofPic + '" class="img-fluid" style="max-width: 100%; height: auto;" alt="Proof of Payment">' : ''}
-                                </td>
-                            </tr>
+                                                <table class="subject-info">
+                                                    <tr>
+                                                        <td class="col-md-5"><strong>Student Name:</strong></td>
+                                                        <td class="col-md-7">${studentName}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="col-md-5"><strong>Program:</strong></td>
+                                                        <td class="col-md-7">${program}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="col-md-5"><strong>Year Level:</strong></td>
+                                                        <td class="col-md-7">${yearLevel}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="col-md-5"><strong>Payment Description:</strong></td>
+                                                        <td class="col-md-7"><?php echo $row['payment_description']; ?></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="col-md-5"><strong>Amount:</strong></td>
+                                                        <td class="col-md-7"><?php echo $row['amount']; ?></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="col-md-5"><strong>Received By:</strong></td>
+                                                        <td class="col-md-7">${receivedBy}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="col-md-5"><strong>Date Paid:</strong></td>
+                                                        <td class="col-md-7">${datePaid}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="col-md-5"><strong>CN Number:</strong></td>
+                                                        <td class="col-md-7">${cnNumber}</td>
+                                                    </tr>
+                                                    <tr>
+                                    <td colspan="2" style="text-align: center;"><strong>Proof of Payment:</strong></td>
+                                    <td class="col-md-0"></td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2" style="text-align: center;">
+                                        ${proofPic ? '<img src="proof-of-payment/' + proofPic + '" class="img-fluid" style="max-width: 100%; height: auto;" alt="Proof of Payment">' : ''}
+                                    </td>
+                                </tr>
 
-                                            </table>
-                                            <hr>
-                                            <h5 style="text-align: center;"><strong>Are you sure you want to mark ${studentName} as unpaid?</strong></h5>
-                                            <form id="markPaidForm" method="POST" action="indexes/officer-payment-unpaid-be.php">
-                                                <input type="hidden" name="payment_for_id" id="modalPaymentForId" value="${paymentforID}">
-                                                <input type="hidden" name="account_number" id="modalAccountNumber" value="${accountnumber}">
-                                                <input type="hidden" name="received_by" id="modalReceivedBy" value="${receivedBy}">
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
-                                                    <button type="submit" class="btn btn-danger" id="confirmMarkPaid" name="confirmMarkUnpaid">Yes</button>
-                                                </div>
-                                            </form>
-                                        `);
+                                                </table>
+                                                <hr>
+                                                <h5 style="text-align: center;"><strong>Are you sure you want to mark ${studentName} as unpaid?</strong></h5>
+                                                <form id="markPaidForm" method="POST" action="indexes/officer-payment-unpaid-be.php">
+                                                    <input type="hidden" name="payment_for_id" id="modalPaymentForId" value="${paymentforID}">
+                                                    <input type="hidden" name="account_number" id="modalAccountNumber" value="${accountnumber}">
+                                                    <input type="hidden" name="received_by" id="modalReceivedBy" value="${receivedBy}">
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+                                                        <button type="submit" class="btn btn-danger" id="confirmMarkPaid" name="confirmMarkUnpaid">Yes</button>
+                                                    </div>
+                                                </form>
+                                            `);
                 });
             });
         </script>

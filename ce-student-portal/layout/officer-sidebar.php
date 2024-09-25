@@ -87,7 +87,7 @@
         }
         ?>
 
-        <li class="nav-item ">
+        <!-- <li class="nav-item ">
           <a href="officer-announcement.php?school_year=<?php echo $defaultYear; ?>&semester=<?php echo $defaultSemester; ?>"
             class="nav-link">
             <i class="nav-icon fas fa-solid fa-bullhorn"></i>
@@ -95,7 +95,7 @@
               Announcements
             </p>
           </a>
-        </li>
+        </li> -->
 
         <?php
         if ($position != 'Staff') {

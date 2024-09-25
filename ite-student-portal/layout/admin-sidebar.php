@@ -76,14 +76,14 @@
 
 
 
-        <li class="nav-item ">
+        <!-- <li class="nav-item ">
           <a href="admin-announcement.php?school_year=<?php echo $defaultYear; ?>&semester=<?php echo $defaultSemester; ?>" class="nav-link">
             <i class="nav-icon fas fa-solid fa-bullhorn"></i>
             <p>
               Announcements
             </p>
           </a>
-        </li>
+        </li> -->
 
         <li class="nav-item ">
           <a href="admin-officer.php" class="nav-link">

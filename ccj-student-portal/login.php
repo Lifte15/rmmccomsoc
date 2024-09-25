@@ -119,7 +119,7 @@ require_once 'googleconfig.php';
                                             </div>
                                         </form>
 
-                                        <hr>
+                                        <!-- <hr>
                                         <div class="col-12">
                                             <p class="text-center mt-3 mb-2">Or sign in with</p>
                                             <div class="d-flex gap-3 flex-column">
@@ -129,7 +129,7 @@ require_once 'googleconfig.php';
                                                     <span class="fs-6 mt-0">Log in with Google</span>
                                                 </a>
                                             </div>
-                                        </div>
+                                        </div> -->
                                     </div>
                                 </div>
                             </div>

@@ -107,11 +107,6 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Officer' && $_SESSION['de
                       </table>
                     </div>
                   </div>
-
-                  <div class="col-md-auto ml-auto">
-                    <a href="officer-enrolled-add.php?school_year=<?php echo $_GET['school_year']; ?>&semester=<?php echo $_GET['semester']; ?>"
-                      class="btn btn-success btn-sm">+ Add Student</a>
-                  </div>
                 </div>
               </div>
             </div>
