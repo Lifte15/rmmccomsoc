@@ -1,7 +1,7 @@
 <?php
 session_start();
 include "indexes/db_conn.php";
-if (isset($_SESSION['role']) && $_SESSION['role'] === 'Officer' && $_SESSION['department'] === 'ITE') {
+if (isset($_SESSION['role']) && $_SESSION['role'] === 'Officer' && $_SESSION['department'] === 'CAS') {
     ?>
 
     <!DOCTYPE html>
@@ -10,7 +10,7 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Officer' && $_SESSION['de
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Officer Event View | ITE Student Portal </title>
+        <title>Officer Event View | CAS Student Portal </title>
         <link rel="icon" type="image/png" href="favicon.ico" />
 
         <!-- Google Font: Source Sans Pro -->
@@ -86,7 +86,7 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Officer' && $_SESSION['de
                                                 <?php
                                                 if (isset($_GET['event_id'])) {
                                                     $event_id = $_GET['event_id'];
-                                                    $eventsql = "SELECT * FROM events WHERE event_id = '$event_id' AND department='ITE'";
+                                                    $eventsql = "SELECT * FROM events WHERE event_id = '$event_id' AND department='CAS'";
                                                     $result = $conn->query($eventsql);
 
                                                     if ($result && $result->num_rows > 0) {
@@ -231,7 +231,7 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Officer' && $_SESSION['de
 
                         $query = "SELECT user.account_number, user.username, user.first_name, user.last_name, user.middle_name, user.program, user.year_level, attendance.remarks, attendance.remarked_by
                         FROM attendance 
-                        JOIN user ON attendance.account_number = user.account_number AND user.department = 'ITE'
+                        JOIN user ON attendance.account_number = user.account_number AND user.department = 'CAS'
                         WHERE attendance.event_id = '$event_id'";
 
                         $filters = [];
@@ -333,11 +333,76 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Officer' && $_SESSION['de
                 </section>
             </div>
 
-            <?php include 'layout/fixed-footer.php'; ?>
+            <div class="modal fade" id="resultModal" tabindex="-1" aria-labelledby="resultModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="resultModalLabel">Attendance Upload Result</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <p>Number of students marked Present: <span id="presentCount"></span></p>
+                            <p>Number of students not in this event: <span id="notPresentCount"></span></p>
+
+                            <div id="downloadReportContainer" style="display: none;">
+                                <h6>Download Report:</h6>
+                                <a id="downloadReportLink" href="" class="btn btn-primary" download>Download Excel
+                                    Report</a>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div><?php include 'layout/fixed-footer.php'; ?>
 
             <aside class="control-sidebar control-sidebar-dark">
             </aside>
         </div>
+
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                const params = new URLSearchParams(window.location.search);
+                const presentCount = params.get('present_count');
+                const notPresentCount = params.get('not_present_count');
+                const reportPath = params.get('report_path');
+
+                if (presentCount && notPresentCount) {
+                    document.getElementById('presentCount').textContent = presentCount;
+                    document.getElementById('notPresentCount').textContent = notPresentCount;
+
+                    if (reportPath) {
+                        document.getElementById('downloadReportContainer').style.display = 'block';
+                        document.getElementById('downloadReportLink').href = reportPath;
+                    }
+
+                    var resultModal = new bootstrap.Modal(document.getElementById('resultModal'));
+                    resultModal.show();
+                }
+            });
+        </script>
+
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+
+
+        <script>
+            function saveScrollPosition() {
+                localStorage.setItem('scrollPosition', window.scrollY);
+            }
+
+            function restoreScrollPosition() {
+                const savedPosition = localStorage.getItem('scrollPosition');
+                if (savedPosition) {
+                    window.scrollTo(0, parseInt(savedPosition));
+                }
+            }
+
+            window.addEventListener('beforeunload', saveScrollPosition);
+
+            window.addEventListener('load', restoreScrollPosition);
+        </script>
+
 
         <!-- jQuery -->
         <script src="AdminLTE-3.2.0/plugins/jquery/jquery.min.js"></script>

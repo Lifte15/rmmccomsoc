@@ -323,12 +323,76 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Officer' && $_SESSION['de
                     </div>
                 </section>
             </div>
+            <div class="modal fade" id="resultModal" tabindex="-1" aria-labelledby="resultModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="resultModalLabel">Attendance Upload Result</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <p>Number of students marked Present: <span id="presentCount"></span></p>
+                            <p>Number of students not in this event: <span id="notPresentCount"></span></p>
 
-            <?php include 'layout/fixed-footer.php'; ?>
+                            <div id="downloadReportContainer" style="display: none;">
+                                <h6>Download Report:</h6>
+                                <a id="downloadReportLink" href="" class="btn btn-primary" download>Download Excel
+                                    Report</a>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div><?php include 'layout/fixed-footer.php'; ?>
 
             <aside class="control-sidebar control-sidebar-dark">
             </aside>
         </div>
+
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                const params = new URLSearchParams(window.location.search);
+                const presentCount = params.get('present_count');
+                const notPresentCount = params.get('not_present_count');
+                const reportPath = params.get('report_path');
+
+                if (presentCount && notPresentCount) {
+                    document.getElementById('presentCount').textContent = presentCount;
+                    document.getElementById('notPresentCount').textContent = notPresentCount;
+
+                    if (reportPath) {
+                        document.getElementById('downloadReportContainer').style.display = 'block';
+                        document.getElementById('downloadReportLink').href = reportPath;
+                    }
+
+                    var resultModal = new bootstrap.Modal(document.getElementById('resultModal'));
+                    resultModal.show();
+                }
+            });
+        </script>
+
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+
+
+
+        <script>
+            function saveScrollPosition() {
+                localStorage.setItem('scrollPosition', window.scrollY);
+            }
+
+            function restoreScrollPosition() {
+                const savedPosition = localStorage.getItem('scrollPosition');
+                if (savedPosition) {
+                    window.scrollTo(0, parseInt(savedPosition));
+                }
+            }
+
+            window.addEventListener('beforeunload', saveScrollPosition);
+
+            window.addEventListener('load', restoreScrollPosition);
+        </script>
 
         <!-- jQuery -->
         <script src="AdminLTE-3.2.0/plugins/jquery/jquery.min.js"></script>
