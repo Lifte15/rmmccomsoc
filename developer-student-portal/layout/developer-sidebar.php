@@ -1,47 +1,45 @@
-
-
 <?php
-  include "indexes/db_conn.php";
-  $query = "SELECT * FROM semester";
-  $result = mysqli_query($conn, $query);
-  $semesters = [];
-  $defaultSemester = '';
+include "indexes/db_conn.php";
+$query = "SELECT * FROM semester";
+$result = mysqli_query($conn, $query);
+$semesters = [];
+$defaultSemester = '';
 
-  if ($result && mysqli_num_rows($result) > 0) {
-    while ($row = mysqli_fetch_assoc($result)) {
-      $semesters[] = $row;
-      if ($row['dfault'] == 1) {
-        $defaultSemester = $row['semester'];
-      }
+if ($result && mysqli_num_rows($result) > 0) {
+  while ($row = mysqli_fetch_assoc($result)) {
+    $semesters[] = $row;
+    if ($row['dfault'] == 1) {
+      $defaultSemester = $row['semester'];
     }
   }
+}
 
-  $schoolYearQuery = "SELECT * FROM school_year";
-  $result = mysqli_query($conn, $schoolYearQuery);
-  $schoolYears = [];
-  $defaultYear = '';
+$schoolYearQuery = "SELECT * FROM school_year";
+$result = mysqli_query($conn, $schoolYearQuery);
+$schoolYears = [];
+$defaultYear = '';
 
-  if ($result && mysqli_num_rows($result) > 0) {
-    while ($row = mysqli_fetch_assoc($result)) {
-      $schoolYears[] = $row;
-      if ($row['dfault'] == 1) {
-        $defaultYear = $row['school_year'];
-      }
+if ($result && mysqli_num_rows($result) > 0) {
+  while ($row = mysqli_fetch_assoc($result)) {
+    $schoolYears[] = $row;
+    if ($row['dfault'] == 1) {
+      $defaultYear = $row['school_year'];
     }
   }
-  ?>
+}
+?>
 
 <aside class="main-sidebar sidebar-dark-danger elevation-4"
   style="background-image: url('images/sidebar-background.png'); background-size: cover; background-position: center;">
   <!-- Brand Logo -->
-  <a href="developer-dashboard.php?school_year=<?php echo $defaultYear; ?>&semester=<?php echo $defaultSemester; ?>" class="brand-link">
-    <img src="images/developer-logo.png" alt="AdminLTE Logo" class="brand-image elevation-3"
-      style="opacity: .8">
+  <a href="developer-dashboard.php?school_year=<?php echo $defaultYear; ?>&semester=<?php echo $defaultSemester; ?>"
+    class="brand-link">
+    <img src="images/developer-logo.png" alt="AdminLTE Logo" class="brand-image elevation-3" style="opacity: .8">
     <span class="brand-text font-weight-light">Developer Portal</span>
   </a>
 
 
- 
+
 
 
   <!-- Sidebar -->
@@ -71,7 +69,8 @@
       <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
 
         <li class="nav-item ">
-          <a href="developer-dashboard.php?school_year=<?php echo $defaultYear; ?>&semester=<?php echo $defaultSemester; ?>" class="nav-link">
+          <a href="developer-dashboard.php?school_year=<?php echo $defaultYear; ?>&semester=<?php echo $defaultSemester; ?>"
+            class="nav-link">
             <i class="nav-icon fas fa-tachometer-alt"></i>
             <p>
               Dashboard
@@ -79,9 +78,9 @@
           </a>
         </li>
 
-        
-        
-        
+
+
+
         <!-- <li class="nav-item ">
           <a href="developer-announcement.php?school_year=<?php echo $defaultYear; ?>&semester=<?php echo $defaultSemester; ?>" class="nav-link">
             <i class="nav-icon fas fa-solid fa-bullhorn"></i>
@@ -90,7 +89,7 @@
             </p>
           </a>
         </li> -->
-        
+
         <li class="nav-item ">
           <a href="developer-admin.php" class="nav-link">
             <i class="nav-icon fas fa-solid fa-user-tie"></i>
@@ -99,18 +98,9 @@
             </p>
           </a>
         </li>
-        
-        <li class="nav-item ">
-          <a href="developer-enrolled-students.php" class="nav-link">
-            <i class="nav-icon fas fa-solid fa-users"></i>
-            <p>
-              All Students
-            </p>
-          </a>
-        </li>
 
-        <!--
-          <li class="nav-item ">
+
+        <li class="nav-item ">
           <a href="developer-students.php" class="nav-link">
             <i class="nav-icon fas fa-solid fa-users"></i>
             <p>
@@ -120,6 +110,17 @@
         </li>
 
 
+        <li class="nav-item ">
+          <a href="developer-enrolled-students.php" class="nav-link">
+            <i class="nav-icon fas fa-solid fa-users"></i>
+            <p>
+              Enrolled Students
+            </p>
+          </a>
+        </li>
+
+
+        <!--
         <li class="nav-item ">
           <a href="developer-enrolled-students.php" class="nav-link">
             <i class="nav-icon fas fa-solid fa-user-plus"></i>
@@ -172,21 +173,21 @@
     </nav> -->
 
 
-    <!-- /.sidebar-menu -->
+        <!-- /.sidebar-menu -->
 
-    <!-- Logout Button -->
-    <div class="sidebar-footer">
-      <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-        <li class="nav-item">
-          <a href="indexes/logout.php" class="nav-link">
-            <i class="nav-icon fas fa-sign-out-alt"></i>
-            <p>
-              Logout
-            </p>
-          </a>
-        </li>
-      </ul>
-    </div>
+        <!-- Logout Button -->
+        <div class="sidebar-footer">
+          <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+            <li class="nav-item">
+              <a href="indexes/logout.php" class="nav-link">
+                <i class="nav-icon fas fa-sign-out-alt"></i>
+                <p>
+                  Logout
+                </p>
+              </a>
+            </li>
+          </ul>
+        </div>
 
   </div>
   <!-- /.sidebar -->

@@ -656,6 +656,23 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'Admin' && $_SESSION['depa
 
     </html>
 
+<script>
+    function saveScrollPosition() {
+        localStorage.setItem('scrollPosition', window.scrollY);
+    }
+
+    function restoreScrollPosition() {
+        const savedPosition = localStorage.getItem('scrollPosition');
+        if (savedPosition) {
+            window.scrollTo(0, parseInt(savedPosition));
+        }
+    }
+
+    window.addEventListener('beforeunload', saveScrollPosition);
+
+    window.addEventListener('load', restoreScrollPosition);
+</script>
+
 
     <script>
         $.widget.bridge('uibutton', $.ui.button)

@@ -57,18 +57,18 @@
             <img src="images/comsoc.png" alt="Logo" class="img-fluid mb-4" style="max-height: 150px;">
             <h1>About Our System</h1>
             <div class="container">
-                <p class="text-justify">The <strong>RMMC Student Portal: Attendance and Payment Monitoring
+                <p class="text-justify">The <strong>RMMC Student Portal: Attendance Monitoring
                         System</strong> was developed by three BSIT students from Ramon Magsaysay Memorial
                     Colleges - General Santos City, under the Computing Society organization, which includes students
                     from BSIT, BSCS, BLIS, and ACT programs. This system addresses the challenges of managing attendance
-                    and payments for ITE students, aiming to reduce time-consuming manual processes, minimize human
+                    for all colleges, aiming to reduce time-consuming manual processes, minimize human
                     error, and enhance data security. Originally created as a deliverable for the course "Integrative
                     Programming and Technology," the developers recognized its potential and sought to expand its
                     application across other departments.
                 </p>
 
                 <p class="text-justify">Through their dedication, they aimed to create an efficient, user-friendly, and
-                    secure solution that improves productivity and simplifies attendance and payment management. This
+                    secure solution that improves productivity and simplifies attendance management. This
                     system benefits both students and department staff, promoting better tracking and maintenance for
                     the student community.
                 </p>
